@@ -123,6 +123,9 @@ const FALLBACK_CONTENT = {
       { heading: { pl: '', en: '' }, headingFont: 'default', textFont: 'default', text: { pl: 'Dzięki kręconej sierści wiele osób z alergią dobrze toleruje Goldendoodle.', en: 'Thanks to their curly coat, many people with dog allergies tolerate Goldendoodles well.' } },
     ],
   },
+  littersIntro: {
+    body: [],
+  },
   dogs: [
     { id: 'dog1', name: { pl: '[Imię suczki]', en: "[Dam's name]" }, role: { pl: 'Suczka hodowlana', en: 'Breeding female' }, bio: { pl: 'Miejsce na krótki opis charakteru.', en: 'Space for a short note on temperament.' } },
     { id: 'dog2', name: { pl: '[Imię reproduktora]', en: '[Sire\'s name]' }, role: { pl: 'Reproduktor', en: 'Stud' }, bio: { pl: 'Miejsce na krótki opis charakteru.', en: 'Space for a short note on temperament.' } },
@@ -361,6 +364,7 @@ function applyLanguage(lang) {
   populateLitterSelect(lang);
   renderContentBlocks('aboutBody', activeContent.about && activeContent.about.body, lang);
   renderContentBlocks('breedBody', activeContent.breed && activeContent.breed.body, lang);
+  renderContentBlocks('littersIntroBody', activeContent.littersIntro && activeContent.littersIntro.body, lang);
 }
 
 document.querySelectorAll('.lang-btn').forEach(btn => {

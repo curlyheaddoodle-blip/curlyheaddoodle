@@ -190,6 +190,7 @@ async function enterEditor() {
     ['O nas — akapity', renderAboutBody],
     ['O rasie — akapity', renderBreedBody],
     ['Nasze psy', renderDogsEditor],
+    ['Szczenięta — akapity', renderLittersIntroBody],
     ['Szczenięta / mioty', renderLittersEditor],
     ['Kontakt', renderContactEditor],
     ['Wszystkie teksty', renderTranslationsEditor],
@@ -778,6 +779,10 @@ function buildBulletsEditor(block, rerenderBlock) {
 }
 function renderAboutBody() { renderParagraphEditor('aboutBodyEditor', content.about.body, renderAboutBody); }
 function renderBreedBody() { renderParagraphEditor('breedBodyEditor', content.breed.body, renderBreedBody); }
+function renderLittersIntroBody() {
+  if (!content.littersIntro) content.littersIntro = { body: [] }; // older saved content.json may predate this field
+  renderParagraphEditor('littersIntroBodyEditor', content.littersIntro.body, renderLittersIntroBody);
+}
 
 // ---- Dogs editor ----
 function renderDogsEditor() {
@@ -856,6 +861,10 @@ document.getElementById('addAboutParaBtn').addEventListener('click', () => {
 document.getElementById('addBreedParaBtn').addEventListener('click', () => {
   content.breed.body.push(newContentBlock());
   renderBreedBody();
+});
+document.getElementById('addLittersIntroParaBtn').addEventListener('click', () => {
+  content.littersIntro.body.push(newContentBlock());
+  renderLittersIntroBody();
 });
 
 document.getElementById('addDogBtn').addEventListener('click', () => {

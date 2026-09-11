@@ -56,6 +56,8 @@
     <div class="wrap">
       <h1 data-i18n="litters_heading">Szczenięta</h1>
       <p class="section-lede" data-i18n="litters_lede">Aktualne, oczekiwane i już zarezerwowane mioty.</p>
+      <!-- Rendered by script.js from data/content.json (littersIntro.body array) — add/remove/customize paragraphs from admin.html. -->
+      <div id="littersIntroBody"></div>
       <!-- Rendered by script.js from data/content.json (litters array) — editable, including add/remove, from admin.html. -->
       <ol class="litter-list" id="litterList"></ol>
       <p class="replace-note" data-i18n="litters_note">Podmień na prawdziwe mioty, daty i zdjęcia.</p>
@@ -76,6 +78,19 @@
     </div>
   </div>
 </footer>
+
+<!-- Needed here because a paragraph's photo placeholder (before upload) uses <use href="#icon-paw">. -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="icon-paw" viewBox="0 0 24 24">
+      <circle cx="12" cy="15.5" r="5"/>
+      <circle cx="4.5" cy="9" r="2.4"/>
+      <circle cx="10" cy="4.8" r="2.4"/>
+      <circle cx="14" cy="4.8" r="2.4"/>
+      <circle cx="19.5" cy="9" r="2.4"/>
+    </symbol>
+  </defs>
+</svg>
 
 <script src="script.js"></script>
 </body>

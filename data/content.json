@@ -483,6 +483,9 @@
       }
     }
   ],
+  "littersIntro": {
+    "body": []
+  },
   "litters": [
     {
       "id": "litter1",
