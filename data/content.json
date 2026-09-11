@@ -34,8 +34,6 @@
 
     "about_kicker": { "pl": "Witaj w naszym świecie!", "en": "Welcome to our world!" },
     "about_heading": { "pl": "Jesteśmy Karolina i Paweł", "en": "We're Karolina and Paweł" },
-    "about_body1": { "pl": "Curly Head Doodle z Mielca to spełnienie naszych marzeń. Nasza przygoda zaczęła się od miłości do rasy, a teraz dzielimy tę pasję z Wami.", "en": "Curly Head Doodle, based in Mielec, is the fulfillment of our dream. Our journey began with a love for the breed, and now we get to share that passion with you." },
-    "about_body2": { "pl": "Wychowujemy szczenięta w domu, bez kojców zewnętrznych, zapewniając im najlepszy możliwy start w życiu.", "en": "We raise our puppies at home, with no outdoor kennels, to give them the best possible start in life." },
     "about_cta": { "pl": "Poznaj naszą filozofię", "en": "Discover our philosophy" },
 
     "why_heading": { "pl": "Dlaczego my?", "en": "Why choose us" },
@@ -49,8 +47,6 @@
     "why4_body": { "pl": "Hodujemy szczenięta (np. pokolenia F2B) w pięknych odcieniach, z sierścią wyjątkowo przyjazną dla alergików.", "en": "We breed puppies (including F2B generations) in beautiful colors, with coats especially friendly to allergy sufferers." },
 
     "breed_heading": { "pl": "Poznaj rasę Mini Goldendoodle", "en": "Meet the Mini Goldendoodle" },
-    "breed_body1": { "pl": "Mini Goldendoodle to połączenie inteligencji pudla i ciepłego, rodzinnego usposobienia golden retrievera. To psy czułe, chętne do nauki i świetnie odnajdujące się zarówno w mieszkaniu, jak i w domu z ogrodem.", "en": "The Mini Goldendoodle combines the Poodle's intelligence with the Golden Retriever's warm, family-oriented nature — affectionate, eager to learn, and equally at home in an apartment or a house with a yard." },
-    "breed_body2": { "pl": "Dzięki kręconej lub falowanej sierści typu pudla, wiele osób z alergią na sierść psów dobrze toleruje Goldendoodle — choć żadna rasa nie jest w 100% hipoalergiczna.", "en": "Thanks to their curly or wavy Poodle-type coat, many people with dog allergies tolerate Goldendoodles well — though no breed is ever 100% hypoallergenic." },
     "breed_fact1_label": { "pl": "Wzrost", "en": "Height" },
     "breed_fact1_value": { "pl": "ok. 35–45 cm w kłębie", "en": "approx. 35–45 cm at the shoulder" },
     "breed_fact2_label": { "pl": "Waga", "en": "Weight" },
@@ -91,6 +87,18 @@
 
     "footer_disclaimer": { "pl": "Nie prowadzimy sprzedaży za pośrednictwem portali ogłoszeniowych typu OLX.", "en": "We do not sell puppies through classifieds sites such as OLX." },
     "footer_copyright": { "pl": "© 2026 Curly Head Doodle. Wszelkie prawa zastrzeżone.", "en": "© 2026 Curly Head Doodle. All rights reserved." }
+  },
+  "about": {
+    "body": [
+      { "pl": "Curly Head Doodle z Mielca to spełnienie naszych marzeń. Nasza przygoda zaczęła się od miłości do rasy, a teraz dzielimy tę pasję z Wami.", "en": "Curly Head Doodle, based in Mielec, is the fulfillment of our dream. Our journey began with a love for the breed, and now we get to share that passion with you." },
+      { "pl": "Wychowujemy szczenięta w domu, bez kojców zewnętrznych, zapewniając im najlepszy możliwy start w życiu.", "en": "We raise our puppies at home, with no outdoor kennels, to give them the best possible start in life." }
+    ]
+  },
+  "breed": {
+    "body": [
+      { "pl": "Mini Goldendoodle to połączenie inteligencji pudla i ciepłego, rodzinnego usposobienia golden retrievera. To psy czułe, chętne do nauki i świetnie odnajdujące się zarówno w mieszkaniu, jak i w domu z ogrodem.", "en": "The Mini Goldendoodle combines the Poodle's intelligence with the Golden Retriever's warm, family-oriented nature — affectionate, eager to learn, and equally at home in an apartment or a house with a yard." },
+      { "pl": "Dzięki kręconej lub falowanej sierści typu pudla, wiele osób z alergią na sierść psów dobrze toleruje Goldendoodle — choć żadna rasa nie jest w 100% hipoalergiczna.", "en": "Thanks to their curly or wavy Poodle-type coat, many people with dog allergies tolerate Goldendoodles well — though no breed is ever 100% hypoallergenic." }
+    ]
   },
   "dogs": [
     {

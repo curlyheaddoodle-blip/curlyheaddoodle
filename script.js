@@ -65,8 +65,6 @@ const FALLBACK_CONTENT = {
     hero_cta_secondary: { pl: 'Poznaj nasze szczenięta', en: 'See our puppies' },
     about_kicker: { pl: 'Witaj w naszym świecie!', en: 'Welcome to our world!' },
     about_heading: { pl: 'Jesteśmy Karolina i Paweł', en: "We're Karolina and Paweł" },
-    about_body1: { pl: 'Curly Head Doodle z Mielca to spełnienie naszych marzeń.', en: 'Curly Head Doodle, based in Mielec, is the fulfillment of our dream.' },
-    about_body2: { pl: 'Wychowujemy szczenięta w domu, bez kojców zewnętrznych.', en: 'We raise our puppies at home, with no outdoor kennels.' },
     about_cta: { pl: 'Poznaj naszą filozofię', en: 'Discover our philosophy' },
     why_heading: { pl: 'Dlaczego my?', en: 'Why choose us' },
     why1_title: { pl: 'Prawdziwy dom', en: 'A real home' },
@@ -78,8 +76,6 @@ const FALLBACK_CONTENT = {
     why4_title: { pl: 'Wielopokoleniowe linie', en: 'Multi-generational lines' },
     why4_body: { pl: 'Hodujemy szczenięta w pięknych odcieniach.', en: 'We breed puppies in beautiful colors.' },
     breed_heading: { pl: 'Poznaj rasę Mini Goldendoodle', en: 'Meet the Mini Goldendoodle' },
-    breed_body1: { pl: 'Mini Goldendoodle to połączenie inteligencji pudla i ciepłego usposobienia golden retrievera.', en: "The Mini Goldendoodle combines the Poodle's intelligence with the Golden Retriever's warm nature." },
-    breed_body2: { pl: 'Dzięki kręconej sierści wiele osób z alergią dobrze toleruje Goldendoodle.', en: 'Thanks to their curly coat, many people with dog allergies tolerate Goldendoodles well.' },
     breed_fact1_label: { pl: 'Wzrost', en: 'Height' },
     breed_fact1_value: { pl: 'ok. 35–45 cm w kłębie', en: 'approx. 35–45 cm at the shoulder' },
     breed_fact2_label: { pl: 'Waga', en: 'Weight' },
@@ -114,6 +110,18 @@ const FALLBACK_CONTENT = {
     form_fineprint: { pl: 'Wykorzystujemy te dane wyłącznie do kontaktu.', en: 'We only use this information to respond to your inquiry.' },
     footer_disclaimer: { pl: 'Nie prowadzimy sprzedaży za pośrednictwem portali ogłoszeniowych typu OLX.', en: 'We do not sell puppies through classifieds sites such as OLX.' },
     footer_copyright: { pl: '© 2026 Curly Head Doodle. Wszelkie prawa zastrzeżone.', en: '© 2026 Curly Head Doodle. All rights reserved.' },
+  },
+  about: {
+    body: [
+      { pl: 'Curly Head Doodle z Mielca to spełnienie naszych marzeń.', en: 'Curly Head Doodle, based in Mielec, is the fulfillment of our dream.' },
+      { pl: 'Wychowujemy szczenięta w domu, bez kojców zewnętrznych.', en: 'We raise our puppies at home, with no outdoor kennels.' },
+    ],
+  },
+  breed: {
+    body: [
+      { pl: 'Mini Goldendoodle to połączenie inteligencji pudla i ciepłego usposobienia golden retrievera.', en: "The Mini Goldendoodle combines the Poodle's intelligence with the Golden Retriever's warm nature." },
+      { pl: 'Dzięki kręconej sierści wiele osób z alergią dobrze toleruje Goldendoodle.', en: 'Thanks to their curly coat, many people with dog allergies tolerate Goldendoodles well.' },
+    ],
   },
   dogs: [
     { id: 'dog1', name: { pl: '[Imię suczki]', en: "[Dam's name]" }, role: { pl: 'Suczka hodowlana', en: 'Breeding female' }, bio: { pl: 'Miejsce na krótki opis charakteru.', en: 'Space for a short note on temperament.' } },
@@ -220,6 +228,19 @@ function populateLitterSelect(lang) {
   });
 }
 
+// ---- Paragraph lists (about/breed body text — open-ended, edited as a
+// list in admin.html rather than a fixed body1/body2/... set of fields) ----
+function renderParagraphList(containerId, paragraphs, lang) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = '';
+  (paragraphs || []).forEach(entry => {
+    const p = document.createElement('p');
+    p.textContent = (entry && entry[lang]) || '';
+    el.appendChild(p);
+  });
+}
+
 // ---- 6. Language switch ----
 function applyLanguage(lang) {
   document.documentElement.lang = lang;
@@ -245,6 +266,8 @@ function applyLanguage(lang) {
   renderDogs(lang);
   renderLitters(lang);
   populateLitterSelect(lang);
+  renderParagraphList('aboutBody', activeContent.about && activeContent.about.body, lang);
+  renderParagraphList('breedBody', activeContent.breed && activeContent.breed.body, lang);
 }
 
 document.querySelectorAll('.lang-btn').forEach(btn => {

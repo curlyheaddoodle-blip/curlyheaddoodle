@@ -36,10 +36,10 @@ const LABELS = {
   page_title: 'Tytuł strony (karta przeglądarki)', page_description: 'Opis strony (SEO)',
   nav_about: 'Menu: O nas', nav_breed: 'Menu: O rasie', nav_dogs: 'Menu: Nasze psy', nav_puppies: 'Menu: Szczenięta', nav_contact: 'Menu: Kontakt', nav_cta: 'Menu: przycisk CTA',
   hero_headline: 'Nagłówek główny', hero_subhead: 'Podtytuł', hero_cta_primary: 'Przycisk główny', hero_cta_secondary: 'Link drugorzędny',
-  about_kicker: 'Nadtytuł', about_heading: 'Nagłówek', about_body1: 'Akapit 1', about_body2: 'Akapit 2', about_cta: 'Link',
+  about_kicker: 'Nadtytuł', about_heading: 'Nagłówek', about_cta: 'Link',
   why_heading: 'Nagłówek sekcji', why1_title: 'Punkt 1: tytuł', why1_body: 'Punkt 1: opis', why2_title: 'Punkt 2: tytuł', why2_body: 'Punkt 2: opis',
   why3_title: 'Punkt 3: tytuł', why3_body: 'Punkt 3: opis', why4_title: 'Punkt 4: tytuł', why4_body: 'Punkt 4: opis',
-  breed_heading: 'Nagłówek', breed_body1: 'Akapit 1', breed_body2: 'Akapit 2',
+  breed_heading: 'Nagłówek',
   breed_fact1_label: 'Cecha 1: etykieta', breed_fact1_value: 'Cecha 1: wartość', breed_fact2_label: 'Cecha 2: etykieta', breed_fact2_value: 'Cecha 2: wartość',
   breed_fact3_label: 'Cecha 3: etykieta', breed_fact3_value: 'Cecha 3: wartość', breed_fact4_label: 'Cecha 4: etykieta', breed_fact4_value: 'Cecha 4: wartość',
   dogs_heading: 'Nagłówek', dogs_lede: 'Zapowiedź', dogs_note: 'Notatka na dole',
@@ -57,9 +57,9 @@ const TRANSLATION_GROUPS = [
   { title: 'Strona / SEO', keys: ['page_title', 'page_description'] },
   { title: 'Menu', keys: ['nav_about', 'nav_breed', 'nav_dogs', 'nav_puppies', 'nav_contact', 'nav_cta'] },
   { title: 'Sekcja główna (Hero)', keys: ['hero_headline', 'hero_subhead', 'hero_cta_primary', 'hero_cta_secondary'] },
-  { title: 'O nas', keys: ['about_kicker', 'about_heading', 'about_body1', 'about_body2', 'about_cta'] },
+  { title: 'O nas', keys: ['about_kicker', 'about_heading', 'about_cta'] },
   { title: 'Dlaczego my', keys: ['why_heading', 'why1_title', 'why1_body', 'why2_title', 'why2_body', 'why3_title', 'why3_body', 'why4_title', 'why4_body'] },
-  { title: 'O rasie', keys: ['breed_heading', 'breed_body1', 'breed_body2', 'breed_fact1_label', 'breed_fact1_value', 'breed_fact2_label', 'breed_fact2_value', 'breed_fact3_label', 'breed_fact3_value', 'breed_fact4_label', 'breed_fact4_value'] },
+  { title: 'O rasie', keys: ['breed_heading', 'breed_fact1_label', 'breed_fact1_value', 'breed_fact2_label', 'breed_fact2_value', 'breed_fact3_label', 'breed_fact3_value', 'breed_fact4_label', 'breed_fact4_value'] },
   { title: 'Nasze psy — nagłówki', keys: ['dogs_heading', 'dogs_lede', 'dogs_note'] },
   { title: 'Szczenięta — nagłówki i statusy', keys: ['litters_heading', 'litters_lede', 'litters_note', 'status_available', 'status_expecting', 'status_reserved'] },
   { title: 'Kontakt', keys: ['contact_heading', 'contact_lede', 'contact_location_label', 'contact_location_value', 'contact_email_label', 'contact_social_label'] },
@@ -167,6 +167,8 @@ async function enterEditor() {
   renderBrand();
   renderSlots();
   renderTheme();
+  renderAboutBody();
+  renderBreedBody();
   renderDogsEditor();
   renderLittersEditor();
   renderContactEditor();
@@ -408,6 +410,45 @@ function collectTheme() {
   return { colors, fontPair: selected ? selected.dataset.fontPair : content.theme.fontPair };
 }
 
+// ---- Paragraph list editor (open-ended — used for "O nas" and "O rasie"
+// body text, so more paragraphs can be added without any code change) ----
+function renderParagraphEditor(containerId, list, rerender) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = '';
+  list.forEach((para, index) => {
+    const row = document.createElement('div');
+    row.className = 'repeat-item';
+    row.innerHTML = `
+      <div class="repeat-item-head">
+        <span class="repeat-title">Akapit ${index + 1}</span>
+        <div class="repeat-item-actions">
+          <button type="button" class="btn-small" data-act="up">↑</button>
+          <button type="button" class="btn-small" data-act="down">↓</button>
+          <button type="button" class="btn-small danger" data-act="remove">Usuń</button>
+        </div>
+      </div>
+      <div class="repeat-row">
+        <div><label>Tekst (PL)</label><textarea data-f="pl">${escapeHtml(para.pl)}</textarea></div>
+        <div><label>Text (EN)</label><textarea data-f="en">${escapeHtml(para.en)}</textarea></div>
+      </div>
+    `;
+    row.querySelectorAll('[data-f]').forEach(input => {
+      input.addEventListener('input', () => { para[input.dataset.f] = input.value; });
+    });
+    row.querySelector('[data-act="up"]').addEventListener('click', () => moveItem(list, index, -1, rerender));
+    row.querySelector('[data-act="down"]').addEventListener('click', () => moveItem(list, index, 1, rerender));
+    row.querySelector('[data-act="remove"]').addEventListener('click', () => {
+      if (list.length <= 1) { alert('Musi zostać co najmniej jeden akapit.'); return; }
+      if (!confirm('Usunąć ten akapit?')) return;
+      list.splice(index, 1);
+      rerender();
+    });
+    el.appendChild(row);
+  });
+}
+function renderAboutBody() { renderParagraphEditor('aboutBodyEditor', content.about.body, renderAboutBody); }
+function renderBreedBody() { renderParagraphEditor('breedBodyEditor', content.breed.body, renderBreedBody); }
+
 // ---- Dogs editor ----
 function renderDogsEditor() {
   const el = document.getElementById('dogsEditor');
@@ -470,6 +511,15 @@ function buildDogRow(dog, index) {
   });
   return row;
 }
+document.getElementById('addAboutParaBtn').addEventListener('click', () => {
+  content.about.body.push({ pl: '', en: '' });
+  renderAboutBody();
+});
+document.getElementById('addBreedParaBtn').addEventListener('click', () => {
+  content.breed.body.push({ pl: '', en: '' });
+  renderBreedBody();
+});
+
 document.getElementById('addDogBtn').addEventListener('click', () => {
   content.dogs.push({ id: `dog-${Date.now()}`, name: { pl: '', en: '' }, role: { pl: '', en: '' }, bio: { pl: '', en: '' } });
   renderDogsEditor();
