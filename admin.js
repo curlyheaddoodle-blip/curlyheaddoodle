@@ -52,6 +52,18 @@ async function verifyToken(candidate) {
   if (!repo.permissions || !repo.permissions.push) {
     throw new Error('Ten token nie ma uprawnień do zapisu w repozytorium.');
   }
+
+  // repo.permissions.push only reflects collaborator-level access — a
+  // fine-grained token can pass that check yet still lack the separate
+  // "Contents" permission needed to actually read/write files. Probe the
+  // Contents API directly so a missing permission is caught here, not
+  // during an upload.
+  const contentsRes = await fetch(`${API_ROOT}/images?ref=${BRANCH}`, {
+    headers: { Authorization: `Bearer ${candidate}`, Accept: 'application/vnd.github+json' },
+  });
+  if (contentsRes.status === 403) {
+    throw new Error('Token nie ma uprawnienia "Contents: Read and write". Edytuj token na GitHubie (Repository permissions → Contents) i spróbuj ponownie.');
+  }
 }
 
 function showSlots() {
@@ -141,6 +153,17 @@ function resizeAndCompress(file, maxDim = 1600, quality = 0.85) {
   });
 }
 
+// GitHub returns this exact text when a fine-grained token's Contents
+// permission is set to "Read-only" instead of "Read and write" — the
+// connect-time check can't catch that (a read-only token still passes a
+// read probe), so translate it here where it actually surfaces.
+function friendlyGithubError(message) {
+  if (message && message.includes('Resource not accessible by personal access token')) {
+    return 'Token nie ma uprawnienia do zapisu. Na GitHubie edytuj token → Repository permissions → Contents → ustaw "Read and write" (nie "Read-only"), zapisz i spróbuj ponownie.';
+  }
+  return message;
+}
+
 async function handleUpload(key) {
   const fileInput = document.getElementById(`file-${key}`);
   const file = fileInput.files[0];
@@ -172,7 +195,7 @@ async function handleUpload(key) {
     loadExistingPreview(key);
     fileInput.value = '';
   } catch (err) {
-    setSlotStatus(key, err.message, 'err');
+    setSlotStatus(key, friendlyGithubError(err.message), 'err');
   } finally {
     uploadBtn.disabled = false;
   }
@@ -198,7 +221,7 @@ async function handleRemove(key) {
     setSlotStatus(key, 'Usunięto.', 'ok');
     loadExistingPreview(key);
   } catch (err) {
-    setSlotStatus(key, err.message, 'err');
+    setSlotStatus(key, friendlyGithubError(err.message), 'err');
   } finally {
     removeBtn.disabled = false;
   }
