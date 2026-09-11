@@ -171,8 +171,8 @@
       "en": "Puppies"
     },
     "litters_lede": {
-      "pl": "Aktualne, oczekiwane i już zarezerwowane mioty.",
-      "en": "Current, expecting, and already reserved litters."
+      "pl": "Aktualne, oczekiwane i poprzednie mioty.",
+      "en": "Current, expecting, and former litters."
     },
     "litters_note": {
       "pl": "Podmień na prawdziwe mioty, daty i zdjęcia.",
@@ -187,8 +187,8 @@
       "en": "Expecting"
     },
     "status_reserved": {
-      "pl": "Zarezerwowany",
-      "en": "Reserved"
+      "pl": "x",
+      "en": "x"
     },
     "contact_heading": {
       "pl": "Wypełnij ankietę",
