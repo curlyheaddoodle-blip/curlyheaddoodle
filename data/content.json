@@ -2,139 +2,372 @@
   "site": {
     "brandName": "Curly Head Doodle"
   },
-  "navOrder": ["about", "breed", "dogs", "litters", "contact"],
+  "navOrder": [
+    "about",
+    "breed",
+    "dogs",
+    "litters",
+    "contact"
+  ],
   "theme": {
     "colors": {
-      "bg": "#F8F2E7",
-      "bgAlt": "#F0E6D2",
-      "paper": "#FFFDF9",
-      "ink": "#2B211A",
-      "inkSoft": "#6B5E4F",
-      "gold": "#B8863B",
-      "goldSoft": "#E3C68A",
-      "line": "#E0D3B8"
+      "bg": "#f8f2e7",
+      "bgAlt": "#f0e6d2",
+      "paper": "#fffdf9",
+      "ink": "#2b211a",
+      "inkSoft": "#6b5e4f",
+      "gold": "#b8863b",
+      "goldSoft": "#e3c68a",
+      "line": "#e0d3b8"
     },
     "fontPair": "fraunces-karla"
   },
   "translations": {
-    "page_title": { "pl": "Curly Head Doodle — Hodowla Mini Goldendoodle, Mielec", "en": "Curly Head Doodle — Mini Goldendoodle Kennel, Mielec" },
-    "page_description": { "pl": "Ekskluzywna, domowa hodowla psów rasy Mini Goldendoodle w Mielcu. Poznaj Karolinę i Pawła oraz nasze szczenięta.", "en": "An exclusive, home-raised Mini Goldendoodle kennel in Mielec, Poland. Meet Karolina and Paweł and our puppies." },
-
-    "nav_about": { "pl": "O nas", "en": "About us" },
-    "nav_breed": { "pl": "O rasie", "en": "The breed" },
-    "nav_dogs": { "pl": "Nasze psy", "en": "Our dogs" },
-    "nav_puppies": { "pl": "Szczenięta", "en": "Puppies" },
-    "nav_contact": { "pl": "Kontakt", "en": "Contact" },
-    "nav_cta": { "pl": "Wypełnij ankietę", "en": "Apply now" },
-
-    "hero_headline": { "pl": "Miłość, która ma cztery łapy i kręcony włos.", "en": "Love with four paws and a curly coat." },
-    "hero_subhead": { "pl": "Ekskluzywna, domowa hodowla psów rasy Mini Goldendoodle w Mielcu.", "en": "An exclusive, home-raised Mini Goldendoodle kennel in Mielec." },
-    "hero_cta_primary": { "pl": "Wypełnij ankietę", "en": "Apply now" },
-    "hero_cta_secondary": { "pl": "Poznaj nasze szczenięta", "en": "See our puppies" },
-
-    "about_kicker": { "pl": "Witaj w naszym świecie!", "en": "Welcome to our world!" },
-    "about_heading": { "pl": "Jesteśmy Karolina i Paweł", "en": "We're Karolina and Paweł" },
-    "about_cta": { "pl": "Poznaj naszą filozofię", "en": "Discover our philosophy" },
-
-    "why_heading": { "pl": "Dlaczego my?", "en": "Why choose us" },
-    "why1_title": { "pl": "Prawdziwy dom", "en": "A real home" },
-    "why1_body": { "pl": "Szczenięta dorastają w centrum domowego życia, znając dźwięk odkurzacza i gwar miasta. Nie mamy kojców.", "en": "Puppies grow up at the center of family life — used to the vacuum cleaner and city noise from day one. We don't keep kennels." },
-    "why2_title": { "pl": "Genetyka bez kompromisów", "en": "Genetics without compromise" },
-    "why2_body": { "pl": "Posiadamy rozbudowany pakiet badań (m.in. Laboklin, Labogenetics XXL), wykluczających najpoważniejsze choroby genetyczne.", "en": "We run an extensive testing panel (including Laboklin and Labogenetics XXL) that rules out the most serious genetic diseases." },
-    "why3_title": { "pl": "Zaawansowana socjalizacja", "en": "Advanced socialization" },
-    "why3_body": { "pl": "Testujemy temperament szczeniąt, stosujemy ENS/ESI i oswajamy je z zabiegami groomerskimi już od najmłodszych dni.", "en": "We test each puppy's temperament, use ENS/ESI early stimulation, and introduce grooming procedures from their earliest days." },
-    "why4_title": { "pl": "Wielopokoleniowe linie", "en": "Multi-generational lines" },
-    "why4_body": { "pl": "Hodujemy szczenięta (np. pokolenia F2B) w pięknych odcieniach, z sierścią wyjątkowo przyjazną dla alergików.", "en": "We breed puppies (including F2B generations) in beautiful colors, with coats especially friendly to allergy sufferers." },
-
-    "breed_heading": { "pl": "Poznaj rasę Mini Goldendoodle", "en": "Meet the Mini Goldendoodle" },
-    "breed_fact1_label": { "pl": "Wzrost", "en": "Height" },
-    "breed_fact1_value": { "pl": "ok. 35–45 cm w kłębie", "en": "approx. 35–45 cm at the shoulder" },
-    "breed_fact2_label": { "pl": "Waga", "en": "Weight" },
-    "breed_fact2_value": { "pl": "ok. 7–14 kg", "en": "approx. 7–14 kg" },
-    "breed_fact3_label": { "pl": "Usposobienie", "en": "Temperament" },
-    "breed_fact3_value": { "pl": "łagodne, towarzyskie, inteligentne", "en": "gentle, social, intelligent" },
-    "breed_fact4_label": { "pl": "Sierść", "en": "Coat" },
-    "breed_fact4_value": { "pl": "kręcona/falowana, niskolinieniowa", "en": "curly/wavy, low-shedding" },
-
-    "dogs_heading": { "pl": "Nasze psy", "en": "Our dogs" },
-    "dogs_lede": { "pl": "Poznaj rodziców naszych miotów — każdy z pełnymi badaniami zdrowotnymi i genetycznymi.", "en": "Meet the parents behind our litters — each fully health- and genetically tested." },
-    "dogs_note": { "pl": "Zdjęcia i pełne dane naszych psów dodamy tutaj.", "en": "Photos and full profiles of our dogs will go here." },
-
-    "litters_heading": { "pl": "Szczenięta", "en": "Puppies" },
-    "litters_lede": { "pl": "Aktualne, oczekiwane i już zarezerwowane mioty.", "en": "Current, expecting, and already reserved litters." },
-    "litters_note": { "pl": "Podmień na prawdziwe mioty, daty i zdjęcia.", "en": "Swap in your real litters, dates, and photos here." },
-
-    "status_available": { "pl": "Dostępne teraz", "en": "Available now" },
-    "status_expecting": { "pl": "Oczekiwany", "en": "Expecting" },
-    "status_reserved": { "pl": "Zarezerwowany", "en": "Reserved" },
-
-    "contact_heading": { "pl": "Wypełnij ankietę", "en": "Apply now" },
-    "contact_lede": { "pl": "Opowiedz nam trochę o swoim domu. Każde zgłoszenie czytamy osobiście i odpowiadamy w ciągu kilku dni.", "en": "Tell us a bit about your home. We read every application ourselves and reply within a few days." },
-    "contact_location_label": { "pl": "Lokalizacja", "en": "Location" },
-    "contact_location_value": { "pl": "Mielec", "en": "Mielec, Poland" },
-    "contact_email_label": { "pl": "E-mail", "en": "Email" },
-    "contact_social_label": { "pl": "Instagram / Facebook", "en": "Instagram / Facebook" },
-
-    "field_name": { "pl": "Imię i nazwisko", "en": "Full name" },
-    "field_email": { "pl": "E-mail", "en": "Email" },
-    "field_phone": { "pl": "Telefon (opcjonalnie)", "en": "Phone (optional)" },
-    "field_litter": { "pl": "Który miot Cię interesuje?", "en": "Which litter are you interested in?" },
-    "field_litter_opt3": { "pl": "Jeszcze nie wiem / przyszły miot", "en": "Not sure yet / future litter" },
-    "field_message": { "pl": "Opowiedz nam o swoim domu", "en": "Tell us about your home" },
-    "field_message_placeholder": { "pl": "Domownicy, inne zwierzęta, ogród, dlaczego Goldendoodle...", "en": "Household, other pets, yard, why a Goldendoodle..." },
-    "submit_btn": { "pl": "Wyślij zgłoszenie", "en": "Send application" },
-    "form_fineprint": { "pl": "Wykorzystujemy te dane wyłącznie do kontaktu i prowadzenia listy oczekujących. Nie udostępniamy ich nikomu innemu.", "en": "We only use this information to respond to your inquiry and manage the waitlist. We don't share it with anyone else." },
-
-    "footer_disclaimer": { "pl": "Nie prowadzimy sprzedaży za pośrednictwem portali ogłoszeniowych typu OLX.", "en": "We do not sell puppies through classifieds sites such as OLX." },
-    "footer_copyright": { "pl": "© 2026 Curly Head Doodle. Wszelkie prawa zastrzeżone.", "en": "© 2026 Curly Head Doodle. All rights reserved." }
+    "page_title": {
+      "pl": "Curly Head Doodle — Hodowla Mini Goldendoodle, Mielec",
+      "en": "Curly Head Doodle — Mini Goldendoodle Kennel, Mielec"
+    },
+    "page_description": {
+      "pl": "Ekskluzywna, domowa hodowla psów rasy Mini Goldendoodle w Mielcu. Poznaj Karolinę i Pawła oraz nasze szczenięta.",
+      "en": "An exclusive, home-raised Mini Goldendoodle kennel in Mielec, Poland. Meet Karolina and Paweł and our puppies."
+    },
+    "nav_about": {
+      "pl": "O nas",
+      "en": "About us"
+    },
+    "nav_breed": {
+      "pl": "O rasie",
+      "en": "The breed"
+    },
+    "nav_dogs": {
+      "pl": "Nasze psy",
+      "en": "Our dogs"
+    },
+    "nav_puppies": {
+      "pl": "Szczenięta",
+      "en": "Puppies"
+    },
+    "nav_contact": {
+      "pl": "Kontakt",
+      "en": "Contact"
+    },
+    "nav_cta": {
+      "pl": "Wypełnij ankietę",
+      "en": "Apply now"
+    },
+    "hero_headline": {
+      "pl": "Miłość, która ma cztery łapy i kręcony włos.",
+      "en": "Love with four paws and a curly coat."
+    },
+    "hero_subhead": {
+      "pl": "Ekskluzywna, domowa hodowla psów rasy Mini Goldendoodle w Mielcu.",
+      "en": "An exclusive, home-raised Mini Goldendoodle kennel in Mielec."
+    },
+    "hero_cta_primary": {
+      "pl": "Wypełnij ankietę",
+      "en": "Apply now"
+    },
+    "hero_cta_secondary": {
+      "pl": "Poznaj nasze szczenięta",
+      "en": "See our puppies"
+    },
+    "about_kicker": {
+      "pl": "Witaj w naszym świecie!",
+      "en": "Welcome to our world!"
+    },
+    "about_heading": {
+      "pl": "Jesteśmy Karolina i Paweł",
+      "en": "We're Karolina and Paweł"
+    },
+    "about_cta": {
+      "pl": "Poznaj naszą filozofię",
+      "en": "Discover our philosophy"
+    },
+    "why_heading": {
+      "pl": "Dlaczego my?",
+      "en": "Why choose us"
+    },
+    "why1_title": {
+      "pl": "Prawdziwy dom",
+      "en": "A real home"
+    },
+    "why1_body": {
+      "pl": "Szczenięta dorastają w centrum domowego życia, znając dźwięk odkurzacza i gwar miasta. Nie mamy kojców.",
+      "en": "Puppies grow up at the center of family life — used to the vacuum cleaner and city noise from day one. We don't keep kennels."
+    },
+    "why2_title": {
+      "pl": "Genetyka bez kompromisów",
+      "en": "Genetics without compromise"
+    },
+    "why2_body": {
+      "pl": "Posiadamy rozbudowany pakiet badań (m.in. Laboklin, Labogenetics XXL), wykluczających najpoważniejsze choroby genetyczne.",
+      "en": "We run an extensive testing panel (including Laboklin and Labogenetics XXL) that rules out the most serious genetic diseases."
+    },
+    "why3_title": {
+      "pl": "Zaawansowana socjalizacja",
+      "en": "Advanced socialization"
+    },
+    "why3_body": {
+      "pl": "Testujemy temperament szczeniąt, stosujemy ENS/ESI i oswajamy je z zabiegami groomerskimi już od najmłodszych dni.",
+      "en": "We test each puppy's temperament, use ENS/ESI early stimulation, and introduce grooming procedures from their earliest days."
+    },
+    "why4_title": {
+      "pl": "Wielopokoleniowe linie",
+      "en": "Multi-generational lines"
+    },
+    "why4_body": {
+      "pl": "Hodujemy szczenięta (np. pokolenia F2B) w pięknych odcieniach, z sierścią wyjątkowo przyjazną dla alergików.",
+      "en": "We breed puppies (including F2B generations) in beautiful colors, with coats especially friendly to allergy sufferers."
+    },
+    "breed_heading": {
+      "pl": "Poznaj rasę Mini Goldendoodle",
+      "en": "Meet the Mini Goldendoodle"
+    },
+    "breed_fact1_label": {
+      "pl": "Wzrost",
+      "en": "Height"
+    },
+    "breed_fact1_value": {
+      "pl": "ok. 35–45 cm w kłębie",
+      "en": "approx. 35–45 cm at the shoulder"
+    },
+    "breed_fact2_label": {
+      "pl": "Waga",
+      "en": "Weight"
+    },
+    "breed_fact2_value": {
+      "pl": "ok. 7–14 kg",
+      "en": "approx. 7–14 kg"
+    },
+    "breed_fact3_label": {
+      "pl": "Usposobienie",
+      "en": "Temperament"
+    },
+    "breed_fact3_value": {
+      "pl": "łagodne, towarzyskie, inteligentne",
+      "en": "gentle, social, intelligent"
+    },
+    "breed_fact4_label": {
+      "pl": "Sierść",
+      "en": "Coat"
+    },
+    "breed_fact4_value": {
+      "pl": "kręcona/falowana, niskolinieniowa",
+      "en": "curly/wavy, low-shedding"
+    },
+    "dogs_heading": {
+      "pl": "Nasze psy",
+      "en": "Our dogs"
+    },
+    "dogs_lede": {
+      "pl": "Poznaj rodziców naszych miotów — każdy z pełnymi badaniami zdrowotnymi i genetycznymi.",
+      "en": "Meet the parents behind our litters — each fully health- and genetically tested."
+    },
+    "dogs_note": {
+      "pl": "Zdjęcia i pełne dane naszych psów dodamy tutaj.",
+      "en": "Photos and full profiles of our dogs will go here."
+    },
+    "litters_heading": {
+      "pl": "Szczenięta",
+      "en": "Puppies"
+    },
+    "litters_lede": {
+      "pl": "Aktualne, oczekiwane i już zarezerwowane mioty.",
+      "en": "Current, expecting, and already reserved litters."
+    },
+    "litters_note": {
+      "pl": "Podmień na prawdziwe mioty, daty i zdjęcia.",
+      "en": "Swap in your real litters, dates, and photos here."
+    },
+    "status_available": {
+      "pl": "Dostępne teraz",
+      "en": "Available now"
+    },
+    "status_expecting": {
+      "pl": "Oczekiwany",
+      "en": "Expecting"
+    },
+    "status_reserved": {
+      "pl": "Zarezerwowany",
+      "en": "Reserved"
+    },
+    "contact_heading": {
+      "pl": "Wypełnij ankietę",
+      "en": "Apply now"
+    },
+    "contact_lede": {
+      "pl": "Opowiedz nam trochę o swoim domu. Każde zgłoszenie czytamy osobiście i odpowiadamy w ciągu kilku dni.",
+      "en": "Tell us a bit about your home. We read every application ourselves and reply within a few days."
+    },
+    "contact_location_label": {
+      "pl": "Lokalizacja",
+      "en": "Location"
+    },
+    "contact_location_value": {
+      "pl": "Mielec",
+      "en": "Mielec, Poland"
+    },
+    "contact_email_label": {
+      "pl": "E-mail",
+      "en": "Email"
+    },
+    "contact_social_label": {
+      "pl": "Instagram / Facebook",
+      "en": "Instagram / Facebook"
+    },
+    "field_name": {
+      "pl": "Imię i nazwisko",
+      "en": "Full name"
+    },
+    "field_email": {
+      "pl": "E-mail",
+      "en": "Email"
+    },
+    "field_phone": {
+      "pl": "Telefon (opcjonalnie)",
+      "en": "Phone (optional)"
+    },
+    "field_litter": {
+      "pl": "Który miot Cię interesuje?",
+      "en": "Which litter are you interested in?"
+    },
+    "field_litter_opt3": {
+      "pl": "Jeszcze nie wiem / przyszły miot",
+      "en": "Not sure yet / future litter"
+    },
+    "field_message": {
+      "pl": "Opowiedz nam o swoim domu",
+      "en": "Tell us about your home"
+    },
+    "field_message_placeholder": {
+      "pl": "Domownicy, inne zwierzęta, ogród, dlaczego Goldendoodle...",
+      "en": "Household, other pets, yard, why a Goldendoodle..."
+    },
+    "submit_btn": {
+      "pl": "Wyślij zgłoszenie",
+      "en": "Send application"
+    },
+    "form_fineprint": {
+      "pl": "Wykorzystujemy te dane wyłącznie do kontaktu i prowadzenia listy oczekujących. Nie udostępniamy ich nikomu innemu.",
+      "en": "We only use this information to respond to your inquiry and manage the waitlist. We don't share it with anyone else."
+    },
+    "footer_disclaimer": {
+      "pl": "Nie prowadzimy sprzedaży za pośrednictwem portali ogłoszeniowych typu OLX.",
+      "en": "We do not sell puppies through classifieds sites such as OLX."
+    },
+    "footer_copyright": {
+      "pl": "© 2026 Curly Head Doodle. Wszelkie prawa zastrzeżone.",
+      "en": "© 2026 Curly Head Doodle. All rights reserved."
+    }
   },
   "about": {
     "body": [
-      { "pl": "Curly Head Doodle z Mielca to spełnienie naszych marzeń. Nasza przygoda zaczęła się od miłości do rasy, a teraz dzielimy tę pasję z Wami.", "en": "Curly Head Doodle, based in Mielec, is the fulfillment of our dream. Our journey began with a love for the breed, and now we get to share that passion with you." },
-      { "pl": "Wychowujemy szczenięta w domu, bez kojców zewnętrznych, zapewniając im najlepszy możliwy start w życiu.", "en": "We raise our puppies at home, with no outdoor kennels, to give them the best possible start in life." }
+      {
+        "pl": "Curly Head Doodle z Mielca to spełnienie naszych marzeń. Nasza przygoda zaczęła się od miłości do rasy, a teraz dzielimy tę pasję z Wami.",
+        "en": "Curly Head Doodle, based in Mielec, is the fulfillment of our dream. Our journey began with a love for the breed, and now we get to share that passion with you."
+      },
+      {
+        "pl": "Wychowujemy szczenięta w domu, bez kojców zewnętrznych, zapewniając im najlepszy możliwy start w życiu.",
+        "en": "We raise our puppies at home, with no outdoor kennels, to give them the best possible start in life."
+      },
+      {
+        "pl": " bftg gbtrf dvf t",
+        "en": "yt htrfrce gbt nkm"
+      }
     ]
   },
   "breed": {
     "body": [
-      { "pl": "Mini Goldendoodle to połączenie inteligencji pudla i ciepłego, rodzinnego usposobienia golden retrievera. To psy czułe, chętne do nauki i świetnie odnajdujące się zarówno w mieszkaniu, jak i w domu z ogrodem.", "en": "The Mini Goldendoodle combines the Poodle's intelligence with the Golden Retriever's warm, family-oriented nature — affectionate, eager to learn, and equally at home in an apartment or a house with a yard." },
-      { "pl": "Dzięki kręconej lub falowanej sierści typu pudla, wiele osób z alergią na sierść psów dobrze toleruje Goldendoodle — choć żadna rasa nie jest w 100% hipoalergiczna.", "en": "Thanks to their curly or wavy Poodle-type coat, many people with dog allergies tolerate Goldendoodles well — though no breed is ever 100% hypoallergenic." }
+      {
+        "pl": "Mini Goldendoodle to połączenie inteligencji pudla i ciepłego, rodzinnego usposobienia golden retrievera. To psy czułe, chętne do nauki i świetnie odnajdujące się zarówno w mieszkaniu, jak i w domu z ogrodem.",
+        "en": "The Mini Goldendoodle combines the Poodle's intelligence with the Golden Retriever's warm, family-oriented nature — affectionate, eager to learn, and equally at home in an apartment or a house with a yard."
+      },
+      {
+        "pl": "Dzięki kręconej lub falowanej sierści typu pudla, wiele osób z alergią na sierść psów dobrze toleruje Goldendoodle — choć żadna rasa nie jest w 100% hipoalergiczna.",
+        "en": "Thanks to their curly or wavy Poodle-type coat, many people with dog allergies tolerate Goldendoodles well — though no breed is ever 100% hypoallergenic."
+      }
     ]
   },
   "dogs": [
     {
       "id": "dog1",
-      "name": { "pl": "[Imię suczki]", "en": "[Dam's name]" },
-      "role": { "pl": "Suczka hodowlana", "en": "Breeding female" },
-      "bio": { "pl": "Miejsce na krótki opis charakteru, umaszczenia i wyników badań zdrowotnych.", "en": "Space for a short note on temperament, coloring, and health clearances." }
+      "name": {
+        "pl": "[Imię suczki]",
+        "en": "[Dam's name]"
+      },
+      "role": {
+        "pl": "Suczka hodowlana",
+        "en": "Breeding female"
+      },
+      "bio": {
+        "pl": "Miejsce na krótki opis charakteru, umaszczenia i wyników badań zdrowotnych.",
+        "en": "Space for a short note on temperament, coloring, and health clearances."
+      }
     },
     {
       "id": "dog2",
-      "name": { "pl": "[Imię reproduktora]", "en": "[Sire's name]" },
-      "role": { "pl": "Reproduktor", "en": "Stud" },
-      "bio": { "pl": "Miejsce na krótki opis charakteru, umaszczenia i wyników badań zdrowotnych.", "en": "Space for a short note on temperament, coloring, and health clearances." }
+      "name": {
+        "pl": "[Imię reproduktora]",
+        "en": "[Sire's name]"
+      },
+      "role": {
+        "pl": "Reproduktor",
+        "en": "Stud"
+      },
+      "bio": {
+        "pl": "Miejsce na krótki opis charakteru, umaszczenia i wyników badań zdrowotnych.",
+        "en": "Space for a short note on temperament, coloring, and health clearances."
+      }
     }
   ],
   "litters": [
     {
       "id": "litter1",
       "status": "available",
-      "title": { "pl": "[Suczka] × [Reproduktor]", "en": "[Dam] × [Sire]" },
-      "desc": { "pl": "Data urodzenia, liczba dostępnych szczeniąt i termin gotowości do odbioru — uzupełnij tutaj.", "en": "Birth date, number of puppies available, and pickup date — fill in here." },
-      "cta": { "pl": "Zapytaj o ten miot", "en": "Ask about this litter" }
+      "title": {
+        "pl": "[Suczka] × [Reproduktor]",
+        "en": "[Dam] × [Sire]"
+      },
+      "desc": {
+        "pl": "Data urodzenia, liczba dostępnych szczeniąt i termin gotowości do odbioru — uzupełnij tutaj.",
+        "en": "Birth date, number of puppies available, and pickup date — fill in here."
+      },
+      "cta": {
+        "pl": "Zapytaj o ten miot",
+        "en": "Ask about this litter"
+      }
     },
     {
       "id": "litter2",
       "status": "expecting",
-      "title": { "pl": "[Suczka] × [Reproduktor]", "en": "[Dam] × [Sire]" },
-      "desc": { "pl": "Planowany termin miotu — uzupełnij tutaj.", "en": "Planned litter date — fill in here." },
-      "cta": { "pl": "Dołącz do listy oczekujących", "en": "Join this waitlist" }
+      "title": {
+        "pl": "[Suczka] × [Reproduktor]",
+        "en": "[Dam] × [Sire]"
+      },
+      "desc": {
+        "pl": "Planowany termin miotu — uzupełnij tutaj.",
+        "en": "Planned litter date — fill in here."
+      },
+      "cta": {
+        "pl": "Dołącz do listy oczekujących",
+        "en": "Join this waitlist"
+      }
     },
     {
       "id": "litter3",
       "status": "reserved",
-      "title": { "pl": "[Suczka] × [Reproduktor]", "en": "[Dam] × [Sire]" },
-      "desc": { "pl": "Wszystkie szczenięta znalazły już domy.", "en": "All puppies have found their homes." },
-      "cta": { "pl": "", "en": "" }
+      "title": {
+        "pl": "[Suczka] × [Reproduktor]",
+        "en": "[Dam] × [Sire]"
+      },
+      "desc": {
+        "pl": "Wszystkie szczenięta znalazły już domy.",
+        "en": "All puppies have found their homes."
+      },
+      "cta": {
+        "pl": "",
+        "en": ""
+      }
     }
   ],
   "contact": {
