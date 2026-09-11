@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <!--
-  CURLY HEAD DOODLE — SETTINGS / PHOTO ADMIN
+  CURLY HEAD DOODLE — SETTINGS ADMIN PANEL
   ==========================================
-  A small panel for uploading real photos into specific sections of the
-  live site. It is a plain static page (no server) that talks directly to
-  the GitHub API using a personal access token you provide, and commits
-  each photo straight into this repo's images/ folder. The public site
-  (script.js) automatically picks up images/<slot>.jpg once it exists.
+  A full content editor for the site: colors/fonts, every piece of PL/EN
+  text, the dogs and litters lists (add/remove/reorder), contact details,
+  and photos. It is a plain static page (no server) that talks directly
+  to the GitHub API using a personal access token you provide, reading
+  and writing data/content.json and images/ in this repo. The public
+  site (script.js) renders everything straight from content.json.
 
   This page is not linked from the main nav — only from a small footer
   link — but it is not truly private: anyone who knows the URL can open
@@ -18,7 +19,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Ustawienia zdjęć — Curly Head Doodle</title>
+<title>Ustawienia — Curly Head Doodle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -32,7 +33,7 @@
     <a class="wordmark" href="index.html">
       <span class="wordmark-text">Curly Head<br>Doodle</span>
     </a>
-    <h1>Ustawienia zdjęć</h1>
+    <h1>Ustawienia strony</h1>
   </div>
 </header>
 
@@ -42,7 +43,7 @@
   <section id="authPanel" class="admin-card">
     <h2>Połącz z repozytorium GitHub</h2>
     <p class="muted">
-      Aby wgrywać zdjęcia, potrzebny jest osobisty token dostępu (Personal Access Token)
+      Aby edytować stronę, potrzebny jest osobisty token dostępu (Personal Access Token)
       z uprawnieniem do zapisu w repozytorium <code>curlyheaddoodle-blip/curlyheaddoodle</code>.
       Token jest zapisywany wyłącznie w Twojej przeglądarce (localStorage) i wysyłany
       tylko bezpośrednio do GitHuba — nigdzie indziej.
@@ -68,12 +69,52 @@
     <p id="authStatus" class="admin-status" role="status"></p>
   </section>
 
-  <!-- ============ PHOTO SLOTS ============ -->
-  <section id="slotsPanel" class="admin-card" hidden>
-    <h2>Zdjęcia na stronie</h2>
-    <p class="muted">Wgraj zdjęcie dla każdej sekcji. Zostanie ono automatycznie przycięte i skompresowane, a strona pokaże je w ciągu minuty od zapisania.</p>
-    <div class="slot-grid" id="slotGrid"></div>
-  </section>
+  <!-- Everything below appears once connected; admin.js fills it from data/content.json -->
+  <div id="editorRoot" hidden>
+
+    <section class="admin-card">
+      <h2>Zdjęcia — Hero i O nas</h2>
+      <p class="muted">Zdjęcia poszczególnych psów edytujesz w sekcji „Nasze psy” poniżej.</p>
+      <div class="slot-grid" id="slotGrid"></div>
+    </section>
+
+    <section class="admin-card">
+      <h2>Wygląd</h2>
+      <p class="muted">Kolory i czcionki widoczne na całej stronie.</p>
+      <div id="themeEditor"></div>
+    </section>
+
+    <section class="admin-card">
+      <h2>Nasze psy</h2>
+      <p class="muted">Dodawaj, usuwaj i zmieniaj kolejność psów. Każdy ma własne zdjęcie.</p>
+      <div id="dogsEditor"></div>
+      <button type="button" class="btn-small" id="addDogBtn">+ Dodaj psa</button>
+    </section>
+
+    <section class="admin-card">
+      <h2>Szczenięta / mioty</h2>
+      <p class="muted">Dodawaj, usuwaj i zmieniaj kolejność miotów.</p>
+      <div id="littersEditor"></div>
+      <button type="button" class="btn-small" id="addLitterBtn">+ Dodaj miot</button>
+    </section>
+
+    <section class="admin-card">
+      <h2>Kontakt</h2>
+      <div id="contactEditor"></div>
+    </section>
+
+    <section class="admin-card">
+      <h2>Wszystkie teksty (PL / EN)</h2>
+      <p class="muted">Rozwiń sekcję, żeby edytować konkretne teksty na stronie.</p>
+      <div id="translationsEditor"></div>
+    </section>
+
+    <div class="save-bar">
+      <button type="button" class="btn btn-primary" id="saveBtn">Zapisz wszystkie zmiany</button>
+      <p id="saveStatus" class="admin-status" role="status"></p>
+    </div>
+
+  </div>
 
 </main>
 

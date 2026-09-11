@@ -14,7 +14,7 @@
 .admin-header h1 { font-size: 1.2rem; margin: 0; color: var(--color-ink-soft); font-weight: 500; }
 .admin-header .wordmark-text { font-family: var(--font-display); font-size: 1rem; font-weight: 600; }
 
-.admin-main { max-width: 760px; padding-top: 40px; padding-bottom: 60px; display: grid; gap: 28px; }
+.admin-main { max-width: 860px; padding-top: 40px; padding-bottom: 100px; display: grid; gap: 28px; }
 
 .admin-card {
   background: var(--color-paper);
@@ -73,3 +73,67 @@
 .btn-small:hover { border-color: var(--color-gold); }
 .btn-small:disabled { opacity: 0.5; cursor: not-allowed; }
 .btn-small.danger { color: #B23A3A; }
+
+/* ---- Theme editor ---- */
+.theme-colors { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin-top: 16px; }
+.color-field { display: flex; align-items: center; gap: 10px; }
+.color-field input[type="color"] {
+  width: 40px; height: 40px; padding: 0; border: 1px solid var(--color-line); border-radius: 6px; cursor: pointer; background: none;
+}
+.color-field label { font-size: 0.85rem; }
+.font-pair-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 20px; }
+.font-pair-option {
+  border: 2px solid var(--color-line); border-radius: var(--radius); padding: 14px; cursor: pointer; background: var(--color-bg);
+}
+.font-pair-option.selected { border-color: var(--color-gold); }
+.font-pair-option .fp-display { font-size: 1.2rem; margin-bottom: 4px; }
+.font-pair-option .fp-body { font-size: 0.9rem; color: var(--color-ink-soft); }
+
+/* ---- Repeatable list editors (dogs / litters) ---- */
+.repeat-item {
+  border: 1px solid var(--color-line); border-radius: var(--radius);
+  padding: 18px; margin-top: 16px; background: var(--color-bg); position: relative;
+}
+.repeat-item-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 12px; flex-wrap: wrap; }
+.repeat-item-head .repeat-title { font-weight: 700; font-size: 0.95rem; }
+.repeat-item-actions { display: flex; gap: 8px; }
+.repeat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+.repeat-row.single { grid-template-columns: 1fr; }
+.repeat-row label { font-size: 0.78rem; font-weight: 700; color: var(--color-ink-soft); display: block; margin-bottom: 4px; }
+.repeat-row input, .repeat-row textarea, .repeat-row select {
+  width: 100%; font-family: var(--font-body); font-size: 0.92rem; padding: 8px 10px;
+  border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-paper); color: var(--color-ink);
+}
+.repeat-row textarea { min-height: 60px; resize: vertical; }
+.dog-photo-row { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+.dog-photo-preview {
+  width: 56px; height: 56px; border-radius: 50%; overflow: hidden; flex-shrink: 0;
+  background: var(--color-paper); border: 2px dashed var(--color-gold-soft);
+  display: flex; align-items: center; justify-content: center; font-size: 0.65rem; color: var(--color-gold-soft); text-align: center;
+}
+.dog-photo-preview img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---- Translations groups ---- */
+.t-group { border: 1px solid var(--color-line); border-radius: var(--radius); margin-top: 12px; }
+.t-group summary {
+  cursor: pointer; padding: 12px 16px; font-weight: 700; font-size: 0.92rem; background: var(--color-bg);
+}
+.t-group-body { padding: 6px 16px 16px; }
+.t-key-row { margin-top: 14px; }
+.t-key-row .t-key-label { font-size: 0.8rem; font-weight: 700; color: var(--color-ink-soft); margin-bottom: 4px; }
+.t-key-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.t-key-inputs .t-lang-wrap { display: flex; flex-direction: column; gap: 3px; }
+.t-key-inputs .t-lang-tag { font-size: 0.68rem; color: var(--color-gold); font-weight: 700; }
+.t-key-inputs input, .t-key-inputs textarea {
+  width: 100%; font-family: var(--font-body); font-size: 0.9rem; padding: 7px 9px;
+  border-radius: 6px; border: 1px solid var(--color-line); background: var(--color-bg); color: var(--color-ink);
+}
+.t-key-inputs textarea { min-height: 56px; resize: vertical; }
+
+/* ---- Save bar ---- */
+.save-bar {
+  position: sticky; bottom: 0; background: var(--color-paper); border: 1px solid var(--color-line);
+  border-radius: var(--radius); padding: 16px 24px; display: flex; align-items: center; gap: 20px;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+}
+.save-bar .admin-status { margin: 0; }

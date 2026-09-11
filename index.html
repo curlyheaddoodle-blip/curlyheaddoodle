@@ -2,14 +2,16 @@
 <!--
   CURLY HEAD DOODLE — WEBSITE SOURCE
   ==========================================
-  index.html  -> page text (Polish, the default) + structure. English text
-                 lives in script.js and swaps in when the visitor picks EN.
-  style.css   -> colors, fonts, layout. Start at :root for the palette.
-  script.js   -> mobile menu, header-on-scroll, and the PL/EN translations.
-
-  To edit PL text: change it directly below.
-  To edit EN text: find the matching key in the `translations.en` object
-  in script.js (same data-i18n name, e.g. "hero_headline").
+  index.html       -> structure only. The Polish text below is a fallback,
+                       shown only if data/content.json fails to load.
+  data/content.json -> the real source of all text (PL+EN), theme colors/
+                       fonts, and the dogs/litters lists. Edit everything
+                       here — by hand, or through admin.html (Settings
+                       panel), which writes back to this same file.
+  style.css        -> base layout. Colors/fonts are overridden at runtime
+                       from content.json's theme (see applyTheme in script.js).
+  script.js        -> loads content.json, renders dogs/litters, applies the
+                       theme, and handles the PL/EN language switch.
 -->
 <html lang="pl">
 <head>
@@ -19,7 +21,8 @@
 <meta name="description" data-i18n-content="page_description" content="Ekskluzywna, domowa hodowla psów rasy Mini Goldendoodle w Mielcu. Poznaj Karolinę i Pawła oraz nasze szczenięta.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- All curated font-pair choices are preloaded here so admin.html can switch --theme-display/--theme-body instantly, with no extra network round trip. -->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -174,21 +177,8 @@
     <div class="wrap">
       <h2 data-i18n="dogs_heading">Nasze psy</h2>
       <p class="section-lede" data-i18n="dogs_lede">Poznaj rodziców naszych miotów — każdy z pełnymi badaniami zdrowotnymi i genetycznymi.</p>
-      <!-- Copy a whole .dog-card to add another dog. Photos are swapped in automatically once images/dog1.jpg / images/dog2.jpg are uploaded via admin.html (Settings panel). -->
-      <div class="dogs-grid">
-        <div class="dog-card">
-          <div class="dog-photo" data-photo-slot="dog1" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-paw"/></svg></div>
-          <h4 data-i18n="dog1_name">[Imię suczki]</h4>
-          <p class="dog-role" data-i18n="dog1_role">Suczka hodowlana</p>
-          <p data-i18n="dog1_bio">Miejsce na krótki opis charakteru, umaszczenia i wyników badań zdrowotnych.</p>
-        </div>
-        <div class="dog-card">
-          <div class="dog-photo" data-photo-slot="dog2" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-paw"/></svg></div>
-          <h4 data-i18n="dog2_name">[Imię reproduktora]</h4>
-          <p class="dog-role" data-i18n="dog2_role">Reproduktor</p>
-          <p data-i18n="dog2_bio">Miejsce na krótki opis charakteru, umaszczenia i wyników badań zdrowotnych.</p>
-        </div>
-      </div>
+      <!-- Rendered by script.js from data/content.json (dogs array) — editable, including add/remove, from admin.html. -->
+      <div class="dogs-grid" id="dogsGrid"></div>
       <p class="replace-note" data-i18n="dogs_note">Zdjęcia i pełne dane naszych psów dodamy tutaj.</p>
     </div>
   </section>
@@ -199,32 +189,8 @@
       <h2 data-i18n="litters_heading">Szczenięta</h2>
       <p class="section-lede" data-i18n="litters_lede">Aktualne, oczekiwane i już zarezerwowane mioty.</p>
 
-      <!-- Copy a whole <li class="litter"> to add another litter. status- class controls the pill color. -->
-      <ol class="litter-list">
-        <li class="litter">
-          <span class="status status-available" data-i18n="litter1_status">Dostępne teraz</span>
-          <div class="litter-body">
-            <h3 data-i18n="litter1_title">[Suczka] × [Reproduktor]</h3>
-            <p data-i18n="litter1_desc">Data urodzenia, liczba dostępnych szczeniąt i termin gotowości do odbioru — uzupełnij tutaj.</p>
-          </div>
-          <a class="btn-link" href="#kontakt" data-i18n="litter1_cta">Zapytaj o ten miot</a>
-        </li>
-        <li class="litter">
-          <span class="status status-expecting" data-i18n="litter2_status">Oczekiwany</span>
-          <div class="litter-body">
-            <h3 data-i18n="litter2_title">[Suczka] × [Reproduktor]</h3>
-            <p data-i18n="litter2_desc">Planowany termin miotu — uzupełnij tutaj.</p>
-          </div>
-          <a class="btn-link" href="#kontakt" data-i18n="litter2_cta">Dołącz do listy oczekujących</a>
-        </li>
-        <li class="litter">
-          <span class="status status-reserved" data-i18n="litter3_status">Zarezerwowany</span>
-          <div class="litter-body">
-            <h3 data-i18n="litter3_title">[Suczka] × [Reproduktor]</h3>
-            <p data-i18n="litter3_desc">Wszystkie szczenięta znalazły już domy.</p>
-          </div>
-        </li>
-      </ol>
+      <!-- Rendered by script.js from data/content.json (litters array) — editable, including add/remove, from admin.html. -->
+      <ol class="litter-list" id="litterList"></ol>
       <p class="replace-note" data-i18n="litters_note">Podmień na prawdziwe mioty, daty i zdjęcia.</p>
     </div>
   </section>
@@ -239,13 +205,13 @@
         <!-- Real contact details — replace the placeholder email/social below -->
         <dl class="contact-info">
           <div><dt data-i18n="contact_location_label">Lokalizacja</dt><dd data-i18n="contact_location_value">Mielec</dd></div>
-          <div><dt data-i18n="contact_email_label">E-mail</dt><dd>kontakt@curlyheaddoodle.pl</dd></div>
-          <div><dt data-i18n="contact_social_label">Instagram / Facebook</dt><dd>@curlyheaddoodle</dd></div>
+          <div><dt data-i18n="contact_email_label">E-mail</dt><dd id="contactEmail">kontakt@curlyheaddoodle.pl</dd></div>
+          <div><dt data-i18n="contact_social_label">Instagram / Facebook</dt><dd id="contactSocial">@curlyheaddoodle</dd></div>
         </dl>
       </div>
 
-      <!-- IMPORTANT: replace YOUR_FORM_ID with your real Formspree form ID (formspree.io) -->
-      <form class="waitlist-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <!-- action is set from data/content.json (contact.formAction), editable in admin.html -->
+      <form class="waitlist-form" id="waitlistForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
         <div class="field">
           <label for="name" data-i18n="field_name">Imię i nazwisko</label>
           <input type="text" id="name" name="name" required>
@@ -260,10 +226,9 @@
         </div>
         <div class="field">
           <label for="litter" data-i18n="field_litter">Który miot Cię interesuje?</label>
+          <!-- Options for existing litters are inserted by script.js above the last, static option. -->
           <select id="litter" name="litter">
-            <option data-i18n="field_litter_opt1">[Suczka] × [Reproduktor] — dostępne teraz</option>
-            <option data-i18n="field_litter_opt2">[Suczka] × [Reproduktor] — oczekiwany</option>
-            <option data-i18n="field_litter_opt3">Jeszcze nie wiem / przyszły miot</option>
+            <option data-i18n="field_litter_opt3" value="not-sure">Jeszcze nie wiem / przyszły miot</option>
           </select>
         </div>
         <div class="field field-wide">
