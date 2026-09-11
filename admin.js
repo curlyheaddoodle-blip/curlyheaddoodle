@@ -884,6 +884,7 @@ function renderLittersEditor() {
   content.litters.forEach((litter, index) => el.appendChild(buildLitterRow(litter, index)));
 }
 function buildLitterRow(litter, index) {
+  if (litter.link === undefined) litter.link = ''; // older litters predate this field
   const row = document.createElement('div');
   row.className = 'repeat-item';
   row.innerHTML = `
@@ -912,6 +913,9 @@ function buildLitterRow(litter, index) {
       <div><label>Przycisk (PL, puste = brak)</label><input data-f="cta.pl" value="${escapeAttr(litter.cta.pl)}"></div>
       <div><label>Button (EN, blank = none)</label><input data-f="cta.en" value="${escapeAttr(litter.cta.en)}"></div>
     </div>
+    <div class="repeat-row single">
+      <div><label>Link przycisku (opcjonalnie — np. formularz Google; puste = strona kontaktowa)</label><input data-f="link" value="${escapeAttr(litter.link)}" placeholder="https://..."></div>
+    </div>
   `;
   row.querySelectorAll('[data-f]').forEach(input => {
     input.addEventListener('input', () => {
@@ -930,7 +934,7 @@ function buildLitterRow(litter, index) {
   return row;
 }
 document.getElementById('addLitterBtn').addEventListener('click', () => {
-  content.litters.push({ id: `litter-${Date.now()}`, status: 'available', title: { pl: '', en: '' }, desc: { pl: '', en: '' }, cta: { pl: '', en: '' } });
+  content.litters.push({ id: `litter-${Date.now()}`, status: 'available', title: { pl: '', en: '' }, desc: { pl: '', en: '' }, cta: { pl: '', en: '' }, link: '' });
   renderLittersEditor();
 });
 

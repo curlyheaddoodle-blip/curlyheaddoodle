@@ -220,7 +220,15 @@ function renderLitters(lang) {
     if (ctaText) {
       const cta = document.createElement('a');
       cta.className = 'btn-link';
-      cta.href = '#kontakt';
+      // A litter can point at an external link (e.g. a Google Form) via its
+      // optional "link" field; otherwise it falls back to the contact page.
+      if (litter.link) {
+        cta.href = litter.link;
+        cta.target = '_blank';
+        cta.rel = 'noopener noreferrer';
+      } else {
+        cta.href = 'kontakt.html';
+      }
       cta.textContent = ctaText;
       li.appendChild(cta);
     }
