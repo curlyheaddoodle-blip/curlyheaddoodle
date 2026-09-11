@@ -4,6 +4,7 @@
    ============================================================= */
 
 .admin-body { background: var(--color-bg-alt); min-height: 100vh; }
+[hidden] { display: none !important; }
 
 .admin-header {
   background: var(--color-paper);
@@ -116,6 +117,10 @@
 .repeat-row textarea { min-height: 60px; resize: vertical; }
 .rt-toolbar { display: flex; gap: 6px; margin: 4px 0 6px; }
 .rt-toolbar .btn-small { padding: 3px 10px; min-width: 30px; }
+.style-wrap { margin-top: 14px; border-top: 1px dashed var(--color-line); padding-top: 12px; }
+.checkbox-label { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; }
+.checkbox-label input[type="checkbox"] { width: 16px; height: 16px; }
+.style-fields { margin-top: 10px; }
 .bullets-wrap { margin-top: 14px; border-top: 1px dashed var(--color-line); padding-top: 12px; }
 .bullet-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: start; margin-top: 8px; }
 .bullet-col { display: flex; flex-direction: column; }

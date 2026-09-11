@@ -261,35 +261,62 @@ function renderContentBlocks(containerId, blocks, lang) {
   if (!el) return;
   el.innerHTML = '';
   (blocks || []).forEach(block => {
+    const outer = document.createElement('div');
+    outer.className = 'content-block';
+
+    if (block.card && block.card.enabled) {
+      outer.classList.add('has-card');
+      outer.style.background = block.card.background || '';
+      outer.style.borderColor = block.card.borderColor || '';
+      outer.style.borderWidth = (block.card.borderWidth != null ? block.card.borderWidth : 1) + 'px';
+    }
+
+    const photoOn = block.photo && block.photo.enabled;
+    if (photoOn) {
+      outer.classList.add('has-photo', 'photo-' + (block.photo.position || 'left'));
+      const photoEl = document.createElement('div');
+      photoEl.className = 'content-block-photo';
+      photoEl.setAttribute('data-photo-slot', block.id);
+      photoEl.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-paw"/></svg>';
+      outer.appendChild(photoEl);
+    }
+
+    const textWrap = document.createElement('div');
+    textWrap.className = 'content-block-text';
+    textWrap.style.textAlign = (photoOn && block.photo.textAlign) || '';
+
     const headingText = block.heading && block.heading[lang];
     if (headingText) {
       const h = document.createElement('h3');
       h.innerHTML = parseRichText(headingText);
-      const font = FONT_CHOICES[block.headingFont];
-      if (font) h.style.fontFamily = font;
-      el.appendChild(h);
+      const hFont = FONT_CHOICES[block.headingFont];
+      if (hFont) h.style.fontFamily = hFont;
+      textWrap.appendChild(h);
     }
     const text = (block.text && block.text[lang]) || '';
+    const textFont = FONT_CHOICES[block.textFont];
     if (text) {
       const p = document.createElement('p');
       p.innerHTML = parseRichText(text);
-      const font = FONT_CHOICES[block.textFont];
-      if (font) p.style.fontFamily = font;
-      el.appendChild(p);
+      if (textFont) p.style.fontFamily = textFont;
+      textWrap.appendChild(p);
     }
     if (block.bullets && block.bullets.length) {
       const ul = document.createElement('ul');
       ul.className = 'rendered-list';
-      const font = FONT_CHOICES[block.textFont];
-      if (font) ul.style.fontFamily = font;
+      if (textFont) ul.style.fontFamily = textFont;
       block.bullets.forEach(bullet => {
         const li = document.createElement('li');
         li.innerHTML = parseRichText((bullet && bullet[lang]) || '');
         ul.appendChild(li);
       });
-      el.appendChild(ul);
+      textWrap.appendChild(ul);
     }
+    outer.appendChild(textWrap);
+
+    el.appendChild(outer);
   });
+  applyPhotoSlots();
 }
 
 // ---- 6. Language switch ----

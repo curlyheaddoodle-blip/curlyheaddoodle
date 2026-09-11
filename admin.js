@@ -557,6 +557,8 @@ function renderParagraphEditor(containerId, list, rerender) {
         btn.addEventListener('click', () => wrapSelection(field, btn.dataset.fmt));
       });
     });
+    row.appendChild(buildCardEditor(block));
+    row.appendChild(buildPhotoEditor(block, rerender));
     row.appendChild(buildBulletsEditor(block, rerender));
     row.querySelector('[data-act="up"]').addEventListener('click', () => moveItem(list, index, -1, rerender));
     row.querySelector('[data-act="down"]').addEventListener('click', () => moveItem(list, index, 1, rerender));
@@ -568,6 +570,99 @@ function renderParagraphEditor(containerId, list, rerender) {
     });
     el.appendChild(row);
   });
+}
+
+// Optional card background/border for a block.
+function buildCardEditor(block) {
+  if (!block.card) block.card = { enabled: false, background: '#FFFDF9', borderColor: '#E0D3B8', borderWidth: 1 };
+  const wrap = document.createElement('div');
+  wrap.className = 'style-wrap';
+  wrap.innerHTML = `
+    <label class="checkbox-label"><input type="checkbox" data-cf="enabled"${block.card.enabled ? ' checked' : ''}> Tło i obramowanie (karta)</label>
+    <div class="repeat-row style-fields"${block.card.enabled ? '' : ' hidden'}>
+      <div class="color-field"><input type="color" data-cf="background" value="${block.card.background}"><label>Tło</label></div>
+      <div class="color-field"><input type="color" data-cf="borderColor" value="${block.card.borderColor}"><label>Obramowanie</label></div>
+      <div><label>Grubość obramowania (px)</label><input type="number" min="0" max="12" data-cf="borderWidth" value="${block.card.borderWidth}"></div>
+    </div>
+  `;
+  const fieldsWrap = wrap.querySelector('.style-fields');
+  wrap.querySelectorAll('[data-cf]').forEach(input => {
+    input.addEventListener('input', () => {
+      const key = input.dataset.cf;
+      if (input.type === 'checkbox') {
+        block.card.enabled = input.checked;
+        fieldsWrap.hidden = !input.checked;
+      } else if (input.type === 'number') {
+        block.card[key] = Number(input.value) || 0;
+      } else {
+        block.card[key] = input.value;
+      }
+    });
+  });
+  return wrap;
+}
+
+// Optional photo for a block, with position (left/right/top/bottom) and
+// text alignment. Reuses the same upload/remove/preview helpers as the
+// fixed hero/about slots and per-dog photos, keyed by the block's own id.
+function buildPhotoEditor(block, rerenderBlock) {
+  if (!block.photo) block.photo = { enabled: false, position: 'left', textAlign: 'left' };
+  if (!block.id) block.id = 'block-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  const path = `images/${block.id}.jpg`;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'style-wrap';
+  wrap.innerHTML = `
+    <label class="checkbox-label"><input type="checkbox" data-pf="enabled"${block.photo.enabled ? ' checked' : ''}> Dodaj zdjęcie do akapitu</label>
+    <div class="style-fields"${block.photo.enabled ? '' : ' hidden'}>
+      <div class="repeat-row">
+        <div><label>Pozycja zdjęcia</label>
+          <select data-pf="position">
+            <option value="left"${block.photo.position === 'left' ? ' selected' : ''}>Lewo</option>
+            <option value="right"${block.photo.position === 'right' ? ' selected' : ''}>Prawo</option>
+            <option value="top"${block.photo.position === 'top' ? ' selected' : ''}>Góra</option>
+            <option value="bottom"${block.photo.position === 'bottom' ? ' selected' : ''}>Dół</option>
+          </select>
+        </div>
+        <div><label>Wyrównanie tekstu</label>
+          <select data-pf="textAlign">
+            <option value="left"${block.photo.textAlign === 'left' ? ' selected' : ''}>Do lewej</option>
+            <option value="center"${block.photo.textAlign === 'center' ? ' selected' : ''}>Wyśrodkowany</option>
+            <option value="right"${block.photo.textAlign === 'right' ? ' selected' : ''}>Do prawej</option>
+          </select>
+        </div>
+      </div>
+      <div class="dog-photo-row">
+        <div class="dog-photo-preview block-photo-preview">Brak</div>
+        <input type="file" accept="image/*" style="flex:1">
+        <button type="button" class="btn-small" data-act="upload">Wgraj</button>
+        <button type="button" class="btn-small danger" data-act="remove">Usuń</button>
+      </div>
+      <p class="slot-status"></p>
+    </div>
+  `;
+  const fieldsWrap = wrap.querySelector('.style-fields');
+  wrap.querySelectorAll('[data-pf]').forEach(input => {
+    input.addEventListener('input', () => {
+      const key = input.dataset.pf;
+      if (input.type === 'checkbox') {
+        block.photo.enabled = input.checked;
+        fieldsWrap.hidden = !input.checked;
+      } else {
+        block.photo[key] = input.value;
+      }
+    });
+  });
+  const preview = wrap.querySelector('.block-photo-preview');
+  const fileInput = wrap.querySelector('input[type="file"]');
+  const status = wrap.querySelector('.slot-status');
+  loadPreviewInto(preview, path);
+  wrap.querySelector('[data-act="upload"]').addEventListener('click', () => {
+    if (!fileInput.files[0]) { status.textContent = 'Najpierw wybierz plik.'; status.className = 'slot-status err'; return; }
+    uploadPhoto(path, fileInput.files[0], status, preview, () => { fileInput.value = ''; });
+  });
+  wrap.querySelector('[data-act="remove"]').addEventListener('click', () => removePhoto(path, status, preview));
+  return wrap;
 }
 
 // Optional bullet list under a block's paragraph. Each bullet is its own
@@ -700,7 +795,12 @@ function buildDogRow(dog, index) {
   return row;
 }
 function newContentBlock() {
-  return { heading: { pl: '', en: '' }, headingFont: 'default', textFont: 'default', text: { pl: '', en: '' }, bullets: [] };
+  return {
+    id: 'block-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+    heading: { pl: '', en: '' }, headingFont: 'default', textFont: 'default', text: { pl: '', en: '' }, bullets: [],
+    card: { enabled: false, background: '#FFFDF9', borderColor: '#E0D3B8', borderWidth: 1 },
+    photo: { enabled: false, position: 'left', textAlign: 'left' },
+  };
 }
 document.getElementById('addAboutParaBtn').addEventListener('click', () => {
   content.about.body.push(newContentBlock());
