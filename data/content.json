@@ -520,15 +520,15 @@
       }
     },
     {
-      "id": "litter3",
-      "status": "reserved",
+      "id": "litter-1789165407178",
+      "status": "available",
       "title": {
-        "pl": "[Suczka] × [Reproduktor]",
-        "en": "[Dam] × [Sire]"
+        "pl": "",
+        "en": ""
       },
       "desc": {
-        "pl": "Wszystkie szczenięta znalazły już domy.",
-        "en": "All puppies have found their homes."
+        "pl": "",
+        "en": ""
       },
       "cta": {
         "pl": "",
