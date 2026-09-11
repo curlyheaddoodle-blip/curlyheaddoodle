@@ -116,6 +116,12 @@
 .repeat-row textarea { min-height: 60px; resize: vertical; }
 .rt-toolbar { display: flex; gap: 6px; margin: 4px 0 6px; }
 .rt-toolbar .btn-small { padding: 3px 10px; min-width: 30px; }
+.bullets-wrap { margin-top: 14px; border-top: 1px dashed var(--color-line); padding-top: 12px; }
+.bullet-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: start; margin-top: 8px; }
+.bullet-col { display: flex; flex-direction: column; }
+.rt-toolbar-mini { display: flex; gap: 4px; margin-bottom: 3px; }
+.rt-toolbar-mini .btn-small { padding: 1px 7px; font-size: 0.78rem; min-width: 24px; }
+.bullet-actions { display: flex; gap: 4px; align-items: flex-start; margin-top: 22px; }
 .dog-photo-row { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
 .dog-photo-preview {
   width: 56px; height: 56px; border-radius: 50%; overflow: hidden; flex-shrink: 0;

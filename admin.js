@@ -501,8 +501,22 @@ function renderParagraphEditor(containerId, list, rerender) {
         </div>
       </div>
       <div class="repeat-row">
-        <div><label>Nagłówek nad akapitem (PL, opcjonalnie)</label><input data-f="heading.pl" value="${escapeAttr(block.heading.pl)}"></div>
-        <div><label>Heading above paragraph (EN, optional)</label><input data-f="heading.en" value="${escapeAttr(block.heading.en)}"></div>
+        <div>
+          <label>Nagłówek nad akapitem (PL, opcjonalnie)</label>
+          <div class="rt-toolbar" data-target="heading.pl">
+            <button type="button" class="btn-small" data-fmt="**" title="Pogrubienie"><strong>B</strong></button>
+            <button type="button" class="btn-small" data-fmt="*" title="Kursywa"><em>I</em></button>
+          </div>
+          <input data-f="heading.pl" value="${escapeAttr(block.heading.pl)}">
+        </div>
+        <div>
+          <label>Heading above paragraph (EN, optional)</label>
+          <div class="rt-toolbar" data-target="heading.en">
+            <button type="button" class="btn-small" data-fmt="**" title="Bold"><strong>B</strong></button>
+            <button type="button" class="btn-small" data-fmt="*" title="Italic"><em>I</em></button>
+          </div>
+          <input data-f="heading.en" value="${escapeAttr(block.heading.en)}">
+        </div>
       </div>
       <div class="repeat-row">
         <div><label>Czcionka nagłówka</label><select data-f="headingFont">${fontSelectHtml(block.headingFont)}</select></div>
@@ -511,7 +525,7 @@ function renderParagraphEditor(containerId, list, rerender) {
       <div class="repeat-row">
         <div>
           <label>Tekst (PL)</label>
-          <div class="rt-toolbar" data-for="pl">
+          <div class="rt-toolbar" data-target="text.pl">
             <button type="button" class="btn-small" data-fmt="**" title="Pogrubienie"><strong>B</strong></button>
             <button type="button" class="btn-small" data-fmt="*" title="Kursywa"><em>I</em></button>
             <button type="button" class="btn-small" data-fmt="++" title="Podkreślenie"><u>U</u></button>
@@ -520,7 +534,7 @@ function renderParagraphEditor(containerId, list, rerender) {
         </div>
         <div>
           <label>Text (EN)</label>
-          <div class="rt-toolbar" data-for="en">
+          <div class="rt-toolbar" data-target="text.en">
             <button type="button" class="btn-small" data-fmt="**" title="Bold"><strong>B</strong></button>
             <button type="button" class="btn-small" data-fmt="*" title="Italic"><em>I</em></button>
             <button type="button" class="btn-small" data-fmt="++" title="Underline"><u>U</u></button>
@@ -538,11 +552,12 @@ function renderParagraphEditor(containerId, list, rerender) {
       });
     });
     row.querySelectorAll('.rt-toolbar').forEach(toolbar => {
-      const textarea = row.querySelector(`textarea[data-f="text.${toolbar.dataset.for}"]`);
+      const field = row.querySelector(`[data-f="${toolbar.dataset.target}"]`);
       toolbar.querySelectorAll('[data-fmt]').forEach(btn => {
-        btn.addEventListener('click', () => wrapSelection(textarea, btn.dataset.fmt));
+        btn.addEventListener('click', () => wrapSelection(field, btn.dataset.fmt));
       });
     });
+    row.appendChild(buildBulletsEditor(block, rerender));
     row.querySelector('[data-act="up"]').addEventListener('click', () => moveItem(list, index, -1, rerender));
     row.querySelector('[data-act="down"]').addEventListener('click', () => moveItem(list, index, 1, rerender));
     row.querySelector('[data-act="remove"]').addEventListener('click', () => {
@@ -553,6 +568,71 @@ function renderParagraphEditor(containerId, list, rerender) {
     });
     el.appendChild(row);
   });
+}
+
+// Optional bullet list under a block's paragraph. Each bullet is its own
+// PL/EN pair with the same bold/italic/underline toolbar as the paragraph.
+function buildBulletsEditor(block, rerenderBlock) {
+  if (!block.bullets) block.bullets = [];
+  const wrap = document.createElement('div');
+  wrap.className = 'bullets-wrap';
+  const label = document.createElement('p');
+  label.className = 't-key-label';
+  label.textContent = 'Wypunktowanie (opcjonalnie)';
+  wrap.appendChild(label);
+
+  block.bullets.forEach((bullet, bIndex) => {
+    const bRow = document.createElement('div');
+    bRow.className = 'bullet-row';
+    bRow.innerHTML = `
+      <div class="bullet-col">
+        <div class="rt-toolbar-mini">
+          <button type="button" class="btn-small" data-fmt="**"><strong>B</strong></button>
+          <button type="button" class="btn-small" data-fmt="*"><em>I</em></button>
+          <button type="button" class="btn-small" data-fmt="++"><u>U</u></button>
+        </div>
+        <input data-bf="pl" value="${escapeAttr(bullet.pl)}" placeholder="Punkt (PL)">
+      </div>
+      <div class="bullet-col">
+        <div class="rt-toolbar-mini">
+          <button type="button" class="btn-small" data-fmt="**"><strong>B</strong></button>
+          <button type="button" class="btn-small" data-fmt="*"><em>I</em></button>
+          <button type="button" class="btn-small" data-fmt="++"><u>U</u></button>
+        </div>
+        <input data-bf="en" value="${escapeAttr(bullet.en)}" placeholder="Point (EN)">
+      </div>
+      <div class="bullet-actions">
+        <button type="button" class="btn-small" data-act="up">↑</button>
+        <button type="button" class="btn-small" data-act="down">↓</button>
+        <button type="button" class="btn-small danger" data-act="remove">✕</button>
+      </div>
+    `;
+    bRow.querySelectorAll('[data-bf]').forEach(input => {
+      input.addEventListener('input', () => { bullet[input.dataset.bf] = input.value; });
+      const toolbar = input.previousElementSibling;
+      toolbar.querySelectorAll('[data-fmt]').forEach(btn => {
+        btn.addEventListener('click', () => wrapSelection(input, btn.dataset.fmt));
+      });
+    });
+    bRow.querySelector('[data-act="up"]').addEventListener('click', () => moveItem(block.bullets, bIndex, -1, rerenderBlock));
+    bRow.querySelector('[data-act="down"]').addEventListener('click', () => moveItem(block.bullets, bIndex, 1, rerenderBlock));
+    bRow.querySelector('[data-act="remove"]').addEventListener('click', () => {
+      block.bullets.splice(bIndex, 1);
+      rerenderBlock();
+    });
+    wrap.appendChild(bRow);
+  });
+
+  const addBtn = document.createElement('button');
+  addBtn.type = 'button';
+  addBtn.className = 'btn-small';
+  addBtn.textContent = '+ Dodaj punkt';
+  addBtn.addEventListener('click', () => {
+    block.bullets.push({ pl: '', en: '' });
+    rerenderBlock();
+  });
+  wrap.appendChild(addBtn);
+  return wrap;
 }
 function renderAboutBody() { renderParagraphEditor('aboutBodyEditor', content.about.body, renderAboutBody); }
 function renderBreedBody() { renderParagraphEditor('breedBodyEditor', content.breed.body, renderBreedBody); }
@@ -620,7 +700,7 @@ function buildDogRow(dog, index) {
   return row;
 }
 function newContentBlock() {
-  return { heading: { pl: '', en: '' }, headingFont: 'default', textFont: 'default', text: { pl: '', en: '' } };
+  return { heading: { pl: '', en: '' }, headingFont: 'default', textFont: 'default', text: { pl: '', en: '' }, bullets: [] };
 }
 document.getElementById('addAboutParaBtn').addEventListener('click', () => {
   content.about.body.push(newContentBlock());

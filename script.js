@@ -264,16 +264,31 @@ function renderContentBlocks(containerId, blocks, lang) {
     const headingText = block.heading && block.heading[lang];
     if (headingText) {
       const h = document.createElement('h3');
-      h.textContent = headingText;
+      h.innerHTML = parseRichText(headingText);
       const font = FONT_CHOICES[block.headingFont];
       if (font) h.style.fontFamily = font;
       el.appendChild(h);
     }
-    const p = document.createElement('p');
-    p.innerHTML = parseRichText((block.text && block.text[lang]) || '');
-    const font = FONT_CHOICES[block.textFont];
-    if (font) p.style.fontFamily = font;
-    el.appendChild(p);
+    const text = (block.text && block.text[lang]) || '';
+    if (text) {
+      const p = document.createElement('p');
+      p.innerHTML = parseRichText(text);
+      const font = FONT_CHOICES[block.textFont];
+      if (font) p.style.fontFamily = font;
+      el.appendChild(p);
+    }
+    if (block.bullets && block.bullets.length) {
+      const ul = document.createElement('ul');
+      ul.className = 'rendered-list';
+      const font = FONT_CHOICES[block.textFont];
+      if (font) ul.style.fontFamily = font;
+      block.bullets.forEach(bullet => {
+        const li = document.createElement('li');
+        li.innerHTML = parseRichText((bullet && bullet[lang]) || '');
+        ul.appendChild(li);
+      });
+      el.appendChild(ul);
+    }
   });
 }
 

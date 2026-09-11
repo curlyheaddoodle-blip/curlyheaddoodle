@@ -75,6 +75,8 @@ h3 { font-size: 1.2rem; }
 h4 { font-size: 1.1rem; font-weight: 600; }
 p { margin: 0 0 1em; max-width: 62ch; }
 .section-lede { color: var(--color-ink-soft); max-width: 56ch; }
+.rendered-list { margin: 0 0 1em; padding-left: 1.3em; max-width: 62ch; }
+.rendered-list li { margin-bottom: 0.4em; }
 .kicker {
   font-family: var(--font-body);
   font-size: 0.95rem;
