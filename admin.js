@@ -163,6 +163,7 @@ async function enterEditor() {
   content = loaded.content;
   contentSha = loaded.sha;
 
+  renderSectionOrder();
   renderBrand();
   renderSlots();
   renderTheme();
@@ -314,6 +315,35 @@ function renderSlots() {
       uploadPhoto(path, fileInput.files[0], status, preview, () => { fileInput.value = ''; });
     });
     card.querySelector('.btn-small.danger').addEventListener('click', () => removePhoto(path, status, preview));
+  });
+}
+
+// ---- Section order ----
+const SECTION_LABELS = {
+  hero: 'Sekcja główna (Hero)',
+  about: 'O nas',
+  breed: 'O rasie',
+  dogs: 'Nasze psy',
+  litters: 'Szczenięta',
+  contact: 'Kontakt',
+};
+function renderSectionOrder() {
+  const el = document.getElementById('sectionOrderEditor');
+  el.innerHTML = '<div class="order-list"></div>';
+  const list = el.querySelector('.order-list');
+  content.sectionOrder.forEach((key, index) => {
+    const row = document.createElement('div');
+    row.className = 'order-row';
+    row.innerHTML = `
+      <span class="order-label">${index + 1}. ${SECTION_LABELS[key] || key}</span>
+      <div class="order-actions">
+        <button type="button" class="btn-small" data-act="up">↑</button>
+        <button type="button" class="btn-small" data-act="down">↓</button>
+      </div>
+    `;
+    row.querySelector('[data-act="up"]').addEventListener('click', () => moveItem(content.sectionOrder, index, -1, renderSectionOrder));
+    row.querySelector('[data-act="down"]').addEventListener('click', () => moveItem(content.sectionOrder, index, 1, renderSectionOrder));
+    list.appendChild(row);
   });
 }
 

@@ -2,6 +2,7 @@
   "site": {
     "brandName": "Curly Head Doodle"
   },
+  "sectionOrder": ["hero", "about", "breed", "dogs", "litters", "contact"],
   "theme": {
     "colors": {
       "bg": "#F8F2E7",

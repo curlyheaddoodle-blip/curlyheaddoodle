@@ -89,6 +89,15 @@
 .font-pair-option .fp-display { font-size: 1.2rem; margin-bottom: 4px; }
 .font-pair-option .fp-body { font-size: 0.9rem; color: var(--color-ink-soft); }
 
+/* ---- Section order ---- */
+.order-list { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+.order-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  border: 1px solid var(--color-line); border-radius: var(--radius); padding: 10px 14px; background: var(--color-bg);
+}
+.order-row .order-label { font-weight: 700; font-size: 0.9rem; }
+.order-row .order-actions { display: flex; gap: 8px; }
+
 /* ---- Repeatable list editors (dogs / litters) ---- */
 .repeat-item {
   border: 1px solid var(--color-line); border-radius: var(--radius);
