@@ -98,8 +98,7 @@ const FALLBACK_CONTENT = {
     contact_location_label: { pl: 'Lokalizacja', en: 'Location' },
     contact_location_value: { pl: 'Mielec', en: 'Mielec, Poland' },
     contact_email_label: { pl: 'E-mail', en: 'Email' },
-    contact_instagram_label: { pl: 'Instagram', en: 'Instagram' },
-    contact_facebook_label: { pl: 'Facebook', en: 'Facebook' },
+    contact_social_label: { pl: 'Media społecznościowe', en: 'Social media' },
     field_name: { pl: 'Imię i nazwisko', en: 'Full name' },
     field_email: { pl: 'E-mail', en: 'Email' },
     field_phone: { pl: 'Telefon', en: 'Phone' },
@@ -472,7 +471,8 @@ async function loadContent() {
     const formEl = document.getElementById('waitlistForm');
     if (emailEl && activeContent.contact.email) emailEl.textContent = activeContent.contact.email;
     if (socialEl && activeContent.contact.social) {
-      socialEl.textContent = activeContent.contact.social;
+      // Icon-only link (see kontakt.html) — only the href is set here, never
+      // textContent, which would wipe out the <svg> icon inside the <a>.
       // The handle in content.json (e.g. "@curlyheaddoodle") is what admin.html
       // edits; the Instagram URL is derived from it so there's no separate
       // link field to keep in sync.
@@ -482,7 +482,6 @@ async function loadContent() {
     const facebookEl = document.getElementById('contactFacebook');
     if (facebookEl && activeContent.contact.facebook) {
       const fbHandle = activeContent.contact.facebook.replace(/^@/, '').trim();
-      facebookEl.textContent = `@${fbHandle}`;
       if (fbHandle) facebookEl.href = `https://www.facebook.com/${encodeURIComponent(fbHandle)}/`;
     }
     if (formEl && activeContent.contact.formAction) {

@@ -210,13 +210,9 @@
       "pl": "E-mail",
       "en": "Email"
     },
-    "contact_instagram_label": {
-      "pl": "Instagram",
-      "en": "Instagram"
-    },
-    "contact_facebook_label": {
-      "pl": "Facebook",
-      "en": "Facebook"
+    "contact_social_label": {
+      "pl": "Media społecznościowe",
+      "en": "Social media"
     },
     "field_section1_heading": {
       "pl": "Dane podstawowe i rodzina",
