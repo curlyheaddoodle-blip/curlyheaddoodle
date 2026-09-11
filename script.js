@@ -98,7 +98,8 @@ const FALLBACK_CONTENT = {
     contact_location_label: { pl: 'Lokalizacja', en: 'Location' },
     contact_location_value: { pl: 'Mielec', en: 'Mielec, Poland' },
     contact_email_label: { pl: 'E-mail', en: 'Email' },
-    contact_social_label: { pl: 'Instagram / Facebook', en: 'Instagram / Facebook' },
+    contact_instagram_label: { pl: 'Instagram', en: 'Instagram' },
+    contact_facebook_label: { pl: 'Facebook', en: 'Facebook' },
     field_name: { pl: 'Imię i nazwisko', en: 'Full name' },
     field_email: { pl: 'E-mail', en: 'Email' },
     field_phone: { pl: 'Telefon', en: 'Phone' },
@@ -135,6 +136,7 @@ const FALLBACK_CONTENT = {
   contact: {
     email: 'kontakt@curlyheaddoodle.pl',
     social: '@curlyheaddoodle',
+    facebook: 'curlyheaddoodle',
     formAction: 'https://formspree.io/f/YOUR_FORM_ID',
   },
 };
@@ -476,6 +478,12 @@ async function loadContent() {
       // link field to keep in sync.
       const handle = activeContent.contact.social.replace(/^@/, '').trim();
       if (handle) socialEl.href = `https://www.instagram.com/${encodeURIComponent(handle)}/`;
+    }
+    const facebookEl = document.getElementById('contactFacebook');
+    if (facebookEl && activeContent.contact.facebook) {
+      const fbHandle = activeContent.contact.facebook.replace(/^@/, '').trim();
+      facebookEl.textContent = `@${fbHandle}`;
+      if (fbHandle) facebookEl.href = `https://www.facebook.com/${encodeURIComponent(fbHandle)}/`;
     }
     if (formEl && activeContent.contact.formAction) {
       // action/method stay as a no-JS fallback; initFormspreeAjax below takes

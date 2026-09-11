@@ -210,9 +210,13 @@
       "pl": "E-mail",
       "en": "Email"
     },
-    "contact_social_label": {
-      "pl": "Instagram / Facebook",
-      "en": "Instagram / Facebook"
+    "contact_instagram_label": {
+      "pl": "Instagram",
+      "en": "Instagram"
+    },
+    "contact_facebook_label": {
+      "pl": "Facebook",
+      "en": "Facebook"
     },
     "field_section1_heading": {
       "pl": "Dane podstawowe i rodzina",
@@ -536,6 +540,7 @@
   "contact": {
     "email": "kontakt@curlyheaddoodle.pl",
     "social": "@curlyheaddoodle",
+    "facebook": "curlyheaddoodle",
     "formAction": "https://formspree.io/f/mrpgddwk"
   }
 }

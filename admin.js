@@ -46,7 +46,7 @@ const LABELS = {
   litters_heading: 'Nagłówek', litters_lede: 'Zapowiedź', litters_note: 'Notatka na dole',
   status_available: 'Etykieta statusu: dostępny', status_expecting: 'Etykieta statusu: oczekiwany', status_reserved: 'Etykieta statusu: zarezerwowany',
   contact_heading: 'Nagłówek', contact_lede: 'Zapowiedź', contact_location_label: 'Etykieta: lokalizacja', contact_location_value: 'Wartość: lokalizacja',
-  contact_email_label: 'Etykieta: e-mail', contact_social_label: 'Etykieta: social media',
+  contact_email_label: 'Etykieta: e-mail', contact_instagram_label: 'Etykieta: Instagram', contact_facebook_label: 'Etykieta: Facebook',
   field_section1_heading: 'Nagłówek sekcji 1', field_name: 'Pole: imię i nazwisko', field_email: 'Pole: e-mail', field_phone: 'Pole: telefon',
   field_city: 'Pole: miejscowość', field_household: 'Pytanie: skład domostwa', field_household_agree: 'Pytanie: zgoda domowników',
   field_allergies: 'Pytanie: alergicy', field_other_pets: 'Pytanie: inne zwierzęta',
@@ -70,7 +70,7 @@ const TRANSLATION_GROUPS = [
   { title: 'O rasie', keys: ['breed_heading', 'breed_fact1_label', 'breed_fact1_value', 'breed_fact2_label', 'breed_fact2_value', 'breed_fact3_label', 'breed_fact3_value', 'breed_fact4_label', 'breed_fact4_value'] },
   { title: 'Nasze psy — nagłówki', keys: ['dogs_heading', 'dogs_lede', 'dogs_note'] },
   { title: 'Szczenięta — nagłówki i statusy', keys: ['litters_heading', 'litters_lede', 'litters_note', 'status_available', 'status_expecting', 'status_reserved'] },
-  { title: 'Kontakt', keys: ['contact_heading', 'contact_lede', 'contact_location_label', 'contact_location_value', 'contact_email_label', 'contact_social_label'] },
+  { title: 'Kontakt', keys: ['contact_heading', 'contact_lede', 'contact_location_label', 'contact_location_value', 'contact_email_label', 'contact_instagram_label', 'contact_facebook_label'] },
   { title: 'Formularz — Dane podstawowe i rodzina', keys: ['field_section1_heading', 'field_name', 'field_email', 'field_phone', 'field_city', 'field_household', 'field_household_agree', 'field_allergies', 'field_other_pets'] },
   { title: 'Formularz — Warunki mieszkaniowe i styl życia', keys: ['field_section2_heading', 'field_housing', 'field_alone_hours', 'field_daily_time'] },
   { title: 'Formularz — Doświadczenie i oczekiwania', keys: ['field_section3_heading', 'field_experience', 'field_grooming_ready', 'field_temperament', 'field_training', 'field_vacation'] },
@@ -938,7 +938,10 @@ function renderContactEditor() {
   el.innerHTML = `
     <div class="repeat-row">
       <div><label>Adres e-mail (kontaktowy)</label><input id="contact-email" value="${escapeAttr(content.contact.email)}"></div>
-      <div><label>Instagram / Facebook (nazwa)</label><input id="contact-social" value="${escapeAttr(content.contact.social)}"></div>
+      <div><label>Instagram (nazwa, bez @)</label><input id="contact-social" value="${escapeAttr(content.contact.social)}"></div>
+    </div>
+    <div class="repeat-row">
+      <div><label>Facebook (nazwa strony, bez @)</label><input id="contact-facebook" value="${escapeAttr(content.contact.facebook)}"></div>
     </div>
     <div class="repeat-row single">
       <div><label>Formspree — adres formularza (action URL)</label><input id="contact-formAction" value="${escapeAttr(content.contact.formAction)}"></div>
@@ -949,6 +952,7 @@ function collectContact() {
   return {
     email: getFieldValue('contact-email', 'Kontakt'),
     social: getFieldValue('contact-social', 'Kontakt'),
+    facebook: getFieldValue('contact-facebook', 'Kontakt'),
     formAction: getFieldValue('contact-formAction', 'Kontakt'),
   };
 }
