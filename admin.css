@@ -130,13 +130,17 @@
 .rt-toolbar-mini { display: flex; gap: 4px; margin-bottom: 3px; }
 .rt-toolbar-mini .btn-small { padding: 1px 7px; font-size: 0.78rem; min-width: 24px; }
 .bullet-actions { display: flex; gap: 4px; align-items: flex-start; margin-top: 22px; }
-.dog-photo-row { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+.dog-photo-row { display: flex; align-items: center; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
 .dog-photo-preview {
   width: 56px; height: 56px; border-radius: 50%; overflow: hidden; flex-shrink: 0;
   background: var(--color-paper); border: 2px dashed var(--color-gold-soft);
   display: flex; align-items: center; justify-content: center; font-size: 0.65rem; color: var(--color-gold-soft); text-align: center;
 }
 .dog-photo-preview img { width: 100%; height: 100%; object-fit: cover; }
+.dog-photo-row input[type="file"] { flex: 1 1 140px; min-width: 0; }
+.dog-photo-row .btn-small { flex: 0 0 auto; }
+/* Narrow collage upload cards (min 220px) need the row to stack cleanly. */
+.photo-upload-slot .dog-photo-row input[type="file"] { flex-basis: 100%; }
 
 /* ---- Translations groups ---- */
 .t-group { border: 1px solid var(--color-line); border-radius: var(--radius); margin-top: 12px; }

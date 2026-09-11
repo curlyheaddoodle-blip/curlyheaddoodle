@@ -280,10 +280,11 @@ p { margin: 0 0 1em; max-width: 62ch; }
   background: var(--color-paper); padding: 32px; border-radius: var(--radius);
   border: 1px solid var(--color-line);
 }
-.field { display: flex; flex-direction: column; gap: 6px; }
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .field-wide { grid-column: 1 / -1; }
 .field label { font-size: 0.9rem; font-weight: 700; }
 .field input, .field select, .field textarea {
+  width: 100%; min-width: 0; box-sizing: border-box;
   font-family: var(--font-body); font-size: 1rem; padding: 10px 12px;
   border-radius: 6px; border: 1px solid var(--color-line);
   background: var(--color-bg); color: var(--color-ink);
@@ -331,4 +332,13 @@ p { margin: 0 0 1em; max-width: 62ch; }
 }
 @media (max-width: 520px) {
   .why-grid { grid-template-columns: 1fr; }
+
+  /* A fixed-width photo/collage beside text never fits a phone-width
+     column — stack instead, same as the top/bottom position already does. */
+  .content-block.has-photo.photo-left,
+  .content-block.has-photo.photo-right { flex-direction: column; }
+  .content-block.has-photo .content-block-photo,
+  .content-block.has-photo .content-block-collage { width: 100%; max-width: 100%; }
+  .content-block.has-photo .content-block-collage { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 80px; }
+  .content-block.has-card { padding: 20px; }
 }
