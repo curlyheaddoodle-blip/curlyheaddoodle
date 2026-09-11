@@ -274,8 +274,20 @@
           "pl": "***Curly Head Doodle*** z Mielca to spełnienie naszych marzeń. Nasza przygoda zaczęła się od miłości do rasy, a teraz dzielimy tę pasję z Wami.",
           "en": "***Curly Head Doodle***, based in Mielec, is the fulfillment of our dream. Our journey began with a love for the breed, and now we get to share that passion with you."
         },
-        "card": { "enabled": false, "background": "#FFFDF9", "borderColor": "#E0D3B8", "borderWidth": 1 },
-        "photo": { "enabled": false, "position": "left", "textAlign": "left" }
+        "card": {
+          "enabled": false,
+          "background": "#FFFDF9",
+          "borderColor": "#E0D3B8",
+          "borderWidth": 1
+        },
+        "photo": {
+          "enabled": false,
+          "position": "left",
+          "textAlign": "left",
+          "mode": "single",
+          "count": 3
+        },
+        "bullets": []
       },
       {
         "id": "about-2",
@@ -289,8 +301,20 @@
           "pl": "Wychowujemy szczenięta w domu, bez kojców zewnętrznych, zapewniając im najlepszy możliwy start w życiu.",
           "en": "We raise our puppies at home, with no outdoor kennels, to give them the best possible start in life."
         },
-        "card": { "enabled": false, "background": "#FFFDF9", "borderColor": "#E0D3B8", "borderWidth": 1 },
-        "photo": { "enabled": false, "position": "left", "textAlign": "left" }
+        "card": {
+          "enabled": false,
+          "background": "#FFFDF9",
+          "borderColor": "#E0D3B8",
+          "borderWidth": 1
+        },
+        "photo": {
+          "enabled": true,
+          "position": "left",
+          "textAlign": "left",
+          "mode": "collage",
+          "count": 3
+        },
+        "bullets": []
       }
     ]
   },
@@ -308,8 +332,20 @@
           "pl": "Mini Goldendoodle to połączenie inteligencji pudla i ciepłego, rodzinnego usposobienia golden retrievera. To psy czułe, chętne do nauki i świetnie odnajdujące się zarówno w mieszkaniu, jak i w domu z ogrodem.",
           "en": "The Mini Goldendoodle combines the Poodle's intelligence with the Golden Retriever's warm, family-oriented nature — affectionate, eager to learn, and equally at home in an apartment or a house with a yard."
         },
-        "card": { "enabled": false, "background": "#FFFDF9", "borderColor": "#E0D3B8", "borderWidth": 1 },
-        "photo": { "enabled": false, "position": "left", "textAlign": "left" }
+        "card": {
+          "enabled": false,
+          "background": "#FFFDF9",
+          "borderColor": "#E0D3B8",
+          "borderWidth": 1
+        },
+        "photo": {
+          "enabled": false,
+          "position": "left",
+          "textAlign": "left",
+          "mode": "single",
+          "count": 3
+        },
+        "bullets": []
       },
       {
         "id": "breed-2",
@@ -323,8 +359,20 @@
           "pl": "Dzięki kręconej lub falowanej sierści typu pudla, wiele osób z alergią na sierść psów dobrze toleruje Goldendoodle — choć żadna rasa nie jest w 100% hipoalergiczna.",
           "en": "Thanks to their curly or wavy Poodle-type coat, many people with dog allergies tolerate Goldendoodles well — though no breed is ever 100% hypoallergenic."
         },
-        "card": { "enabled": false, "background": "#FFFDF9", "borderColor": "#E0D3B8", "borderWidth": 1 },
-        "photo": { "enabled": false, "position": "left", "textAlign": "left" }
+        "card": {
+          "enabled": false,
+          "background": "#FFFDF9",
+          "borderColor": "#E0D3B8",
+          "borderWidth": 1
+        },
+        "photo": {
+          "enabled": false,
+          "position": "left",
+          "textAlign": "left",
+          "mode": "single",
+          "count": 3
+        },
+        "bullets": []
       }
     ]
   },
