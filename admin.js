@@ -410,12 +410,38 @@ function collectTheme() {
   return { colors, fontPair: selected ? selected.dataset.fontPair : content.theme.fontPair };
 }
 
-// ---- Paragraph list editor (open-ended — used for "O nas" and "O rasie"
-// body text, so more paragraphs can be added without any code change) ----
+// ---- Content block editor (open-ended — used for "O nas" and "O rasie"
+// body text): each block is an optional heading + a paragraph, each with
+// its own font choice, plus a bold/italic/underline toolbar on the text.
+const FONT_OPTIONS = [
+  { id: 'default', label: 'Domyślna (z motywu strony)' },
+  { id: 'fraunces', label: 'Fraunces (szeryfowa)' },
+  { id: 'karla', label: 'Karla (bezszeryfowa)' },
+  { id: 'playfair', label: 'Playfair Display (szeryfowa)' },
+  { id: 'inter', label: 'Inter (bezszeryfowa)' },
+  { id: 'cormorant', label: 'Cormorant Garamond (szeryfowa)' },
+  { id: 'nunito', label: 'Nunito Sans (bezszeryfowa)' },
+];
+function fontSelectHtml(selected) {
+  return FONT_OPTIONS.map(f => `<option value="${f.id}"${selected === f.id ? ' selected' : ''}>${f.label}</option>`).join('');
+}
+// Wraps the textarea's current selection in `marker` on both sides (or
+// inserts placeholder text if nothing is selected), then fires an input
+// event so the existing data-binding listener picks up the new value.
+function wrapSelection(textarea, marker) {
+  const start = textarea.selectionStart, end = textarea.selectionEnd;
+  const value = textarea.value;
+  const selected = value.slice(start, end) || 'tekst';
+  textarea.value = value.slice(0, start) + marker + selected + marker + value.slice(end);
+  textarea.dispatchEvent(new Event('input', { bubbles: true }));
+  textarea.focus();
+  textarea.setSelectionRange(start + marker.length, start + marker.length + selected.length);
+}
+
 function renderParagraphEditor(containerId, list, rerender) {
   const el = document.getElementById(containerId);
   el.innerHTML = '';
-  list.forEach((para, index) => {
+  list.forEach((block, index) => {
     const row = document.createElement('div');
     row.className = 'repeat-item';
     row.innerHTML = `
@@ -428,12 +454,47 @@ function renderParagraphEditor(containerId, list, rerender) {
         </div>
       </div>
       <div class="repeat-row">
-        <div><label>Tekst (PL)</label><textarea data-f="pl">${escapeHtml(para.pl)}</textarea></div>
-        <div><label>Text (EN)</label><textarea data-f="en">${escapeHtml(para.en)}</textarea></div>
+        <div><label>Nagłówek nad akapitem (PL, opcjonalnie)</label><input data-f="heading.pl" value="${escapeAttr(block.heading.pl)}"></div>
+        <div><label>Heading above paragraph (EN, optional)</label><input data-f="heading.en" value="${escapeAttr(block.heading.en)}"></div>
       </div>
+      <div class="repeat-row">
+        <div><label>Czcionka nagłówka</label><select data-f="headingFont">${fontSelectHtml(block.headingFont)}</select></div>
+        <div><label>Czcionka akapitu</label><select data-f="textFont">${fontSelectHtml(block.textFont)}</select></div>
+      </div>
+      <div class="repeat-row">
+        <div>
+          <label>Tekst (PL)</label>
+          <div class="rt-toolbar" data-for="pl">
+            <button type="button" class="btn-small" data-fmt="**" title="Pogrubienie"><strong>B</strong></button>
+            <button type="button" class="btn-small" data-fmt="*" title="Kursywa"><em>I</em></button>
+            <button type="button" class="btn-small" data-fmt="++" title="Podkreślenie"><u>U</u></button>
+          </div>
+          <textarea data-f="text.pl">${escapeHtml(block.text.pl)}</textarea>
+        </div>
+        <div>
+          <label>Text (EN)</label>
+          <div class="rt-toolbar" data-for="en">
+            <button type="button" class="btn-small" data-fmt="**" title="Bold"><strong>B</strong></button>
+            <button type="button" class="btn-small" data-fmt="*" title="Italic"><em>I</em></button>
+            <button type="button" class="btn-small" data-fmt="++" title="Underline"><u>U</u></button>
+          </div>
+          <textarea data-f="text.en">${escapeHtml(block.text.en)}</textarea>
+        </div>
+      </div>
+      <p class="slot-hint">Zaznacz fragment tekstu i kliknij B / I / U, aby go pogrubić, pochylić lub podkreślić.</p>
     `;
     row.querySelectorAll('[data-f]').forEach(input => {
-      input.addEventListener('input', () => { para[input.dataset.f] = input.value; });
+      input.addEventListener('input', () => {
+        const path = input.dataset.f.split('.');
+        if (path.length === 1) block[path[0]] = input.value;
+        else block[path[0]][path[1]] = input.value;
+      });
+    });
+    row.querySelectorAll('.rt-toolbar').forEach(toolbar => {
+      const textarea = row.querySelector(`textarea[data-f="text.${toolbar.dataset.for}"]`);
+      toolbar.querySelectorAll('[data-fmt]').forEach(btn => {
+        btn.addEventListener('click', () => wrapSelection(textarea, btn.dataset.fmt));
+      });
     });
     row.querySelector('[data-act="up"]').addEventListener('click', () => moveItem(list, index, -1, rerender));
     row.querySelector('[data-act="down"]').addEventListener('click', () => moveItem(list, index, 1, rerender));
@@ -511,12 +572,15 @@ function buildDogRow(dog, index) {
   });
   return row;
 }
+function newContentBlock() {
+  return { heading: { pl: '', en: '' }, headingFont: 'default', textFont: 'default', text: { pl: '', en: '' } };
+}
 document.getElementById('addAboutParaBtn').addEventListener('click', () => {
-  content.about.body.push({ pl: '', en: '' });
+  content.about.body.push(newContentBlock());
   renderAboutBody();
 });
 document.getElementById('addBreedParaBtn').addEventListener('click', () => {
-  content.breed.body.push({ pl: '', en: '' });
+  content.breed.body.push(newContentBlock());
   renderBreedBody();
 });
 

@@ -113,14 +113,14 @@ const FALLBACK_CONTENT = {
   },
   about: {
     body: [
-      { pl: 'Curly Head Doodle z Mielca to spełnienie naszych marzeń.', en: 'Curly Head Doodle, based in Mielec, is the fulfillment of our dream.' },
-      { pl: 'Wychowujemy szczenięta w domu, bez kojców zewnętrznych.', en: 'We raise our puppies at home, with no outdoor kennels.' },
+      { heading: { pl: '', en: '' }, headingFont: 'default', textFont: 'default', text: { pl: 'Curly Head Doodle z Mielca to spełnienie naszych marzeń.', en: 'Curly Head Doodle, based in Mielec, is the fulfillment of our dream.' } },
+      { heading: { pl: '', en: '' }, headingFont: 'default', textFont: 'default', text: { pl: 'Wychowujemy szczenięta w domu, bez kojców zewnętrznych.', en: 'We raise our puppies at home, with no outdoor kennels.' } },
     ],
   },
   breed: {
     body: [
-      { pl: 'Mini Goldendoodle to połączenie inteligencji pudla i ciepłego usposobienia golden retrievera.', en: "The Mini Goldendoodle combines the Poodle's intelligence with the Golden Retriever's warm nature." },
-      { pl: 'Dzięki kręconej sierści wiele osób z alergią dobrze toleruje Goldendoodle.', en: 'Thanks to their curly coat, many people with dog allergies tolerate Goldendoodles well.' },
+      { heading: { pl: '', en: '' }, headingFont: 'default', textFont: 'default', text: { pl: 'Mini Goldendoodle to połączenie inteligencji pudla i ciepłego usposobienia golden retrievera.', en: "The Mini Goldendoodle combines the Poodle's intelligence with the Golden Retriever's warm nature." } },
+      { heading: { pl: '', en: '' }, headingFont: 'default', textFont: 'default', text: { pl: 'Dzięki kręconej sierści wiele osób z alergią dobrze toleruje Goldendoodle.', en: 'Thanks to their curly coat, many people with dog allergies tolerate Goldendoodles well.' } },
     ],
   },
   dogs: [
@@ -146,6 +146,18 @@ const FONT_PAIRS = {
   'fraunces-karla': { display: '"Fraunces", serif', body: '"Karla", sans-serif' },
   'playfair-inter': { display: '"Playfair Display", serif', body: '"Inter", sans-serif' },
   'cormorant-nunito': { display: '"Cormorant Garamond", serif', body: '"Nunito Sans", sans-serif' },
+};
+// Individual font choices offered per paragraph/heading block (as opposed
+// to FONT_PAIRS, which sets the sitewide display+body pairing). All are
+// already preloaded via the <link> in <head>, so switching is instant.
+const FONT_CHOICES = {
+  default: null,
+  fraunces: '"Fraunces", serif',
+  karla: '"Karla", sans-serif',
+  playfair: '"Playfair Display", serif',
+  inter: 'Inter, sans-serif',
+  cormorant: '"Cormorant Garamond", serif',
+  nunito: '"Nunito Sans", sans-serif',
 };
 const COLOR_VAR_MAP = {
   bg: '--color-bg', bgAlt: '--color-bg-alt', paper: '--color-paper', ink: '--color-ink',
@@ -228,15 +240,39 @@ function populateLitterSelect(lang) {
   });
 }
 
-// ---- Paragraph lists (about/breed body text — open-ended, edited as a
-// list in admin.html rather than a fixed body1/body2/... set of fields) ----
-function renderParagraphList(containerId, paragraphs, lang) {
+// ---- Content blocks (about/breed body text — open-ended list of optional
+// heading + paragraph, each with its own font choice; edited in admin.html
+// rather than a fixed body1/body2/... set of fields) ----
+
+// Escapes HTML, then turns a small hand-rolled markup into safe tags:
+// **bold**, ++underline++, *italic*. Order matters — ** is consumed before
+// single-* so bold pairs don't get read as two italics.
+function parseRichText(raw) {
+  const escaped = String(raw || '')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return escaped
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\+\+(.+?)\+\+/g, '<u>$1</u>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>');
+}
+
+function renderContentBlocks(containerId, blocks, lang) {
   const el = document.getElementById(containerId);
   if (!el) return;
   el.innerHTML = '';
-  (paragraphs || []).forEach(entry => {
+  (blocks || []).forEach(block => {
+    const headingText = block.heading && block.heading[lang];
+    if (headingText) {
+      const h = document.createElement('h3');
+      h.textContent = headingText;
+      const font = FONT_CHOICES[block.headingFont];
+      if (font) h.style.fontFamily = font;
+      el.appendChild(h);
+    }
     const p = document.createElement('p');
-    p.textContent = (entry && entry[lang]) || '';
+    p.innerHTML = parseRichText((block.text && block.text[lang]) || '');
+    const font = FONT_CHOICES[block.textFont];
+    if (font) p.style.fontFamily = font;
     el.appendChild(p);
   });
 }
@@ -266,8 +302,8 @@ function applyLanguage(lang) {
   renderDogs(lang);
   renderLitters(lang);
   populateLitterSelect(lang);
-  renderParagraphList('aboutBody', activeContent.about && activeContent.about.body, lang);
-  renderParagraphList('breedBody', activeContent.breed && activeContent.breed.body, lang);
+  renderContentBlocks('aboutBody', activeContent.about && activeContent.about.body, lang);
+  renderContentBlocks('breedBody', activeContent.breed && activeContent.breed.body, lang);
 }
 
 document.querySelectorAll('.lang-btn').forEach(btn => {
