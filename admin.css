@@ -1,0 +1,75 @@
+/* =============================================================
+   CURLY HEAD DOODLE — ADMIN / SETTINGS PANEL STYLES
+   Reuses the color/font tokens from style.css (:root).
+   ============================================================= */
+
+.admin-body { background: var(--color-bg-alt); min-height: 100vh; }
+
+.admin-header {
+  background: var(--color-paper);
+  border-bottom: 1px solid var(--color-line);
+  padding: 18px 0;
+}
+.admin-header .wrap { display: flex; align-items: baseline; gap: 24px; }
+.admin-header h1 { font-size: 1.2rem; margin: 0; color: var(--color-ink-soft); font-weight: 500; }
+.admin-header .wordmark-text { font-family: var(--font-display); font-size: 1rem; font-weight: 600; }
+
+.admin-main { max-width: 760px; padding-top: 40px; padding-bottom: 60px; display: grid; gap: 28px; }
+
+.admin-card {
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+}
+.admin-card h2 { font-size: 1.3rem; margin-bottom: 0.4em; }
+
+.admin-help { margin: 16px 0; font-size: 0.92rem; }
+.admin-help summary { cursor: pointer; font-weight: 700; color: var(--color-gold); }
+.admin-help ol { margin: 12px 0 0; padding-left: 22px; color: var(--color-ink-soft); }
+.admin-help code, .admin-card code {
+  background: var(--color-bg-alt); padding: 1px 6px; border-radius: 4px; font-size: 0.9em;
+}
+
+.admin-card .field { display: flex; flex-direction: column; gap: 6px; max-width: 420px; margin: 18px 0 0; }
+.admin-card .field label { font-size: 0.9rem; font-weight: 700; }
+.admin-card .field input {
+  font-family: var(--font-body); font-size: 1rem; padding: 10px 12px;
+  border-radius: 6px; border: 1px solid var(--color-line);
+  background: var(--color-bg); color: var(--color-ink);
+}
+.admin-card .field input:focus { border-color: var(--color-gold); }
+
+.admin-actions { display: flex; align-items: center; gap: 20px; margin-top: 18px; flex-wrap: wrap; }
+.admin-status { margin: 14px 0 0; font-size: 0.92rem; min-height: 1.3em; }
+.admin-status.ok { color: #3E7A4A; }
+.admin-status.err { color: #B23A3A; }
+.admin-status.busy { color: var(--color-ink-soft); }
+
+.slot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 22px; margin-top: 20px; }
+.slot-card {
+  border: 1px solid var(--color-line); border-radius: var(--radius);
+  padding: 16px; display: flex; flex-direction: column; gap: 10px; background: var(--color-bg);
+}
+.slot-card h3 { font-size: 1rem; margin: 0; }
+.slot-card .slot-hint { font-size: 0.82rem; color: var(--color-ink-soft); margin: 0; }
+.slot-preview {
+  aspect-ratio: 1/1; border-radius: 6px; overflow: hidden;
+  background: var(--color-paper); border: 2px dashed var(--color-gold-soft);
+  display: flex; align-items: center; justify-content: center; color: var(--color-gold-soft); font-size: 0.8rem;
+}
+.slot-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.slot-card input[type="file"] { font-size: 0.85rem; }
+.slot-card .slot-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.slot-card .slot-status { font-size: 0.82rem; min-height: 1.2em; }
+.slot-card .slot-status.ok { color: #3E7A4A; }
+.slot-card .slot-status.err { color: #B23A3A; }
+.slot-card .slot-status.busy { color: var(--color-ink-soft); }
+.btn-small {
+  font-family: var(--font-body); font-size: 0.85rem; font-weight: 700;
+  padding: 6px 12px; border-radius: 6px; border: 1px solid var(--color-line);
+  background: var(--color-paper); color: var(--color-ink); cursor: pointer;
+}
+.btn-small:hover { border-color: var(--color-gold); }
+.btn-small:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-small.danger { color: #B23A3A; }

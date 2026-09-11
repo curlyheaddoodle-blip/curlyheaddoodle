@@ -28,6 +28,24 @@ primaryNav.querySelectorAll('a').forEach(link => {
   });
 });
 
+// ---- 1b. Photo slots — swap in uploaded photos (images/<slot>.jpg) if present ----
+// Photos are uploaded via admin.html (Settings panel), which commits them to
+// this exact path in the repo. Until a slot's file exists, the original
+// illustration/placeholder markup in index.html stays as-is.
+document.querySelectorAll('[data-photo-slot]').forEach(container => {
+  const slot = container.getAttribute('data-photo-slot');
+  const img = new Image();
+  img.onload = () => {
+    container.innerHTML = '';
+    img.alt = '';
+    img.loading = 'lazy';
+    container.appendChild(img);
+    container.classList.add('has-photo');
+  };
+  img.onerror = () => { /* no photo uploaded yet — keep placeholder */ };
+  img.src = `images/${slot}.jpg`;
+});
+
 // ---- 2. Header background on scroll ----
 const header = document.getElementById('siteHeader');
 const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 12);

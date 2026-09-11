@@ -78,12 +78,11 @@
       </div>
 
       <!--
-        Original medallion illustration standing in for a real photo (the
-        wireframe used a photo of the family + dogs). To swap in a real
-        photo instead, delete the .hero-art contents and add:
-        <img src="your-photo.jpg" alt="Describe the photo">
+        Medallion illustration shown until a real photo is uploaded via
+        admin.html (Settings panel). Once images/hero.jpg exists, script.js
+        swaps it in automatically — no manual edit needed here.
       -->
-      <div class="hero-art" aria-hidden="true">
+      <div class="hero-art" data-photo-slot="hero" aria-hidden="true">
         <svg viewBox="0 0 460 460" class="hero-svg">
           <circle cx="230" cy="230" r="210" fill="var(--color-bg-alt)"/>
           <circle cx="230" cy="230" r="180" fill="none" stroke="var(--color-gold-soft)" stroke-width="2" stroke-dasharray="1 9"/>
@@ -118,10 +117,10 @@
         <a class="btn-link" href="#o-rasie" data-i18n="about_cta">Poznaj naszą filozofię</a>
       </div>
       <!--
-        Photo placeholder (the wireframe used a puppy-paw-in-hand photo here).
-        Swap this whole .photo-frame div for: <img src="your-photo.jpg" alt="...">
+        Photo placeholder, swapped for a real photo automatically once
+        images/about.jpg is uploaded via admin.html (Settings panel).
       -->
-      <div class="photo-frame" aria-hidden="true">
+      <div class="photo-frame" data-photo-slot="about" aria-hidden="true">
         <svg viewBox="0 0 24 24" class="photo-frame-icon"><use href="#icon-paw"/></svg>
       </div>
     </div>
@@ -175,16 +174,16 @@
     <div class="wrap">
       <h2 data-i18n="dogs_heading">Nasze psy</h2>
       <p class="section-lede" data-i18n="dogs_lede">Poznaj rodziców naszych miotów — każdy z pełnymi badaniami zdrowotnymi i genetycznymi.</p>
-      <!-- Copy a whole .dog-card to add another dog. Swap .dog-photo for a real <img> when you have one. -->
+      <!-- Copy a whole .dog-card to add another dog. Photos are swapped in automatically once images/dog1.jpg / images/dog2.jpg are uploaded via admin.html (Settings panel). -->
       <div class="dogs-grid">
         <div class="dog-card">
-          <div class="dog-photo" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-paw"/></svg></div>
+          <div class="dog-photo" data-photo-slot="dog1" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-paw"/></svg></div>
           <h4 data-i18n="dog1_name">[Imię suczki]</h4>
           <p class="dog-role" data-i18n="dog1_role">Suczka hodowlana</p>
           <p data-i18n="dog1_bio">Miejsce na krótki opis charakteru, umaszczenia i wyników badań zdrowotnych.</p>
         </div>
         <div class="dog-card">
-          <div class="dog-photo" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-paw"/></svg></div>
+          <div class="dog-photo" data-photo-slot="dog2" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-paw"/></svg></div>
           <h4 data-i18n="dog2_name">[Imię reproduktora]</h4>
           <p class="dog-role" data-i18n="dog2_role">Reproduktor</p>
           <p data-i18n="dog2_bio">Miejsce na krótki opis charakteru, umaszczenia i wyników badań zdrowotnych.</p>
@@ -289,6 +288,7 @@
     <div class="footer-right">
       <p class="muted" data-i18n="footer_disclaimer">Nie prowadzimy sprzedaży za pośrednictwem portali ogłoszeniowych typu OLX.</p>
       <p class="muted" data-i18n="footer_copyright">&copy; 2026 Curly Head Doodle. Wszelkie prawa zastrzeżone.</p>
+      <p class="muted"><a class="admin-link" href="admin.html">Ustawienia zdjęć</a></p>
     </div>
   </div>
 </footer>

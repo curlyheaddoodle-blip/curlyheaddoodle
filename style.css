@@ -154,6 +154,8 @@ p { margin: 0 0 1em; max-width: 62ch; }
 }
 .btn-link:hover { border-bottom-color: var(--color-gold); }
 .hero-svg { width: 100%; height: auto; }
+.hero-art.has-photo { aspect-ratio: 1/1; border-radius: 50%; overflow: hidden; }
+.hero-art.has-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 
 /* ---------- 6. SECTIONS ---------- */
 .section { padding: 68px 0; }
@@ -168,6 +170,8 @@ p { margin: 0 0 1em; max-width: 62ch; }
   display: flex; align-items: center; justify-content: center;
 }
 .photo-frame-icon { width: 44px; height: 44px; fill: var(--color-gold-soft); }
+.photo-frame.has-photo { border-style: solid; padding: 0; overflow: hidden; }
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
 
 .why-heading { text-align: left; margin-bottom: 24px; }
 .why-grid {
@@ -200,6 +204,8 @@ p { margin: 0 0 1em; max-width: 62ch; }
   margin-bottom: 16px;
 }
 .dog-photo svg { width: 34px; height: 34px; fill: var(--color-gold-soft); }
+.dog-photo.has-photo { border-style: solid; overflow: hidden; }
+.dog-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 .dog-role { color: var(--color-gold); font-weight: 700; font-size: 0.9rem; margin: -0.6em 0 0.6em; }
 
 /* -- Szczenięta -- */
@@ -245,6 +251,8 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .footer-row { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; }
 .footer-right { text-align: right; }
 .site-footer .muted { color: #CBBFA9; margin: 0 0 4px; }
+.admin-link { color: #8A7C64; font-size: 0.8rem; text-decoration: underline; }
+.admin-link:hover { color: var(--color-bg); }
 
 /* One-time hero entrance */
 .hero-copy, .hero-art { animation: rise 0.7s ease both; }

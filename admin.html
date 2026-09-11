@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--
+  CURLY HEAD DOODLE — SETTINGS / PHOTO ADMIN
+  ==========================================
+  A small panel for uploading real photos into specific sections of the
+  live site. It is a plain static page (no server) that talks directly to
+  the GitHub API using a personal access token you provide, and commits
+  each photo straight into this repo's images/ folder. The public site
+  (script.js) automatically picks up images/<slot>.jpg once it exists.
+
+  This page is not linked from the main nav — only from a small footer
+  link — but it is not truly private: anyone who knows the URL can open
+  it. That's fine, because without a valid token with write access to
+  this repo, nothing here can do anything. Never share your token.
+-->
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Ustawienia zdjęć — Curly Head Doodle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+
+<header class="admin-header">
+  <div class="wrap">
+    <a class="wordmark" href="index.html">
+      <span class="wordmark-text">Curly Head<br>Doodle</span>
+    </a>
+    <h1>Ustawienia zdjęć</h1>
+  </div>
+</header>
+
+<main class="wrap admin-main">
+
+  <!-- ============ TOKEN / LOGIN ============ -->
+  <section id="authPanel" class="admin-card">
+    <h2>Połącz z repozytorium GitHub</h2>
+    <p class="muted">
+      Aby wgrywać zdjęcia, potrzebny jest osobisty token dostępu (Personal Access Token)
+      z uprawnieniem do zapisu w repozytorium <code>curlyheaddoodle-blip/curlyheaddoodle</code>.
+      Token jest zapisywany wyłącznie w Twojej przeglądarce (localStorage) i wysyłany
+      tylko bezpośrednio do GitHuba — nigdzie indziej.
+    </p>
+    <details class="admin-help">
+      <summary>Jak zrobić token? (raz)</summary>
+      <ol>
+        <li>Zaloguj się na GitHubie jako <code>curlyheaddoodle-blip</code>.</li>
+        <li>Idź do Settings → Developer settings → Personal access tokens → Fine-grained tokens.</li>
+        <li>Utwórz token z dostępem tylko do repozytorium <code>curlyheaddoodle</code>, z uprawnieniem
+          <strong>Contents: Read and write</strong>.</li>
+        <li>Skopiuj token i wklej poniżej.</li>
+      </ol>
+    </details>
+    <div class="field">
+      <label for="tokenInput">Token dostępu</label>
+      <input type="password" id="tokenInput" autocomplete="off" placeholder="github_pat_...">
+    </div>
+    <div class="admin-actions">
+      <button type="button" class="btn btn-primary" id="connectBtn">Połącz</button>
+      <button type="button" class="btn-link" id="disconnectBtn" hidden>Wyloguj (usuń token z przeglądarki)</button>
+    </div>
+    <p id="authStatus" class="admin-status" role="status"></p>
+  </section>
+
+  <!-- ============ PHOTO SLOTS ============ -->
+  <section id="slotsPanel" class="admin-card" hidden>
+    <h2>Zdjęcia na stronie</h2>
+    <p class="muted">Wgraj zdjęcie dla każdej sekcji. Zostanie ono automatycznie przycięte i skompresowane, a strona pokaże je w ciągu minuty od zapisania.</p>
+    <div class="slot-grid" id="slotGrid"></div>
+  </section>
+
+</main>
+
+<script src="admin.js"></script>
+</body>
+</html>
