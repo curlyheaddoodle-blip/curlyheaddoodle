@@ -163,6 +163,7 @@ async function enterEditor() {
   content = loaded.content;
   contentSha = loaded.sha;
 
+  renderBrand();
   renderSlots();
   renderTheme();
   renderDogsEditor();
@@ -181,8 +182,11 @@ async function loadContentFile() {
   return { content: JSON.parse(decoded), sha: data.sha };
 }
 
-// ---- Photo upload (shared by fixed slots and per-dog slots) ----
-function resizeAndCompress(file, maxDim = 1600, quality = 0.85) {
+// ---- Photo upload (shared by fixed slots, per-dog slots, and the logo) ----
+// `path` is the file's full path in the repo, e.g. "images/hero.jpg" or
+// "images/logo.png" — logos use PNG so a transparent background survives;
+// photos use JPEG since they compress much better.
+function resizeAndCompress(file, maxDim = 1600, quality = 0.85, mime = 'image/jpeg') {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onerror = () => reject(new Error('Nie udało się odczytać pliku.'));
@@ -200,7 +204,7 @@ function resizeAndCompress(file, maxDim = 1600, quality = 0.85) {
         canvas.width = width;
         canvas.height = height;
         canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-        resolve(canvas.toDataURL('image/jpeg', quality).split(',')[1]);
+        resolve(canvas.toDataURL(mime, quality).split(',')[1]);
       };
       img.src = reader.result;
     };
@@ -208,14 +212,14 @@ function resizeAndCompress(file, maxDim = 1600, quality = 0.85) {
   });
 }
 
-async function getFileSha(key) {
-  const res = await fetch(`${API_ROOT}/images/${key}.jpg?ref=${BRANCH}`, { headers: ghHeaders() });
+async function getFileSha(path) {
+  const res = await fetch(`${API_ROOT}/${path}?ref=${BRANCH}`, { headers: ghHeaders() });
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`Nie udało się sprawdzić istniejącego pliku (${res.status})`);
   return (await res.json()).sha;
 }
 
-function loadPreviewInto(previewEl, key, onFound) {
+function loadPreviewInto(previewEl, path, onFound) {
   const img = new Image();
   img.onload = () => {
     previewEl.innerHTML = '';
@@ -223,20 +227,20 @@ function loadPreviewInto(previewEl, key, onFound) {
     if (onFound) onFound(true);
   };
   img.onerror = () => { previewEl.textContent = 'Brak zdjęcia'; if (onFound) onFound(false); };
-  img.src = `images/${key}.jpg?t=${Date.now()}`;
+  img.src = `${path}?t=${Date.now()}`;
 }
 
-async function uploadPhoto(key, file, statusEl, previewEl, onDone) {
+async function uploadPhoto(path, file, statusEl, previewEl, onDone, mime = 'image/jpeg') {
   statusEl.textContent = 'Przetwarzanie zdjęcia…';
   statusEl.className = 'slot-status busy';
   try {
-    const base64Content = await resizeAndCompress(file);
+    const base64Content = await resizeAndCompress(file, 1600, 0.85, mime);
     statusEl.textContent = 'Zapisywanie w repozytorium…';
-    const sha = await getFileSha(key);
-    const res = await fetch(`${API_ROOT}/images/${key}.jpg`, {
+    const sha = await getFileSha(path);
+    const res = await fetch(`${API_ROOT}/${path}`, {
       method: 'PUT',
       headers: { ...ghHeaders(), 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: `Update ${key} photo via admin panel`, content: base64Content, branch: BRANCH, ...(sha ? { sha } : {}) }),
+      body: JSON.stringify({ message: `Update ${path} via admin panel`, content: base64Content, branch: BRANCH, ...(sha ? { sha } : {}) }),
     });
     if (!res.ok) {
       const errBody = await res.json().catch(() => ({}));
@@ -244,7 +248,7 @@ async function uploadPhoto(key, file, statusEl, previewEl, onDone) {
     }
     statusEl.textContent = 'Zapisano!';
     statusEl.className = 'slot-status ok';
-    loadPreviewInto(previewEl, key);
+    loadPreviewInto(previewEl, path);
     if (onDone) onDone();
   } catch (err) {
     statusEl.textContent = friendlyGithubError(err.message);
@@ -252,17 +256,17 @@ async function uploadPhoto(key, file, statusEl, previewEl, onDone) {
   }
 }
 
-async function removePhoto(key, statusEl, previewEl) {
+async function removePhoto(path, statusEl, previewEl) {
   if (!confirm('Usunąć to zdjęcie? Strona wróci do domyślnej grafiki.')) return;
   statusEl.textContent = 'Usuwanie…';
   statusEl.className = 'slot-status busy';
   try {
-    const sha = await getFileSha(key);
+    const sha = await getFileSha(path);
     if (!sha) { statusEl.textContent = 'Brak zdjęcia do usunięcia.'; statusEl.className = 'slot-status err'; return; }
-    const res = await fetch(`${API_ROOT}/images/${key}.jpg`, {
+    const res = await fetch(`${API_ROOT}/${path}`, {
       method: 'DELETE',
       headers: { ...ghHeaders(), 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: `Remove ${key} photo via admin panel`, sha, branch: BRANCH }),
+      body: JSON.stringify({ message: `Remove ${path} via admin panel`, sha, branch: BRANCH }),
     });
     if (!res.ok) {
       const errBody = await res.json().catch(() => ({}));
@@ -270,7 +274,7 @@ async function removePhoto(key, statusEl, previewEl) {
     }
     statusEl.textContent = 'Usunięto.';
     statusEl.className = 'slot-status ok';
-    loadPreviewInto(previewEl, key);
+    loadPreviewInto(previewEl, path);
   } catch (err) {
     statusEl.textContent = friendlyGithubError(err.message);
     statusEl.className = 'slot-status err';
@@ -286,6 +290,7 @@ function renderSlots() {
   const grid = document.getElementById('slotGrid');
   grid.innerHTML = '';
   FIXED_SLOTS.forEach(slot => {
+    const path = `images/${slot.key}.jpg`;
     const card = document.createElement('div');
     card.className = 'slot-card';
     card.innerHTML = `
@@ -303,13 +308,42 @@ function renderSlots() {
     const preview = card.querySelector('.slot-preview');
     const fileInput = card.querySelector('input[type="file"]');
     const status = card.querySelector('.slot-status');
-    loadPreviewInto(preview, slot.key);
+    loadPreviewInto(preview, path);
     card.querySelector('.btn-small:not(.danger)').addEventListener('click', () => {
       if (!fileInput.files[0]) { status.textContent = 'Najpierw wybierz plik.'; status.className = 'slot-status err'; return; }
-      uploadPhoto(slot.key, fileInput.files[0], status, preview, () => { fileInput.value = ''; });
+      uploadPhoto(path, fileInput.files[0], status, preview, () => { fileInput.value = ''; });
     });
-    card.querySelector('.btn-small.danger').addEventListener('click', () => removePhoto(slot.key, status, preview));
+    card.querySelector('.btn-small.danger').addEventListener('click', () => removePhoto(path, status, preview));
   });
+}
+
+// ---- Brand (logo + name) ----
+function renderBrand() {
+  const el = document.getElementById('brandEditor');
+  el.innerHTML = `
+    <div class="dog-photo-row">
+      <div class="dog-photo-preview" id="logoPreview">Brak</div>
+      <input type="file" accept="image/png,image/svg+xml" id="logoFile" style="flex:1">
+      <button type="button" class="btn-small" id="logoUploadBtn">Wgraj</button>
+      <button type="button" class="btn-small danger" id="logoRemoveBtn">Usuń</button>
+    </div>
+    <p class="slot-status" id="logoStatus">Logo powinno być PNG z przezroczystym tłem, najlepiej kwadratowe.</p>
+    <div class="repeat-row single" style="margin-top:16px">
+      <div><label>Nazwa marki (nagłówek i stopka)</label><input id="brandNameInput" value="${escapeAttr(content.site.brandName)}"></div>
+    </div>
+  `;
+  const preview = document.getElementById('logoPreview');
+  const fileInput = document.getElementById('logoFile');
+  const status = document.getElementById('logoStatus');
+  loadPreviewInto(preview, 'images/logo.png');
+  document.getElementById('logoUploadBtn').addEventListener('click', () => {
+    if (!fileInput.files[0]) { status.textContent = 'Najpierw wybierz plik.'; status.className = 'slot-status err'; return; }
+    uploadPhoto('images/logo.png', fileInput.files[0], status, preview, () => { fileInput.value = ''; }, 'image/png');
+  });
+  document.getElementById('logoRemoveBtn').addEventListener('click', () => removePhoto('images/logo.png', status, preview));
+}
+function collectBrand() {
+  return { brandName: document.getElementById('brandNameInput').value };
 }
 
 // ---- Theme editor ----
@@ -383,7 +417,8 @@ function buildDogRow(dog, index) {
   const preview = row.querySelector('.dog-photo-preview');
   const status = row.querySelector('.slot-status');
   const fileInput = row.querySelector('input[type="file"]');
-  loadPreviewInto(preview, dog.id);
+  const dogPhotoPath = `images/${dog.id}.jpg`;
+  loadPreviewInto(preview, dogPhotoPath);
 
   row.querySelectorAll('[data-f]').forEach(input => {
     input.addEventListener('input', () => {
@@ -400,7 +435,7 @@ function buildDogRow(dog, index) {
   });
   row.querySelector('[data-act="upload-photo"]').addEventListener('click', () => {
     if (!fileInput.files[0]) { status.textContent = 'Najpierw wybierz plik.'; status.className = 'slot-status err'; return; }
-    uploadPhoto(dog.id, fileInput.files[0], status, preview, () => { fileInput.value = ''; });
+    uploadPhoto(dogPhotoPath, fileInput.files[0], status, preview, () => { fileInput.value = ''; });
   });
   return row;
 }
@@ -555,6 +590,7 @@ saveBtn.addEventListener('click', async () => {
   saveStatus.textContent = 'Zapisywanie…';
   saveStatus.className = 'admin-status busy';
   try {
+    content.site = collectBrand();
     content.theme = collectTheme();
     content.translations = collectTranslations();
     content.contact = collectContact();

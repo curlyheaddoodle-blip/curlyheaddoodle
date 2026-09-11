@@ -39,6 +39,9 @@ onScroll();
 
 // ---- 3. Content loading ----
 const FALLBACK_CONTENT = {
+  site: {
+    brandName: 'Curly Head Doodle',
+  },
   theme: {
     colors: {
       bg: '#F8F2E7', bgAlt: '#F0E6D2', paper: '#FFFDF9', ink: '#2B211A',
@@ -268,6 +271,29 @@ function applyPhotoSlots() {
   });
 }
 
+// ---- Brand name + logo (header/footer wordmark) ----
+function applyBrandName() {
+  const name = (activeContent.site && activeContent.site.brandName) || 'Curly Head Doodle';
+  const headerEl = document.getElementById('brandName');
+  const footerEl = document.getElementById('brandNameFooter');
+  if (headerEl) headerEl.textContent = name;
+  if (footerEl) footerEl.textContent = name;
+}
+
+function applyLogo() {
+  const slot = document.querySelector('[data-logo-slot="logo"]');
+  if (!slot) return;
+  const img = new Image();
+  img.onload = () => {
+    slot.innerHTML = '';
+    img.alt = '';
+    slot.appendChild(img);
+    slot.classList.add('has-logo');
+  };
+  img.onerror = () => { /* no custom logo uploaded — keep the default icon */ };
+  img.src = 'images/logo.png';
+}
+
 // ---- Load content.json, then render everything ----
 async function loadContent() {
   try {
@@ -280,6 +306,8 @@ async function loadContent() {
 
   applyTheme(activeContent.theme);
   applyPhotoSlots();
+  applyBrandName();
+  applyLogo();
 
   if (activeContent.contact) {
     const emailEl = document.getElementById('contactEmail');

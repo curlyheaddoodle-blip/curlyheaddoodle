@@ -1,4 +1,7 @@
 {
+  "site": {
+    "brandName": "Curly Head Doodle"
+  },
   "theme": {
     "colors": {
       "bg": "#F8F2E7",

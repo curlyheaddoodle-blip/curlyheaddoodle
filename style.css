@@ -102,6 +102,8 @@ p { margin: 0 0 1em; max-width: 62ch; }
   text-decoration: none; color: var(--color-ink);
 }
 .brand-mark { width: 42px; height: 42px; flex-shrink: 0; }
+.brand-mark-slot { display: inline-flex; width: 42px; height: 42px; flex-shrink: 0; }
+.brand-mark-slot.has-logo img { width: 42px; height: 42px; object-fit: contain; display: block; }
 .wordmark-text {
   font-family: var(--font-display);
   font-size: 1.05rem; font-weight: 600; line-height: 1.15;
