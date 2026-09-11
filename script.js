@@ -433,6 +433,21 @@ function applyLogo() {
   img.src = 'images/logo.png';
 }
 
+// ---- Formspree AJAX submission (kontakt.html only) ----
+// Wires the waitlist form up to Formspree's @formspree/ajax library (loaded
+// with `defer` in kontakt.html) so submitting stays on-page instead of
+// redirecting to Formspree's own confirmation page. The stub below is
+// Formspree's standard snippet: it queues the initForm call so it works
+// regardless of whether the deferred library has finished loading yet.
+function initFormspreeAjax(formEl, formActionUrl) {
+  const formId = formActionUrl.split('/').filter(Boolean).pop();
+  if (!formId || formId === 'YOUR_FORM_ID') return; // admin hasn't set a real form yet
+  window.formspree = window.formspree || function () {
+    (formspree.q = formspree.q || []).push(arguments);
+  };
+  formspree('initForm', { formElement: formEl, formId });
+}
+
 // ---- Load content.json, then render everything ----
 async function loadContent() {
   try {
@@ -455,7 +470,12 @@ async function loadContent() {
     const formEl = document.getElementById('waitlistForm');
     if (emailEl && activeContent.contact.email) emailEl.textContent = activeContent.contact.email;
     if (socialEl && activeContent.contact.social) socialEl.textContent = activeContent.contact.social;
-    if (formEl && activeContent.contact.formAction) formEl.setAttribute('action', activeContent.contact.formAction);
+    if (formEl && activeContent.contact.formAction) {
+      // action/method stay as a no-JS fallback; initFormspreeAjax below takes
+      // over the real submission (stays on-page, shows inline success/error).
+      formEl.setAttribute('action', activeContent.contact.formAction);
+      initFormspreeAjax(formEl, activeContent.contact.formAction);
+    }
   }
 
   let savedLang = 'pl';

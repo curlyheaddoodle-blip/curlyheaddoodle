@@ -65,34 +65,38 @@
         </dl>
       </div>
 
-      <!-- action is set from data/content.json (contact.formAction), editable in admin.html -->
+      <!-- action/method are a no-JS fallback; the real submission goes through
+           Formspree's AJAX library (see script.js), using the ID parsed out of
+           data/content.json's contact.formAction — editable in admin.html. -->
       <form class="waitlist-form" id="waitlistForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="form-message form-message-success" data-fs-success></div>
+        <div class="form-message form-message-error" data-fs-error></div>
 
         <fieldset class="form-section">
           <legend data-i18n="field_section1_heading">Dane podstawowe i rodzina</legend>
           <div class="field">
             <label for="name" data-i18n="field_name">Imię i nazwisko</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" required data-fs-field>
           </div>
           <div class="field">
             <label for="email" data-i18n="field_email">E-mail</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" required data-fs-field>
           </div>
           <div class="field">
             <label for="phone"><span data-i18n="field_phone">Telefon (opcjonalnie)</span></label>
-            <input type="tel" id="phone" name="phone">
+            <input type="tel" id="phone" name="phone" data-fs-field>
           </div>
           <div class="field">
             <label for="city" data-i18n="field_city">Miejscowość</label>
-            <input type="text" id="city" name="city" required>
+            <input type="text" id="city" name="city" required data-fs-field>
           </div>
           <div class="field field-wide">
             <label for="household" data-i18n="field_household">Kto wchodzi w skład Twojego domostwa? (Proszę podać wiek dzieci, jeśli dotyczy)</label>
-            <textarea id="household" name="household" rows="2" required></textarea>
+            <textarea id="household" name="household" rows="2" required data-fs-field></textarea>
           </div>
           <div class="field">
             <label for="householdAgree" data-i18n="field_household_agree">Czy wszyscy domownicy zgadzają się na przyjęcie psa pod swój dach?</label>
-            <select id="householdAgree" name="household_agree" required>
+            <select id="householdAgree" name="household_agree" required data-fs-field>
               <option value="" disabled selected data-i18n="field_select_placeholder">Wybierz...</option>
               <option value="tak" data-i18n="field_yes">Tak</option>
               <option value="nie" data-i18n="field_no">Nie</option>
@@ -100,11 +104,11 @@
           </div>
           <div class="field field-wide">
             <label for="allergies" data-i18n="field_allergies">Czy w domu są alergicy? Jeśli tak, to na co? (To dla nas ważne, aby upewnić się, że wiesz o tym, że żaden pies nie jest w 100% hipoalergiczny)</label>
-            <textarea id="allergies" name="allergies" rows="2" required></textarea>
+            <textarea id="allergies" name="allergies" rows="2" required data-fs-field></textarea>
           </div>
           <div class="field field-wide">
             <label for="otherPets" data-i18n="field_other_pets">Czy posiadasz obecnie inne zwierzęta? Jeśli tak, jakie i jaki jest ich stosunek do innych psów?</label>
-            <textarea id="otherPets" name="other_pets" rows="2" required></textarea>
+            <textarea id="otherPets" name="other_pets" rows="2" required data-fs-field></textarea>
           </div>
         </fieldset>
 
@@ -112,15 +116,15 @@
           <legend data-i18n="field_section2_heading">Warunki mieszkaniowe i styl życia</legend>
           <div class="field field-wide">
             <label for="housing" data-i18n="field_housing">Czy mieszkasz w domu z ogrodem, czy w mieszkaniu? (Jeśli wynajmujesz, czy posiadasz pisemną zgodę wynajmującego?)</label>
-            <textarea id="housing" name="housing" rows="2" required></textarea>
+            <textarea id="housing" name="housing" rows="2" required data-fs-field></textarea>
           </div>
           <div class="field">
             <label for="aloneHours" data-i18n="field_alone_hours">Ile godzin dziennie pies będzie pozostawał sam w domu bez nadzoru?</label>
-            <input type="text" id="aloneHours" name="alone_hours" required>
+            <input type="text" id="aloneHours" name="alone_hours" required data-fs-field>
           </div>
           <div class="field field-wide">
             <label for="dailyTime" data-i18n="field_daily_time">Jak planujesz spędzać czas z psem na co dzień? (np. spokojne spacery, bieganie, wycieczki)</label>
-            <textarea id="dailyTime" name="daily_time" rows="2" required></textarea>
+            <textarea id="dailyTime" name="daily_time" rows="2" required data-fs-field></textarea>
           </div>
         </fieldset>
 
@@ -128,11 +132,11 @@
           <legend data-i18n="field_section3_heading">Doświadczenie i oczekiwania</legend>
           <div class="field field-wide">
             <label for="experience" data-i18n="field_experience">Czy masz wcześniejsze doświadczenie w opiece nad psem?</label>
-            <textarea id="experience" name="experience" rows="2" required></textarea>
+            <textarea id="experience" name="experience" rows="2" required data-fs-field></textarea>
           </div>
           <div class="field">
             <label for="groomingReady" data-i18n="field_grooming_ready">Goldendoodle to rasa wymagająca dbania o włos. Czy jesteś gotowy/a na codzienne czesanie oraz regularne wizyty u groomera?</label>
-            <select id="groomingReady" name="grooming_ready" required>
+            <select id="groomingReady" name="grooming_ready" required data-fs-field>
               <option value="" disabled selected data-i18n="field_select_placeholder">Wybierz...</option>
               <option value="tak" data-i18n="field_yes">Tak</option>
               <option value="nie" data-i18n="field_no">Nie</option>
@@ -140,30 +144,30 @@
           </div>
           <div class="field field-wide">
             <label for="temperament" data-i18n="field_temperament">Opisz, jakiego charakteru psa szukasz (np. „spokojny kanapowiec”, „aktywny kompan do długich wędrówek”, „bardzo wpatrzony w człowieka”)</label>
-            <textarea id="temperament" name="temperament" rows="2" required></textarea>
+            <textarea id="temperament" name="temperament" rows="2" required data-fs-field></textarea>
           </div>
           <div class="field field-wide">
             <label for="training" data-i18n="field_training">W jaki sposób planujesz uczyć psa podstawowych zasad? (np. praca samodzielna, psie przedszkole)</label>
-            <textarea id="training" name="training" rows="2" required></textarea>
+            <textarea id="training" name="training" rows="2" required data-fs-field></textarea>
           </div>
           <div class="field field-wide">
             <label for="vacation" data-i18n="field_vacation">Gdzie pies będzie przebywał podczas Twoich wyjazdów wakacyjnych?</label>
-            <textarea id="vacation" name="vacation" rows="2" required></textarea>
+            <textarea id="vacation" name="vacation" rows="2" required data-fs-field></textarea>
           </div>
         </fieldset>
 
         <div class="field">
           <label for="litter" data-i18n="field_litter">Który miot Cię interesuje?</label>
           <!-- Options for existing litters are inserted by script.js above the last, static option. -->
-          <select id="litter" name="litter">
+          <select id="litter" name="litter" data-fs-field>
             <option data-i18n="field_litter_opt3" value="not-sure">Jeszcze nie wiem / przyszły miot</option>
           </select>
         </div>
         <div class="field field-wide">
           <label for="message" data-i18n="field_message">Coś jeszcze, o czym chcesz nam powiedzieć? (opcjonalnie)</label>
-          <textarea id="message" name="message" rows="3" data-i18n-placeholder="field_message_placeholder" placeholder="Miejsce na wszystko, co nie zmieściło się w pytaniach powyżej..."></textarea>
+          <textarea id="message" name="message" rows="3" data-i18n-placeholder="field_message_placeholder" placeholder="Miejsce na wszystko, co nie zmieściło się w pytaniach powyżej..." data-fs-field></textarea>
         </div>
-        <button class="btn btn-primary" type="submit" data-i18n="submit_btn">Wyślij zgłoszenie</button>
+        <button class="btn btn-primary" type="submit" data-i18n="submit_btn" data-fs-submit-btn>Wyślij zgłoszenie</button>
         <p class="form-fineprint" data-i18n="form_fineprint">Wykorzystujemy te dane wyłącznie do kontaktu i prowadzenia listy oczekujących. Nie udostępniamy ich nikomu innemu.</p>
       </form>
     </div>
@@ -184,6 +188,9 @@
   </div>
 </footer>
 
+<!-- Powers the AJAX form submission wired up in script.js — the stub function
+     there queues initForm() before this loads, so order here doesn't matter. -->
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 <script src="script.js"></script>
 </body>
 </html>

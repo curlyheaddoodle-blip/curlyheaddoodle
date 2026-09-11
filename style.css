@@ -294,6 +294,13 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .waitlist-form .btn { grid-column: 1 / -1; justify-self: start; margin-top: 4px; }
 .form-fineprint { grid-column: 1 / -1; font-size: 0.85rem; color: var(--color-ink-soft); margin: 4px 0 0; }
 
+/* Formspree's AJAX library fills these with text on submit; empty (no
+   message yet) collapses to nothing via :empty rather than an odd blank box. */
+.form-message { grid-column: 1 / -1; padding: 12px 16px; border-radius: 6px; font-size: 0.9rem; }
+.form-message:empty { display: none; padding: 0; }
+.form-message-success { background: #E3F0E5; color: #2A5B34; }
+.form-message-error { background: #FBE7E7; color: #8A2E2E; }
+
 /* A <fieldset> famously won't shrink below its content's width in a grid
    or flex layout (the same "auto min-size" issue min-width:0 already
    fixes on .field/inputs) — without min-width:0 here this form section
