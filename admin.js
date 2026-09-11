@@ -359,7 +359,6 @@ const SECTION_LABELS = {
   breed: 'O rasie',
   dogs: 'Nasze psy',
   litters: 'Szczenięta',
-  contact: 'Kontakt',
 };
 function renderSectionOrder() {
   const el = document.getElementById('sectionOrderEditor');

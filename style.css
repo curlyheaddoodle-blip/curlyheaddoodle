@@ -210,6 +210,7 @@ p { margin: 0 0 1em; max-width: 62ch; }
 
 /* -- O nas -- */
 .about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; margin-bottom: 56px; }
+.about-actions { display: flex; align-items: center; gap: 22px; margin-top: 12px; flex-wrap: wrap; }
 .photo-frame {
   aspect-ratio: 4/3; border-radius: var(--radius);
   border: 2px dashed var(--color-gold-soft);

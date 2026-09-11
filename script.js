@@ -42,7 +42,7 @@ const FALLBACK_CONTENT = {
   site: {
     brandName: 'Curly Head Doodle',
   },
-  navOrder: ['about', 'breed', 'dogs', 'litters', 'contact'],
+  navOrder: ['about', 'breed', 'dogs', 'litters'],
   theme: {
     colors: {
       bg: '#F8F2E7', bgAlt: '#F0E6D2', paper: '#FFFDF9', ink: '#2B211A',
