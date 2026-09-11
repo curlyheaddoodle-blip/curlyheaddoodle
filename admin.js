@@ -606,9 +606,13 @@ function buildCardEditor(block) {
 // text alignment. Reuses the same upload/remove/preview helpers as the
 // fixed hero/about slots and per-dog photos, keyed by the block's own id.
 function buildPhotoEditor(block, rerenderBlock) {
-  if (!block.photo) block.photo = { enabled: false, position: 'left', textAlign: 'left' };
+  if (!block.photo) block.photo = { enabled: false, mode: 'single', position: 'left', textAlign: 'left', count: 3 };
+  if (block.photo.mode === undefined) block.photo.mode = 'single';
+  if (block.photo.count === undefined) block.photo.count = 3;
   if (!block.id) block.id = 'block-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-  const path = `images/${block.id}.jpg`;
+
+  const isCollage = block.photo.mode === 'collage';
+  const slotCount = isCollage ? block.photo.count : 1;
 
   const wrap = document.createElement('div');
   wrap.className = 'style-wrap';
@@ -616,7 +620,19 @@ function buildPhotoEditor(block, rerenderBlock) {
     <label class="checkbox-label"><input type="checkbox" data-pf="enabled"${block.photo.enabled ? ' checked' : ''}> Dodaj zdjęcie do akapitu</label>
     <div class="style-fields"${block.photo.enabled ? '' : ' hidden'}>
       <div class="repeat-row">
-        <div><label>Pozycja zdjęcia</label>
+        <div><label>Tryb</label>
+          <select data-pf-rerender="mode">
+            <option value="single"${!isCollage ? ' selected' : ''}>Pojedyncze zdjęcie</option>
+            <option value="collage"${isCollage ? ' selected' : ''}>Kolaż (kilka zdjęć)</option>
+          </select>
+        </div>
+        <div${isCollage ? '' : ' hidden'}>
+          <label>Liczba zdjęć</label>
+          <select data-pf-rerender="count">${[2, 3, 4, 5].map(n => `<option value="${n}"${block.photo.count === n ? ' selected' : ''}>${n}</option>`).join('')}</select>
+        </div>
+      </div>
+      <div class="repeat-row">
+        <div><label>Pozycja</label>
           <select data-pf="position">
             <option value="left"${block.photo.position === 'left' ? ' selected' : ''}>Lewo</option>
             <option value="right"${block.photo.position === 'right' ? ' selected' : ''}>Prawo</option>
@@ -632,6 +648,33 @@ function buildPhotoEditor(block, rerenderBlock) {
           </select>
         </div>
       </div>
+      <div class="photo-upload-grid"></div>
+    </div>
+  `;
+  const fieldsWrap = wrap.querySelector('.style-fields');
+  wrap.querySelector('[data-pf="enabled"]').addEventListener('input', e => {
+    block.photo.enabled = e.target.checked;
+    fieldsWrap.hidden = !e.target.checked;
+  });
+  wrap.querySelectorAll('[data-pf-rerender]').forEach(select => {
+    select.addEventListener('change', () => {
+      const key = select.dataset.pfRerender;
+      block.photo[key] = key === 'count' ? Number(select.value) : select.value;
+      rerenderBlock();
+    });
+  });
+  wrap.querySelectorAll('select[data-pf]').forEach(select => {
+    select.addEventListener('input', () => { block.photo[select.dataset.pf] = select.value; });
+  });
+
+  const uploadGrid = wrap.querySelector('.photo-upload-grid');
+  uploadGrid.className = 'photo-upload-grid' + (isCollage ? ' is-collage' : '');
+  for (let i = 1; i <= slotCount; i++) {
+    const path = isCollage ? `images/${block.id}-${i}.jpg` : `images/${block.id}.jpg`;
+    const slotEl = document.createElement('div');
+    slotEl.className = 'photo-upload-slot';
+    slotEl.innerHTML = `
+      ${isCollage ? `<p class="slot-hint">Zdjęcie ${i}</p>` : ''}
       <div class="dog-photo-row">
         <div class="dog-photo-preview block-photo-preview">Brak</div>
         <input type="file" accept="image/*" style="flex:1">
@@ -639,29 +682,18 @@ function buildPhotoEditor(block, rerenderBlock) {
         <button type="button" class="btn-small danger" data-act="remove">Usuń</button>
       </div>
       <p class="slot-status"></p>
-    </div>
-  `;
-  const fieldsWrap = wrap.querySelector('.style-fields');
-  wrap.querySelectorAll('[data-pf]').forEach(input => {
-    input.addEventListener('input', () => {
-      const key = input.dataset.pf;
-      if (input.type === 'checkbox') {
-        block.photo.enabled = input.checked;
-        fieldsWrap.hidden = !input.checked;
-      } else {
-        block.photo[key] = input.value;
-      }
+    `;
+    const preview = slotEl.querySelector('.block-photo-preview');
+    const fileInput = slotEl.querySelector('input[type="file"]');
+    const status = slotEl.querySelector('.slot-status');
+    loadPreviewInto(preview, path);
+    slotEl.querySelector('[data-act="upload"]').addEventListener('click', () => {
+      if (!fileInput.files[0]) { status.textContent = 'Najpierw wybierz plik.'; status.className = 'slot-status err'; return; }
+      uploadPhoto(path, fileInput.files[0], status, preview, () => { fileInput.value = ''; });
     });
-  });
-  const preview = wrap.querySelector('.block-photo-preview');
-  const fileInput = wrap.querySelector('input[type="file"]');
-  const status = wrap.querySelector('.slot-status');
-  loadPreviewInto(preview, path);
-  wrap.querySelector('[data-act="upload"]').addEventListener('click', () => {
-    if (!fileInput.files[0]) { status.textContent = 'Najpierw wybierz plik.'; status.className = 'slot-status err'; return; }
-    uploadPhoto(path, fileInput.files[0], status, preview, () => { fileInput.value = ''; });
-  });
-  wrap.querySelector('[data-act="remove"]').addEventListener('click', () => removePhoto(path, status, preview));
+    slotEl.querySelector('[data-act="remove"]').addEventListener('click', () => removePhoto(path, status, preview));
+    uploadGrid.appendChild(slotEl);
+  }
   return wrap;
 }
 
@@ -799,7 +831,7 @@ function newContentBlock() {
     id: 'block-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
     heading: { pl: '', en: '' }, headingFont: 'default', textFont: 'default', text: { pl: '', en: '' }, bullets: [],
     card: { enabled: false, background: '#FFFDF9', borderColor: '#E0D3B8', borderWidth: 1 },
-    photo: { enabled: false, position: 'left', textAlign: 'left' },
+    photo: { enabled: false, mode: 'single', position: 'left', textAlign: 'left', count: 3 },
   };
 }
 document.getElementById('addAboutParaBtn').addEventListener('click', () => {

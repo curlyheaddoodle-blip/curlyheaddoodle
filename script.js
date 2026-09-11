@@ -274,11 +274,25 @@ function renderContentBlocks(containerId, blocks, lang) {
     const photoOn = block.photo && block.photo.enabled;
     if (photoOn) {
       outer.classList.add('has-photo', 'photo-' + (block.photo.position || 'left'));
-      const photoEl = document.createElement('div');
-      photoEl.className = 'content-block-photo';
-      photoEl.setAttribute('data-photo-slot', block.id);
-      photoEl.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-paw"/></svg>';
-      outer.appendChild(photoEl);
+      if (block.photo.mode === 'collage') {
+        const count = Math.min(5, Math.max(2, block.photo.count || 3));
+        const collage = document.createElement('div');
+        collage.className = 'content-block-collage';
+        for (let i = 1; i <= count; i++) {
+          const cell = document.createElement('div');
+          cell.className = 'collage-photo';
+          cell.setAttribute('data-photo-slot', `${block.id}-${i}`);
+          cell.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-paw"/></svg>';
+          collage.appendChild(cell);
+        }
+        outer.appendChild(collage);
+      } else {
+        const photoEl = document.createElement('div');
+        photoEl.className = 'content-block-photo';
+        photoEl.setAttribute('data-photo-slot', block.id);
+        photoEl.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-paw"/></svg>';
+        outer.appendChild(photoEl);
+      }
     }
 
     const textWrap = document.createElement('div');
