@@ -275,6 +275,8 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .contact-info { margin: 28px 0 0; display: grid; gap: 16px; }
 .contact-info dt { font-size: 0.82rem; font-weight: 700; color: var(--color-gold); text-transform: uppercase; letter-spacing: 0.03em; }
 .contact-info dd { margin: 2px 0 0; }
+.contact-info dd a { text-decoration: none; border-bottom: 1px solid var(--color-gold-soft); }
+.contact-info dd a:hover { border-bottom-color: var(--color-gold); }
 
 .waitlist-form {
   display: grid; grid-template-columns: 1fr 1fr; gap: 18px;

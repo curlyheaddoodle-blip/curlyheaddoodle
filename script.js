@@ -101,7 +101,7 @@ const FALLBACK_CONTENT = {
     contact_social_label: { pl: 'Instagram / Facebook', en: 'Instagram / Facebook' },
     field_name: { pl: 'Imię i nazwisko', en: 'Full name' },
     field_email: { pl: 'E-mail', en: 'Email' },
-    field_phone: { pl: 'Telefon (opcjonalnie)', en: 'Phone (optional)' },
+    field_phone: { pl: 'Telefon', en: 'Phone' },
     field_litter: { pl: 'Który miot Cię interesuje?', en: 'Which litter are you interested in?' },
     field_litter_opt3: { pl: 'Jeszcze nie wiem / przyszły miot', en: 'Not sure yet / future litter' },
     field_message: { pl: 'Opowiedz nam o swoim domu', en: 'Tell us about your home' },
@@ -469,7 +469,14 @@ async function loadContent() {
     const socialEl = document.getElementById('contactSocial');
     const formEl = document.getElementById('waitlistForm');
     if (emailEl && activeContent.contact.email) emailEl.textContent = activeContent.contact.email;
-    if (socialEl && activeContent.contact.social) socialEl.textContent = activeContent.contact.social;
+    if (socialEl && activeContent.contact.social) {
+      socialEl.textContent = activeContent.contact.social;
+      // The handle in content.json (e.g. "@curlyheaddoodle") is what admin.html
+      // edits; the Instagram URL is derived from it so there's no separate
+      // link field to keep in sync.
+      const handle = activeContent.contact.social.replace(/^@/, '').trim();
+      if (handle) socialEl.href = `https://www.instagram.com/${encodeURIComponent(handle)}/`;
+    }
     if (formEl && activeContent.contact.formAction) {
       // action/method stay as a no-JS fallback; initFormspreeAjax below takes
       // over the real submission (stays on-page, shows inline success/error).
