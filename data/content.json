@@ -210,11 +210,7 @@
       "pl": "E-mail",
       "en": "Email"
     },
-    "contact_instagram_label": {
-      "pl": "",
-      "en": ""
-    },
-    "contact_facebook_label": {
+    "contact_social_label": {
       "pl": "",
       "en": ""
     },
