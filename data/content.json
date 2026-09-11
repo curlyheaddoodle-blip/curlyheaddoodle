@@ -281,10 +281,10 @@
           "borderWidth": 1
         },
         "photo": {
-          "enabled": false,
+          "enabled": true,
           "position": "left",
           "textAlign": "left",
-          "mode": "single",
+          "mode": "collage",
           "count": 3
         },
         "bullets": []
