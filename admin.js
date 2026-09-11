@@ -318,9 +318,10 @@ function renderSlots() {
   });
 }
 
-// ---- Section order ----
+// ---- Menu order ----
+// The site is multiple pages now (each nav item is its own .html page), so
+// this reorders the nav links themselves rather than sections on one page.
 const SECTION_LABELS = {
-  hero: 'Sekcja główna (Hero)',
   about: 'O nas',
   breed: 'O rasie',
   dogs: 'Nasze psy',
@@ -331,7 +332,7 @@ function renderSectionOrder() {
   const el = document.getElementById('sectionOrderEditor');
   el.innerHTML = '<div class="order-list"></div>';
   const list = el.querySelector('.order-list');
-  content.sectionOrder.forEach((key, index) => {
+  content.navOrder.forEach((key, index) => {
     const row = document.createElement('div');
     row.className = 'order-row';
     row.innerHTML = `
@@ -341,8 +342,8 @@ function renderSectionOrder() {
         <button type="button" class="btn-small" data-act="down">↓</button>
       </div>
     `;
-    row.querySelector('[data-act="up"]').addEventListener('click', () => moveItem(content.sectionOrder, index, -1, renderSectionOrder));
-    row.querySelector('[data-act="down"]').addEventListener('click', () => moveItem(content.sectionOrder, index, 1, renderSectionOrder));
+    row.querySelector('[data-act="up"]').addEventListener('click', () => moveItem(content.navOrder, index, -1, renderSectionOrder));
+    row.querySelector('[data-act="down"]').addEventListener('click', () => moveItem(content.navOrder, index, 1, renderSectionOrder));
     list.appendChild(row);
   });
 }

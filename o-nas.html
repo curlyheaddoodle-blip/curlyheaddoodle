@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O nas — Curly Head Doodle</title>
+<meta name="description" content="Poznaj Karolinę i Pawła oraz filozofię hodowli Curly Head Doodle w Mielcu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Przejdź do treści</a>
+
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-row">
+    <a class="wordmark" href="index.html">
+      <span class="brand-mark-slot" data-logo-slot="logo" aria-hidden="true">
+        <svg class="brand-mark" viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="30" fill="none" stroke="var(--color-gold)" stroke-width="1.4" stroke-dasharray="2 3"/>
+          <path d="M32 14 C34 10 40 10 40 15 C40 18 36 19 35 22" fill="none" stroke="var(--color-gold)" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M20 30 C18 24 22 19 27 20 C24 23 25 27 28 28" fill="none" stroke="var(--color-ink)" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M44 30 C46 24 42 19 37 20 C40 23 39 27 36 28" fill="none" stroke="var(--color-ink)" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="32" cy="35" r="12" fill="none" stroke="var(--color-ink)" stroke-width="1.8"/>
+          <path d="M25 32 C26 30 28 30 28 32 C28 34 26 34 25 32Z" fill="var(--color-ink)"/>
+          <path d="M39 32 C38 30 36 30 36 32 C36 34 38 34 39 32Z" fill="var(--color-ink)"/>
+          <ellipse cx="32" cy="39" rx="2.4" ry="1.8" fill="var(--color-ink)"/>
+        </svg>
+      </span>
+      <span class="wordmark-text" id="brandName">Curly Head Doodle</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
+      <span></span><span></span><span></span>
+      <span class="sr-only">Menu</span>
+    </button>
+
+    <nav class="primary-nav" id="primaryNav">
+      <a href="o-nas.html" data-i18n="nav_about" data-section="about">O nas</a>
+      <a href="o-rasie.html" data-i18n="nav_breed" data-section="breed">O rasie</a>
+      <a href="nasze-psy.html" data-i18n="nav_dogs" data-section="dogs">Nasze psy</a>
+      <a href="szczenieta.html" data-i18n="nav_puppies" data-section="litters">Szczenięta</a>
+      <a href="kontakt.html" data-i18n="nav_contact" data-section="contact">Kontakt</a>
+      <a href="kontakt.html" class="nav-cta" data-i18n="nav_cta">Wypełnij ankietę</a>
+      <div class="lang-switch" role="group" aria-label="Language / Język">
+        <button type="button" class="lang-btn" data-lang="pl">PL</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="section">
+    <div class="wrap about-grid">
+      <div class="about-copy">
+        <p class="kicker" data-i18n="about_kicker">Witaj w naszym świecie!</p>
+        <h1 data-i18n="about_heading">Jesteśmy Karolina i Paweł</h1>
+        <p data-i18n="about_body1">Curly Head Doodle z Mielca to spełnienie naszych marzeń. Nasza przygoda zaczęła się od miłości do rasy, a teraz dzielimy tę pasję z Wami.</p>
+        <p data-i18n="about_body2">Wychowujemy szczenięta w domu, bez kojców zewnętrznych, zapewniając im najlepszy możliwy start w życiu.</p>
+        <a class="btn-link" href="o-rasie.html" data-i18n="about_cta">Poznaj naszą filozofię</a>
+      </div>
+      <div class="photo-frame" data-photo-slot="about" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="photo-frame-icon"><use href="#icon-paw"/></svg>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <h2 class="why-heading" data-i18n="why_heading">Dlaczego my?</h2>
+      <ul class="why-grid">
+        <li class="why-item">
+          <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3 L21 10 V20 H14 V14 H10 V20 H3 V10 Z"/></svg></span>
+          <h3 data-i18n="why1_title">Prawdziwy dom</h3>
+          <p data-i18n="why1_body">Szczenięta dorastają w centrum domowego życia, znając dźwięk odkurzacza i gwar miasta. Nie mamy kojców.</p>
+        </li>
+        <li class="why-item">
+          <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3 C8 7 16 7 16 11 C16 15 8 15 8 19"/><path d="M16 3 C16 7 8 7 8 11 C8 15 16 15 16 19" opacity="0.4"/><line x1="9" y1="6" x2="15" y2="6"/><line x1="9" y1="16" x2="15" y2="16"/></svg></span>
+          <h3 data-i18n="why2_title">Genetyka bez kompromisów</h3>
+          <p data-i18n="why2_body">Posiadamy rozbudowany pakiet badań (m.in. Laboklin, Labogenetics XXL), wykluczających najpoważniejsze choroby genetyczne.</p>
+        </li>
+        <li class="why-item">
+          <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 4 L22 9 L12 14 L2 9 Z"/><path d="M6 11.5 V16 C6 17.5 9 19 12 19 C15 19 18 17.5 18 16 V11.5"/><line x1="22" y1="9" x2="22" y2="15"/></svg></span>
+          <h3 data-i18n="why3_title">Zaawansowana socjalizacja</h3>
+          <p data-i18n="why3_body">Testujemy temperament szczeniąt, stosujemy ENS/ESI i oswajamy je z zabiegami groomerskimi już od najmłodszych dni.</p>
+        </li>
+        <li class="why-item">
+          <span class="icon-badge"><svg viewBox="0 0 24 24"><use href="#icon-paw"/></svg></span>
+          <h3 data-i18n="why4_title">Wielopokoleniowe linie</h3>
+          <p data-i18n="why4_body">Hodujemy szczenięta (np. pokolenia F2B) w pięknych odcieniach, z sierścią wyjątkowo przyjazną dla alergików.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <div>
+      <p class="wordmark small" id="brandNameFooter">Curly Head Doodle</p>
+      <p class="muted" data-i18n="contact_location_value">Mielec</p>
+    </div>
+    <div class="footer-right">
+      <p class="muted" data-i18n="footer_disclaimer">Nie prowadzimy sprzedaży za pośrednictwem portali ogłoszeniowych typu OLX.</p>
+      <p class="muted" data-i18n="footer_copyright">&copy; 2026 Curly Head Doodle. Wszelkie prawa zastrzeżone.</p>
+      <p class="muted footer-links"><a class="admin-link" href="privacy.html">Polityka prywatności</a> · <a class="admin-link" href="admin.html">Ustawienia strony</a></p>
+    </div>
+  </div>
+</footer>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="icon-paw" viewBox="0 0 24 24">
+      <circle cx="12" cy="15.5" r="5"/>
+      <circle cx="4.5" cy="9" r="2.4"/>
+      <circle cx="10" cy="4.8" r="2.4"/>
+      <circle cx="14" cy="4.8" r="2.4"/>
+      <circle cx="19.5" cy="9" r="2.4"/>
+    </symbol>
+  </defs>
+</svg>
+
+<script src="script.js"></script>
+</body>
+</html>

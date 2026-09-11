@@ -115,7 +115,7 @@ p { margin: 0 0 1em; max-width: 62ch; }
   text-decoration: none; font-weight: 500; color: var(--color-ink);
   font-size: 0.95rem; padding: 6px 2px; border-bottom: 2px solid transparent;
 }
-.primary-nav a:hover { border-bottom-color: var(--color-gold); }
+.primary-nav a:hover, .primary-nav a[aria-current="page"] { border-bottom-color: var(--color-gold); }
 .nav-cta {
   background: var(--color-ink); color: var(--color-paper) !important;
   padding: 9px 16px !important; border-radius: var(--radius); border-bottom: none !important;

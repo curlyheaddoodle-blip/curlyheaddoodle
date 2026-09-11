@@ -42,7 +42,7 @@ const FALLBACK_CONTENT = {
   site: {
     brandName: 'Curly Head Doodle',
   },
-  sectionOrder: ['hero', 'about', 'breed', 'dogs', 'litters', 'contact'],
+  navOrder: ['about', 'breed', 'dogs', 'litters', 'contact'],
   theme: {
     colors: {
       bg: '#F8F2E7', bgAlt: '#F0E6D2', paper: '#FFFDF9', ink: '#2B211A',
@@ -272,19 +272,28 @@ function applyPhotoSlots() {
   });
 }
 
-// ---- Section order ----
-// Moves <main>'s section children to match the saved order (matched by
-// data-section, e.g. "hero"/"about"/"breed"/"dogs"/"litters"/"contact").
-// appendChild on an already-attached node moves it rather than duplicating
-// it, so this just needs to walk the desired order once.
-function applySectionOrder(order) {
-  const main = document.getElementById('main');
-  if (!main || !Array.isArray(order)) return;
+// ---- Menu order ----
+// Reorders the nav's <a data-section> links (about/breed/dogs/litters/
+// contact — each its own page) to match content.json's navOrder, by
+// inserting each in turn just before the "Apply now" CTA link.
+function applyNavOrder(order) {
+  const nav = document.getElementById('primaryNav');
+  const cta = nav && nav.querySelector('.nav-cta');
+  if (!nav || !cta || !Array.isArray(order)) return;
   order.forEach(key => {
-    const section = main.querySelector(`[data-section="${key}"]`);
-    if (section) main.appendChild(section);
+    const link = nav.querySelector(`a[data-section="${key}"]`);
+    if (link) nav.insertBefore(link, cta);
   });
 }
+
+// Highlights whichever nav link matches the current page.
+function applyActiveNavLink() {
+  const current = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.primary-nav a[data-section]').forEach(a => {
+    if (a.getAttribute('href') === current) a.setAttribute('aria-current', 'page');
+  });
+}
+applyActiveNavLink();
 
 // ---- Brand name + logo (header/footer wordmark) ----
 function applyBrandName() {
@@ -320,7 +329,7 @@ async function loadContent() {
   }
 
   applyTheme(activeContent.theme);
-  applySectionOrder(activeContent.sectionOrder);
+  applyNavOrder(activeContent.navOrder);
   applyPhotoSlots();
   applyBrandName();
   applyLogo();
