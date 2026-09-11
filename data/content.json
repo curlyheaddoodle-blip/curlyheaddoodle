@@ -518,7 +518,8 @@
       "cta": {
         "pl": "Dołącz do listy oczekujących",
         "en": "Join this waitlist"
-      }
+      },
+      "link": ""
     },
     {
       "id": "litter-1789165407178",
@@ -534,11 +535,12 @@
       "cta": {
         "pl": "",
         "en": ""
-      }
+      },
+      "link": ""
     }
   ],
   "contact": {
-    "email": "kontakt@curlyheaddoodle.pl",
+    "email": "curlyheaddoodle@gmail.com",
     "social": "@curlyheaddoodle",
     "facebook": "curlyheaddoodle",
     "formAction": "https://formspree.io/f/mrpgddwk"
