@@ -163,16 +163,31 @@ async function enterEditor() {
   content = loaded.content;
   contentSha = loaded.sha;
 
-  renderSectionOrder();
-  renderBrand();
-  renderSlots();
-  renderTheme();
-  renderAboutBody();
-  renderBreedBody();
-  renderDogsEditor();
-  renderLittersEditor();
-  renderContactEditor();
-  renderTranslationsEditor();
+  // Each section renders independently — if one throws (e.g. unexpected
+  // content shape), the rest still load instead of leaving the whole panel
+  // blank, and the failure is visible instead of silently breaking Save.
+  const sections = [
+    ['Kolejność w menu', renderSectionOrder],
+    ['Logo i nazwa marki', renderBrand],
+    ['Zdjęcia', renderSlots],
+    ['Wygląd', renderTheme],
+    ['O nas — akapity', renderAboutBody],
+    ['O rasie — akapity', renderBreedBody],
+    ['Nasze psy', renderDogsEditor],
+    ['Szczenięta / mioty', renderLittersEditor],
+    ['Kontakt', renderContactEditor],
+    ['Wszystkie teksty', renderTranslationsEditor],
+  ];
+  const failures = [];
+  sections.forEach(([label, fn]) => {
+    try { fn(); } catch (err) {
+      console.error(`Sekcja "${label}" nie wczytała się:`, err);
+      failures.push(label);
+    }
+  });
+  if (failures.length) {
+    setAuthStatus('Połączono, ale nie wczytały się: ' + failures.join(', ') + '. Odśwież stronę (Ctrl+Shift+R) — jeśli to nie pomoże, daj znać.', 'err');
+  }
 
   editorRoot.hidden = false;
 }
@@ -375,8 +390,18 @@ function renderBrand() {
   });
   document.getElementById('logoRemoveBtn').addEventListener('click', () => removePhoto('images/logo.png', status, preview));
 }
+// Reads an input's value by id, or throws a clear error naming which
+// section failed to load instead of a bare "Cannot read properties of
+// null" — this happens if that section's render() call failed earlier
+// (see enterEditor) or a stale cached page is missing the field.
+function getFieldValue(id, sectionLabel) {
+  const el = document.getElementById(id);
+  if (!el) throw new Error(`Sekcja "${sectionLabel}" nie wczytała się poprawnie — odśwież stronę (Ctrl+Shift+R) i spróbuj ponownie.`);
+  return el.value;
+}
+
 function collectBrand() {
-  return { brandName: document.getElementById('brandNameInput').value };
+  return { brandName: getFieldValue('brandNameInput', 'Logo i nazwa marki') };
 }
 
 // ---- Theme editor ----
@@ -405,7 +430,7 @@ function renderTheme() {
 }
 function collectTheme() {
   const colors = {};
-  COLOR_FIELDS.forEach(f => { colors[f.key] = document.getElementById(`color-${f.key}`).value; });
+  COLOR_FIELDS.forEach(f => { colors[f.key] = getFieldValue(`color-${f.key}`, 'Wygląd'); });
   const selected = document.querySelector('.font-pair-option.selected');
   return { colors, fontPair: selected ? selected.dataset.fontPair : content.theme.fontPair };
 }
@@ -425,17 +450,39 @@ const FONT_OPTIONS = [
 function fontSelectHtml(selected) {
   return FONT_OPTIONS.map(f => `<option value="${f.id}"${selected === f.id ? ' selected' : ''}>${f.label}</option>`).join('');
 }
-// Wraps the textarea's current selection in `marker` on both sides (or
-// inserts placeholder text if nothing is selected), then fires an input
-// event so the existing data-binding listener picks up the new value.
+// Toggles `marker` around the textarea's current selection — wraps it if
+// not already wrapped, unwraps it if it is (whether the selection sits
+// just inside the markers, or includes them). Without this toggle,
+// clicking the same button twice on the same text stacks markers
+// (**** instead of **) and breaks parseRichText's output.
 function wrapSelection(textarea, marker) {
   const start = textarea.selectionStart, end = textarea.selectionEnd;
   const value = textarea.value;
-  const selected = value.slice(start, end) || 'tekst';
-  textarea.value = value.slice(0, start) + marker + selected + marker + value.slice(end);
+  const selected = value.slice(start, end);
+  const before = value.slice(Math.max(0, start - marker.length), start);
+  const after = value.slice(end, end + marker.length);
+  let newValue, newStart, newEnd;
+
+  if (selected && before === marker && after === marker) {
+    newValue = value.slice(0, start - marker.length) + selected + value.slice(end + marker.length);
+    newStart = start - marker.length;
+    newEnd = newStart + selected.length;
+  } else if (selected.length >= marker.length * 2 && selected.startsWith(marker) && selected.endsWith(marker)) {
+    const inner = selected.slice(marker.length, selected.length - marker.length);
+    newValue = value.slice(0, start) + inner + value.slice(end);
+    newStart = start;
+    newEnd = start + inner.length;
+  } else {
+    const text = selected || 'tekst';
+    newValue = value.slice(0, start) + marker + text + marker + value.slice(end);
+    newStart = start + marker.length;
+    newEnd = newStart + text.length;
+  }
+
+  textarea.value = newValue;
   textarea.dispatchEvent(new Event('input', { bubbles: true }));
   textarea.focus();
-  textarea.setSelectionRange(start + marker.length, start + marker.length + selected.length);
+  textarea.setSelectionRange(newStart, newEnd);
 }
 
 function renderParagraphEditor(containerId, list, rerender) {
@@ -673,9 +720,9 @@ function renderContactEditor() {
 }
 function collectContact() {
   return {
-    email: document.getElementById('contact-email').value,
-    social: document.getElementById('contact-social').value,
-    formAction: document.getElementById('contact-formAction').value,
+    email: getFieldValue('contact-email', 'Kontakt'),
+    social: getFieldValue('contact-social', 'Kontakt'),
+    formAction: getFieldValue('contact-formAction', 'Kontakt'),
   };
 }
 
