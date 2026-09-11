@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<!--
+  CURLY HEAD DOODLE — WEBSITE SOURCE
+  ==========================================
+  index.html  -> page text (Polish, the default) + structure. English text
+                 lives in script.js and swaps in when the visitor picks EN.
+  style.css   -> colors, fonts, layout. Start at :root for the palette.
+  script.js   -> mobile menu, header-on-scroll, and the PL/EN translations.
+
+  To edit PL text: change it directly below.
+  To edit EN text: find the matching key in the `translations.en` object
+  in script.js (same data-i18n name, e.g. "hero_headline").
+-->
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="page_title">Curly Head Doodle — Hodowla Mini Goldendoodle, Mielec</title>
+<meta name="description" data-i18n-content="page_description" content="Ekskluzywna, domowa hodowla psów rasy Mini Goldendoodle w Mielcu. Poznaj Karolinę i Pawła oraz nasze szczenięta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Przejdź do treści</a>
+
+<!-- ============ HEADER / NAV ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-row">
+    <a class="wordmark" href="#top">
+      <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="30" fill="none" stroke="var(--color-gold)" stroke-width="1.4" stroke-dasharray="2 3"/>
+        <path d="M32 14 C34 10 40 10 40 15 C40 18 36 19 35 22" fill="none" stroke="var(--color-gold)" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M20 30 C18 24 22 19 27 20 C24 23 25 27 28 28" fill="none" stroke="var(--color-ink)" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M44 30 C46 24 42 19 37 20 C40 23 39 27 36 28" fill="none" stroke="var(--color-ink)" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="32" cy="35" r="12" fill="none" stroke="var(--color-ink)" stroke-width="1.8"/>
+        <path d="M25 32 C26 30 28 30 28 32 C28 34 26 34 25 32Z" fill="var(--color-ink)"/>
+        <path d="M39 32 C38 30 36 30 36 32 C36 34 38 34 39 32Z" fill="var(--color-ink)"/>
+        <ellipse cx="32" cy="39" rx="2.4" ry="1.8" fill="var(--color-ink)"/>
+      </svg>
+      <span class="wordmark-text">Curly Head<br>Doodle</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
+      <span></span><span></span><span></span>
+      <span class="sr-only">Menu</span>
+    </button>
+
+    <nav class="primary-nav" id="primaryNav">
+      <a href="#o-nas" data-i18n="nav_about">O nas</a>
+      <a href="#o-rasie" data-i18n="nav_breed">O rasie</a>
+      <a href="#nasze-psy" data-i18n="nav_dogs">Nasze psy</a>
+      <a href="#szczenieta" data-i18n="nav_puppies">Szczenięta</a>
+      <a href="#kontakt" data-i18n="nav_contact">Kontakt</a>
+      <a href="#kontakt" class="nav-cta" data-i18n="nav_cta">Wypełnij ankietę</a>
+      <div class="lang-switch" role="group" aria-label="Language / Język">
+        <button type="button" class="lang-btn" data-lang="pl">PL</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <div class="wrap hero-row">
+      <div class="hero-copy">
+        <h1 data-i18n="hero_headline">Miłość, która ma cztery łapy i kręcony włos.</h1>
+        <p class="hero-lede" data-i18n="hero_subhead">Ekskluzywna, domowa hodowla psów rasy Mini Goldendoodle w Mielcu.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#kontakt" data-i18n="hero_cta_primary">Wypełnij ankietę</a>
+          <a class="btn-link" href="#szczenieta" data-i18n="hero_cta_secondary">Poznaj nasze szczenięta</a>
+        </div>
+      </div>
+
+      <!--
+        Original medallion illustration standing in for a real photo (the
+        wireframe used a photo of the family + dogs). To swap in a real
+        photo instead, delete the .hero-art contents and add:
+        <img src="your-photo.jpg" alt="Describe the photo">
+      -->
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 460 460" class="hero-svg">
+          <circle cx="230" cy="230" r="210" fill="var(--color-bg-alt)"/>
+          <circle cx="230" cy="230" r="180" fill="none" stroke="var(--color-gold-soft)" stroke-width="2" stroke-dasharray="1 9"/>
+          <g stroke="var(--color-gold)" stroke-width="2.4" fill="none" stroke-linecap="round">
+            <path d="M140 150 C120 130 130 100 160 105 C145 118 150 138 168 142"/>
+            <path d="M320 150 C340 130 330 100 300 105 C315 118 310 138 292 142"/>
+            <path d="M120 230 C95 220 90 190 115 180 C108 200 120 215 140 218"/>
+            <path d="M340 230 C365 220 370 190 345 180 C352 200 340 215 320 218"/>
+            <path d="M155 320 C135 335 105 328 105 300 C122 312 142 308 150 292"/>
+            <path d="M305 320 C325 335 355 328 355 300 C338 312 318 308 310 292"/>
+          </g>
+          <circle cx="230" cy="235" r="95" fill="var(--color-paper)" stroke="var(--color-ink)" stroke-width="2.2"/>
+          <path d="M160 200 C165 175 190 165 200 185 C185 190 182 202 192 210" fill="none" stroke="var(--color-ink)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M300 200 C295 175 270 165 260 185 C275 190 278 202 268 210" fill="none" stroke="var(--color-ink)" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="200" cy="228" r="6" fill="var(--color-ink)"/>
+          <circle cx="260" cy="228" r="6" fill="var(--color-ink)"/>
+          <path d="M222 252 C226 258 234 258 238 252 C234 262 226 262 222 252Z" fill="var(--color-ink)"/>
+          <path d="M230 258 C228 268 218 274 210 272" fill="none" stroke="var(--color-ink)" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ O NAS (about us + why us) ============ -->
+  <section class="section" id="o-nas">
+    <div class="wrap about-grid">
+      <div class="about-copy">
+        <p class="kicker" data-i18n="about_kicker">Witaj w naszym świecie!</p>
+        <h2 data-i18n="about_heading">Jesteśmy Karolina i Paweł</h2>
+        <p data-i18n="about_body1">Curly Head Doodle z Mielca to spełnienie naszych marzeń. Nasza przygoda zaczęła się od miłości do rasy, a teraz dzielimy tę pasję z Wami.</p>
+        <p data-i18n="about_body2">Wychowujemy szczenięta w domu, bez kojców zewnętrznych, zapewniając im najlepszy możliwy start w życiu.</p>
+        <a class="btn-link" href="#o-rasie" data-i18n="about_cta">Poznaj naszą filozofię</a>
+      </div>
+      <!--
+        Photo placeholder (the wireframe used a puppy-paw-in-hand photo here).
+        Swap this whole .photo-frame div for: <img src="your-photo.jpg" alt="...">
+      -->
+      <div class="photo-frame" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="photo-frame-icon"><use href="#icon-paw"/></svg>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <h3 class="why-heading" data-i18n="why_heading">Dlaczego my?</h3>
+      <ul class="why-grid">
+        <li class="why-item">
+          <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3 L21 10 V20 H14 V14 H10 V20 H3 V10 Z"/></svg></span>
+          <h4 data-i18n="why1_title">Prawdziwy dom</h4>
+          <p data-i18n="why1_body">Szczenięta dorastają w centrum domowego życia, znając dźwięk odkurzacza i gwar miasta. Nie mamy kojców.</p>
+        </li>
+        <li class="why-item">
+          <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3 C8 7 16 7 16 11 C16 15 8 15 8 19"/><path d="M16 3 C16 7 8 7 8 11 C8 15 16 15 16 19" opacity="0.4"/><line x1="9" y1="6" x2="15" y2="6"/><line x1="9" y1="16" x2="15" y2="16"/></svg></span>
+          <h4 data-i18n="why2_title">Genetyka bez kompromisów</h4>
+          <p data-i18n="why2_body">Posiadamy rozbudowany pakiet badań (m.in. Laboklin, Labogenetics XXL), wykluczających najpoważniejsze choroby genetyczne.</p>
+        </li>
+        <li class="why-item">
+          <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 4 L22 9 L12 14 L2 9 Z"/><path d="M6 11.5 V16 C6 17.5 9 19 12 19 C15 19 18 17.5 18 16 V11.5"/><line x1="22" y1="9" x2="22" y2="15"/></svg></span>
+          <h4 data-i18n="why3_title">Zaawansowana socjalizacja</h4>
+          <p data-i18n="why3_body">Testujemy temperament szczeniąt, stosujemy ENS/ESI i oswajamy je z zabiegami groomerskimi już od najmłodszych dni.</p>
+        </li>
+        <li class="why-item">
+          <span class="icon-badge"><svg viewBox="0 0 24 24"><use href="#icon-paw"/></svg></span>
+          <h4 data-i18n="why4_title">Wielopokoleniowe linie</h4>
+          <p data-i18n="why4_body">Hodujemy szczenięta (np. pokolenia F2B) w pięknych odcieniach, z sierścią wyjątkowo przyjazną dla alergików.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ O RASIE (about the breed) ============ -->
+  <section class="section alt" id="o-rasie">
+    <div class="wrap breed-grid">
+      <div>
+        <h2 data-i18n="breed_heading">Poznaj rasę Mini Goldendoodle</h2>
+        <p data-i18n="breed_body1">Mini Goldendoodle to połączenie inteligencji pudla i ciepłego, rodzinnego usposobienia golden retrievera. To psy czułe, chętne do nauki i świetnie odnajdujące się zarówno w mieszkaniu, jak i w domu z ogrodem.</p>
+        <p data-i18n="breed_body2">Dzięki kręconej lub falowanej sierści typu pudla, wiele osób z alergią na sierść psów dobrze toleruje Goldendoodle — choć żadna rasa nie jest w 100% hipoalergiczna.</p>
+      </div>
+      <dl class="breed-facts">
+        <div><dt data-i18n="breed_fact1_label">Wzrost</dt><dd data-i18n="breed_fact1_value">ok. 35–45 cm w kłębie</dd></div>
+        <div><dt data-i18n="breed_fact2_label">Waga</dt><dd data-i18n="breed_fact2_value">ok. 7–14 kg</dd></div>
+        <div><dt data-i18n="breed_fact3_label">Usposobienie</dt><dd data-i18n="breed_fact3_value">łagodne, towarzyskie, inteligentne</dd></div>
+        <div><dt data-i18n="breed_fact4_label">Sierść</dt><dd data-i18n="breed_fact4_value">kręcona/falowana, niskolinieniowa</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ NASZE PSY (our dogs) ============ -->
+  <section class="section" id="nasze-psy">
+    <div class="wrap">
+      <h2 data-i18n="dogs_heading">Nasze psy</h2>
+      <p class="section-lede" data-i18n="dogs_lede">Poznaj rodziców naszych miotów — każdy z pełnymi badaniami zdrowotnymi i genetycznymi.</p>
+      <!-- Copy a whole .dog-card to add another dog. Swap .dog-photo for a real <img> when you have one. -->
+      <div class="dogs-grid">
+        <div class="dog-card">
+          <div class="dog-photo" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-paw"/></svg></div>
+          <h4 data-i18n="dog1_name">[Imię suczki]</h4>
+          <p class="dog-role" data-i18n="dog1_role">Suczka hodowlana</p>
+          <p data-i18n="dog1_bio">Miejsce na krótki opis charakteru, umaszczenia i wyników badań zdrowotnych.</p>
+        </div>
+        <div class="dog-card">
+          <div class="dog-photo" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-paw"/></svg></div>
+          <h4 data-i18n="dog2_name">[Imię reproduktora]</h4>
+          <p class="dog-role" data-i18n="dog2_role">Reproduktor</p>
+          <p data-i18n="dog2_bio">Miejsce na krótki opis charakteru, umaszczenia i wyników badań zdrowotnych.</p>
+        </div>
+      </div>
+      <p class="replace-note" data-i18n="dogs_note">Zdjęcia i pełne dane naszych psów dodamy tutaj.</p>
+    </div>
+  </section>
+
+  <!-- ============ SZCZENIĘTA (litters) ============ -->
+  <section class="section alt" id="szczenieta">
+    <div class="wrap">
+      <h2 data-i18n="litters_heading">Szczenięta</h2>
+      <p class="section-lede" data-i18n="litters_lede">Aktualne, oczekiwane i już zarezerwowane mioty.</p>
+
+      <!-- Copy a whole <li class="litter"> to add another litter. status- class controls the pill color. -->
+      <ol class="litter-list">
+        <li class="litter">
+          <span class="status status-available" data-i18n="litter1_status">Dostępne teraz</span>
+          <div class="litter-body">
+            <h3 data-i18n="litter1_title">[Suczka] × [Reproduktor]</h3>
+            <p data-i18n="litter1_desc">Data urodzenia, liczba dostępnych szczeniąt i termin gotowości do odbioru — uzupełnij tutaj.</p>
+          </div>
+          <a class="btn-link" href="#kontakt" data-i18n="litter1_cta">Zapytaj o ten miot</a>
+        </li>
+        <li class="litter">
+          <span class="status status-expecting" data-i18n="litter2_status">Oczekiwany</span>
+          <div class="litter-body">
+            <h3 data-i18n="litter2_title">[Suczka] × [Reproduktor]</h3>
+            <p data-i18n="litter2_desc">Planowany termin miotu — uzupełnij tutaj.</p>
+          </div>
+          <a class="btn-link" href="#kontakt" data-i18n="litter2_cta">Dołącz do listy oczekujących</a>
+        </li>
+        <li class="litter">
+          <span class="status status-reserved" data-i18n="litter3_status">Zarezerwowany</span>
+          <div class="litter-body">
+            <h3 data-i18n="litter3_title">[Suczka] × [Reproduktor]</h3>
+            <p data-i18n="litter3_desc">Wszystkie szczenięta znalazły już domy.</p>
+          </div>
+        </li>
+      </ol>
+      <p class="replace-note" data-i18n="litters_note">Podmień na prawdziwe mioty, daty i zdjęcia.</p>
+    </div>
+  </section>
+
+  <!-- ============ KONTAKT (contact / application form) ============ -->
+  <section class="section" id="kontakt">
+    <div class="wrap contact-grid">
+      <div>
+        <h2 data-i18n="contact_heading">Wypełnij ankietę</h2>
+        <p class="section-lede" data-i18n="contact_lede">Opowiedz nam trochę o swoim domu. Każde zgłoszenie czytamy osobiście i odpowiadamy w ciągu kilku dni.</p>
+
+        <!-- Real contact details — replace the placeholder email/social below -->
+        <dl class="contact-info">
+          <div><dt data-i18n="contact_location_label">Lokalizacja</dt><dd data-i18n="contact_location_value">Mielec</dd></div>
+          <div><dt data-i18n="contact_email_label">E-mail</dt><dd>kontakt@curlyheaddoodle.pl</dd></div>
+          <div><dt data-i18n="contact_social_label">Instagram / Facebook</dt><dd>@curlyheaddoodle</dd></div>
+        </dl>
+      </div>
+
+      <!-- IMPORTANT: replace YOUR_FORM_ID with your real Formspree form ID (formspree.io) -->
+      <form class="waitlist-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="field">
+          <label for="name" data-i18n="field_name">Imię i nazwisko</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="email" data-i18n="field_email">E-mail</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="field">
+          <label for="phone"><span data-i18n="field_phone">Telefon (opcjonalnie)</span></label>
+          <input type="tel" id="phone" name="phone">
+        </div>
+        <div class="field">
+          <label for="litter" data-i18n="field_litter">Który miot Cię interesuje?</label>
+          <select id="litter" name="litter">
+            <option data-i18n="field_litter_opt1">[Suczka] × [Reproduktor] — dostępne teraz</option>
+            <option data-i18n="field_litter_opt2">[Suczka] × [Reproduktor] — oczekiwany</option>
+            <option data-i18n="field_litter_opt3">Jeszcze nie wiem / przyszły miot</option>
+          </select>
+        </div>
+        <div class="field field-wide">
+          <label for="message" data-i18n="field_message">Opowiedz nam o swoim domu</label>
+          <textarea id="message" name="message" rows="4" data-i18n-placeholder="field_message_placeholder" placeholder="Domownicy, inne zwierzęta, ogród, dlaczego Goldendoodle..."></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit" data-i18n="submit_btn">Wyślij zgłoszenie</button>
+        <p class="form-fineprint" data-i18n="form_fineprint">Wykorzystujemy te dane wyłącznie do kontaktu i prowadzenia listy oczekujących. Nie udostępniamy ich nikomu innemu.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <div>
+      <p class="wordmark small">Curly Head Doodle</p>
+      <p class="muted" data-i18n="contact_location_value">Mielec</p>
+    </div>
+    <div class="footer-right">
+      <p class="muted" data-i18n="footer_disclaimer">Nie prowadzimy sprzedaży za pośrednictwem portali ogłoszeniowych typu OLX.</p>
+      <p class="muted" data-i18n="footer_copyright">&copy; 2026 Curly Head Doodle. Wszelkie prawa zastrzeżone.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Paw-print icon reused across the page. Leave as is unless you want a different icon shape. -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="icon-paw" viewBox="0 0 24 24">
+      <circle cx="12" cy="15.5" r="5"/>
+      <circle cx="4.5" cy="9" r="2.4"/>
+      <circle cx="10" cy="4.8" r="2.4"/>
+      <circle cx="14" cy="4.8" r="2.4"/>
+      <circle cx="19.5" cy="9" r="2.4"/>
+    </symbol>
+  </defs>
+</svg>
+
+<script src="script.js"></script>
+</body>
+</html>
