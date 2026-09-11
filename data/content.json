@@ -215,6 +215,10 @@
       "pl": "Instagram / Facebook",
       "en": "Instagram / Facebook"
     },
+    "field_section1_heading": {
+      "pl": "Dane podstawowe i rodzina",
+      "en": "Basic info and family"
+    },
     "field_name": {
       "pl": "Imię i nazwisko",
       "en": "Full name"
@@ -227,6 +231,78 @@
       "pl": "Telefon (opcjonalnie)",
       "en": "Phone (optional)"
     },
+    "field_city": {
+      "pl": "Miejscowość",
+      "en": "Town / city"
+    },
+    "field_household": {
+      "pl": "Kto wchodzi w skład Twojego domostwa? (Proszę podać wiek dzieci, jeśli dotyczy)",
+      "en": "Who's in your household? (Please include children's ages, if applicable)"
+    },
+    "field_household_agree": {
+      "pl": "Czy wszyscy domownicy zgadzają się na przyjęcie psa pod swój dach?",
+      "en": "Does everyone in your household agree to bringing a dog into your home?"
+    },
+    "field_allergies": {
+      "pl": "Czy w domu są alergicy? Jeśli tak, to na co? (To dla nas ważne, aby upewnić się, że wiesz o tym, że żaden pies nie jest w 100% hipoalergiczny)",
+      "en": "Does anyone in your home have allergies? If so, to what? (This matters to us — no dog is ever 100% hypoallergenic)"
+    },
+    "field_other_pets": {
+      "pl": "Czy posiadasz obecnie inne zwierzęta? Jeśli tak, jakie i jaki jest ich stosunek do innych psów?",
+      "en": "Do you currently have other pets? If so, what kind, and how do they get along with dogs?"
+    },
+    "field_section2_heading": {
+      "pl": "Warunki mieszkaniowe i styl życia",
+      "en": "Living conditions and lifestyle"
+    },
+    "field_housing": {
+      "pl": "Czy mieszkasz w domu z ogrodem, czy w mieszkaniu? (Jeśli wynajmujesz, czy posiadasz pisemną zgodę wynajmującego?)",
+      "en": "Do you live in a house with a garden, or an apartment? (If renting, do you have written permission from your landlord?)"
+    },
+    "field_alone_hours": {
+      "pl": "Ile godzin dziennie pies będzie pozostawał sam w domu bez nadzoru?",
+      "en": "How many hours a day will the dog be left home alone?"
+    },
+    "field_daily_time": {
+      "pl": "Jak planujesz spędzać czas z psem na co dzień? (np. spokojne spacery, bieganie, wycieczki)",
+      "en": "How do you plan to spend time with the dog day-to-day? (e.g. calm walks, running, hiking)"
+    },
+    "field_section3_heading": {
+      "pl": "Doświadczenie i oczekiwania",
+      "en": "Experience and expectations"
+    },
+    "field_experience": {
+      "pl": "Czy masz wcześniejsze doświadczenie w opiece nad psem?",
+      "en": "Do you have previous experience caring for a dog?"
+    },
+    "field_grooming_ready": {
+      "pl": "Goldendoodle to rasa wymagająca dbania o włos. Czy jesteś gotowy/a na codzienne czesanie oraz regularne wizyty u groomera?",
+      "en": "Goldendoodles need regular coat care. Are you ready for daily brushing and regular groomer visits?"
+    },
+    "field_temperament": {
+      "pl": "Opisz, jakiego charakteru psa szukasz (np. „spokojny kanapowiec”, „aktywny kompan do długich wędrówek”, „bardzo wpatrzony w człowieka”)",
+      "en": "Describe the kind of temperament you're looking for (e.g. \"calm couch companion,\" \"active hiking partner,\" \"very attached to their person\")"
+    },
+    "field_training": {
+      "pl": "W jaki sposób planujesz uczyć psa podstawowych zasad? (np. praca samodzielna, psie przedszkole)",
+      "en": "How do you plan to teach the dog basic obedience? (e.g. training it yourself, puppy school)"
+    },
+    "field_vacation": {
+      "pl": "Gdzie pies będzie przebywał podczas Twoich wyjazdów wakacyjnych?",
+      "en": "Where will the dog stay when you go on vacation?"
+    },
+    "field_select_placeholder": {
+      "pl": "Wybierz...",
+      "en": "Select..."
+    },
+    "field_yes": {
+      "pl": "Tak",
+      "en": "Yes"
+    },
+    "field_no": {
+      "pl": "Nie",
+      "en": "No"
+    },
     "field_litter": {
       "pl": "Który miot Cię interesuje?",
       "en": "Which litter are you interested in?"
@@ -236,12 +312,12 @@
       "en": "Not sure yet / future litter"
     },
     "field_message": {
-      "pl": "Opowiedz nam o swoim domu",
-      "en": "Tell us about your home"
+      "pl": "Coś jeszcze, o czym chcesz nam powiedzieć? (opcjonalnie)",
+      "en": "Anything else you'd like us to know? (optional)"
     },
     "field_message_placeholder": {
-      "pl": "Domownicy, inne zwierzęta, ogród, dlaczego Goldendoodle...",
-      "en": "Household, other pets, yard, why a Goldendoodle..."
+      "pl": "Miejsce na wszystko, co nie zmieściło się w pytaniach powyżej...",
+      "en": "Anything that didn't fit in the questions above..."
     },
     "submit_btn": {
       "pl": "Wyślij zgłoszenie",

@@ -293,6 +293,22 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .waitlist-form .btn { grid-column: 1 / -1; justify-self: start; margin-top: 4px; }
 .form-fineprint { grid-column: 1 / -1; font-size: 0.85rem; color: var(--color-ink-soft); margin: 4px 0 0; }
 
+/* A <fieldset> famously won't shrink below its content's width in a grid
+   or flex layout (the same "auto min-size" issue min-width:0 already
+   fixes on .field/inputs) — without min-width:0 here this form section
+   would blow out the page exactly like the litter <select> once did. */
+.form-section {
+  grid-column: 1 / -1; min-width: 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  border: none; margin: 0; padding: 0;
+}
+.form-section legend {
+  display: block; grid-column: 1 / -1; width: 100%; box-sizing: border-box;
+  font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--color-ink);
+  padding: 0 0 8px; margin: 12px 0 4px; border-bottom: 1px solid var(--color-line);
+}
+.form-section:first-of-type legend { margin-top: 0; }
+
 /* ---------- 7. FOOTER ---------- */
 .site-footer { background: var(--color-ink); color: var(--color-bg); padding: 36px 0; }
 .site-footer .wordmark.small { color: var(--color-bg); }
@@ -326,7 +342,7 @@ p { margin: 0 0 1em; max-width: 62ch; }
   .why-grid { grid-template-columns: 1fr 1fr; }
   .dogs-grid { grid-template-columns: 1fr; }
   .breed-facts { grid-template-columns: 1fr 1fr; }
-  .waitlist-form { grid-template-columns: 1fr; }
+  .waitlist-form, .form-section { grid-template-columns: 1fr; }
   .footer-row { flex-direction: column; align-items: flex-start; }
   .footer-right { text-align: left; }
 }

@@ -47,8 +47,16 @@ const LABELS = {
   status_available: 'Etykieta statusu: dostępny', status_expecting: 'Etykieta statusu: oczekiwany', status_reserved: 'Etykieta statusu: zarezerwowany',
   contact_heading: 'Nagłówek', contact_lede: 'Zapowiedź', contact_location_label: 'Etykieta: lokalizacja', contact_location_value: 'Wartość: lokalizacja',
   contact_email_label: 'Etykieta: e-mail', contact_social_label: 'Etykieta: social media',
-  field_name: 'Pole: imię i nazwisko', field_email: 'Pole: e-mail', field_phone: 'Pole: telefon', field_litter: 'Pole: wybór miotu',
-  field_litter_opt3: 'Opcja: „jeszcze nie wiem”', field_message: 'Pole: wiadomość', field_message_placeholder: 'Placeholder wiadomości',
+  field_section1_heading: 'Nagłówek sekcji 1', field_name: 'Pole: imię i nazwisko', field_email: 'Pole: e-mail', field_phone: 'Pole: telefon',
+  field_city: 'Pole: miejscowość', field_household: 'Pytanie: skład domostwa', field_household_agree: 'Pytanie: zgoda domowników',
+  field_allergies: 'Pytanie: alergicy', field_other_pets: 'Pytanie: inne zwierzęta',
+  field_section2_heading: 'Nagłówek sekcji 2', field_housing: 'Pytanie: dom czy mieszkanie', field_alone_hours: 'Pytanie: godziny samotności',
+  field_daily_time: 'Pytanie: czas z psem',
+  field_section3_heading: 'Nagłówek sekcji 3', field_experience: 'Pytanie: doświadczenie', field_grooming_ready: 'Pytanie: gotowość na groomera',
+  field_temperament: 'Pytanie: charakter psa', field_training: 'Pytanie: nauka zasad', field_vacation: 'Pytanie: opieka wakacyjna',
+  field_select_placeholder: 'Placeholder listy wyboru', field_yes: 'Odpowiedź: Tak', field_no: 'Odpowiedź: Nie',
+  field_litter: 'Pole: wybór miotu',
+  field_litter_opt3: 'Opcja: „jeszcze nie wiem”', field_message: 'Pole: dodatkowa wiadomość', field_message_placeholder: 'Placeholder wiadomości',
   submit_btn: 'Przycisk wysyłania', form_fineprint: 'Drobny druk pod formularzem',
   footer_disclaimer: 'Zastrzeżenie', footer_copyright: 'Prawa autorskie',
 };
@@ -63,11 +71,19 @@ const TRANSLATION_GROUPS = [
   { title: 'Nasze psy — nagłówki', keys: ['dogs_heading', 'dogs_lede', 'dogs_note'] },
   { title: 'Szczenięta — nagłówki i statusy', keys: ['litters_heading', 'litters_lede', 'litters_note', 'status_available', 'status_expecting', 'status_reserved'] },
   { title: 'Kontakt', keys: ['contact_heading', 'contact_lede', 'contact_location_label', 'contact_location_value', 'contact_email_label', 'contact_social_label'] },
-  { title: 'Formularz zgłoszeniowy', keys: ['field_name', 'field_email', 'field_phone', 'field_litter', 'field_litter_opt3', 'field_message', 'field_message_placeholder', 'submit_btn', 'form_fineprint'] },
+  { title: 'Formularz — Dane podstawowe i rodzina', keys: ['field_section1_heading', 'field_name', 'field_email', 'field_phone', 'field_city', 'field_household', 'field_household_agree', 'field_allergies', 'field_other_pets'] },
+  { title: 'Formularz — Warunki mieszkaniowe i styl życia', keys: ['field_section2_heading', 'field_housing', 'field_alone_hours', 'field_daily_time'] },
+  { title: 'Formularz — Doświadczenie i oczekiwania', keys: ['field_section3_heading', 'field_experience', 'field_grooming_ready', 'field_temperament', 'field_training', 'field_vacation'] },
+  { title: 'Formularz — pozostałe', keys: ['field_select_placeholder', 'field_yes', 'field_no', 'field_litter', 'field_litter_opt3', 'field_message', 'field_message_placeholder', 'submit_btn', 'form_fineprint'] },
   { title: 'Stopka', keys: ['footer_disclaimer', 'footer_copyright'] },
 ];
+const LONG_QUESTION_KEYS = new Set([
+  'field_household', 'field_household_agree', 'field_allergies', 'field_other_pets',
+  'field_housing', 'field_daily_time', 'field_experience', 'field_grooming_ready',
+  'field_temperament', 'field_training', 'field_vacation',
+]);
 function isLongKey(key) {
-  return /body|lede|bio|desc|fineprint|description|placeholder/.test(key);
+  return /body|lede|bio|desc|fineprint|description|placeholder/.test(key) || LONG_QUESTION_KEYS.has(key);
 }
 
 // ---- Auth ----
