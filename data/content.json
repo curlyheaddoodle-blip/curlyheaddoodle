@@ -12,7 +12,7 @@
   "customPages": [
     {
       "id": "custom-mtysmct2vm0s",
-      "slug": "https://curlyheaddoodle.pl/kontakt.html",
+      "slug": "kontakt",
       "navLabel": {
         "pl": "Kontakt",
         "en": "Contact"
@@ -21,7 +21,8 @@
         "pl": "Kontakt",
         "en": "Contact"
       },
-      "body": []
+      "body": [],
+      "showContactBlock": true
     }
   ],
   "theme": {

@@ -927,6 +927,10 @@ function buildCustomPageRow(page, index) {
         <p class="slot-hint">Adres: page.html?slug=${escapeHtml(page.slug || '…')}</p>
       </div>
     </div>
+    <label class="checkbox-label" style="margin-top:14px">
+      <input type="checkbox" data-act="showContactBlock"${page.showContactBlock ? ' checked' : ''}>
+      Pokaż na tej stronie dane kontaktowe (lokalizacja, e-mail, social media, przycisk formularza)
+    </label>
     <div id="customPageBodyEditor-${page.id}"></div>
     <button type="button" class="btn-small" data-act="add-para">+ Dodaj akapit</button>
   `;
@@ -936,6 +940,9 @@ function buildCustomPageRow(page, index) {
       if (path.length === 1) page[path[0]] = input.value;
       else page[path[0]][path[1]] = input.value;
     });
+  });
+  row.querySelector('[data-act="showContactBlock"]').addEventListener('change', e => {
+    page.showContactBlock = e.target.checked;
   });
   row.querySelector('[data-act="add-para"]').addEventListener('click', () => {
     page.body.push(newContentBlock());

@@ -372,6 +372,9 @@ function applyCustomPage(lang) {
   if (heading) heading.textContent = headingText;
   document.title = `${headingText} — Curly Head Doodle`;
   renderContentBlocks('customPageBody', page.body, lang);
+
+  const contactBlock = document.getElementById('customPageContact');
+  if (contactBlock) contactBlock.hidden = !page.showContactBlock;
 }
 
 // ---- 6. Language switch ----
@@ -413,16 +416,17 @@ function applyLanguage(lang) {
 // since it links to a different, language-specific URL, not the site's own
 // waitlist form.
 function applyContactCta(lang) {
-  const btn = document.getElementById('contactFormBtn');
   const c = activeContent.contact;
-  if (!btn || !c) return;
+  if (!c) return;
   const label = c.ctaLabel && (c.ctaLabel[lang] || c.ctaLabel.pl);
-  if (label) btn.textContent = label;
   const link = lang === 'en' ? c.ctaLinkEn : c.ctaLinkPl;
-  if (link) btn.href = link;
-  btn.classList.remove('size-small', 'size-large');
-  if (c.ctaSize === 'small' || c.ctaSize === 'large') btn.classList.add(`size-${c.ctaSize}`);
-  if (c.ctaColor) btn.style.backgroundColor = c.ctaColor;
+  document.querySelectorAll('.js-contact-form-btn').forEach(btn => {
+    if (label) btn.textContent = label;
+    if (link) btn.href = link;
+    btn.classList.remove('size-small', 'size-large');
+    if (c.ctaSize === 'small' || c.ctaSize === 'large') btn.classList.add(`size-${c.ctaSize}`);
+    if (c.ctaColor) btn.style.backgroundColor = c.ctaColor;
+  });
 }
 
 document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -565,29 +569,29 @@ async function loadContent() {
   applyLogo();
 
   if (activeContent.contact) {
-    const emailEl = document.getElementById('contactEmail');
-    const socialEl = document.getElementById('contactSocial');
+    // Classes, not ids — this same contact block appears twice on a custom
+    // "Contact" page (once in the footer, once in the page body when its
+    // "showContactBlock" option is on), so every matching element gets set.
+    const c = activeContent.contact;
     const formEl = document.getElementById('waitlistForm');
-    if (emailEl && activeContent.contact.email) emailEl.textContent = activeContent.contact.email;
-    if (socialEl && activeContent.contact.social) {
-      // Icon-only link (see kontakt.html) — only the href is set here, never
-      // textContent, which would wipe out the <svg> icon inside the <a>.
-      // The handle in content.json (e.g. "@curlyheaddoodle") is what admin.html
-      // edits; the Instagram URL is derived from it so there's no separate
-      // link field to keep in sync.
-      const handle = activeContent.contact.social.replace(/^@/, '').trim();
-      if (handle) socialEl.href = `https://www.instagram.com/${encodeURIComponent(handle)}/`;
+    if (c.email) document.querySelectorAll('.js-contact-email').forEach(el => { el.textContent = c.email; });
+    if (c.social) {
+      // Icon-only links — only href is set here, never textContent, which
+      // would wipe out the <svg> icon inside the <a>. The handle in
+      // content.json (e.g. "@curlyheaddoodle") is what admin.html edits; the
+      // Instagram URL is derived from it so there's no separate link field.
+      const handle = c.social.replace(/^@/, '').trim();
+      if (handle) document.querySelectorAll('.js-contact-social').forEach(el => { el.href = `https://www.instagram.com/${encodeURIComponent(handle)}/`; });
     }
-    const facebookEl = document.getElementById('contactFacebook');
-    if (facebookEl && activeContent.contact.facebook) {
-      const fbHandle = activeContent.contact.facebook.replace(/^@/, '').trim();
-      if (fbHandle) facebookEl.href = `https://www.facebook.com/${encodeURIComponent(fbHandle)}/`;
+    if (c.facebook) {
+      const fbHandle = c.facebook.replace(/^@/, '').trim();
+      if (fbHandle) document.querySelectorAll('.js-contact-facebook').forEach(el => { el.href = `https://www.facebook.com/${encodeURIComponent(fbHandle)}/`; });
     }
-    if (formEl && activeContent.contact.formAction) {
+    if (formEl && c.formAction) {
       // action/method stay as a no-JS fallback; initFormspreeAjax below takes
       // over the real submission (stays on-page, shows inline success/error).
-      formEl.setAttribute('action', activeContent.contact.formAction);
-      initFormspreeAjax(formEl, activeContent.contact.formAction);
+      formEl.setAttribute('action', c.formAction);
+      initFormspreeAjax(formEl, c.formAction);
     }
   }
 
