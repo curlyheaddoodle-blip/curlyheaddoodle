@@ -559,6 +559,11 @@
     "email": "curlyheaddoodle@gmail.com",
     "social": "@curlyheaddoodle",
     "facebook": "curlyheaddoodle",
-    "formAction": "https://formspree.io/f/mrpgddwk"
+    "formAction": "https://formspree.io/f/mrpgddwk",
+    "ctaLabel": { "pl": "Wypełnij szybkie zgłoszenie", "en": "Quick application form" },
+    "ctaColor": "#2b211a",
+    "ctaSize": "medium",
+    "ctaLinkPl": "https://docs.google.com/forms/d/e/1FAIpQLSdA5B4u62-V5OMnPk-UbO-xaf03BnpaTi4w9R4OcOFtaiMx8g/viewform",
+    "ctaLinkEn": "https://docs.google.com/forms/u/1/d/1LWhqV1UkKpLp7_3WrhGpKj79k27e0jc6OX6Mo5B3gJQ/edit?usp=drive_web&ouid=117840897866608989784"
   }
 }

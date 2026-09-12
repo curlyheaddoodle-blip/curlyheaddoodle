@@ -141,6 +141,11 @@ const FALLBACK_CONTENT = {
     social: '@curlyheaddoodle',
     facebook: 'curlyheaddoodle',
     formAction: 'https://formspree.io/f/YOUR_FORM_ID',
+    ctaLabel: { pl: 'Wypełnij szybkie zgłoszenie', en: 'Quick application form' },
+    ctaColor: '#2b211a',
+    ctaSize: 'medium',
+    ctaLinkPl: '',
+    ctaLinkEn: '',
   },
 };
 
@@ -400,6 +405,24 @@ function applyLanguage(lang) {
   applyNavOrder(activeContent.navOrder, activeContent.customPages, lang);
   applyActiveNavLink();
   applyCustomPage(lang);
+  applyContactCta(lang);
+}
+
+// Footer "Contact" button — a customizable (label/color/size) shortcut to
+// the Google Form, kept separate from the full Formspree form on kontakt.html
+// since it links to a different, language-specific URL, not the site's own
+// waitlist form.
+function applyContactCta(lang) {
+  const btn = document.getElementById('contactFormBtn');
+  const c = activeContent.contact;
+  if (!btn || !c) return;
+  const label = c.ctaLabel && (c.ctaLabel[lang] || c.ctaLabel.pl);
+  if (label) btn.textContent = label;
+  const link = lang === 'en' ? c.ctaLinkEn : c.ctaLinkPl;
+  if (link) btn.href = link;
+  btn.classList.remove('size-small', 'size-large');
+  if (c.ctaSize === 'small' || c.ctaSize === 'large') btn.classList.add(`size-${c.ctaSize}`);
+  if (c.ctaColor) btn.style.backgroundColor = c.ctaColor;
 }
 
 document.querySelectorAll('.lang-btn').forEach(btn => {

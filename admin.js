@@ -1125,6 +1125,11 @@ function moveItem(arr, index, delta, rerender) {
 // ---- Contact editor ----
 function renderContactEditor() {
   renderKeyFields('contactFieldsEditor', SECTION_KEY_GROUPS.contact);
+  if (!content.contact.ctaLabel) content.contact.ctaLabel = { pl: '', en: '' };
+  if (!content.contact.ctaColor) content.contact.ctaColor = '#2b211a';
+  if (!content.contact.ctaSize) content.contact.ctaSize = 'medium';
+  if (content.contact.ctaLinkPl === undefined) content.contact.ctaLinkPl = '';
+  if (content.contact.ctaLinkEn === undefined) content.contact.ctaLinkEn = '';
   const el = document.getElementById('contactEditor');
   el.innerHTML = `
     <div class="repeat-row">
@@ -1137,6 +1142,29 @@ function renderContactEditor() {
     <div class="repeat-row single">
       <div><label>Formspree — adres formularza (action URL)</label><input id="contact-formAction" value="${escapeAttr(content.contact.formAction)}"></div>
     </div>
+    <div class="style-wrap">
+      <p class="t-key-label">Przycisk w stopce (prowadzi do formularza Google)</p>
+      <div class="repeat-row">
+        <div><label>Tekst przycisku (PL)</label><input id="contact-ctaLabelPl" value="${escapeAttr(content.contact.ctaLabel.pl)}"></div>
+        <div><label>Button text (EN)</label><input id="contact-ctaLabelEn" value="${escapeAttr(content.contact.ctaLabel.en)}"></div>
+      </div>
+      <div class="repeat-row">
+        <div class="color-field"><input type="color" id="contact-ctaColor" value="${content.contact.ctaColor}"><label for="contact-ctaColor">Kolor przycisku</label></div>
+        <div><label>Rozmiar</label>
+          <select id="contact-ctaSize">
+            <option value="small"${content.contact.ctaSize === 'small' ? ' selected' : ''}>Mały</option>
+            <option value="medium"${content.contact.ctaSize === 'medium' ? ' selected' : ''}>Średni</option>
+            <option value="large"${content.contact.ctaSize === 'large' ? ' selected' : ''}>Duży</option>
+          </select>
+        </div>
+      </div>
+      <div class="repeat-row single">
+        <div><label>Link (PL) — formularz Google</label><input id="contact-ctaLinkPl" value="${escapeAttr(content.contact.ctaLinkPl)}" placeholder="https://..."></div>
+      </div>
+      <div class="repeat-row single">
+        <div><label>Link (EN) — Google form</label><input id="contact-ctaLinkEn" value="${escapeAttr(content.contact.ctaLinkEn)}" placeholder="https://..."></div>
+      </div>
+    </div>
   `;
 }
 function collectContact() {
@@ -1145,6 +1173,11 @@ function collectContact() {
     social: getFieldValue('contact-social', 'Kontakt'),
     facebook: getFieldValue('contact-facebook', 'Kontakt'),
     formAction: getFieldValue('contact-formAction', 'Kontakt'),
+    ctaLabel: { pl: getFieldValue('contact-ctaLabelPl', 'Kontakt'), en: getFieldValue('contact-ctaLabelEn', 'Kontakt') },
+    ctaColor: getFieldValue('contact-ctaColor', 'Kontakt'),
+    ctaSize: getFieldValue('contact-ctaSize', 'Kontakt'),
+    ctaLinkPl: getFieldValue('contact-ctaLinkPl', 'Kontakt'),
+    ctaLinkEn: getFieldValue('contact-ctaLinkEn', 'Kontakt'),
   };
 }
 
