@@ -64,19 +64,25 @@ const LABELS = {
 const TRANSLATION_GROUPS = [
   { title: 'Strona / SEO', keys: ['page_title', 'page_description'] },
   { title: 'Menu', keys: ['nav_about', 'nav_breed', 'nav_dogs', 'nav_puppies', 'nav_contact', 'nav_cta'] },
-  { title: 'Sekcja główna (Hero)', keys: ['hero_headline', 'hero_subhead', 'hero_cta_primary', 'hero_cta_secondary'] },
-  { title: 'O nas', keys: ['about_kicker', 'about_heading', 'about_cta'] },
-  { title: 'Dlaczego my', keys: ['why_heading', 'why1_title', 'why1_body', 'why2_title', 'why2_body', 'why3_title', 'why3_body', 'why4_title', 'why4_body'] },
-  { title: 'O rasie', keys: ['breed_heading', 'breed_fact1_label', 'breed_fact1_value', 'breed_fact2_label', 'breed_fact2_value', 'breed_fact3_label', 'breed_fact3_value', 'breed_fact4_label', 'breed_fact4_value'] },
-  { title: 'Nasze psy — nagłówki', keys: ['dogs_heading', 'dogs_lede', 'dogs_note'] },
-  { title: 'Szczenięta — nagłówki i statusy', keys: ['litters_heading', 'litters_lede', 'litters_note', 'status_available', 'status_expecting', 'status_reserved'] },
-  { title: 'Kontakt', keys: ['contact_heading', 'contact_lede', 'contact_location_label', 'contact_location_value', 'contact_email_label', 'contact_social_label'] },
   { title: 'Formularz — Dane podstawowe i rodzina', keys: ['field_section1_heading', 'field_name', 'field_email', 'field_phone', 'field_city', 'field_household', 'field_household_agree', 'field_allergies', 'field_other_pets'] },
   { title: 'Formularz — Warunki mieszkaniowe i styl życia', keys: ['field_section2_heading', 'field_housing', 'field_alone_hours', 'field_daily_time'] },
   { title: 'Formularz — Doświadczenie i oczekiwania', keys: ['field_section3_heading', 'field_experience', 'field_grooming_ready', 'field_temperament', 'field_training', 'field_vacation'] },
   { title: 'Formularz — pozostałe', keys: ['field_select_placeholder', 'field_yes', 'field_no', 'field_litter', 'field_litter_opt3', 'field_message', 'field_message_placeholder', 'submit_btn', 'form_fineprint'] },
   { title: 'Stopka', keys: ['footer_disclaimer', 'footer_copyright'] },
 ];
+// Keys grouped by real-world site section so admin.html can show them
+// together with that section's photo/body/list editor, instead of buried
+// in the separate "Wszystkie teksty" accordion.
+const SECTION_KEY_GROUPS = {
+  hero: ['hero_headline', 'hero_subhead', 'hero_cta_primary', 'hero_cta_secondary'],
+  about: ['about_kicker', 'about_heading', 'about_cta', 'why_heading',
+    'why1_title', 'why1_body', 'why2_title', 'why2_body', 'why3_title', 'why3_body', 'why4_title', 'why4_body'],
+  breed: ['breed_heading', 'breed_fact1_label', 'breed_fact1_value', 'breed_fact2_label', 'breed_fact2_value',
+    'breed_fact3_label', 'breed_fact3_value', 'breed_fact4_label', 'breed_fact4_value'],
+  dogs: ['dogs_heading', 'dogs_lede', 'dogs_note'],
+  litters: ['litters_heading', 'litters_lede', 'litters_note', 'status_available', 'status_expecting', 'status_reserved'],
+  contact: ['contact_heading', 'contact_lede', 'contact_location_label', 'contact_location_value', 'contact_email_label', 'contact_social_label'],
+};
 const LONG_QUESTION_KEYS = new Set([
   'field_household', 'field_household_agree', 'field_allergies', 'field_other_pets',
   'field_housing', 'field_daily_time', 'field_experience', 'field_grooming_ready',
@@ -84,6 +90,63 @@ const LONG_QUESTION_KEYS = new Set([
 ]);
 function isLongKey(key) {
   return /body|lede|bio|desc|fineprint|description|placeholder/.test(key) || LONG_QUESTION_KEYS.has(key);
+}
+
+// Renders a list of translation keys as PL/EN field pairs directly inside a
+// section's own card (e.g. Hero, O nas) instead of the general "Wszystkie
+// teksty" accordion — so everything about one section lives in one place.
+function renderKeyFields(containerId, keys) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = keys.map(key => {
+    const entry = content.translations[key] || { pl: '', en: '' };
+    const tag = isLongKey(key) ? 'textarea' : 'input';
+    return `
+      <div class="t-key-row">
+        <div class="t-key-label">${LABELS[key] || key}</div>
+        <div class="t-key-inputs">
+          <div class="t-lang-wrap"><span class="t-lang-tag">PL</span><${tag} data-key="${key}" data-lang="pl">${tag === 'textarea' ? escapeHtml(entry.pl) : ''}</${tag}></div>
+          <div class="t-lang-wrap"><span class="t-lang-tag">EN</span><${tag} data-key="${key}" data-lang="en">${tag === 'textarea' ? escapeHtml(entry.en) : ''}</${tag}></div>
+        </div>
+      </div>`;
+  }).join('');
+  keys.forEach(key => {
+    const entry = content.translations[key] || { pl: '', en: '' };
+    el.querySelectorAll(`input[data-key="${key}"]`).forEach(input => { input.value = entry[input.dataset.lang] || ''; });
+  });
+}
+// Builds one fixed photo slot card (hero / about) — factored out of the old
+// standalone "Zdjęcia" card so each slot can live inside its own section card.
+function buildFixedSlotCard(slot) {
+  const path = `images/${slot.key}.jpg`;
+  const card = document.createElement('div');
+  card.className = 'slot-card';
+  card.innerHTML = `
+    <h3>${slot.label}</h3>
+    <p class="slot-hint">${slot.hint}</p>
+    <div class="slot-preview">Brak zdjęcia</div>
+    <input type="file" accept="image/*">
+    <div class="slot-actions">
+      <button type="button" class="btn-small">Wgraj zdjęcie</button>
+      <button type="button" class="btn-small danger">Usuń zdjęcie</button>
+    </div>
+    <p class="slot-status"></p>
+  `;
+  const preview = card.querySelector('.slot-preview');
+  const fileInput = card.querySelector('input[type="file"]');
+  const status = card.querySelector('.slot-status');
+  loadPreviewInto(preview, path);
+  card.querySelector('.btn-small:not(.danger)').addEventListener('click', () => {
+    if (!fileInput.files[0]) { status.textContent = 'Najpierw wybierz plik.'; status.className = 'slot-status err'; return; }
+    uploadPhoto(path, fileInput.files[0], status, preview, () => { fileInput.value = ''; });
+  });
+  card.querySelector('.btn-small.danger').addEventListener('click', () => removePhoto(path, status, preview));
+  return card;
+}
+function renderHero() {
+  renderKeyFields('heroFieldsEditor', SECTION_KEY_GROUPS.hero);
+  const grid = document.getElementById('heroSlotGrid');
+  grid.innerHTML = '';
+  grid.appendChild(buildFixedSlotCard({ key: 'hero', label: 'Zdjęcie główne (Hero)', hint: 'Widoczne na górze strony głównej.' }));
 }
 
 // ---- Auth ----
@@ -186,7 +249,7 @@ async function enterEditor() {
     ['Kolejność w menu', renderSectionOrder],
     ['Strony niestandardowe', renderCustomPages],
     ['Logo i nazwa marki', renderBrand],
-    ['Zdjęcia', renderSlots],
+    ['Sekcja główna (Hero)', renderHero],
     ['Wygląd', renderTheme],
     ['O nas — akapity', renderAboutBody],
     ['O rasie — akapity', renderBreedBody],
@@ -315,42 +378,6 @@ async function removePhoto(path, statusEl, previewEl) {
     statusEl.textContent = friendlyGithubError(err.message);
     statusEl.className = 'slot-status err';
   }
-}
-
-// ---- Fixed photo slots (hero, about) ----
-const FIXED_SLOTS = [
-  { key: 'hero', label: 'Zdjęcie główne (Hero)', hint: 'Widoczne na górze strony głównej.' },
-  { key: 'about', label: 'Zdjęcie „O nas”', hint: 'Sekcja o Karolinie i Pawle.' },
-];
-function renderSlots() {
-  const grid = document.getElementById('slotGrid');
-  grid.innerHTML = '';
-  FIXED_SLOTS.forEach(slot => {
-    const path = `images/${slot.key}.jpg`;
-    const card = document.createElement('div');
-    card.className = 'slot-card';
-    card.innerHTML = `
-      <h3>${slot.label}</h3>
-      <p class="slot-hint">${slot.hint}</p>
-      <div class="slot-preview">Brak zdjęcia</div>
-      <input type="file" accept="image/*">
-      <div class="slot-actions">
-        <button type="button" class="btn-small">Wgraj zdjęcie</button>
-        <button type="button" class="btn-small danger">Usuń zdjęcie</button>
-      </div>
-      <p class="slot-status"></p>
-    `;
-    grid.appendChild(card);
-    const preview = card.querySelector('.slot-preview');
-    const fileInput = card.querySelector('input[type="file"]');
-    const status = card.querySelector('.slot-status');
-    loadPreviewInto(preview, path);
-    card.querySelector('.btn-small:not(.danger)').addEventListener('click', () => {
-      if (!fileInput.files[0]) { status.textContent = 'Najpierw wybierz plik.'; status.className = 'slot-status err'; return; }
-      uploadPhoto(path, fileInput.files[0], status, preview, () => { fileInput.value = ''; });
-    });
-    card.querySelector('.btn-small.danger').addEventListener('click', () => removePhoto(path, status, preview));
-  });
 }
 
 // ---- Menu order ----
@@ -820,10 +847,20 @@ function buildBulletsEditor(block, rerenderBlock) {
   wrap.appendChild(addBtn);
   return wrap;
 }
-function renderAboutBody() { renderParagraphEditor('aboutBodyEditor', content.about.body, renderAboutBody); }
-function renderBreedBody() { renderParagraphEditor('breedBodyEditor', content.breed.body, renderBreedBody); }
+function renderAboutBody() {
+  renderKeyFields('aboutFieldsEditor', SECTION_KEY_GROUPS.about);
+  const grid = document.getElementById('aboutSlotGrid');
+  grid.innerHTML = '';
+  grid.appendChild(buildFixedSlotCard({ key: 'about', label: 'Zdjęcie „O nas”', hint: 'Sekcja o Karolinie i Pawle.' }));
+  renderParagraphEditor('aboutBodyEditor', content.about.body, renderAboutBody);
+}
+function renderBreedBody() {
+  renderKeyFields('breedFieldsEditor', SECTION_KEY_GROUPS.breed);
+  renderParagraphEditor('breedBodyEditor', content.breed.body, renderBreedBody);
+}
 function renderLittersIntroBody() {
   if (!content.littersIntro) content.littersIntro = { body: [] }; // older saved content.json may predate this field
+  renderKeyFields('littersFieldsEditor', SECTION_KEY_GROUPS.litters);
   renderParagraphEditor('littersIntroBodyEditor', content.littersIntro.body, renderLittersIntroBody);
 }
 
@@ -918,6 +955,7 @@ function buildCustomPageRow(page, index) {
 
 // ---- Dogs editor ----
 function renderDogsEditor() {
+  renderKeyFields('dogsFieldsEditor', SECTION_KEY_GROUPS.dogs);
   const el = document.getElementById('dogsEditor');
   el.innerHTML = '';
   content.dogs.forEach((dog, index) => el.appendChild(buildDogRow(dog, index)));
@@ -1086,6 +1124,7 @@ function moveItem(arr, index, delta, rerender) {
 
 // ---- Contact editor ----
 function renderContactEditor() {
+  renderKeyFields('contactFieldsEditor', SECTION_KEY_GROUPS.contact);
   const el = document.getElementById('contactEditor');
   el.innerHTML = `
     <div class="repeat-row">
@@ -1141,7 +1180,9 @@ function renderTranslationsEditor() {
 }
 function collectTranslations() {
   const result = {};
-  document.querySelectorAll('#translationsEditor [data-key]').forEach(field => {
+  // Scans the whole document, not just #translationsEditor, since section
+  // cards (Hero, O nas, Kontakt, ...) now render their own [data-key] fields.
+  document.querySelectorAll('[data-key][data-lang]').forEach(field => {
     const key = field.dataset.key;
     const lang = field.dataset.lang;
     if (!result[key]) result[key] = { pl: '', en: '' };

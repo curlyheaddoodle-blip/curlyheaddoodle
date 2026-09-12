@@ -92,9 +92,10 @@
     </section>
 
     <section class="admin-card">
-      <h2>Zdjęcia — Hero i O nas</h2>
-      <p class="muted">Zdjęcia poszczególnych psów edytujesz w sekcji „Nasze psy” poniżej.</p>
-      <div class="slot-grid" id="slotGrid"></div>
+      <h2>Sekcja główna (Hero)</h2>
+      <p class="muted">Nagłówek, podtytuł, przyciski i zdjęcie widoczne na górze strony głównej — wszystko w jednym miejscu.</p>
+      <div id="heroFieldsEditor"></div>
+      <div class="slot-grid" id="heroSlotGrid" style="margin-top:20px"></div>
     </section>
 
     <section class="admin-card">
@@ -104,48 +105,53 @@
     </section>
 
     <section class="admin-card">
-      <h2>O nas — akapity</h2>
-      <p class="muted">Dowolna liczba akapitów tekstu głównego strony „O nas”.</p>
+      <h2>O nas</h2>
+      <p class="muted">Nadtytuł, nagłówek, zdjęcie, punkty „Dlaczego my” i akapity strony „O nas” — wszystko w jednym miejscu.</p>
+      <div id="aboutFieldsEditor"></div>
+      <div class="slot-grid" id="aboutSlotGrid" style="margin-top:20px"></div>
+      <h3 class="section-subhead">Akapity</h3>
       <div id="aboutBodyEditor"></div>
       <button type="button" class="btn-small" id="addAboutParaBtn">+ Dodaj akapit</button>
     </section>
 
     <section class="admin-card">
-      <h2>O rasie — akapity</h2>
-      <p class="muted">Dowolna liczba akapitów tekstu głównego strony „O rasie”.</p>
+      <h2>O rasie</h2>
+      <p class="muted">Nagłówek, cechy rasy i akapity strony „O rasie”.</p>
+      <div id="breedFieldsEditor"></div>
+      <h3 class="section-subhead">Akapity</h3>
       <div id="breedBodyEditor"></div>
       <button type="button" class="btn-small" id="addBreedParaBtn">+ Dodaj akapit</button>
     </section>
 
     <section class="admin-card">
       <h2>Nasze psy</h2>
-      <p class="muted">Dodawaj, usuwaj i zmieniaj kolejność psów. Każdy ma własne zdjęcie.</p>
-      <div id="dogsEditor"></div>
+      <p class="muted">Nagłówek sekcji oraz lista psów — dodawaj, usuwaj, zmieniaj kolejność, każdy ma własne zdjęcie.</p>
+      <div id="dogsFieldsEditor"></div>
+      <div id="dogsEditor" style="margin-top:16px"></div>
       <button type="button" class="btn-small" id="addDogBtn">+ Dodaj psa</button>
     </section>
 
     <section class="admin-card">
-      <h2>Szczenięta — akapity</h2>
-      <p class="muted">Dowolna liczba akapitów tekstu wprowadzającego na stronie „Szczenięta”, nad listą miotów.</p>
+      <h2>Szczenięta</h2>
+      <p class="muted">Nagłówek, etykiety statusów, akapity wprowadzające i lista miotów — wszystko w jednym miejscu.</p>
+      <div id="littersFieldsEditor"></div>
+      <h3 class="section-subhead">Akapity wprowadzające</h3>
       <div id="littersIntroBodyEditor"></div>
       <button type="button" class="btn-small" id="addLittersIntroParaBtn">+ Dodaj akapit</button>
-    </section>
-
-    <section class="admin-card">
-      <h2>Szczenięta / mioty</h2>
-      <p class="muted">Dodawaj, usuwaj i zmieniaj kolejność miotów.</p>
+      <h3 class="section-subhead">Mioty</h3>
       <div id="littersEditor"></div>
       <button type="button" class="btn-small" id="addLitterBtn">+ Dodaj miot</button>
     </section>
 
     <section class="admin-card">
       <h2>Kontakt</h2>
-      <div id="contactEditor"></div>
+      <div id="contactFieldsEditor"></div>
+      <div id="contactEditor" style="margin-top:16px"></div>
     </section>
 
     <section class="admin-card">
-      <h2>Wszystkie teksty (PL / EN)</h2>
-      <p class="muted">Rozwiń sekcję, żeby edytować konkretne teksty na stronie.</p>
+      <h2>Pozostałe teksty (PL / EN)</h2>
+      <p class="muted">SEO, menu, stopka i formularz zgłoszeniowy — wszystko inne, co nie należy do jednej konkretnej sekcji powyżej.</p>
       <div id="translationsEditor"></div>
     </section>
 
