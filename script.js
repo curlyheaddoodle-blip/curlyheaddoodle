@@ -43,6 +43,7 @@ const FALLBACK_CONTENT = {
     brandName: 'Curly Head Doodle',
   },
   navOrder: ['about', 'breed', 'dogs', 'litters'],
+  customPages: [],
   theme: {
     colors: {
       bg: '#F8F2E7', bgAlt: '#F0E6D2', paper: '#FFFDF9', ink: '#2B211A',
@@ -345,6 +346,29 @@ function renderContentBlocks(containerId, blocks, lang) {
   applyPhotoSlots();
 }
 
+// Renders a custom page (page.html?slug=...) — a no-op everywhere else,
+// since #customPageHeading/#customPageBody only exist on that template.
+function applyCustomPage(lang) {
+  const heading = document.getElementById('customPageHeading');
+  const bodyEl = document.getElementById('customPageBody');
+  if (!heading && !bodyEl) return;
+
+  const slug = new URLSearchParams(location.search).get('slug');
+  const page = (activeContent.customPages || []).find(p => (p.slug || p.id) === slug);
+  const notFound = { pl: 'Nie znaleziono strony', en: 'Page not found' };
+
+  if (!page) {
+    if (heading) heading.textContent = notFound[lang] || notFound.pl;
+    if (bodyEl) bodyEl.innerHTML = '';
+    document.title = `${notFound[lang] || notFound.pl} — Curly Head Doodle`;
+    return;
+  }
+  const headingText = (page.heading && page.heading[lang]) || '';
+  if (heading) heading.textContent = headingText;
+  document.title = `${headingText} — Curly Head Doodle`;
+  renderContentBlocks('customPageBody', page.body, lang);
+}
+
 // ---- 6. Language switch ----
 function applyLanguage(lang) {
   document.documentElement.lang = lang;
@@ -373,6 +397,9 @@ function applyLanguage(lang) {
   renderContentBlocks('aboutBody', activeContent.about && activeContent.about.body, lang);
   renderContentBlocks('breedBody', activeContent.breed && activeContent.breed.body, lang);
   renderContentBlocks('littersIntroBody', activeContent.littersIntro && activeContent.littersIntro.body, lang);
+  applyNavOrder(activeContent.navOrder, activeContent.customPages, lang);
+  applyActiveNavLink();
+  applyCustomPage(lang);
 }
 
 document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -404,21 +431,59 @@ function applyPhotoSlots() {
 // Reorders the nav's <a data-section> links (about/breed/dogs/litters/
 // contact — each its own page) to match content.json's navOrder, by
 // inserting each in turn just before the "Apply now" CTA link.
-function applyNavOrder(order) {
+// Rebuilds the nav from navOrder each time: built-in links (about/breed/
+// dogs/litters, already static HTML on every page) are shown and moved
+// into position; any built-in key missing from navOrder is hidden rather
+// than deleted, since "removing a section" just means taking it out of
+// the menu — the page itself still exists. Custom pages (from
+// content.json's customPages, each rendered by the shared page.html
+// template) get their <a> created/updated here too, since they don't
+// exist as static HTML on any page.
+function applyNavOrder(order, customPages, lang) {
   const nav = document.getElementById('primaryNav');
   const cta = nav && nav.querySelector('.nav-cta');
   if (!nav || !cta || !Array.isArray(order)) return;
+
+  const byId = {};
+  (customPages || []).forEach(p => { byId[p.id] = p; });
+
+  nav.querySelectorAll('a[data-section]').forEach(a => { a.hidden = true; });
+
   order.forEach(key => {
-    const link = nav.querySelector(`a[data-section="${key}"]`);
-    if (link) nav.insertBefore(link, cta);
+    if (byId[key]) {
+      const page = byId[key];
+      let link = nav.querySelector(`a[data-custom-page="${key}"]`);
+      if (!link) {
+        link = document.createElement('a');
+        link.setAttribute('data-custom-page', key);
+        link.setAttribute('data-section', `custom:${key}`);
+        nav.insertBefore(link, cta);
+      } else {
+        nav.insertBefore(link, cta);
+      }
+      link.href = `page.html?slug=${encodeURIComponent(page.slug || page.id)}`;
+      link.textContent = (page.navLabel && page.navLabel[lang]) || page.slug || key;
+      link.hidden = false;
+    } else {
+      const link = nav.querySelector(`a[data-section="${key}"]`);
+      if (link) {
+        nav.insertBefore(link, cta);
+        link.hidden = false;
+      }
+    }
   });
 }
 
-// Highlights whichever nav link matches the current page.
+// Highlights whichever nav link matches the current page. Custom pages all
+// share page.html, so the query string (?slug=...) has to match too, not
+// just the pathname.
 function applyActiveNavLink() {
   const current = location.pathname.split('/').pop() || 'index.html';
+  const currentWithQuery = current + location.search;
   document.querySelectorAll('.primary-nav a[data-section]').forEach(a => {
-    if (a.getAttribute('href') === current) a.setAttribute('aria-current', 'page');
+    const href = a.getAttribute('href');
+    if (href === current || href === currentWithQuery) a.setAttribute('aria-current', 'page');
+    else a.removeAttribute('aria-current');
   });
 }
 applyActiveNavLink();
@@ -472,7 +537,6 @@ async function loadContent() {
   }
 
   applyTheme(activeContent.theme);
-  applyNavOrder(activeContent.navOrder);
   applyPhotoSlots();
   applyBrandName();
   applyLogo();

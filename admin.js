@@ -184,6 +184,7 @@ async function enterEditor() {
   // blank, and the failure is visible instead of silently breaking Save.
   const sections = [
     ['Kolejność w menu', renderSectionOrder],
+    ['Strony niestandardowe', renderCustomPages],
     ['Logo i nazwa marki', renderBrand],
     ['Zdjęcia', renderSlots],
     ['Wygląd', renderTheme],
@@ -355,12 +356,25 @@ function renderSlots() {
 // ---- Menu order ----
 // The site is multiple pages now (each nav item is its own .html page), so
 // this reorders the nav links themselves rather than sections on one page.
-const SECTION_LABELS = {
+// Built-in pages always exist as real .html files; custom pages (added
+// below, under "Strony niestandardowe") all share page.html and are
+// identified by their own id. Either kind can be added to or removed
+// from navOrder — "removing" a built-in page just hides its nav link,
+// since the page itself can't be deleted; removing a custom page here
+// only drops it from the menu (deleting it outright happens in its own
+// editor, which also cleans up navOrder for you).
+const BUILTIN_SECTION_LABELS = {
   about: 'O nas',
   breed: 'O rasie',
   dogs: 'Nasze psy',
   litters: 'Szczenięta',
 };
+function resolveSectionLabel(key) {
+  if (BUILTIN_SECTION_LABELS[key]) return BUILTIN_SECTION_LABELS[key];
+  const page = (content.customPages || []).find(p => p.id === key);
+  if (page) return (page.navLabel && page.navLabel.pl) || page.slug || '(bez nazwy)';
+  return key;
+}
 function renderSectionOrder() {
   const el = document.getElementById('sectionOrderEditor');
   el.innerHTML = '<div class="order-list"></div>';
@@ -369,16 +383,45 @@ function renderSectionOrder() {
     const row = document.createElement('div');
     row.className = 'order-row';
     row.innerHTML = `
-      <span class="order-label">${index + 1}. ${SECTION_LABELS[key] || key}</span>
+      <span class="order-label">${index + 1}. ${escapeHtml(resolveSectionLabel(key))}</span>
       <div class="order-actions">
         <button type="button" class="btn-small" data-act="up">↑</button>
         <button type="button" class="btn-small" data-act="down">↓</button>
+        <button type="button" class="btn-small danger" data-act="remove">Usuń z menu</button>
       </div>
     `;
     row.querySelector('[data-act="up"]').addEventListener('click', () => moveItem(content.navOrder, index, -1, renderSectionOrder));
     row.querySelector('[data-act="down"]').addEventListener('click', () => moveItem(content.navOrder, index, 1, renderSectionOrder));
+    row.querySelector('[data-act="remove"]').addEventListener('click', () => {
+      content.navOrder.splice(index, 1);
+      renderSectionOrder();
+    });
     list.appendChild(row);
   });
+
+  const available = [];
+  Object.keys(BUILTIN_SECTION_LABELS).forEach(key => {
+    if (!content.navOrder.includes(key)) available.push({ key, label: BUILTIN_SECTION_LABELS[key] });
+  });
+  (content.customPages || []).forEach(page => {
+    if (!content.navOrder.includes(page.id)) available.push({ key: page.id, label: (page.navLabel && page.navLabel.pl) || page.slug || '(bez nazwy)' });
+  });
+
+  const addWrap = document.createElement('div');
+  addWrap.className = 'order-add-wrap';
+  if (available.length) {
+    addWrap.innerHTML = `
+      <select id="sectionOrderAddSelect">${available.map(a => `<option value="${a.key}">${escapeHtml(a.label)}</option>`).join('')}</select>
+      <button type="button" class="btn-small" id="sectionOrderAddBtn">+ Dodaj do menu</button>
+    `;
+    addWrap.querySelector('#sectionOrderAddBtn').addEventListener('click', () => {
+      content.navOrder.push(document.getElementById('sectionOrderAddSelect').value);
+      renderSectionOrder();
+    });
+  } else {
+    addWrap.innerHTML = `<p class="slot-hint">Wszystkie sekcje są już w menu.</p>`;
+  }
+  el.appendChild(addWrap);
 }
 
 // ---- Brand (logo + name) ----
@@ -784,6 +827,95 @@ function renderLittersIntroBody() {
   renderParagraphEditor('littersIntroBodyEditor', content.littersIntro.body, renderLittersIntroBody);
 }
 
+// ---- Custom pages ("Strony niestandardowe") ----
+// Fully user-defined pages, all served by the shared page.html template
+// (see that file's own comment) and identified by ?slug=. Each carries its
+// own nav label, heading, and the same content-block body used elsewhere,
+// so a site owner can add a genuinely new section without any code change.
+function slugify(text) {
+  return (text || '')
+    .toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 40);
+}
+function newCustomPage() {
+  return {
+    id: 'custom-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+    slug: '',
+    navLabel: { pl: '', en: '' },
+    heading: { pl: '', en: '' },
+    body: [],
+  };
+}
+function renderCustomPages() {
+  if (!content.customPages) content.customPages = [];
+  const el = document.getElementById('customPagesEditor');
+  el.innerHTML = '';
+  content.customPages.forEach((page, index) => {
+    const row = buildCustomPageRow(page, index);
+    el.appendChild(row); // must be attached before the nested renderParagraphEditor call below,
+    // since that looks its container up by document.getElementById — which can't find an element
+    // that only exists in a detached (not-yet-appended) subtree.
+    renderParagraphEditor(`customPageBodyEditor-${page.id}`, page.body, renderCustomPages);
+  });
+}
+function buildCustomPageRow(page, index) {
+  if (!page.body) page.body = [];
+  if (!page.slug) page.slug = slugify(page.navLabel.pl || page.heading.pl);
+  const row = document.createElement('div');
+  row.className = 'repeat-item';
+  row.innerHTML = `
+    <div class="repeat-item-head">
+      <span class="repeat-title">${escapeHtml((page.navLabel && page.navLabel.pl) || page.heading.pl || 'Nowa strona')}</span>
+      <div class="repeat-item-actions">
+        <button type="button" class="btn-small" data-act="up">↑</button>
+        <button type="button" class="btn-small" data-act="down">↓</button>
+        <button type="button" class="btn-small danger" data-act="remove">Usuń stronę</button>
+      </div>
+    </div>
+    <div class="repeat-row">
+      <div><label>Nazwa w menu (PL)</label><input data-f="navLabel.pl" value="${escapeAttr(page.navLabel.pl)}"></div>
+      <div><label>Menu label (EN)</label><input data-f="navLabel.en" value="${escapeAttr(page.navLabel.en)}"></div>
+    </div>
+    <div class="repeat-row">
+      <div><label>Nagłówek strony (PL)</label><input data-f="heading.pl" value="${escapeAttr(page.heading.pl)}"></div>
+      <div><label>Page heading (EN)</label><input data-f="heading.en" value="${escapeAttr(page.heading.en)}"></div>
+    </div>
+    <div class="repeat-row single">
+      <div>
+        <label>Adres strony (slug)</label>
+        <input data-f="slug" value="${escapeAttr(page.slug)}" placeholder="np. faq">
+        <p class="slot-hint">Adres: page.html?slug=${escapeHtml(page.slug || '…')}</p>
+      </div>
+    </div>
+    <div id="customPageBodyEditor-${page.id}"></div>
+    <button type="button" class="btn-small" data-act="add-para">+ Dodaj akapit</button>
+  `;
+  row.querySelectorAll('[data-f]').forEach(input => {
+    input.addEventListener('input', () => {
+      const path = input.dataset.f.split('.');
+      if (path.length === 1) page[path[0]] = input.value;
+      else page[path[0]][path[1]] = input.value;
+    });
+  });
+  row.querySelector('[data-act="add-para"]').addEventListener('click', () => {
+    page.body.push(newContentBlock());
+    renderCustomPages();
+  });
+  row.querySelector('[data-act="up"]').addEventListener('click', () => moveItem(content.customPages, index, -1, renderCustomPages));
+  row.querySelector('[data-act="down"]').addEventListener('click', () => moveItem(content.customPages, index, 1, renderCustomPages));
+  row.querySelector('[data-act="remove"]').addEventListener('click', () => {
+    if (!confirm('Usunąć tę stronę na stałe? Zostanie też usunięta z menu.')) return;
+    content.customPages.splice(index, 1);
+    content.navOrder = content.navOrder.filter(k => k !== page.id);
+    renderCustomPages();
+    renderSectionOrder();
+  });
+  return row;
+}
+
 // ---- Dogs editor ----
 function renderDogsEditor() {
   const el = document.getElementById('dogsEditor');
@@ -865,6 +997,13 @@ document.getElementById('addBreedParaBtn').addEventListener('click', () => {
 document.getElementById('addLittersIntroParaBtn').addEventListener('click', () => {
   content.littersIntro.body.push(newContentBlock());
   renderLittersIntroBody();
+});
+document.getElementById('addCustomPageBtn').addEventListener('click', () => {
+  const page = newCustomPage();
+  content.customPages.push(page);
+  content.navOrder.push(page.id); // a newly added page shows up in the menu right away
+  renderCustomPages();
+  renderSectionOrder();
 });
 
 document.getElementById('addDogBtn').addEventListener('click', () => {
