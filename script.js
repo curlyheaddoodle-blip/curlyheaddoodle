@@ -141,7 +141,7 @@ const FALLBACK_CONTENT = {
     social: '@curlyheaddoodle',
     facebook: 'curlyheaddoodle',
     formAction: 'https://formspree.io/f/YOUR_FORM_ID',
-    ctaLabel: { pl: 'Wypełnij szybkie zgłoszenie', en: 'Quick application form' },
+    ctaLabel: { pl: 'Skontaktuj się', en: 'Contact us' },
     ctaColor: '#2b211a',
     ctaSize: 'medium',
     ctaLinkPl: '',

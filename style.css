@@ -324,19 +324,19 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .form-section:first-of-type legend { margin-top: 0; }
 
 /* ---------- 7. FOOTER ---------- */
-.site-footer { background: var(--color-ink); color: var(--color-bg); padding: 36px 0; }
+.site-footer { background: var(--color-ink); color: var(--color-bg); padding: 22px 0; }
 .site-footer .wordmark.small { color: var(--color-bg); }
 .footer-row { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 32px; }
 .footer-right { text-align: right; }
 .site-footer .muted { color: #CBBFA9; margin: 0 0 4px; }
 /* Footer contact block is a compact summary, not a full section — shrink
    text, icons and the button well below their normal page-content size. */
-.footer-contact { max-width: 340px; font-size: 0.88rem; }
-.footer-contact .footer-lede { margin: 6px 0 12px; }
-.footer-contact .contact-info { margin: 0 0 12px; gap: 8px; }
-.footer-contact .contact-info dt { font-size: 0.7rem; }
-.footer-contact .social-icons { margin-bottom: 14px; }
-.footer-contact .social-icons svg { width: 19px; height: 19px; }
+.footer-contact { max-width: 380px; font-size: 0.85rem; }
+.footer-contact-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; margin: 8px 0 10px; }
+.footer-contact .contact-info { margin: 0; gap: 6px; }
+.footer-contact .contact-info dt { font-size: 0.68rem; }
+.footer-contact .social-icons { margin: 2px 0 0; }
+.footer-contact .social-icons svg { width: 18px; height: 18px; }
 .site-footer .social-icons a { color: var(--color-bg); }
 .site-footer .social-icons a:hover { color: var(--color-gold); }
 .footer-contact .contact-form-btn { padding: 8px 18px; font-size: 0.85rem; }

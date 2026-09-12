@@ -561,7 +561,7 @@
     "social": "@curlyheaddoodle",
     "facebook": "curlyheaddoodle",
     "formAction": "https://formspree.io/f/mrpgddwk",
-    "ctaLabel": { "pl": "Wypełnij szybkie zgłoszenie", "en": "Quick application form" },
+    "ctaLabel": { "pl": "Skontaktuj się", "en": "Contact us" },
     "ctaColor": "#2b211a",
     "ctaSize": "medium",
     "ctaLinkPl": "https://docs.google.com/forms/d/e/1FAIpQLSdA5B4u62-V5OMnPk-UbO-xaf03BnpaTi4w9R4OcOFtaiMx8g/viewform",
