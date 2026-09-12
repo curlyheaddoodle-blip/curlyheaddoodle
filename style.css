@@ -345,7 +345,8 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .footer-contact .contact-form-btn.size-large { padding: 12px 26px; font-size: 0.95rem; }
 .contact-form-btn.size-small { padding: 8px 18px; font-size: 0.85rem; }
 .contact-form-btn.size-large { padding: 16px 34px; font-size: 1.1rem; }
-.contact-info-block { margin-top: 32px; }
+.contact-info-block { margin-top: 32px; display: flex; gap: 56px; align-items: flex-start; }
+.contact-social-col { display: flex; flex-direction: column; gap: 14px; }
 .admin-link { color: #8A7C64; font-size: 0.8rem; text-decoration: underline; }
 .admin-link:hover { color: var(--color-bg); }
 
