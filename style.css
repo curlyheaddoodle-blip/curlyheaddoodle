@@ -324,10 +324,7 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .form-section:first-of-type legend { margin-top: 0; }
 
 /* ---------- 7. FOOTER ---------- */
-.site-footer {
-  background: var(--color-ink); color: var(--color-bg); padding: 16px 0;
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
-}
+.site-footer { background: var(--color-ink); color: var(--color-bg); padding: 16px 0; }
 .site-footer .wordmark.small { color: var(--color-bg); }
 .footer-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
 .footer-photos { display: flex; gap: 8px; }

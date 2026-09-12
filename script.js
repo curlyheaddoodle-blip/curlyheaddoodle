@@ -439,7 +439,7 @@ function applyFooterPhotos() {
   if (!wrap) return;
   wrap.innerHTML = '';
   const cfg = activeContent.contact && activeContent.contact.footerPhotos;
-  if (!cfg || !cfg.enabled) { fixFooterSpace(); return; }
+  if (!cfg || !cfg.enabled) return;
   const size = cfg.size || 64;
   for (let i = 1; i <= (cfg.count || 3); i++) {
     const img = document.createElement('img');
@@ -449,18 +449,7 @@ function applyFooterPhotos() {
     img.src = `images/footer-${i}.jpg?t=${Date.now()}`;
     wrap.appendChild(img);
   }
-  fixFooterSpace();
 }
-// The footer is position:fixed sitewide, so page content needs matching
-// bottom padding or the footer would cover it — recomputed whenever the
-// footer's own content (photos, button text/size) might change its height.
-function fixFooterSpace() {
-  requestAnimationFrame(() => {
-    const footer = document.querySelector('.site-footer');
-    if (footer) document.body.style.paddingBottom = `${footer.offsetHeight}px`;
-  });
-}
-window.addEventListener('resize', fixFooterSpace);
 
 document.querySelectorAll('.lang-btn').forEach(btn => {
   btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
