@@ -1137,6 +1137,7 @@ function renderContactEditor() {
   if (!content.contact.ctaSize) content.contact.ctaSize = 'medium';
   if (content.contact.ctaLinkPl === undefined) content.contact.ctaLinkPl = '';
   if (content.contact.ctaLinkEn === undefined) content.contact.ctaLinkEn = '';
+  if (!content.contact.footerPhotos) content.contact.footerPhotos = { enabled: false, size: 64, count: 3 };
   const el = document.getElementById('contactEditor');
   el.innerHTML = `
     <div class="repeat-row">
@@ -1172,7 +1173,37 @@ function renderContactEditor() {
         <div><label>Link (EN) — Google form</label><input id="contact-ctaLinkEn" value="${escapeAttr(content.contact.ctaLinkEn)}" placeholder="https://..."></div>
       </div>
     </div>
+    <div class="style-wrap">
+      <label class="checkbox-label"><input type="checkbox" id="contact-footerPhotosEnabled"${content.contact.footerPhotos.enabled ? ' checked' : ''}> Pokaż zdjęcia w stopce (widoczne na każdej stronie)</label>
+      <div class="repeat-row style-fields"${content.contact.footerPhotos.enabled ? '' : ' hidden'}>
+        <div><label>Rozmiar ramki (px)</label><input type="number" min="32" max="160" id="contact-footerPhotosSize" value="${content.contact.footerPhotos.size}"></div>
+        <div><label>Liczba zdjęć</label>
+          <select id="contact-footerPhotosCount">${[2, 3, 4, 5].map(n => `<option value="${n}"${content.contact.footerPhotos.count === n ? ' selected' : ''}>${n}</option>`).join('')}</select>
+        </div>
+      </div>
+      <div class="photo-upload-grid is-collage" id="footerPhotosUploadGrid" style="margin-top:10px"${content.contact.footerPhotos.enabled ? '' : ' hidden'}></div>
+    </div>
   `;
+  renderFooterPhotoSlots();
+  const fieldsWrap = el.querySelector('.style-fields');
+  const uploadGrid = document.getElementById('footerPhotosUploadGrid');
+  document.getElementById('contact-footerPhotosEnabled').addEventListener('change', e => {
+    content.contact.footerPhotos.enabled = e.target.checked;
+    fieldsWrap.hidden = uploadGrid.hidden = !e.target.checked;
+  });
+  document.getElementById('contact-footerPhotosCount').addEventListener('change', e => {
+    content.contact.footerPhotos.count = Number(e.target.value);
+    renderFooterPhotoSlots();
+  });
+}
+// Reuses the same fixed-slot photo uploader as Hero/O nas — one card per
+// photo, named images/footer-1.jpg, footer-2.jpg, etc.
+function renderFooterPhotoSlots() {
+  const grid = document.getElementById('footerPhotosUploadGrid');
+  grid.innerHTML = '';
+  for (let i = 1; i <= content.contact.footerPhotos.count; i++) {
+    grid.appendChild(buildFixedSlotCard({ key: `footer-${i}`, label: `Zdjęcie ${i}`, hint: '' }));
+  }
 }
 function collectContact() {
   return {
@@ -1185,6 +1216,11 @@ function collectContact() {
     ctaSize: getFieldValue('contact-ctaSize', 'Kontakt'),
     ctaLinkPl: getFieldValue('contact-ctaLinkPl', 'Kontakt'),
     ctaLinkEn: getFieldValue('contact-ctaLinkEn', 'Kontakt'),
+    footerPhotos: {
+      enabled: document.getElementById('contact-footerPhotosEnabled').checked,
+      size: Number(getFieldValue('contact-footerPhotosSize', 'Kontakt')) || 64,
+      count: Number(document.getElementById('contact-footerPhotosCount').value) || 3,
+    },
   };
 }
 

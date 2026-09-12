@@ -146,6 +146,7 @@ const FALLBACK_CONTENT = {
     ctaSize: 'medium',
     ctaLinkPl: '',
     ctaLinkEn: '',
+    footerPhotos: { enabled: false, size: 64, count: 3 },
   },
 };
 
@@ -409,6 +410,7 @@ function applyLanguage(lang) {
   applyActiveNavLink();
   applyCustomPage(lang);
   applyContactCta(lang);
+  applyFooterPhotos();
 }
 
 // Footer "Contact" button — a customizable (label/color/size) shortcut to
@@ -428,6 +430,37 @@ function applyContactCta(lang) {
     if (c.ctaColor) btn.style.backgroundColor = c.ctaColor;
   });
 }
+
+// Optional footer photo strip — count/frame size set in admin.html; files are
+// expected at images/footer-1.jpg, footer-2.jpg, etc. Missing files just
+// don't render (no broken-image icon).
+function applyFooterPhotos() {
+  const wrap = document.getElementById('footerPhotos');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  const cfg = activeContent.contact && activeContent.contact.footerPhotos;
+  if (!cfg || !cfg.enabled) { fixFooterSpace(); return; }
+  const size = cfg.size || 64;
+  for (let i = 1; i <= (cfg.count || 3); i++) {
+    const img = document.createElement('img');
+    img.style.width = img.style.height = `${size}px`;
+    img.alt = '';
+    img.onerror = () => img.remove();
+    img.src = `images/footer-${i}.jpg?t=${Date.now()}`;
+    wrap.appendChild(img);
+  }
+  fixFooterSpace();
+}
+// The footer is position:fixed sitewide, so page content needs matching
+// bottom padding or the footer would cover it — recomputed whenever the
+// footer's own content (photos, button text/size) might change its height.
+function fixFooterSpace() {
+  requestAnimationFrame(() => {
+    const footer = document.querySelector('.site-footer');
+    if (footer) document.body.style.paddingBottom = `${footer.offsetHeight}px`;
+  });
+}
+window.addEventListener('resize', fixFooterSpace);
 
 document.querySelectorAll('.lang-btn').forEach(btn => {
   btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
