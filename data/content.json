@@ -7,7 +7,8 @@
     "breed",
     "dogs",
     "litters",
-    "custom-mtysmct2vm0s"
+    "custom-mtysmct2vm0s",
+    "custom-mtysqfzz8zkg"
   ],
   "customPages": [
     {
@@ -20,6 +21,19 @@
       "heading": {
         "pl": "Kontakt",
         "en": "Contact"
+      },
+      "body": []
+    },
+    {
+      "id": "custom-mtysqfzz8zkg",
+      "slug": "test",
+      "navLabel": {
+        "pl": "test",
+        "en": "test"
+      },
+      "heading": {
+        "pl": "test",
+        "en": "test"
       },
       "body": []
     }
