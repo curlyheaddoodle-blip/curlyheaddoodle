@@ -3,7 +3,35 @@
     "brandName": "Curly Head Doodle"
   },
   "hero": {
-    "body": []
+    "body": [
+      {
+        "id": "block-mtz0w1byihxn",
+        "heading": {
+          "pl": "test",
+          "en": "test"
+        },
+        "headingFont": "default",
+        "textFont": "default",
+        "text": {
+          "pl": "rdjtdtd",
+          "en": "jd6dj6"
+        },
+        "bullets": [],
+        "card": {
+          "enabled": false,
+          "background": "#FFFDF9",
+          "borderColor": "#E0D3B8",
+          "borderWidth": 1
+        },
+        "photo": {
+          "enabled": false,
+          "mode": "single",
+          "position": "left",
+          "textAlign": "left",
+          "count": 3
+        }
+      }
+    ]
   },
   "navOrder": [
     "about",
@@ -383,10 +411,50 @@
   },
   "breed": {
     "facts": [
-      { "id": "fact1", "label": { "pl": "Wzrost", "en": "Height" }, "value": { "pl": "ok. 35–45 cm w kłębie", "en": "approx. 35–45 cm at the shoulder" } },
-      { "id": "fact2", "label": { "pl": "Waga", "en": "Weight" }, "value": { "pl": "ok. 7–14 kg", "en": "approx. 7–14 kg" } },
-      { "id": "fact3", "label": { "pl": "Usposobienie", "en": "Temperament" }, "value": { "pl": "łagodne, towarzyskie, inteligentne", "en": "gentle, social, intelligent" } },
-      { "id": "fact4", "label": { "pl": "Sierść", "en": "Coat" }, "value": { "pl": "kręcona/falowana, niskolinieniowa", "en": "curly/wavy, low-shedding" } }
+      {
+        "id": "fact1",
+        "label": {
+          "pl": "Wzrost",
+          "en": "Height"
+        },
+        "value": {
+          "pl": "ok. 35–45 cm w kłębie",
+          "en": "approx. 35–45 cm at the shoulder"
+        }
+      },
+      {
+        "id": "fact2",
+        "label": {
+          "pl": "Waga",
+          "en": "Weight"
+        },
+        "value": {
+          "pl": "ok. 7–14 kg",
+          "en": "approx. 7–14 kg"
+        }
+      },
+      {
+        "id": "fact3",
+        "label": {
+          "pl": "Usposobienie",
+          "en": "Temperament"
+        },
+        "value": {
+          "pl": "łagodne, towarzyskie, inteligentne",
+          "en": "gentle, social, intelligent"
+        }
+      },
+      {
+        "id": "fact4",
+        "label": {
+          "pl": "Sierść",
+          "en": "Coat"
+        },
+        "value": {
+          "pl": "kręcona/falowana, niskolinieniowa",
+          "en": "curly/wavy, low-shedding"
+        }
+      }
     ],
     "body": [
       {
@@ -459,7 +527,8 @@
       "bio": {
         "pl": "Miejsce na krótki opis charakteru, umaszczenia i wyników badań zdrowotnych.",
         "en": "Space for a short note on temperament, coloring, and health clearances."
-      }
+      },
+      "extra": []
     },
     {
       "id": "dog2",
@@ -474,7 +543,8 @@
       "bio": {
         "pl": "Miejsce na krótki opis charakteru, umaszczenia i wyników badań zdrowotnych.",
         "en": "Space for a short note on temperament, coloring, and health clearances."
-      }
+      },
+      "extra": []
     }
   ],
   "littersIntro": {
@@ -496,7 +566,8 @@
         "pl": "Zapytaj o ten miot",
         "en": "Ask about this litter"
       },
-      "link": "https://docs.google.com/forms/d/e/1FAIpQLSdA5B4u62-V5OMnPk-UbO-xaf03BnpaTi4w9R4OcOFtaiMx8g/viewform?usp=publish-editor"
+      "link": "https://docs.google.com/forms/d/e/1FAIpQLSdA5B4u62-V5OMnPk-UbO-xaf03BnpaTi4w9R4OcOFtaiMx8g/viewform?usp=publish-editor",
+      "extra": []
     },
     {
       "id": "litter2",
@@ -513,7 +584,8 @@
         "pl": "Dołącz do listy oczekujących",
         "en": "Join this waitlist"
       },
-      "link": ""
+      "link": "",
+      "extra": []
     },
     {
       "id": "litter-1789165407178",
@@ -530,7 +602,8 @@
         "pl": "",
         "en": ""
       },
-      "link": ""
+      "link": "",
+      "extra": []
     }
   ],
   "contact": {
