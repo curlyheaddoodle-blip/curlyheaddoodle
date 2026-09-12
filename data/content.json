@@ -6,9 +6,24 @@
     "about",
     "breed",
     "dogs",
-    "litters"
+    "litters",
+    "custom-mtysmct2vm0s"
   ],
-  "customPages": [],
+  "customPages": [
+    {
+      "id": "custom-mtysmct2vm0s",
+      "slug": "https://curlyheaddoodle.pl/kontakt.html",
+      "navLabel": {
+        "pl": "Kontakt",
+        "en": "Contact"
+      },
+      "heading": {
+        "pl": "Kontakt",
+        "en": "Contact"
+      },
+      "body": []
+    }
+  ],
   "theme": {
     "colors": {
       "bg": "#f8f2e7",
