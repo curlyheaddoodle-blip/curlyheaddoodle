@@ -343,6 +343,7 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .footer-contact .contact-form-btn { padding: 8px 18px; font-size: 0.85rem; }
 .footer-contact .contact-form-btn.size-small { padding: 6px 14px; font-size: 0.78rem; }
 .footer-contact .contact-form-btn.size-large { padding: 12px 26px; font-size: 0.95rem; }
+.contact-form-btn { color: var(--color-paper); }
 .contact-form-btn.size-small { padding: 8px 18px; font-size: 0.85rem; }
 .contact-form-btn.size-large { padding: 16px 34px; font-size: 1.1rem; }
 .contact-info-block { margin-top: 32px; display: flex; gap: 56px; align-items: flex-start; }
