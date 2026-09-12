@@ -334,8 +334,8 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .footer-contact { font-size: 0.85rem; }
 .footer-contact-row { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; margin: 8px 0 0; }
 .footer-contact .contact-info { display: flex; gap: 16px; margin: 0; }
-.footer-contact .contact-info > div { display: flex; gap: 4px; align-items: baseline; }
-.footer-contact .contact-info dt, .footer-contact .contact-info dd { margin: 0; font-size: 0.72rem; }
+.footer-contact .contact-info dt { margin: 0; font-size: 0.68rem; }
+.footer-contact .contact-info dd { margin: 1px 0 0; font-size: 0.85rem; }
 .footer-contact .social-icons { margin: 0; }
 .footer-contact .social-icons svg { width: 18px; height: 18px; }
 .site-footer .social-icons a { color: var(--color-bg); }
