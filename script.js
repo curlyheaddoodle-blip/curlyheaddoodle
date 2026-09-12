@@ -42,6 +42,7 @@ const FALLBACK_CONTENT = {
   site: {
     brandName: 'Curly Head Doodle',
   },
+  hero: { body: [] },
   navOrder: ['about', 'breed', 'dogs', 'litters'],
   customPages: [],
   theme: {
@@ -119,6 +120,7 @@ const FALLBACK_CONTENT = {
     ],
   },
   breed: {
+    facts: [],
     body: [
       { heading: { pl: '', en: '' }, headingFont: 'default', textFont: 'default', text: { pl: 'Mini Goldendoodle to połączenie inteligencji pudla i ciepłego usposobienia golden retrievera.', en: "The Mini Goldendoodle combines the Poodle's intelligence with the Golden Retriever's warm nature." } },
       { heading: { pl: '', en: '' }, headingFont: 'default', textFont: 'default', text: { pl: 'Dzięki kręconej sierści wiele osób z alergią dobrze toleruje Goldendoodle.', en: 'Thanks to their curly coat, many people with dog allergies tolerate Goldendoodles well.' } },
@@ -147,6 +149,7 @@ const FALLBACK_CONTENT = {
     ctaLinkPl: '',
     ctaLinkEn: '',
     footerPhotos: { enabled: false, size: 64, count: 3 },
+    details: [],
   },
 };
 
@@ -191,6 +194,34 @@ function applyTheme(theme) {
 // ---- 5. Dogs / litters ----
 const STATUS_CLASS = { available: 'status-available', expecting: 'status-expecting', reserved: 'status-reserved' };
 
+// Generic "label/value" list — used for breed facts, and for the open-ended
+// extra details a site owner can add to a dog, a litter, or the contact
+// block, without needing a new fixed field added to the codebase.
+function appendFactRows(parent, items, lang) {
+  (items || []).forEach(item => {
+    const row = document.createElement('div');
+    const dt = document.createElement('dt');
+    dt.textContent = (item.label && item.label[lang]) || '';
+    const dd = document.createElement('dd');
+    dd.textContent = (item.value && item.value[lang]) || '';
+    row.appendChild(dt);
+    row.appendChild(dd);
+    parent.appendChild(row);
+  });
+}
+function buildFactListEl(items, lang, className) {
+  const dl = document.createElement('dl');
+  dl.className = className;
+  appendFactRows(dl, items, lang);
+  return dl;
+}
+function renderFactList(containerId, items, lang) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = '';
+  appendFactRows(el, items, lang);
+}
+
 function renderDogs(lang) {
   const grid = document.getElementById('dogsGrid');
   if (!grid) return;
@@ -203,6 +234,7 @@ function renderDogs(lang) {
     card.querySelector('h4').textContent = (dog.name && dog.name[lang]) || '';
     card.querySelector('.dog-role').textContent = (dog.role && dog.role[lang]) || '';
     card.querySelector('.dog-bio').textContent = (dog.bio && dog.bio[lang]) || '';
+    if (dog.extra && dog.extra.length) card.appendChild(buildFactListEl(dog.extra, lang, 'extra-facts dog-extra'));
     grid.appendChild(card);
   });
   applyPhotoSlots();
@@ -224,6 +256,7 @@ function renderLitters(lang) {
     statusEl.classList.add(STATUS_CLASS[litter.status] || 'status-available');
     li.querySelector('h3').textContent = (litter.title && litter.title[lang]) || '';
     li.querySelector('p').textContent = (litter.desc && litter.desc[lang]) || '';
+    if (litter.extra && litter.extra.length) li.querySelector('.litter-body').appendChild(buildFactListEl(litter.extra, lang, 'extra-facts litter-extra'));
     if (ctaText) {
       const cta = document.createElement('a');
       cta.className = 'btn-link';
@@ -403,13 +436,16 @@ function applyLanguage(lang) {
   renderDogs(lang);
   renderLitters(lang);
   populateLitterSelect(lang);
+  renderContentBlocks('heroBody', activeContent.hero && activeContent.hero.body, lang);
   renderContentBlocks('aboutBody', activeContent.about && activeContent.about.body, lang);
   renderContentBlocks('breedBody', activeContent.breed && activeContent.breed.body, lang);
   renderContentBlocks('littersIntroBody', activeContent.littersIntro && activeContent.littersIntro.body, lang);
+  renderFactList('breedFacts', activeContent.breed && activeContent.breed.facts, lang);
   applyNavOrder(activeContent.navOrder, activeContent.customPages, lang);
   applyActiveNavLink();
   applyCustomPage(lang);
   applyContactCta(lang);
+  applyContactDetails(lang);
   applyFooterPhotos();
 }
 
@@ -428,6 +464,28 @@ function applyContactCta(lang) {
     btn.classList.remove('size-small', 'size-large');
     if (c.ctaSize === 'small' || c.ctaSize === 'large') btn.classList.add(`size-${c.ctaSize}`);
     if (c.ctaColor) btn.style.backgroundColor = c.ctaColor;
+  });
+}
+
+// Open-ended extra contact details (e.g. "Location", "Phone") added in
+// admin.html — appended after the fixed E-mail row in every .contact-info
+// list on the page (footer, and any custom page's contact block). Cleared
+// and rebuilt each time so language switches don't duplicate rows.
+function applyContactDetails(lang) {
+  const details = activeContent.contact && activeContent.contact.details;
+  document.querySelectorAll('.contact-info').forEach(dl => {
+    dl.querySelectorAll('.fact-extra').forEach(row => row.remove());
+    (details || []).forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'fact-extra';
+      const dt = document.createElement('dt');
+      dt.textContent = (item.label && item.label[lang]) || '';
+      const dd = document.createElement('dd');
+      dd.textContent = (item.value && item.value[lang]) || '';
+      row.appendChild(dt);
+      row.appendChild(dd);
+      dl.appendChild(row);
+    });
   });
 }
 

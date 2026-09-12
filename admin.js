@@ -77,8 +77,7 @@ const SECTION_KEY_GROUPS = {
   hero: ['hero_headline', 'hero_subhead', 'hero_cta_primary', 'hero_cta_secondary'],
   about: ['about_kicker', 'about_heading', 'about_cta', 'why_heading',
     'why1_title', 'why1_body', 'why2_title', 'why2_body', 'why3_title', 'why3_body', 'why4_title', 'why4_body'],
-  breed: ['breed_heading', 'breed_fact1_label', 'breed_fact1_value', 'breed_fact2_label', 'breed_fact2_value',
-    'breed_fact3_label', 'breed_fact3_value', 'breed_fact4_label', 'breed_fact4_value'],
+  breed: ['breed_heading'],
   dogs: ['dogs_heading', 'dogs_lede', 'dogs_note'],
   litters: ['litters_heading', 'litters_lede', 'litters_note', 'status_available', 'status_expecting', 'status_reserved'],
   contact: ['contact_heading', 'contact_lede', 'contact_location_label', 'contact_location_value', 'contact_email_label', 'contact_social_label'],
@@ -147,6 +146,9 @@ function renderHero() {
   const grid = document.getElementById('heroSlotGrid');
   grid.innerHTML = '';
   grid.appendChild(buildFixedSlotCard({ key: 'hero', label: 'Zdjęcie główne (Hero)', hint: 'Widoczne na górze strony głównej.' }));
+  if (!content.hero) content.hero = { body: [] };
+  if (!content.hero.body) content.hero.body = [];
+  renderParagraphEditor('heroBodyEditor', content.hero.body, renderHero);
 }
 
 // ---- Auth ----
@@ -856,6 +858,8 @@ function renderAboutBody() {
 }
 function renderBreedBody() {
   renderKeyFields('breedFieldsEditor', SECTION_KEY_GROUPS.breed);
+  if (!content.breed.facts) content.breed.facts = [];
+  renderFactListEditor('breedFactsEditor', content.breed.facts, renderBreedBody);
   renderParagraphEditor('breedBodyEditor', content.breed.body, renderBreedBody);
 }
 function renderLittersIntroBody() {
@@ -965,9 +969,14 @@ function renderDogsEditor() {
   renderKeyFields('dogsFieldsEditor', SECTION_KEY_GROUPS.dogs);
   const el = document.getElementById('dogsEditor');
   el.innerHTML = '';
-  content.dogs.forEach((dog, index) => el.appendChild(buildDogRow(dog, index)));
+  content.dogs.forEach((dog, index) => {
+    const row = buildDogRow(dog, index);
+    el.appendChild(row); // attach before the nested fact-list editor, which looks up its container by id
+    renderFactListEditor(`dogExtra-${dog.id}`, dog.extra, renderDogsEditor);
+  });
 }
 function buildDogRow(dog, index) {
+  if (!dog.extra) dog.extra = [];
   const row = document.createElement('div');
   row.className = 'repeat-item';
   row.innerHTML = `
@@ -997,6 +1006,11 @@ function buildDogRow(dog, index) {
       <div><label>Opis (PL)</label><textarea data-f="bio.pl">${escapeHtml(dog.bio.pl)}</textarea></div>
       <div><label>Bio (EN)</label><textarea data-f="bio.en">${escapeHtml(dog.bio.en)}</textarea></div>
     </div>
+    <div class="bullets-wrap">
+      <p class="t-key-label">Dodatkowe pola (opcjonalnie, np. rasa, waga, badania)</p>
+      <div id="dogExtra-${dog.id}"></div>
+      <button type="button" class="btn-small" data-act="add-extra">+ Dodaj pole</button>
+    </div>
   `;
   const preview = row.querySelector('.dog-photo-preview');
   const status = row.querySelector('.slot-status');
@@ -1021,6 +1035,10 @@ function buildDogRow(dog, index) {
     if (!fileInput.files[0]) { status.textContent = 'Najpierw wybierz plik.'; status.className = 'slot-status err'; return; }
     uploadPhoto(dogPhotoPath, fileInput.files[0], status, preview, () => { fileInput.value = ''; });
   });
+  row.querySelector('[data-act="add-extra"]').addEventListener('click', () => {
+    dog.extra.push({ label: { pl: '', en: '' }, value: { pl: '', en: '' } });
+    renderDogsEditor();
+  });
   return row;
 }
 function newContentBlock() {
@@ -1038,6 +1056,14 @@ document.getElementById('addAboutParaBtn').addEventListener('click', () => {
 document.getElementById('addBreedParaBtn').addEventListener('click', () => {
   content.breed.body.push(newContentBlock());
   renderBreedBody();
+});
+document.getElementById('addBreedFactBtn').addEventListener('click', () => {
+  content.breed.facts.push({ label: { pl: '', en: '' }, value: { pl: '', en: '' } });
+  renderBreedBody();
+});
+document.getElementById('addHeroParaBtn').addEventListener('click', () => {
+  content.hero.body.push(newContentBlock());
+  renderHero();
 });
 document.getElementById('addLittersIntroParaBtn').addEventListener('click', () => {
   content.littersIntro.body.push(newContentBlock());
@@ -1065,10 +1091,15 @@ const STATUS_OPTIONS = [
 function renderLittersEditor() {
   const el = document.getElementById('littersEditor');
   el.innerHTML = '';
-  content.litters.forEach((litter, index) => el.appendChild(buildLitterRow(litter, index)));
+  content.litters.forEach((litter, index) => {
+    const row = buildLitterRow(litter, index);
+    el.appendChild(row); // attach before the nested fact-list editor, which looks up its container by id
+    renderFactListEditor(`litterExtra-${litter.id}`, litter.extra, renderLittersEditor);
+  });
 }
 function buildLitterRow(litter, index) {
   if (litter.link === undefined) litter.link = ''; // older litters predate this field
+  if (!litter.extra) litter.extra = [];
   const row = document.createElement('div');
   row.className = 'repeat-item';
   row.innerHTML = `
@@ -1100,6 +1131,11 @@ function buildLitterRow(litter, index) {
     <div class="repeat-row single">
       <div><label>Link przycisku (opcjonalnie — np. formularz Google; puste = strona kontaktowa)</label><input data-f="link" value="${escapeAttr(litter.link)}" placeholder="https://..."></div>
     </div>
+    <div class="bullets-wrap">
+      <p class="t-key-label">Dodatkowe pola (opcjonalnie, np. data urodzenia, liczba szczeniąt)</p>
+      <div id="litterExtra-${litter.id}"></div>
+      <button type="button" class="btn-small" data-act="add-extra">+ Dodaj pole</button>
+    </div>
   `;
   row.querySelectorAll('[data-f]').forEach(input => {
     input.addEventListener('input', () => {
@@ -1113,6 +1149,10 @@ function buildLitterRow(litter, index) {
   row.querySelector('[data-act="remove"]').addEventListener('click', () => {
     if (!confirm('Usunąć ten miot ze strony?')) return;
     content.litters.splice(index, 1);
+    renderLittersEditor();
+  });
+  row.querySelector('[data-act="add-extra"]').addEventListener('click', () => {
+    litter.extra.push({ label: { pl: '', en: '' }, value: { pl: '', en: '' } });
     renderLittersEditor();
   });
   return row;
@@ -1129,6 +1169,47 @@ function moveItem(arr, index, delta, rerender) {
   rerender();
 }
 
+// Generic "label/value" list editor — shared by breed facts, contact extra
+// details, and per-dog/per-litter extra fields, so adding a brand-new kind
+// of detail anywhere never needs new code, just this one reusable editor.
+function renderFactListEditor(containerId, list, rerender) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = '';
+  list.forEach((item, index) => {
+    if (!item.label) item.label = { pl: '', en: '' };
+    if (!item.value) item.value = { pl: '', en: '' };
+    const row = document.createElement('div');
+    row.className = 'bullet-row';
+    row.innerHTML = `
+      <div class="bullet-col">
+        <label class="t-key-label">Etykieta (PL / EN)</label>
+        <input data-ff="label.pl" value="${escapeAttr(item.label.pl)}" placeholder="np. Lokalizacja" style="margin-bottom:4px">
+        <input data-ff="label.en" value="${escapeAttr(item.label.en)}" placeholder="e.g. Location">
+      </div>
+      <div class="bullet-col">
+        <label class="t-key-label">Wartość (PL / EN)</label>
+        <input data-ff="value.pl" value="${escapeAttr(item.value.pl)}" style="margin-bottom:4px">
+        <input data-ff="value.en" value="${escapeAttr(item.value.en)}">
+      </div>
+      <div class="bullet-actions">
+        <button type="button" class="btn-small" data-act="up">↑</button>
+        <button type="button" class="btn-small" data-act="down">↓</button>
+        <button type="button" class="btn-small danger" data-act="remove">✕</button>
+      </div>
+    `;
+    row.querySelectorAll('[data-ff]').forEach(input => {
+      input.addEventListener('input', () => {
+        const [group, lang] = input.dataset.ff.split('.');
+        item[group][lang] = input.value;
+      });
+    });
+    row.querySelector('[data-act="up"]').addEventListener('click', () => moveItem(list, index, -1, rerender));
+    row.querySelector('[data-act="down"]').addEventListener('click', () => moveItem(list, index, 1, rerender));
+    row.querySelector('[data-act="remove"]').addEventListener('click', () => { list.splice(index, 1); rerender(); });
+    el.appendChild(row);
+  });
+}
+
 // ---- Contact editor ----
 function renderContactEditor() {
   renderKeyFields('contactFieldsEditor', SECTION_KEY_GROUPS.contact);
@@ -1138,6 +1219,7 @@ function renderContactEditor() {
   if (content.contact.ctaLinkPl === undefined) content.contact.ctaLinkPl = '';
   if (content.contact.ctaLinkEn === undefined) content.contact.ctaLinkEn = '';
   if (!content.contact.footerPhotos) content.contact.footerPhotos = { enabled: false, size: 64, count: 3 };
+  if (!content.contact.details) content.contact.details = [];
   const el = document.getElementById('contactEditor');
   el.innerHTML = `
     <div class="repeat-row">
@@ -1183,8 +1265,14 @@ function renderContactEditor() {
       </div>
       <div class="photo-upload-grid is-collage" id="footerPhotosUploadGrid" style="margin-top:10px"${content.contact.footerPhotos.enabled ? '' : ' hidden'}></div>
     </div>
+    <div class="style-wrap">
+      <p class="t-key-label">Dodatkowe szczegóły kontaktowe (np. lokalizacja, telefon) — widoczne wszędzie obok e-maila</p>
+      <div id="contactDetailsEditor"></div>
+      <button type="button" class="btn-small" id="addContactDetailBtn">+ Dodaj szczegół</button>
+    </div>
   `;
   renderFooterPhotoSlots();
+  renderFactListEditor('contactDetailsEditor', content.contact.details, renderContactEditor);
   const fieldsWrap = el.querySelector('.style-fields');
   const uploadGrid = document.getElementById('footerPhotosUploadGrid');
   document.getElementById('contact-footerPhotosEnabled').addEventListener('change', e => {
@@ -1194,6 +1282,10 @@ function renderContactEditor() {
   document.getElementById('contact-footerPhotosCount').addEventListener('change', e => {
     content.contact.footerPhotos.count = Number(e.target.value);
     renderFooterPhotoSlots();
+  });
+  document.getElementById('addContactDetailBtn').addEventListener('click', () => {
+    content.contact.details.push({ label: { pl: '', en: '' }, value: { pl: '', en: '' } });
+    renderContactEditor();
   });
 }
 // Reuses the same fixed-slot photo uploader as Hero/O nas — one card per
@@ -1221,6 +1313,7 @@ function collectContact() {
       size: Number(getFieldValue('contact-footerPhotosSize', 'Kontakt')) || 64,
       count: Number(document.getElementById('contact-footerPhotosCount').value) || 3,
     },
+    details: content.contact.details,
   };
 }
 

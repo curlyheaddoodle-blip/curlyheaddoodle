@@ -2,6 +2,9 @@
   "site": {
     "brandName": "Curly Head Doodle"
   },
+  "hero": {
+    "body": []
+  },
   "navOrder": [
     "about",
     "breed",
@@ -106,38 +109,6 @@
     "breed_heading": {
       "pl": "Poznaj rasę Mini Goldendoodle",
       "en": "Meet the Mini Goldendoodle"
-    },
-    "breed_fact1_label": {
-      "pl": "Wzrost",
-      "en": "Height"
-    },
-    "breed_fact1_value": {
-      "pl": "ok. 35–45 cm w kłębie",
-      "en": "approx. 35–45 cm at the shoulder"
-    },
-    "breed_fact2_label": {
-      "pl": "Waga",
-      "en": "Weight"
-    },
-    "breed_fact2_value": {
-      "pl": "ok. 7–14 kg",
-      "en": "approx. 7–14 kg"
-    },
-    "breed_fact3_label": {
-      "pl": "Usposobienie",
-      "en": "Temperament"
-    },
-    "breed_fact3_value": {
-      "pl": "łagodne, towarzyskie, inteligentne",
-      "en": "gentle, social, intelligent"
-    },
-    "breed_fact4_label": {
-      "pl": "Sierść",
-      "en": "Coat"
-    },
-    "breed_fact4_value": {
-      "pl": "kręcona/falowana, niskolinieniowa",
-      "en": "curly/wavy, low-shedding"
     },
     "dogs_heading": {
       "pl": "Nasze psy",
@@ -411,6 +382,12 @@
     ]
   },
   "breed": {
+    "facts": [
+      { "id": "fact1", "label": { "pl": "Wzrost", "en": "Height" }, "value": { "pl": "ok. 35–45 cm w kłębie", "en": "approx. 35–45 cm at the shoulder" } },
+      { "id": "fact2", "label": { "pl": "Waga", "en": "Weight" }, "value": { "pl": "ok. 7–14 kg", "en": "approx. 7–14 kg" } },
+      { "id": "fact3", "label": { "pl": "Usposobienie", "en": "Temperament" }, "value": { "pl": "łagodne, towarzyskie, inteligentne", "en": "gentle, social, intelligent" } },
+      { "id": "fact4", "label": { "pl": "Sierść", "en": "Coat" }, "value": { "pl": "kręcona/falowana, niskolinieniowa", "en": "curly/wavy, low-shedding" } }
+    ],
     "body": [
       {
         "id": "breed-1",
@@ -566,6 +543,7 @@
     "ctaSize": "medium",
     "ctaLinkPl": "https://docs.google.com/forms/d/e/1FAIpQLSdA5B4u62-V5OMnPk-UbO-xaf03BnpaTi4w9R4OcOFtaiMx8g/viewform",
     "ctaLinkEn": "https://docs.google.com/forms/u/1/d/1LWhqV1UkKpLp7_3WrhGpKj79k27e0jc6OX6Mo5B3gJQ/edit?usp=drive_web&ouid=117840897866608989784",
-    "footerPhotos": { "enabled": false, "size": 64, "count": 3 }
+    "footerPhotos": { "enabled": false, "size": 64, "count": 3 },
+    "details": []
   }
 }
