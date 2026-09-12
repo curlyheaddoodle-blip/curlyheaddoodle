@@ -7,8 +7,7 @@
     "breed",
     "dogs",
     "litters",
-    "custom-mtysmct2vm0s",
-    "custom-mtysqfzz8zkg"
+    "custom-mtysmct2vm0s"
   ],
   "customPages": [
     {
@@ -21,19 +20,6 @@
       "heading": {
         "pl": "Kontakt",
         "en": "Contact"
-      },
-      "body": []
-    },
-    {
-      "id": "custom-mtysqfzz8zkg",
-      "slug": "test",
-      "navLabel": {
-        "pl": "test",
-        "en": "test"
-      },
-      "heading": {
-        "pl": "test",
-        "en": "test"
       },
       "body": []
     }
@@ -52,38 +38,6 @@
     "fontPair": "fraunces-karla"
   },
   "translations": {
-    "page_title": {
-      "pl": "Curly Head Doodle — Hodowla Mini Goldendoodle | Szczeniaki | Mielec PL",
-      "en": "Curly Head Doodle — Mini Goldendoodle Breeder | Puppies | Mielec"
-    },
-    "page_description": {
-      "pl": "Szukasz wymarzonego Mini Goldendoodle? Poznaj domową hodowlę Curly Head Doodle z Mielca. Szczenięta po przebadanych genetycznie rodzicach, z doskonałą socjalizacją i domowym wychowaniem.",
-      "en": "Looking for your dream Mini Goldendoodle? Meet Curly Head Doodle, an in-home breeder from Mielec. Puppies from genetically tested parents, with excellent socialization and home raising."
-    },
-    "nav_about": {
-      "pl": "O nas",
-      "en": "About us"
-    },
-    "nav_breed": {
-      "pl": "O rasie",
-      "en": "The breed"
-    },
-    "nav_dogs": {
-      "pl": "Nasze psy",
-      "en": "Our dogs"
-    },
-    "nav_puppies": {
-      "pl": "Szczenięta",
-      "en": "Puppies"
-    },
-    "nav_contact": {
-      "pl": "Kontakt",
-      "en": "Contact"
-    },
-    "nav_cta": {
-      "pl": "Wypełnij ankietę",
-      "en": "Apply now"
-    },
     "hero_headline": {
       "pl": "Curly Head Doodle – Przyjaźń, która ma cztery łapy i kręcony włos.",
       "en": "Curly Head Doodle – Friends with four paws and curly hair"
@@ -243,6 +197,38 @@
     "contact_social_label": {
       "pl": "",
       "en": ""
+    },
+    "page_title": {
+      "pl": "Curly Head Doodle — Hodowla Mini Goldendoodle | Szczeniaki | Mielec PL",
+      "en": "Curly Head Doodle — Mini Goldendoodle Breeder | Puppies | Mielec"
+    },
+    "page_description": {
+      "pl": "Szukasz wymarzonego Mini Goldendoodle? Poznaj domową hodowlę Curly Head Doodle z Mielca. Szczenięta po przebadanych genetycznie rodzicach, z doskonałą socjalizacją i domowym wychowaniem.",
+      "en": "Looking for your dream Mini Goldendoodle? Meet Curly Head Doodle, an in-home breeder from Mielec. Puppies from genetically tested parents, with excellent socialization and home raising."
+    },
+    "nav_about": {
+      "pl": "O nas",
+      "en": "About us"
+    },
+    "nav_breed": {
+      "pl": "O rasie",
+      "en": "The breed"
+    },
+    "nav_dogs": {
+      "pl": "Nasze psy",
+      "en": "Our dogs"
+    },
+    "nav_puppies": {
+      "pl": "Szczenięta",
+      "en": "Puppies"
+    },
+    "nav_contact": {
+      "pl": "Kontakt",
+      "en": "Contact"
+    },
+    "nav_cta": {
+      "pl": "Wypełnij ankietę",
+      "en": "Apply now"
     },
     "field_section1_heading": {
       "pl": "Dane podstawowe i rodzina",
