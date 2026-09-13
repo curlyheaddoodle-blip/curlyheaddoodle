@@ -1383,8 +1383,17 @@ async function translateField(srcEl, targetEl, srcLang, targetLang, btn) {
   btn.disabled = true;
   btn.textContent = '…';
   try {
-    targetEl.value = await callTranslate(text, srcLang, targetLang);
-    targetEl.dispatchEvent(new Event('input', { bubbles: true }));
+    const translated = await callTranslate(text, srcLang, targetLang);
+    // MyMemory sometimes has a bogus memory entry that just echoes the input
+    // back (e.g. "Father" tagged as a PL->EN match for "father") — if the
+    // "translation" is just the same text, it isn't one, so don't silently
+    // overwrite the field with something useless.
+    if (translated.trim().toLowerCase() === text.toLowerCase()) {
+      alert('Nie udało się przetłumaczyć — usługa zwróciła ten sam tekst. Wpisz tłumaczenie ręcznie.');
+    } else {
+      targetEl.value = translated;
+      targetEl.dispatchEvent(new Event('input', { bubbles: true }));
+    }
   } catch (err) {
     alert('Błąd tłumaczenia: ' + err.message);
   } finally {
