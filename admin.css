@@ -75,6 +75,7 @@
 .btn-small:hover { border-color: var(--color-gold); }
 .btn-small:disabled { opacity: 0.5; cursor: not-allowed; }
 .btn-small.danger { color: #B23A3A; }
+.translate-btn { margin-top: 4px; }
 
 /* ---- Theme editor ---- */
 .theme-colors { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin-top: 16px; }

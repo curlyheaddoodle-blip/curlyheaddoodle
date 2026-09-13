@@ -1360,6 +1360,82 @@ function collectTranslations() {
   return result;
 }
 
+// ---- Auto-translate (PL <-> EN) ----
+// Adds a small "→EN"/"→PL" button next to every PL/EN field pair in the
+// editor, calling MyMemory's free translation API (no API key, and — unlike
+// DeepL — it allows direct browser calls, which matters since this site has
+// no backend to proxy the request through). A MutationObserver keeps this
+// working automatically as sections render/re-render, instead of needing
+// every render function updated by hand.
+async function callTranslate(text, sourceLang, targetLang) {
+  const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${targetLang}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Błąd serwera tłumaczeń (${res.status})`);
+  const data = await res.json();
+  const translated = data.responseData && data.responseData.translatedText;
+  if (!translated) throw new Error('Brak odpowiedzi z serwisu tłumaczeń.');
+  return translated;
+}
+async function translateField(srcEl, targetEl, srcLang, targetLang, btn) {
+  const text = srcEl.value.trim();
+  if (!text) return;
+  const original = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = '…';
+  try {
+    targetEl.value = await callTranslate(text, srcLang, targetLang);
+    targetEl.dispatchEvent(new Event('input', { bubbles: true }));
+  } catch (err) {
+    alert('Błąd tłumaczenia: ' + err.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = original;
+  }
+}
+// Finds the PL/EN counterpart of a field, scoped to its own repeat item (dog,
+// litter, custom page, paragraph, bullet, fact row) so identically-named
+// fields in other rows are never matched by mistake.
+function findLangSibling(el, targetLang) {
+  if (el.dataset.key !== undefined) {
+    return document.querySelector(`[data-key="${el.dataset.key}"][data-lang="${targetLang}"]`);
+  }
+  const scope = el.closest('.repeat-item, .bullet-row, .t-key-row') || document;
+  for (const attr of ['data-f', 'data-ff']) {
+    const val = el.getAttribute(attr);
+    if (val && (val.endsWith('.pl') || val.endsWith('.en'))) {
+      return scope.querySelector(`[${attr}="${val.slice(0, -3)}.${targetLang}"]`);
+    }
+  }
+  const bf = el.getAttribute('data-bf');
+  if (bf === 'pl' || bf === 'en') return scope.querySelector(`[data-bf="${targetLang}"]`);
+  return null;
+}
+function attachTranslateBtn(srcEl, srcLang, targetLang) {
+  if (srcEl.dataset.hasTranslateBtn) return;
+  const targetEl = findLangSibling(srcEl, targetLang);
+  if (!targetEl) return;
+  srcEl.dataset.hasTranslateBtn = '1';
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'btn-small translate-btn';
+  btn.textContent = targetLang === 'en' ? '→EN' : '→PL';
+  btn.title = 'Przetłumacz automatycznie';
+  btn.addEventListener('click', () => translateField(srcEl, targetEl, srcLang, targetLang, btn));
+  srcEl.insertAdjacentElement('afterend', btn);
+}
+function addTranslateButtons() {
+  document.querySelectorAll('input[data-f$=".pl"], textarea[data-f$=".pl"], input[data-ff$=".pl"], textarea[data-ff$=".pl"], input[data-bf="pl"], textarea[data-bf="pl"], input[data-key][data-lang="pl"], textarea[data-key][data-lang="pl"]')
+    .forEach(el => attachTranslateBtn(el, 'pl', 'en'));
+  document.querySelectorAll('input[data-f$=".en"], textarea[data-f$=".en"], input[data-ff$=".en"], textarea[data-ff$=".en"], input[data-bf="en"], textarea[data-bf="en"], input[data-key][data-lang="en"], textarea[data-key][data-lang="en"]')
+    .forEach(el => attachTranslateBtn(el, 'en', 'pl'));
+}
+let translateButtonsScheduled = false;
+new MutationObserver(() => {
+  if (translateButtonsScheduled) return;
+  translateButtonsScheduled = true;
+  requestAnimationFrame(() => { translateButtonsScheduled = false; addTranslateButtons(); });
+}).observe(editorRoot, { childList: true, subtree: true });
+
 // ---- Save ----
 function escapeHtml(str) {
   return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
