@@ -406,8 +406,8 @@
         "headingFont": "default",
         "textFont": "default",
         "text": {
-          "pl": "Jesteśmy Karolina i Paweł. Nasza hodowla w Mielcu to przede wszystkim nasz wspólny dom, w którym psy są pełnoprawnymi członkami rodziny: towarzyszą nam w codziennym życiu, odpoczywają na kanapie i asystują przy porannej kawie. Szczenięta dorastają w samym centrum domowego ogniska, od pierwszego oddechu otoczone czułością, codziennym gwarem i najlepszą możliwą opieką.",
-          "en": "Hi! We are Karolina and Paweł. We run a small, in-home Goldendoodle breeding program. Our love for animals has always been there, but it was the Mini Goldendoodle breed that completely stole our hearts. It combines the incredible intelligence of a Poodle with the absolute gentleness, joy, and patience of a Golden Retriever.\nOur goal from the beginning was not simply \"breeding dogs\". We wanted to create an ethical place full of empathy. The welfare of our dog mothers is our priority – we maintain appropriate regenerative breaks, and our dogs are, above all, our beloved friends.\n"
+          "pl": "**Nasza historia i filozofia\n**Cześć! Tu Karolina i Paweł. Prowadzimy kameralną, domową hodowlę psów rasy Goldendoodle. Nasza miłość do zwierząt trwała od zawsze, ale to właśnie rasa Mini Goldendoodle skradła nasze serca całkowicie. Łączy ona bowiem niesamowitą inteligencję pudla z absolutną łagodnością, radością i cierpliwością golden retrievera.\nNaszym celem od początku nie było po prostu \"rozmnażanie psów\". Zależało nam na stworzeniu etycznego miejsca pełnego empatii. Dobrostan naszych psich matek jest dla nas priorytetem – zachowujemy odpowiednie przerwy regeneracyjne, a nasze psy to przede wszystkim nasi ukochani przyjaciele.",
+          "en": "**Our Story and Philosophy **\nHi! We are Karolina and Paweł. We run a small, in-home Goldendoodle breeding program. Our love for animals has always been there, but it was the Mini Goldendoodle breed that completely stole our hearts. It combines the incredible intelligence of a Poodle with the absolute gentleness, joy, and patience of a Golden Retriever.\nOur goal from the beginning was not simply \"breeding dogs\". We wanted to create an ethical place full of empathy. The welfare of our dog mothers is our priority – we maintain appropriate regenerative breaks, and our dogs are, above all, our beloved friends."
         },
         "card": {
           "enabled": false,
@@ -797,6 +797,24 @@
       "cta": {
         "pl": "Dołącz do listy oczekujących",
         "en": "Join this waitlist"
+      },
+      "link": "",
+      "extra": []
+    },
+    {
+      "id": "litter-1789679795546",
+      "status": "available",
+      "title": {
+        "pl": "",
+        "en": ""
+      },
+      "desc": {
+        "pl": "",
+        "en": ""
+      },
+      "cta": {
+        "pl": "",
+        "en": ""
       },
       "link": "",
       "extra": []
