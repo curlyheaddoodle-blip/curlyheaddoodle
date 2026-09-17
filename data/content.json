@@ -674,10 +674,10 @@
         {
           "label": {
             "pl": "Badania Genetyczne:",
-            "en": "Genetic Examinations"
+            "en": "Genetic Examinations:"
           },
           "value": {
-            "pl": " Pełny panel Laboklin Labogenetics XXL (profil wolny od ponad 250 chorób dziedzicznych)",
+            "pl": " Pełny panel Laboklin Labogenetics XXL (profil wolny od ponad 250 chorób dziedzicznych, m. in. ",
             "en": "Full Laboklin Labogenetics XXL panel (profile free from more than 250 hereditary diseases)"
           }
         }
@@ -754,7 +754,7 @@
             "en": "Genetic Examination:"
           },
           "value": {
-            "pl": "Profil w 100% czysty. Choroby genetyczne wykluczone (Wynik: N/N Clear):  Degenerative myelopathy (DM exon 2),  Neonatal encephalopathy with seizures (NEWS),  Progressive retinal atrophy (prcd-PRA oraz rcd4-PRA),  von Willebrand disease type I (vWD1)",
+            "pl": "Profil w 100% czysty. Choroby genetyczne wykluczone: ✅ DM (Mielopatia degeneracyjna) – choroba rdzenia kręgowego  ✅ NEWS (Encefalopatia noworodkowa) – ciężka choroba układu nerwowego  ✅ prcd-PRA & rcd4-PRA – postępujący zanik siatkówki (gwarancja zdrowych oczu)  ✅ vWD1 (Choroba von Willebranda) – zaburzenia krzepnięcia krwi",
             "en": "Profile 100% clean. Genetic diseases excluded (Result: N/N Clear):  Degenerative myelopathy (DM exon 2),  Neonatal encephalopathy with seizures (NEWS),  Progressive retinal atrophy (prcd-PRA and rcd4-PRA),  von Willebrand disease type I (vWD1)"
           }
         }
