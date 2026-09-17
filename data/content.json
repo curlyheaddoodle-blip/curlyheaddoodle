@@ -191,8 +191,8 @@
       "en": "Meet the parents behind our litters — each fully health- and genetically tested."
     },
     "dogs_note": {
-      "pl": "Zdjęcia i pełne dane naszych psów dodamy tutaj.",
-      "en": "Photos and full profiles of our dogs will go here."
+      "pl": "",
+      "en": ""
     },
     "litters_heading": {
       "pl": "Szczenięta",
@@ -684,8 +684,8 @@
             "en": "Weight: / Height:"
           },
           "value": {
-            "pl": "8kg / 45cm w kłębie",
-            "en": "8kg / 45cm at the withers"
+            "pl": "8 kg / 45cm w kłębie",
+            "en": "8 kg / 45cm at the withers"
           }
         },
         {
