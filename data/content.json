@@ -610,11 +610,58 @@
       "id": "dog1",
       "name": {
         "pl": "Figa",
-        "en": "Fig"
+        "en": "Figa"
       },
       "role": {
         "pl": "Suczka hodowlana",
         "en": "Breeding female"
+      },
+      "bio": {
+        "pl": "Figa to chodząca elegancja. Z natury niezwykle spokojna, cierpliwa i zrównoważona. Jest absolutnym championem w nauce nowych sztuczek – jej inteligencja potrafi nas zaskoczyć każdego dnia. W domu to oaza spokoju, wspaniale wyczuwająca nastroje, co czyni ją perfekcyjną matką, która przekazuje szczeniętom swoją łagodność.",
+        "en": "Figa is walking elegance. By nature, she is extremely calm, patient, and balanced. She is an absolute champion at learning new tricks – her intelligence can surprise us every day. At home, she is an oasis of peace, wonderfully sensing moods, which makes her a perfect mother who passes on her gentleness to the puppies."
+      },
+      "extra": [
+        {
+          "label": {
+            "pl": "Rasa i Generacja:",
+            "en": "Race and Generation:"
+          },
+          "value": {
+            "pl": "mini goldendoodle (F2)",
+            "en": "mini goldendoodle (F2)"
+          }
+        },
+        {
+          "label": {
+            "pl": "Waga: / Wzrost:",
+            "en": "Weight: / Height:"
+          },
+          "value": {
+            "pl": " 16 kg / 48 cm w kłębie",
+            "en": "16 kg / 48 cm at the withers"
+          }
+        },
+        {
+          "label": {
+            "pl": "Badania Genetyczne:",
+            "en": "Genetic Examinations"
+          },
+          "value": {
+            "pl": " Pełny panel Laboklin Labogenetics XXL (profil wolny od ponad 250 chorób dziedzicznych)",
+            "en": "Full Laboklin Labogenetics XXL panel (profile free from more than 250 hereditary diseases)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dog2",
+      "name": {
+        "pl": "Eddie",
+        "en": "Eddie"
+      },
+      "role": {
+        "pl": "Reproduktor",
+        "en": "Sire"
       },
       "bio": {
         "pl": "Miejsce na krótki opis charakteru, umaszczenia i wyników badań zdrowotnych.",
@@ -623,31 +670,35 @@
       "extra": [
         {
           "label": {
-            "pl": "Rasa:",
-            "en": "Race:"
+            "pl": "Rasa",
+            "en": "Race"
           },
           "value": {
-            "pl": "mini goldendoodle",
-            "en": "mini goldendoodle"
+            "pl": "Pudel miniaturowy",
+            "en": "Miniature Poodle"
+          }
+        },
+        {
+          "label": {
+            "pl": "Waga: / Wzrost:",
+            "en": "Weight: / Height:"
+          },
+          "value": {
+            "pl": "8kg / 45cm w kłębie",
+            "en": "8kg / 45cm at the withers"
+          }
+        },
+        {
+          "label": {
+            "pl": "Badania genetyczne: ",
+            "en": "Genetic Examination"
+          },
+          "value": {
+            "pl": "",
+            "en": ""
           }
         }
       ]
-    },
-    {
-      "id": "dog2",
-      "name": {
-        "pl": "[Imię reproduktora]",
-        "en": "[Sire's name]"
-      },
-      "role": {
-        "pl": "Reproduktor",
-        "en": "Stud"
-      },
-      "bio": {
-        "pl": "Miejsce na krótki opis charakteru, umaszczenia i wyników badań zdrowotnych.",
-        "en": "Space for a short note on temperament, coloring, and health clearances."
-      },
-      "extra": []
     }
   ],
   "littersIntro": {
