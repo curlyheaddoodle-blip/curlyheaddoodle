@@ -13,10 +13,54 @@
         "headingFont": "default",
         "textFont": "default",
         "text": {
+          "pl": "Witaj w naszym świecie! Jesteśmy Karolina i Paweł. Nasza hodowla w Mielcu to przede wszystkim nasz wspólny dom, w którym psy są pełnoprawnymi członkami rodziny: towarzyszą nam w codziennym życiu, odpoczywają na kanapie i asystują przy porannej kawie. Szczenięta dorastają w samym centrum domowego ogniska, od pierwszego oddechu otoczone czułością, codziennym gwarem i najlepszą możliwą opieką.",
+          "en": "Welcome to our world! We are Karolina and Paweł. Our breeding in Mielec is primarily our common home, where dogs are full members of the family: they accompany us in everyday life, relax on the couch and assist with morning coffee. Puppies grow up in the very center of the home campfire, surrounded by tenderness, everyday gusto and the best possible care from the first breath."
+        },
+        "bullets": [],
+        "card": {
+          "enabled": false,
+          "background": "#FFFDF9",
+          "borderColor": "#E0D3B8",
+          "borderWidth": 1
+        },
+        "photo": {
+          "enabled": true,
+          "mode": "single",
+          "position": "left",
+          "textAlign": "left",
+          "count": 3
+        }
+      },
+      {
+        "id": "block-mu5oylc6pg4v",
+        "heading": {
+          "pl": "**Dlaczego nasza hodowla Mini Goldendoodle to mądry wybór?**",
+          "en": "**Why is our Mini Goldendoodle a wise choice?**"
+        },
+        "headingFont": "default",
+        "textFont": "default",
+        "text": {
           "pl": "",
           "en": ""
         },
-        "bullets": [],
+        "bullets": [
+          {
+            "pl": "**Dorastanie w sercu domu: **Maluchy od początku oswajają się z dźwiękiem odkurzacza, telewizora czy blendera. Zapoznajemy je również z odgłosami zgiełku miejskiego – samochodami, syrenami i ruchem ulicznym. Dzięki temu opuszczają nas odważne i gotowe na nowe wyzwania.",
+            "en": "**Growing up in the heart of the house: **Toddlers get used to the sound of a vacuum cleaner, TV or blender from the very beginning. We also familiarize them with the sounds of city noise – cars, sirens and traffic. Thanks to this, they leave us bold and ready for new challenges."
+          },
+          {
+            "pl": "**Świadome podejście do zdrowia: **Kwestie genetyczne traktujemy priorytetowo. Rodzice naszych szczeniąt posiadają niezwykle szczegółowe wyniki badań (m.in. obszerne pakiety Laboklin Labogenetics XXL), aby zminimalizować ryzyko chorób dziedzicznych i zapewnić maluchom bezpieczny start.",
+            "en": "**Conscious approach to health: ** Genetic issues are a priority for us. The parents of our puppies have extremely detailed test results (including extensive Laboklin Labogenetics XXL packages) to minimize the risk of hereditary diseases and ensure a safe start for the toddlers."
+          },
+          {
+            "pl": "**Nowoczesna socjalizacja: **Opieramy się na sprawdzonych, empatycznych programach (Badass Breeder, Puppy Culture). Wdrażamy wczesną stymulację neurologiczną i węchową (ENS/ESI), uczymy czystości i łagodnie oswajamy z zabiegami pielęgnacyjnymi.",
+            "en": "**Modern socialization: **We rely on proven, empathetic programs (Badass Breeder, Puppy Culture). We implement early neurological and olfactory stimulation (ENS/ESI), teach purity and gently familiarize with care treatments."
+          },
+          {
+            "pl": "**Wielopokoleniowe linie (Multigen): **Koncentrujemy się na zaawansowanych generacjach (np. F2B), uzyskując piękne psy w pożądanych odcieniach (apricot, red brown), z włosem wysoce przyjaznym dla alergików.",
+            "en": "**Multigenerational lines (Multigen): **We focus on advanced generations (e.g. F2B), obtaining beautiful dogs in the desired shades (apricot, red brown), with hair highly allergy friendly."
+          }
+        ],
         "card": {
           "enabled": false,
           "background": "#FFFDF9",
