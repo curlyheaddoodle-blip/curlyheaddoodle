@@ -617,8 +617,8 @@
         "en": "Breeding female"
       },
       "bio": {
-        "pl": "Figa to chodząca elegancja. Z natury niezwykle spokojna, cierpliwa i zrównoważona. Jest absolutnym championem w nauce nowych sztuczek – jej inteligencja potrafi nas zaskoczyć każdego dnia. W domu to oaza spokoju, wspaniale wyczuwająca nastroje, co czyni ją perfekcyjną matką, która przekazuje szczeniętom swoją łagodność.\n\n🧬 Profil genetyczny (Wynik: Czysty / Wolny od mutacji):\n\n✅ DM (Mielopatia degeneracyjna) – postępująca choroba rdzenia kręgowego prowadząca do niedowładów.\n\n✅ EF (Zespół epizodycznego upadania) – schorzenie neurologiczne objawiające się nagłym sztywnieniem mięśni i upadkami.\n\n✅ GM2 (Gangliozydoza) – ciężka choroba metaboliczna układu nerwowego.\n\n✅ MTCP (Makrotrombocytopenia) – anomalia płytek krwi (wykluczenie tej wady to kluczowe bezpieczeństwo przy ewentualnych zabiegach weterynaryjnych).\n\n✅ OCD (Osteochondrodysplazja) – dziedziczna choroba układu kostno-stawowego, powodująca karłowatość i deformacje kości.\n\n✅ PRA-prcd (Postępujący zanik siatkówki) – genetyczna utrata wzroku\n\n✅ vWD1 (Choroba von Willebranda) – zaburzenia krzepnięcia krwi (gwarantuje bezpieczeństwo np. w przypadku operacji czy kastracji).",
-        "en": "QUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS"
+        "pl": "Figa to chodząca elegancja. Z natury niezwykle spokojna, cierpliwa i zrównoważona. Jest absolutnym championem w nauce nowych sztuczek – jej inteligencja potrafi nas zaskoczyć każdego dnia. W domu to oaza spokoju, wspaniale wyczuwająca nastroje, co czyni ją perfekcyjną matką, która przekazuje szczeniętom swoją łagodność.",
+        "en": "Figa is a walking elegance. Extremely calm, patient and balanced by nature. She is an absolute champion in learning new tricks – her intelligence can surprise us every day. At home, it is an oasis of peace, wonderfully sensing moods, which makes her a perfect mother who conveys her gentleness to the puppies."
       },
       "extra": [
         {
@@ -677,7 +677,7 @@
             "en": "Genetic Examinations:"
           },
           "value": {
-            "pl": " Pełny panel Laboklin Labogenetics XXL (profil wolny od ponad 250 chorób dziedzicznych, m. in. ",
+            "pl": " Pełny panel Laboklin Labogenetics XXL (profil wolny od ponad 250 chorób dziedzicznych)",
             "en": "Full Laboklin Labogenetics XXL panel (profile free from more than 250 hereditary diseases)"
           }
         }
@@ -694,7 +694,7 @@
         "en": "Sire"
       },
       "bio": {
-        "pl": "Nasz uroczy chłopak to chodząca radość. Eddie to dusza towarzystwa, mistrz długiego przytulania i niekwestionowany pogromca smoków (choć na ten moment walczy wyłącznie z tymi pluszowymi). Wnosi do domu niesamowitą energię, humor i ten błysk w oku.\n",
+        "pl": "Nasz uroczy chłopak to chodząca radość. Eddie to dusza towarzystwa, mistrz długiego przytulania i niekwestionowany pogromca smoków (choć na ten moment walczy wyłącznie z tymi pluszowymi). Wnosi do domu niesamowitą energię, humor i ten błysk w oku.",
         "en": "Our cute boy is a walking joy. Eddie is the soul of the company, the master of long hugs and the undisputed slayer of dragons (although at the moment he fights only with plush ones). He brings incredible energy, humor and that twinkle in his eye to the house."
       },
       "extra": [
@@ -754,7 +754,7 @@
             "en": "Genetic Examination:"
           },
           "value": {
-            "pl": "Profil w 100% czysty. Choroby genetyczne wykluczone: ✅ DM (Mielopatia degeneracyjna) – choroba rdzenia kręgowego  ✅ NEWS (Encefalopatia noworodkowa) – ciężka choroba układu nerwowego  ✅ prcd-PRA & rcd4-PRA – postępujący zanik siatkówki (gwarancja zdrowych oczu)  ✅ vWD1 (Choroba von Willebranda) – zaburzenia krzepnięcia krwi",
+            "pl": "Profil w 100% czysty. Choroby genetyczne wykluczone (Wynik: N/N Clear):  Degenerative myelopathy (DM exon 2),  Neonatal encephalopathy with seizures (NEWS),  Progressive retinal atrophy (prcd-PRA oraz rcd4-PRA),  von Willebrand disease type I (vWD1)",
             "en": "Profile 100% clean. Genetic diseases excluded: ✅ DM (degenerative myelopathy) – spinal cord disease  ✅ NEWS (neonatal encephalopathy) – severe nervous system disease  ✅ prcd-PRA & rcd4-PRA – progressive retinal atrophy (guarantee of healthy eyes)  ✅ vWD1 (von Willebrand disease) – blood clotting disorders"
           }
         }
