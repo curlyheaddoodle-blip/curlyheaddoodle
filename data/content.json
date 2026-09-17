@@ -562,13 +562,13 @@
           "en": "In our breeding program, we focus primarily on **multigenerational Mini Goldendoodles (Multigen)**, combining carefully selected genes, e.g., through the F2B generation (a cross between a Mini Goldendoodle and a Miniature Poodle) and related lines. Thanks to this, we strive to obtain dogs with predictable characteristics, with a beautiful, wavy or curly coat in apricot or red brown shades.\n"
         },
         "card": {
-          "enabled": false,
+          "enabled": true,
           "background": "#FFFDF9",
           "borderColor": "#E0D3B8",
           "borderWidth": 1
         },
         "photo": {
-          "enabled": false,
+          "enabled": true,
           "position": "left",
           "textAlign": "left",
           "mode": "single",
