@@ -525,14 +525,14 @@
       {
         "id": "breed-1",
         "heading": {
-          "pl": "",
-          "en": ""
+          "pl": "**Dla kogo to wymarzony towarzysz?**",
+          "en": "**Who is this dream companion for?**"
         },
         "headingFont": "default",
         "textFont": "default",
         "text": {
-          "pl": "Mini Goldendoodle to połączenie inteligencji pudla i ciepłego, rodzinnego usposobienia golden retrievera. To psy czułe, chętne do nauki i świetnie odnajdujące się zarówno w mieszkaniu, jak i w domu z ogrodem.",
-          "en": "The Mini Goldendoodle combines the Poodle's intelligence with the Golden Retriever's warm, family-oriented nature — affectionate, eager to learn, and equally at home in an apartment or a house with a yard."
+          "pl": "Goldendoodle to rasa nastawiona na współpracę, niezwykle wpatrzona w człowieka i obdarzona wielką empatią. Dzięki genom golden retrievera i pudla, są to psy bystre, łatwe w układaniu, uwielbiające zabawę, ale potrafiące wyciszyć się w domu. Idealnie sprawdzają się jako psy rodzinne oraz psy do wsparcia emocjonalnego. Bardzo przywiązują się do ludzi – nie odnajdą się jako psy podwórkowe czy zostawiane same na wiele godzin.",
+          "en": "Goldendoodle is a cooperative breed, extremely focused on humans and endowed with great empathy. Thanks to the genes of the golden retriever and the poodle, they are smart, easy to stack, love to play, but can calm down at home. They are ideal as family dogs and dogs for emotional support. They are very attached to people – they will not find themselves as yard dogs or left alone for many hours."
         },
         "card": {
           "enabled": false,
@@ -552,14 +552,14 @@
       {
         "id": "breed-2",
         "heading": {
-          "pl": "",
-          "en": ""
+          "pl": "**Generacje i rodzaj włosa – jak to wygląda w praktyce?**",
+          "en": "**Generations and hair type – what does it look like in practice?**"
         },
         "headingFont": "default",
         "textFont": "default",
         "text": {
-          "pl": "Dzięki kręconej lub falowanej sierści typu pudla, wiele osób z alergią na sierść psów dobrze toleruje Goldendoodle — choć żadna rasa nie jest w 100% hipoalergiczna.",
-          "en": "Thanks to their curly or wavy Poodle-type coat, many people with dog allergies tolerate Goldendoodles well — though no breed is ever 100% hypoallergenic."
+          "pl": "W naszej hodowli stawiamy przede wszystkim na **wielopokoleniowe Mini Goldendoodle (Multigen)**, łącząc starannie dobrane geny, np. poprzez generację F2B (połączenie Mini Goldendoodle z pudlem miniaturowym) i pokrewne linie. Dzięki temu dążymy do uzyskania psów o przewidywalnych cechach, z piękną, falistą lub kręconą szatą w odcieniach apricot czy red brown.\n\n**Czy Goldendoodle są w 100% hipoalergiczne? **Należy obalić ten mit – żaden pies nie jest w 100% wolny od alergenów. Jednak generacje wielopokoleniowe (Multigen / F2B), ze względu na wysoką pulę genów pudla, posiadają szatę nieliniejącą (lub znikomo liniejącą), co **drastycznie minimalizuje ryzyko wystąpienia objawów u alergików.** Ich przepiękny włos wymaga zaangażowania: regularnego czesania odpowiednią szczotką oraz wizyt u profesjonalnego groomera (co około 8 tygodni).",
+          "en": "QUERY LENGTH LIMIT EXCEEDED. MAX ALLOWED QUERY : 500 CHARS"
         },
         "card": {
           "enabled": false,
