@@ -443,7 +443,7 @@
           "borderWidth": 1
         },
         "photo": {
-          "enabled": true,
+          "enabled": false,
           "position": "left",
           "textAlign": "left",
           "mode": "collage",
