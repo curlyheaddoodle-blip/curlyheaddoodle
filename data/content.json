@@ -633,6 +633,16 @@
         },
         {
           "label": {
+            "pl": "Data urodzenia:",
+            "en": "Date of birth:"
+          },
+          "value": {
+            "pl": "23.09.2023",
+            "en": "23.09.2023"
+          }
+        },
+        {
+          "label": {
             "pl": "Waga: / Wzrost:",
             "en": "Weight: / Height:"
           },
@@ -643,32 +653,22 @@
         },
         {
           "label": {
-            "pl": "",
-            "en": ""
+            "pl": "Kolor:",
+            "en": "Colour"
           },
           "value": {
-            "pl": "",
-            "en": ""
+            "pl": "Biszkoptowy",
+            "en": "Apricot"
           }
         },
         {
           "label": {
-            "pl": "",
-            "en": ""
+            "pl": "Włos:",
+            "en": "Hair"
           },
           "value": {
-            "pl": "",
-            "en": ""
-          }
-        },
-        {
-          "label": {
-            "pl": "",
-            "en": ""
-          },
-          "value": {
-            "pl": "",
-            "en": ""
+            "pl": "Kręcony",
+            "en": "Curly"
           }
         },
         {
