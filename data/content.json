@@ -417,9 +417,9 @@
         },
         "photo": {
           "enabled": true,
-          "position": "left",
+          "position": "right",
           "textAlign": "left",
-          "mode": "collage",
+          "mode": "single",
           "count": 3
         },
         "bullets": []
@@ -443,11 +443,11 @@
           "borderWidth": 1
         },
         "photo": {
-          "enabled": false,
+          "enabled": true,
           "position": "left",
           "textAlign": "left",
           "mode": "collage",
-          "count": 3
+          "count": 4
         },
         "bullets": [
           {
