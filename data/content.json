@@ -623,12 +623,12 @@
       "extra": [
         {
           "label": {
-            "pl": "Rasa: mini goldendoodle",
-            "en": ""
+            "pl": "Rasa:",
+            "en": "Race:"
           },
           "value": {
-            "pl": "",
-            "en": ""
+            "pl": "mini goldendoodle",
+            "en": "mini goldendoodle"
           }
         }
       ]
