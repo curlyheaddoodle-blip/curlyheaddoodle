@@ -203,8 +203,8 @@
       "en": "Current, expecting, and former litters."
     },
     "litters_note": {
-      "pl": "Podmień na prawdziwe mioty, daty i zdjęcia.",
-      "en": "Swap in your real litters, dates, and photos here."
+      "pl": "",
+      "en": ""
     },
     "status_available": {
       "pl": "Dostępne teraz",
@@ -215,8 +215,8 @@
       "en": "Expecting"
     },
     "status_reserved": {
-      "pl": "xdasfsa",
-      "en": "xdasfsa"
+      "pl": "",
+      "en": ""
     },
     "contact_heading": {
       "pl": "Wypełnij ankietę",
