@@ -427,14 +427,14 @@
       {
         "id": "about-2",
         "heading": {
-          "pl": "",
-          "en": ""
+          "pl": "Nasze metody pracy i socjalizacji",
+          "en": "Our working and socialisation methods"
         },
         "headingFont": "default",
         "textFont": "default",
         "text": {
-          "pl": "Wychowujemy szczenięta w domu, bez kojców zewnętrznych, zapewniając im najlepszy możliwy start w życiu.",
-          "en": "We raise our puppies at home, with no outdoor kennels, to give them the best possible start in life."
+          "pl": "Wierzymy, że wspaniały charakter psa to efekt dobrych genów i mądrej pracy od pierwszych dni życia. Wychowując maluchy wdrażamy założenia cenionych programów edukacyjnych (Badass Breeder, Puppy Culture). Co to oznacza dla przyszłego właściciela?",
+          "en": "We believe that a great dog character is the result of good genes and wise work from the first days of life. When raising children, we implement the assumptions of valued educational programs (Badass Breeder, Puppy Culture). What does this mean for the future owner?"
         },
         "card": {
           "enabled": false,
@@ -443,13 +443,34 @@
           "borderWidth": 1
         },
         "photo": {
-          "enabled": true,
+          "enabled": false,
           "position": "left",
           "textAlign": "left",
           "mode": "collage",
           "count": 3
         },
-        "bullets": []
+        "bullets": [
+          {
+            "pl": "**Wczesna Stymulacja Neurologiczna (ENS): **Od 3. do 16. dnia życia wprowadzamy serię pięciu mikrostymulacji dotykowych i temperaturowych. Badania dowodzą, że ten program (pierwotnie stworzony dla psów wojskowych) przyspiesza rozwój układu nerwowego. Szczenięta poddane ENS w dorosłym życiu znacznie lepiej radzą sobie ze stresem, mają silniejsze serca i wyższą odporność na choroby.",
+            "en": "**Early Neurological Stimulation (ENS): **From day 3 to day 16, we introduce a series of five tactile and temperature microstimulations. Research shows that this program (originally created for military dogs) accelerates the development of the nervous system. Puppies subjected to ENS in adulthood cope much better with stress, have stronger hearts and higher resistance to diseases."
+          },
+          {
+            "pl": "**Wczesna Stymulacja Węchowa (ESI): **W tym samym okresie codziennie wprowadzamy maluchom nowy, naturalny zapach (np. kora drzewa, trawa, przyprawy). Rozwija to obszary mózgu odpowiedzialne za węch, budując w psach pewność siebie i ciekawość świata.",
+            "en": "**Early Olfactory Stimulation (ESI): **During the same period, we introduce toddlers a new, natural smell every day (e.g. tree bark, grass, spices). This develops the areas of the brain responsible for smell, building self-confidence and curiosity in the world in dogs."
+          },
+          {
+            "pl": "**Budowanie pewności siebie, a nie lęku: **Program Badass Breeder uczy zasady \"wzmacniaj, nie wyręczaj\". Oferujemy szczeniętom bezpieczne wyzwania, nowe faktury pod łapkami (\"Złota 12\") oraz kontrolowane bodźce środowiskowe i dźwiękowe. Dzięki temu pies w nowym domu nie reaguje paniką na upuszczony garnek czy szczekającego psa sąsiada, lecz traktuje nowości jako przygodę.",
+            "en": "**Building self-confidence, not fear: ** Badass Breeder teaches the “empower, not replace” principle. We offer puppies safe challenges, new underfoot textures (\"Złota 12\") and controlled environmental and sound stimuli. Thanks to this, the dog in the new house does not react with panic to the dropped pot or the barking dog of the neighbor, but treats novelty as an adventure."
+          },
+          {
+            "pl": "**Wczesny trening czystości: **W kojcu wprowadzamy specjalne strefy na “toaletę”. Szczenięta naturalnie uczą się załatwiania swoich potrzeb poza posłaniem, co jest gigantycznym ułatwieniem w pierwszych tygodniach w nowym domu.",
+            "en": "**Early cleanliness training: **We introduce special zones for the \"toilet\" in the playpen. Puppies naturally learn to take care of their needs outside the bed, which is a gigantic facilitation in the first weeks in a new home."
+          },
+          {
+            "pl": "**Oswajanie z groomingiem: **Goldendoodle wymagają regularnej pielęgnacji. Nasze maluchy poznają suszarkę, kąpiele, czesanie, dotykanie łapek, przestrzeni między palcami i obcinanie pazurków na długo przed wyjazdem.",
+            "en": "**Grooming: **Goldendoodle requires regular grooming. Our little ones will get to know the dryer, baths, combing, touching their paws, the space between their fingers and clipping their claws long before they leave."
+          }
+        ]
       }
     ]
   },
