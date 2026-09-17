@@ -628,7 +628,7 @@
           },
           "value": {
             "pl": "mini goldendoodle (F2)",
-            "en": "mini goldendoodle (F2)"
+            "en": "Mini Goldendoodle (F2)"
           }
         },
         {
@@ -639,6 +639,36 @@
           "value": {
             "pl": " 16 kg / 48 cm w kłębie",
             "en": "16 kg / 48 cm at the withers"
+          }
+        },
+        {
+          "label": {
+            "pl": "",
+            "en": ""
+          },
+          "value": {
+            "pl": "",
+            "en": ""
+          }
+        },
+        {
+          "label": {
+            "pl": "",
+            "en": ""
+          },
+          "value": {
+            "pl": "",
+            "en": ""
+          }
+        },
+        {
+          "label": {
+            "pl": "",
+            "en": ""
+          },
+          "value": {
+            "pl": "",
+            "en": ""
           }
         },
         {
@@ -674,8 +704,18 @@
             "en": "Race"
           },
           "value": {
-            "pl": "Pudel miniaturowy",
+            "pl": "pudel miniaturowy",
             "en": "Miniature Poodle"
+          }
+        },
+        {
+          "label": {
+            "pl": "Data urodzenia:",
+            "en": "Date of birth:"
+          },
+          "value": {
+            "pl": "26.08.2024",
+            "en": "26.08.2024"
           }
         },
         {
@@ -690,8 +730,28 @@
         },
         {
           "label": {
+            "pl": "Kolor:",
+            "en": "Colour:"
+          },
+          "value": {
+            "pl": "Red",
+            "en": "Red"
+          }
+        },
+        {
+          "label": {
+            "pl": "Włos:",
+            "en": "Hair:"
+          },
+          "value": {
+            "pl": "Kręcony",
+            "en": "Curly"
+          }
+        },
+        {
+          "label": {
             "pl": "Badania genetyczne: ",
-            "en": "Genetic Examination"
+            "en": "Genetic Examination:"
           },
           "value": {
             "pl": "",
