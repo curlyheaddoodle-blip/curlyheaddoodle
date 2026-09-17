@@ -609,8 +609,8 @@
     {
       "id": "dog1",
       "name": {
-        "pl": "[Imię suczki]",
-        "en": "[Dam's name]"
+        "pl": "Figa",
+        "en": "Fig"
       },
       "role": {
         "pl": "Suczka hodowlana",
@@ -620,7 +620,18 @@
         "pl": "Miejsce na krótki opis charakteru, umaszczenia i wyników badań zdrowotnych.",
         "en": "Space for a short note on temperament, coloring, and health clearances."
       },
-      "extra": []
+      "extra": [
+        {
+          "label": {
+            "pl": "Rasa: mini goldendoodle",
+            "en": ""
+          },
+          "value": {
+            "pl": "",
+            "en": ""
+          }
+        }
+      ]
     },
     {
       "id": "dog2",
