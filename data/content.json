@@ -700,8 +700,8 @@
       "extra": [
         {
           "label": {
-            "pl": "Rasa",
-            "en": "Race"
+            "pl": "Rasa:",
+            "en": "Race:"
           },
           "value": {
             "pl": "pudel miniaturowy",
