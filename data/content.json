@@ -444,7 +444,7 @@
         },
         "photo": {
           "enabled": true,
-          "position": "left",
+          "position": "right",
           "textAlign": "left",
           "mode": "collage",
           "count": 4
