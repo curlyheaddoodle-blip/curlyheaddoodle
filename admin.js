@@ -944,6 +944,10 @@ function buildCustomPageRow(page, index) {
       <input type="checkbox" data-act="showContactBlock"${page.showContactBlock ? ' checked' : ''}>
       Pokaż na tej stronie dane kontaktowe (lokalizacja, e-mail, social media, przycisk formularza)
     </label>
+    <label class="checkbox-label" style="margin-top:8px">
+      <input type="checkbox" data-act="showContactForm"${page.showContactForm ? ' checked' : ''}>
+      Pokaż na tej stronie krótki formularz kontaktowy (imię, e-mail, wiadomość)
+    </label>
     <div id="customPageBodyEditor-${page.id}"></div>
     <button type="button" class="btn-small" data-act="add-para">+ Dodaj akapit</button>
   `;
@@ -956,6 +960,9 @@ function buildCustomPageRow(page, index) {
   });
   row.querySelector('[data-act="showContactBlock"]').addEventListener('change', e => {
     page.showContactBlock = e.target.checked;
+  });
+  row.querySelector('[data-act="showContactForm"]').addEventListener('change', e => {
+    page.showContactForm = e.target.checked;
   });
   row.querySelector('[data-act="add-para"]').addEventListener('click', () => {
     page.body.push(newContentBlock());

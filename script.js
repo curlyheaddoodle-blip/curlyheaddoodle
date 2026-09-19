@@ -482,6 +482,8 @@ function applyCustomPage(lang) {
 
   const contactBlock = document.getElementById('customPageContact');
   if (contactBlock) contactBlock.hidden = !page.showContactBlock;
+  const contactForm = document.getElementById('customPageContactForm');
+  if (contactForm) contactForm.hidden = !page.showContactForm;
 }
 
 // ---- 6. Language switch ----
@@ -735,7 +737,6 @@ async function loadContent() {
     // "Contact" page (once in the footer, once in the page body when its
     // "showContactBlock" option is on), so every matching element gets set.
     const c = activeContent.contact;
-    const formEl = document.getElementById('waitlistForm');
     if (c.email) document.querySelectorAll('.js-contact-email').forEach(el => { el.textContent = c.email; });
     if (c.social) {
       // Icon-only links — only href is set here, never textContent, which
@@ -749,11 +750,15 @@ async function loadContent() {
       const fbHandle = c.facebook.replace(/^@/, '').trim();
       if (fbHandle) document.querySelectorAll('.js-contact-facebook').forEach(el => { el.href = `https://www.facebook.com/${encodeURIComponent(fbHandle)}/`; });
     }
-    if (formEl && c.formAction) {
+    if (c.formAction) {
       // action/method stay as a no-JS fallback; initFormspreeAjax below takes
       // over the real submission (stays on-page, shows inline success/error).
-      formEl.setAttribute('action', c.formAction);
-      initFormspreeAjax(formEl, c.formAction);
+      // Every Formspree-wired form on the page (the apply form, and any
+      // custom page's short contact form) shares this class.
+      document.querySelectorAll('.js-formspree-form').forEach(formEl => {
+        formEl.setAttribute('action', c.formAction);
+        initFormspreeAjax(formEl, c.formAction);
+      });
     }
   }
 

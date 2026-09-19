@@ -97,7 +97,8 @@
         "en": "Contact"
       },
       "body": [],
-      "showContactBlock": true
+      "showContactBlock": true,
+      "showContactForm": true
     }
   ],
   "theme": {
@@ -832,13 +833,13 @@
     "facebook": "61584361806271",
     "formAction": "https://formspree.io/f/mrpgddwk",
     "ctaLabel": {
-      "pl": "Skontaktuj się",
-      "en": "Contact us"
+      "pl": "Kontakt",
+      "en": "Contact"
     },
     "ctaColor": "#2b211a",
     "ctaSize": "medium",
-    "ctaLinkPl": "https://docs.google.com/forms/d/e/1FAIpQLSdA5B4u62-V5OMnPk-UbO-xaf03BnpaTi4w9R4OcOFtaiMx8g/viewform",
-    "ctaLinkEn": "https://docs.google.com/forms/u/1/d/1LWhqV1UkKpLp7_3WrhGpKj79k27e0jc6OX6Mo5B3gJQ/edit?usp=drive_web&ouid=117840897866608989784",
+    "ctaLinkPl": "page.html?slug=kontakt",
+    "ctaLinkEn": "page.html?slug=kontakt",
     "footerPhotos": {
       "enabled": false,
       "size": 64,
