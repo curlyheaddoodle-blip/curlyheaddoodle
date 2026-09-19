@@ -115,7 +115,10 @@ function renderKeyFields(containerId, keys) {
 }
 // Builds one fixed photo slot card (hero / about) — factored out of the old
 // standalone "Zdjęcia" card so each slot can live inside its own section card.
-function buildFixedSlotCard(slot) {
+// `visTarget`/`visKey` (optional) point at a boolean field to toggle this
+// slot's visibility on the live site (e.g. { key: 'hero', ... }, content.hero,
+// 'photoHidden') — used by Hero/O nas, not by per-block or footer slots.
+function buildFixedSlotCard(slot, visTarget, visKey) {
   const path = `images/${slot.key}.jpg`;
   const card = document.createElement('div');
   card.className = 'slot-card';
@@ -129,6 +132,7 @@ function buildFixedSlotCard(slot) {
       <button type="button" class="btn-small danger">Usuń zdjęcie</button>
     </div>
     <p class="slot-status"></p>
+    ${visTarget ? `<label class="checkbox-label" style="margin-top:8px"><input type="checkbox" data-act="vis"${visTarget[visKey] ? ' checked' : ''}> Ukryj to zdjęcie na stronie</label>` : ''}
   `;
   const preview = card.querySelector('.slot-preview');
   const fileInput = card.querySelector('input[type="file"]');
@@ -139,15 +143,18 @@ function buildFixedSlotCard(slot) {
     uploadPhoto(path, fileInput.files[0], status, preview, () => { fileInput.value = ''; });
   });
   card.querySelector('.btn-small.danger').addEventListener('click', () => removePhoto(path, status, preview));
+  if (visTarget) {
+    card.querySelector('[data-act="vis"]').addEventListener('change', e => { visTarget[visKey] = e.target.checked; });
+  }
   return card;
 }
 function renderHero() {
   renderKeyFields('heroFieldsEditor', SECTION_KEY_GROUPS.hero);
-  const grid = document.getElementById('heroSlotGrid');
-  grid.innerHTML = '';
-  grid.appendChild(buildFixedSlotCard({ key: 'hero', label: 'Zdjęcie główne (Hero)', hint: 'Widoczne na górze strony głównej.' }));
   if (!content.hero) content.hero = { body: [] };
   if (!content.hero.body) content.hero.body = [];
+  const grid = document.getElementById('heroSlotGrid');
+  grid.innerHTML = '';
+  grid.appendChild(buildFixedSlotCard({ key: 'hero', label: 'Zdjęcie główne (Hero)', hint: 'Widoczne na górze strony głównej.' }, content.hero, 'photoHidden'));
   renderParagraphEditor('heroBodyEditor', content.hero.body, renderHero);
 }
 
@@ -583,6 +590,7 @@ function renderParagraphEditor(containerId, list, rerender) {
       <div class="repeat-item-head">
         <span class="repeat-title">Akapit ${index + 1}</span>
         <div class="repeat-item-actions">
+          <label class="checkbox-label" style="font-size:0.85rem"><input type="checkbox" data-act="hidden"${block.hidden ? ' checked' : ''}> Ukryty</label>
           <button type="button" class="btn-small" data-act="up">↑</button>
           <button type="button" class="btn-small" data-act="down">↓</button>
           <button type="button" class="btn-small danger" data-act="remove">Usuń</button>
@@ -648,6 +656,7 @@ function renderParagraphEditor(containerId, list, rerender) {
     row.appendChild(buildCardEditor(block));
     row.appendChild(buildPhotoEditor(block, rerender));
     row.appendChild(buildBulletsEditor(block, rerender));
+    row.querySelector('[data-act="hidden"]').addEventListener('change', e => { block.hidden = e.target.checked; });
     row.querySelector('[data-act="up"]').addEventListener('click', () => moveItem(list, index, -1, rerender));
     row.querySelector('[data-act="down"]').addEventListener('click', () => moveItem(list, index, 1, rerender));
     row.querySelector('[data-act="remove"]').addEventListener('click', () => {
@@ -853,7 +862,7 @@ function renderAboutBody() {
   renderKeyFields('aboutFieldsEditor', SECTION_KEY_GROUPS.about);
   const grid = document.getElementById('aboutSlotGrid');
   grid.innerHTML = '';
-  grid.appendChild(buildFixedSlotCard({ key: 'about', label: 'Zdjęcie „O nas”', hint: 'Sekcja o Karolinie i Pawle.' }));
+  grid.appendChild(buildFixedSlotCard({ key: 'about', label: 'Zdjęcie „O nas”', hint: 'Sekcja o Karolinie i Pawle.' }, content.about, 'photoHidden'));
   renderParagraphEditor('aboutBodyEditor', content.about.body, renderAboutBody);
 }
 function renderBreedBody() {
@@ -983,6 +992,7 @@ function buildDogRow(dog, index) {
     <div class="repeat-item-head">
       <span class="repeat-title">Pies ${index + 1}</span>
       <div class="repeat-item-actions">
+        <label class="checkbox-label" style="font-size:0.85rem"><input type="checkbox" data-act="hidden"${dog.hidden ? ' checked' : ''}> Ukryty</label>
         <button type="button" class="btn-small" data-act="up">↑</button>
         <button type="button" class="btn-small" data-act="down">↓</button>
         <button type="button" class="btn-small danger" data-act="remove">Usuń</button>
@@ -1024,6 +1034,7 @@ function buildDogRow(dog, index) {
       dog[group][lang] = input.value;
     });
   });
+  row.querySelector('[data-act="hidden"]').addEventListener('change', e => { dog.hidden = e.target.checked; });
   row.querySelector('[data-act="up"]').addEventListener('click', () => moveItem(content.dogs, index, -1, renderDogsEditor));
   row.querySelector('[data-act="down"]').addEventListener('click', () => moveItem(content.dogs, index, 1, renderDogsEditor));
   row.querySelector('[data-act="remove"]').addEventListener('click', () => {
@@ -1107,6 +1118,7 @@ function buildLitterRow(litter, index) {
     <div class="repeat-item-head">
       <span class="repeat-title">Miot ${index + 1}</span>
       <div class="repeat-item-actions">
+        <label class="checkbox-label" style="font-size:0.85rem"><input type="checkbox" data-act="hidden"${litter.hidden ? ' checked' : ''}> Ukryty</label>
         <button type="button" class="btn-small" data-act="up">↑</button>
         <button type="button" class="btn-small" data-act="down">↓</button>
         <button type="button" class="btn-small danger" data-act="remove">Usuń</button>
@@ -1145,6 +1157,7 @@ function buildLitterRow(litter, index) {
       else litter[path[0]][path[1]] = input.value;
     });
   });
+  row.querySelector('[data-act="hidden"]').addEventListener('change', e => { litter.hidden = e.target.checked; });
   row.querySelector('[data-act="up"]').addEventListener('click', () => moveItem(content.litters, index, -1, renderLittersEditor));
   row.querySelector('[data-act="down"]').addEventListener('click', () => moveItem(content.litters, index, 1, renderLittersEditor));
   row.querySelector('[data-act="remove"]').addEventListener('click', () => {

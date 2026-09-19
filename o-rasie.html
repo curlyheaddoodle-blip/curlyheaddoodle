@@ -53,14 +53,14 @@
 
 <main id="main">
   <section class="section">
-    <div class="wrap breed-grid">
-      <div>
-        <h1 data-i18n="breed_heading">Poznaj rasę Mini Goldendoodle</h1>
-        <!-- Rendered by script.js from data/content.json (breed.body array) — add/remove/reorder paragraphs from admin.html. -->
-        <div id="breedBody"></div>
-      </div>
-      <!-- Rendered by script.js from data/content.json (breed.facts array) — add/remove/reorder facts from admin.html. -->
-      <dl class="fact-list" id="breedFacts"></dl>
+    <div class="wrap">
+      <h1 data-i18n="breed_heading">Poznaj rasę Mini Goldendoodle</h1>
+      <!-- Rendered by script.js from data/content.json (breed.facts array) — add/remove/reorder facts from admin.html.
+           Kept as a compact block (not a full-height sidebar) so it only
+           takes up part of the page, leaving the rest full-width for body text. -->
+      <dl class="fact-list breed-facts-block" id="breedFacts"></dl>
+      <!-- Rendered by script.js from data/content.json (breed.body array) — add/remove/reorder paragraphs from admin.html. -->
+      <div id="breedBody"></div>
     </div>
   </section>
 </main>

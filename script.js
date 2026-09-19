@@ -228,6 +228,7 @@ function renderDogs(lang) {
   if (!grid) return;
   grid.innerHTML = '';
   (activeContent.dogs || []).forEach(dog => {
+    if (dog.hidden) return;
     const card = document.createElement('div');
     card.className = 'dog-card';
     card.innerHTML = '<div class="dog-photo" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-paw"/></svg></div><h4></h4><p class="dog-role"></p><p class="dog-bio"></p>';
@@ -246,6 +247,7 @@ function renderLitters(lang) {
   if (!list) return;
   list.innerHTML = '';
   (activeContent.litters || []).forEach(litter => {
+    if (litter.hidden) return;
     const li = document.createElement('li');
     li.className = 'litter';
     const statusKey = 'status_' + (litter.status || 'available');
@@ -283,7 +285,7 @@ function populateLitterSelect(lang) {
   const staticOption = select.querySelector('[data-i18n="field_litter_opt3"]');
   select.querySelectorAll('option:not([data-i18n="field_litter_opt3"])').forEach(o => o.remove());
   (activeContent.litters || []).forEach(litter => {
-    if (litter.status === 'reserved') return;
+    if (litter.status === 'reserved' || litter.hidden) return;
     const statusKey = 'status_' + litter.status;
     const statusLabel = (activeContent.translations[statusKey] && activeContent.translations[statusKey][lang]) || '';
     const opt = document.createElement('option');
@@ -314,6 +316,7 @@ function renderContentBlocks(containerId, blocks, lang) {
   if (!el) return;
   el.innerHTML = '';
   (blocks || []).forEach(block => {
+    if (block.hidden) return;
     const outer = document.createElement('div');
     outer.className = 'content-block';
 
@@ -534,6 +537,14 @@ function applyPhotoSlots() {
     img.src = `images/${slot}.jpg`;
   });
 }
+// Hides the fixed hero/about photo slots when their "photoHidden" toggle
+// (admin.html, per-section photo card) is on.
+function applyPhotoVisibility() {
+  const heroSlot = document.querySelector('[data-photo-slot="hero"]');
+  if (heroSlot) heroSlot.hidden = !!(activeContent.hero && activeContent.hero.photoHidden);
+  const aboutSlot = document.querySelector('[data-photo-slot="about"]');
+  if (aboutSlot) aboutSlot.hidden = !!(activeContent.about && activeContent.about.photoHidden);
+}
 
 // ---- Menu order ----
 // Reorders the nav's <a data-section> links (about/breed/dogs/litters/
@@ -646,6 +657,7 @@ async function loadContent() {
 
   applyTheme(activeContent.theme);
   applyPhotoSlots();
+  applyPhotoVisibility();
   applyBrandName();
   applyLogo();
 
