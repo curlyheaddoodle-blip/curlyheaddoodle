@@ -1,6 +1,7 @@
 {
   "site": {
-    "brandName": "Curly Head Doodle"
+    "brandName": "Curly Head Doodle",
+    "logoSize": 42
   },
   "hero": {
     "body": [

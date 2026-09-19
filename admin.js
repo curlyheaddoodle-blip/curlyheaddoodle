@@ -118,7 +118,9 @@ function renderKeyFields(containerId, keys) {
 // `visTarget`/`visKey` (optional) point at a boolean field to toggle this
 // slot's visibility on the live site (e.g. { key: 'hero', ... }, content.hero,
 // 'photoHidden') — used by Hero/O nas, not by per-block or footer slots.
-function buildFixedSlotCard(slot, visTarget, visKey) {
+// `sizeTarget`/`sizeKey`/`sizeDefault` (optional, same shape) add a size (px)
+// input the same way, for the same two callers.
+function buildFixedSlotCard(slot, visTarget, visKey, sizeTarget, sizeKey, sizeDefault) {
   const path = `images/${slot.key}.jpg`;
   const card = document.createElement('div');
   card.className = 'slot-card';
@@ -132,6 +134,7 @@ function buildFixedSlotCard(slot, visTarget, visKey) {
       <button type="button" class="btn-small danger">Usuń zdjęcie</button>
     </div>
     <p class="slot-status"></p>
+    ${sizeTarget ? `<div class="repeat-row single" style="margin-top:8px"><div><label>Rozmiar (px)</label><input type="number" min="60" max="700" data-act="size" value="${sizeTarget[sizeKey] || sizeDefault}"></div></div>` : ''}
     ${visTarget ? `<label class="checkbox-label" style="margin-top:8px"><input type="checkbox" data-act="vis"${visTarget[visKey] ? ' checked' : ''}> Ukryj to zdjęcie na stronie</label>` : ''}
   `;
   const preview = card.querySelector('.slot-preview');
@@ -146,6 +149,9 @@ function buildFixedSlotCard(slot, visTarget, visKey) {
   if (visTarget) {
     card.querySelector('[data-act="vis"]').addEventListener('change', e => { visTarget[visKey] = e.target.checked; });
   }
+  if (sizeTarget) {
+    card.querySelector('[data-act="size"]').addEventListener('input', e => { sizeTarget[sizeKey] = Number(e.target.value) || sizeDefault; });
+  }
   return card;
 }
 function renderHero() {
@@ -154,7 +160,7 @@ function renderHero() {
   if (!content.hero.body) content.hero.body = [];
   const grid = document.getElementById('heroSlotGrid');
   grid.innerHTML = '';
-  grid.appendChild(buildFixedSlotCard({ key: 'hero', label: 'Zdjęcie główne (Hero)', hint: 'Widoczne na górze strony głównej.' }, content.hero, 'photoHidden'));
+  grid.appendChild(buildFixedSlotCard({ key: 'hero', label: 'Zdjęcie główne (Hero)', hint: 'Widoczne na górze strony głównej.' }, content.hero, 'photoHidden', content.hero, 'photoSize', 420));
   renderParagraphEditor('heroBodyEditor', content.hero.body, renderHero);
 }
 
@@ -471,8 +477,9 @@ function renderBrand() {
       <button type="button" class="btn-small danger" id="logoRemoveBtn">Usuń</button>
     </div>
     <p class="slot-status" id="logoStatus">Logo powinno być PNG z przezroczystym tłem, najlepiej kwadratowe.</p>
-    <div class="repeat-row single" style="margin-top:16px">
+    <div class="repeat-row">
       <div><label>Nazwa marki (nagłówek i stopka)</label><input id="brandNameInput" value="${escapeAttr(content.site.brandName)}"></div>
+      <div><label>Rozmiar logo (px)</label><input type="number" min="20" max="120" id="logoSizeInput" value="${(content.site.logoSize || 42)}"></div>
     </div>
   `;
   const preview = document.getElementById('logoPreview');
@@ -496,7 +503,10 @@ function getFieldValue(id, sectionLabel) {
 }
 
 function collectBrand() {
-  return { brandName: getFieldValue('brandNameInput', 'Logo i nazwa marki') };
+  return {
+    brandName: getFieldValue('brandNameInput', 'Logo i nazwa marki'),
+    logoSize: Number(getFieldValue('logoSizeInput', 'Logo i nazwa marki')) || 42,
+  };
 }
 
 // ---- Theme editor ----
@@ -730,7 +740,7 @@ function buildPhotoEditor(block, rerenderBlock) {
       </div>
       <div class="repeat-row">
         <div><label>Pozycja</label>
-          <select data-pf="position">
+          <select data-pf-rerender="position">
             <option value="left"${block.photo.position === 'left' ? ' selected' : ''}>Lewo</option>
             <option value="right"${block.photo.position === 'right' ? ' selected' : ''}>Prawo</option>
             <option value="top"${block.photo.position === 'top' ? ' selected' : ''}>Góra</option>
@@ -744,6 +754,9 @@ function buildPhotoEditor(block, rerenderBlock) {
             <option value="right"${block.photo.textAlign === 'right' ? ' selected' : ''}>Do prawej</option>
           </select>
         </div>
+      </div>
+      <div class="repeat-row single"${block.photo.position === 'top' || block.photo.position === 'bottom' ? ' hidden' : ''}>
+        <div><label>Rozmiar (px) — tylko dla pozycji Lewo/Prawo</label><input type="number" min="60" max="500" data-pf="size" value="${block.photo.size || (isCollage ? 200 : 120)}"></div>
       </div>
       <div class="photo-upload-grid"></div>
     </div>
@@ -763,6 +776,8 @@ function buildPhotoEditor(block, rerenderBlock) {
   wrap.querySelectorAll('select[data-pf]').forEach(select => {
     select.addEventListener('input', () => { block.photo[select.dataset.pf] = select.value; });
   });
+  const sizeInput = wrap.querySelector('input[data-pf="size"]');
+  if (sizeInput) sizeInput.addEventListener('input', () => { block.photo.size = Number(sizeInput.value) || (isCollage ? 200 : 120); });
 
   const uploadGrid = wrap.querySelector('.photo-upload-grid');
   uploadGrid.className = 'photo-upload-grid' + (isCollage ? ' is-collage' : '');
@@ -862,7 +877,7 @@ function renderAboutBody() {
   renderKeyFields('aboutFieldsEditor', SECTION_KEY_GROUPS.about);
   const grid = document.getElementById('aboutSlotGrid');
   grid.innerHTML = '';
-  grid.appendChild(buildFixedSlotCard({ key: 'about', label: 'Zdjęcie „O nas”', hint: 'Sekcja o Karolinie i Pawle.' }, content.about, 'photoHidden'));
+  grid.appendChild(buildFixedSlotCard({ key: 'about', label: 'Zdjęcie „O nas”', hint: 'Sekcja o Karolinie i Pawle.' }, content.about, 'photoHidden', content.about, 'photoSize', 480));
   renderParagraphEditor('aboutBodyEditor', content.about.body, renderAboutBody);
 }
 function renderBreedBody() {

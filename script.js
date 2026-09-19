@@ -398,11 +398,17 @@ function renderContentBlocks(containerId, blocks, lang) {
 
     const photoOn = block.photo && block.photo.enabled;
     if (photoOn) {
-      outer.classList.add('has-photo', 'photo-' + (block.photo.position || 'left'));
+      const position = block.photo.position || 'left';
+      outer.classList.add('has-photo', 'photo-' + position);
+      // A custom size only applies for the left/right layout — top/bottom
+      // are intentionally full-width (CSS handles that), so an inline width
+      // there would just fight the layout instead of resizing anything.
+      const sizePx = position !== 'top' && position !== 'bottom' ? block.photo.size : null;
       if (block.photo.mode === 'collage') {
         const count = Math.min(5, Math.max(2, block.photo.count || 3));
         const collage = document.createElement('div');
         collage.className = 'content-block-collage';
+        if (sizePx) { collage.style.width = collage.style.flexBasis = `${sizePx}px`; }
         for (let i = 1; i <= count; i++) {
           const cell = document.createElement('div');
           cell.className = 'collage-photo';
@@ -414,6 +420,7 @@ function renderContentBlocks(containerId, blocks, lang) {
       } else {
         const photoEl = document.createElement('div');
         photoEl.className = 'content-block-photo';
+        if (sizePx) { photoEl.style.width = photoEl.style.flexBasis = `${sizePx}px`; }
         photoEl.setAttribute('data-photo-slot', block.id);
         photoEl.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-paw"/></svg>';
         outer.appendChild(photoEl);
@@ -612,9 +619,15 @@ function applyPhotoSlots() {
 // (admin.html, per-section photo card) is on.
 function applyPhotoVisibility() {
   const heroSlot = document.querySelector('[data-photo-slot="hero"]');
-  if (heroSlot) heroSlot.hidden = !!(activeContent.hero && activeContent.hero.photoHidden);
+  if (heroSlot) {
+    heroSlot.hidden = !!(activeContent.hero && activeContent.hero.photoHidden);
+    heroSlot.style.maxWidth = `${(activeContent.hero && activeContent.hero.photoSize) || 420}px`;
+  }
   const aboutSlot = document.querySelector('[data-photo-slot="about"]');
-  if (aboutSlot) aboutSlot.hidden = !!(activeContent.about && activeContent.about.photoHidden);
+  if (aboutSlot) {
+    aboutSlot.hidden = !!(activeContent.about && activeContent.about.photoHidden);
+    aboutSlot.style.maxWidth = `${(activeContent.about && activeContent.about.photoSize) || 480}px`;
+  }
 }
 
 // ---- Menu order ----
@@ -690,10 +703,13 @@ function applyBrandName() {
 function applyLogo() {
   const slot = document.querySelector('[data-logo-slot="logo"]');
   if (!slot) return;
+  const size = (activeContent.site && activeContent.site.logoSize) || 42;
+  slot.style.width = slot.style.height = `${size}px`;
   const img = new Image();
   img.onload = () => {
     slot.innerHTML = '';
     img.alt = '';
+    img.style.width = img.style.height = `${size}px`;
     slot.appendChild(img);
     slot.classList.add('has-logo');
   };
