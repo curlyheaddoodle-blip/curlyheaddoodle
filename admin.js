@@ -44,7 +44,7 @@ const LABELS = {
   breed_fact3_label: 'Cecha 3: etykieta', breed_fact3_value: 'Cecha 3: wartość', breed_fact4_label: 'Cecha 4: etykieta', breed_fact4_value: 'Cecha 4: wartość',
   dogs_heading: 'Nagłówek', dogs_lede: 'Zapowiedź', dogs_note: 'Notatka na dole',
   litters_heading: 'Nagłówek', litters_lede: 'Zapowiedź', litters_note: 'Notatka na dole',
-  status_available: 'Etykieta statusu: dostępny', status_expecting: 'Etykieta statusu: oczekiwany', status_reserved: 'Etykieta statusu: zarezerwowany',
+  status_available: 'Etykieta statusu: dostępny', status_expecting: 'Etykieta statusu: oczekiwany', status_reserved: 'Etykieta statusu: zarezerwowany', status_previous: 'Etykieta statusu: poprzedni miot',
   contact_heading: 'Nagłówek', contact_lede: 'Zapowiedź', contact_location_label: 'Etykieta: lokalizacja', contact_location_value: 'Wartość: lokalizacja',
   contact_email_label: 'Etykieta: e-mail', contact_social_label: 'Etykieta: media społecznościowe',
   field_section1_heading: 'Nagłówek sekcji 1', field_name: 'Pole: imię i nazwisko', field_email: 'Pole: e-mail', field_phone: 'Pole: telefon',
@@ -74,12 +74,12 @@ const TRANSLATION_GROUPS = [
 // together with that section's photo/body/list editor, instead of buried
 // in the separate "Wszystkie teksty" accordion.
 const SECTION_KEY_GROUPS = {
-  hero: ['hero_headline', 'hero_subhead', 'hero_cta_primary', 'hero_cta_secondary'],
-  about: ['about_kicker', 'about_heading', 'about_cta', 'why_heading',
+  hero: ['hero_headline', 'hero_subhead', 'hero_cta_primary', 'hero_cta_secondary', 'why_heading',
     'why1_title', 'why1_body', 'why2_title', 'why2_body', 'why3_title', 'why3_body', 'why4_title', 'why4_body'],
+  about: ['about_kicker', 'about_heading', 'about_cta'],
   breed: ['breed_heading'],
   dogs: ['dogs_heading', 'dogs_lede', 'dogs_note'],
-  litters: ['litters_heading', 'litters_lede', 'litters_note', 'status_available', 'status_expecting', 'status_reserved'],
+  litters: ['litters_heading', 'litters_lede', 'litters_note', 'status_available', 'status_expecting', 'status_reserved', 'status_previous'],
   contact: ['contact_heading', 'contact_lede', 'contact_location_label', 'contact_location_value', 'contact_email_label', 'contact_social_label'],
 };
 const LONG_QUESTION_KEYS = new Set([
@@ -1087,6 +1087,7 @@ const STATUS_OPTIONS = [
   { value: 'available', label: 'Dostępny' },
   { value: 'expecting', label: 'Oczekiwany' },
   { value: 'reserved', label: 'Zarezerwowany' },
+  { value: 'previous', label: 'Poprzedni miot' },
 ];
 function renderLittersEditor() {
   const el = document.getElementById('littersEditor');
@@ -1367,14 +1368,52 @@ function collectTranslations() {
 // no backend to proxy the request through). A MutationObserver keeps this
 // working automatically as sections render/re-render, instead of needing
 // every render function updated by hand.
-async function callTranslate(text, sourceLang, targetLang) {
-  const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${targetLang}`;
+// MyMemory rejects anything over 500 chars per request — and does it with an
+// HTTP 200 whose "translation" is literally the words "QUERY LENGTH LIMIT
+// EXCEEDED...", which the old code happily wrote into the field. Longer text
+// is now split on sentence boundaries into <500-char chunks, each translated
+// separately and stitched back together, so long paragraphs actually work
+// instead of erroring (or silently filling in the error message).
+function splitIntoChunks(text, maxLen) {
+  if (text.length <= maxLen) return [text];
+  const sentences = text.split(/(?<=[.!?])\s+/);
+  const chunks = [];
+  let current = '';
+  sentences.forEach(sentence => {
+    if (sentence.length > maxLen) {
+      if (current) { chunks.push(current); current = ''; }
+      for (let i = 0; i < sentence.length; i += maxLen) chunks.push(sentence.slice(i, i + maxLen));
+      return;
+    }
+    if (current && (current + ' ' + sentence).length > maxLen) {
+      chunks.push(current);
+      current = sentence;
+    } else {
+      current = current ? current + ' ' + sentence : sentence;
+    }
+  });
+  if (current) chunks.push(current);
+  return chunks;
+}
+async function translateChunk(chunk, sourceLang, targetLang) {
+  const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(chunk)}&langpair=${sourceLang}|${targetLang}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Błąd serwera tłumaczeń (${res.status})`);
   const data = await res.json();
+  if (data.responseStatus && String(data.responseStatus) !== '200') {
+    throw new Error(data.responseDetails || `Błąd tłumaczenia (${data.responseStatus})`);
+  }
   const translated = data.responseData && data.responseData.translatedText;
   if (!translated) throw new Error('Brak odpowiedzi z serwisu tłumaczeń.');
   return translated;
+}
+async function callTranslate(text, sourceLang, targetLang) {
+  const chunks = splitIntoChunks(text, 450);
+  const results = [];
+  for (const chunk of chunks) {
+    results.push(await translateChunk(chunk, sourceLang, targetLang));
+  }
+  return results.join(' ');
 }
 async function translateField(srcEl, targetEl, srcLang, targetLang, btn) {
   const text = srcEl.value.trim();

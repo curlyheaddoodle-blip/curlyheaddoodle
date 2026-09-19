@@ -95,6 +95,7 @@ const FALLBACK_CONTENT = {
     status_available: { pl: 'Dostępne teraz', en: 'Available now' },
     status_expecting: { pl: 'Oczekiwany', en: 'Expecting' },
     status_reserved: { pl: 'Zarezerwowany', en: 'Reserved' },
+    status_previous: { pl: 'Poprzedni miot', en: 'Previous litter' },
     contact_heading: { pl: 'Wypełnij ankietę', en: 'Apply now' },
     contact_lede: { pl: 'Opowiedz nam trochę o swoim domu.', en: 'Tell us a bit about your home.' },
     contact_location_label: { pl: 'Lokalizacja', en: 'Location' },
@@ -192,7 +193,7 @@ function applyTheme(theme) {
 }
 
 // ---- 5. Dogs / litters ----
-const STATUS_CLASS = { available: 'status-available', expecting: 'status-expecting', reserved: 'status-reserved' };
+const STATUS_CLASS = { available: 'status-available', expecting: 'status-expecting', reserved: 'status-reserved', previous: 'status-previous' };
 
 // Generic "label/value" list — used for breed facts, and for the open-ended
 // extra details a site owner can add to a dog, a litter, or the contact
