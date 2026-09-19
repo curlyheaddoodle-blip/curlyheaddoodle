@@ -161,6 +161,7 @@ function renderHero() {
   const grid = document.getElementById('heroSlotGrid');
   grid.innerHTML = '';
   grid.appendChild(buildFixedSlotCard({ key: 'hero', label: 'Zdjęcie główne (Hero)', hint: 'Widoczne na górze strony głównej.' }, content.hero, 'photoHidden', content.hero, 'photoSize', 420));
+  grid.appendChild(buildPhotoStyleFields(content.hero, 'photoShape', 'photoFit', 'circle', 'cover'));
   renderParagraphEditor('heroBodyEditor', content.hero.body, renderHero);
 }
 
@@ -482,6 +483,7 @@ function renderBrand() {
       <div><label>Rozmiar logo (px)</label><input type="number" min="20" max="120" id="logoSizeInput" value="${(content.site.logoSize || 42)}"></div>
     </div>
   `;
+  el.appendChild(buildPhotoStyleFields(content.site, 'logoShape', 'logoFit', 'square', 'contain'));
   const preview = document.getElementById('logoPreview');
   const fileInput = document.getElementById('logoFile');
   const status = document.getElementById('logoStatus');
@@ -506,6 +508,8 @@ function collectBrand() {
   return {
     brandName: getFieldValue('brandNameInput', 'Logo i nazwa marki'),
     logoSize: Number(getFieldValue('logoSizeInput', 'Logo i nazwa marki')) || 42,
+    logoShape: content.site.logoShape,
+    logoFit: content.site.logoFit,
   };
 }
 
@@ -878,6 +882,7 @@ function renderAboutBody() {
   const grid = document.getElementById('aboutSlotGrid');
   grid.innerHTML = '';
   grid.appendChild(buildFixedSlotCard({ key: 'about', label: 'Zdjęcie „O nas”', hint: 'Sekcja o Karolinie i Pawle.' }, content.about, 'photoHidden', content.about, 'photoSize', 480));
+  grid.appendChild(buildPhotoStyleFields(content.about, 'photoShape', 'photoFit', 'rounded', 'cover'));
   renderParagraphEditor('aboutBodyEditor', content.about.body, renderAboutBody);
 }
 function renderBreedBody() {
@@ -1000,6 +1005,9 @@ function renderDogsEditor() {
   renderKeyFields('dogsFieldsEditor', SECTION_KEY_GROUPS.dogs);
   if (!content.dogsSection) content.dogsSection = { photoSize: 200 };
   document.getElementById('dogsPhotoSize').value = content.dogsSection.photoSize;
+  const dogsStyleWrap = document.getElementById('dogsPhotoStyleFields');
+  dogsStyleWrap.innerHTML = '';
+  dogsStyleWrap.appendChild(buildPhotoStyleFields(content.dogsSection, 'shape', 'fit', 'rounded', 'cover'));
   const el = document.getElementById('dogsEditor');
   el.innerHTML = '';
   content.dogs.forEach((dog, index) => {
@@ -1134,6 +1142,9 @@ const STATUS_OPTIONS = [
 function renderLittersEditor() {
   if (!content.littersSection) content.littersSection = { photoSize: 160 };
   document.getElementById('littersPhotoSize').value = content.littersSection.photoSize;
+  const littersStyleWrap = document.getElementById('littersPhotoStyleFields');
+  littersStyleWrap.innerHTML = '';
+  littersStyleWrap.appendChild(buildPhotoStyleFields(content.littersSection, 'shape', 'fit', 'rounded', 'cover'));
   const el = document.getElementById('littersEditor');
   el.innerHTML = '';
   content.litters.forEach((litter, index) => {
@@ -1236,6 +1247,36 @@ function moveItem(arr, index, delta, rerender) {
   rerender();
 }
 
+// Shared shape + fit controls for any photo spot — Hero, O nas, logo,
+// footer photos, dog photos, litter photos. `target[shapeKey]` is
+// 'circle' | 'rounded' | 'square' (border-radius); `target[fitKey]` is
+// 'cover' | 'contain' (how the image fills its frame). Returns a row to
+// insert next to that spot's upload/size controls.
+function buildPhotoStyleFields(target, shapeKey, fitKey, shapeDefault, fitDefault) {
+  if (!target[shapeKey]) target[shapeKey] = shapeDefault || 'rounded';
+  if (!target[fitKey]) target[fitKey] = fitDefault || 'cover';
+  const wrap = document.createElement('div');
+  wrap.className = 'repeat-row';
+  wrap.style.marginTop = '8px';
+  wrap.innerHTML = `
+    <div><label>Kształt</label>
+      <select data-act="shape">
+        <option value="circle"${target[shapeKey] === 'circle' ? ' selected' : ''}>Koło</option>
+        <option value="rounded"${target[shapeKey] === 'rounded' ? ' selected' : ''}>Zaokrąglony</option>
+        <option value="square"${target[shapeKey] === 'square' ? ' selected' : ''}>Kwadrat (proste rogi)</option>
+      </select>
+    </div>
+    <div><label>Dopasowanie zdjęcia</label>
+      <select data-act="fit">
+        <option value="cover"${target[fitKey] === 'cover' ? ' selected' : ''}>Wypełnij (przytnij)</option>
+        <option value="contain"${target[fitKey] === 'contain' ? ' selected' : ''}>Zmieść w całości</option>
+      </select>
+    </div>
+  `;
+  wrap.querySelector('[data-act="shape"]').addEventListener('input', e => { target[shapeKey] = e.target.value; });
+  wrap.querySelector('[data-act="fit"]').addEventListener('input', e => { target[fitKey] = e.target.value; });
+  return wrap;
+}
 // Generic "label/value" list editor — shared by breed facts, contact extra
 // details, and per-dog/per-litter extra fields, so adding a brand-new kind
 // of detail anywhere never needs new code, just this one reusable editor.
@@ -1331,6 +1372,7 @@ function renderContactEditor() {
         </div>
       </div>
       <div class="photo-upload-grid is-collage" id="footerPhotosUploadGrid" style="margin-top:10px"${content.contact.footerPhotos.enabled ? '' : ' hidden'}></div>
+      <div id="footerPhotosStyleFields"${content.contact.footerPhotos.enabled ? '' : ' hidden'}></div>
     </div>
     <div class="style-wrap">
       <p class="t-key-label">Dodatkowe szczegóły kontaktowe (np. lokalizacja, telefon) — widoczne wszędzie obok e-maila</p>
@@ -1339,12 +1381,15 @@ function renderContactEditor() {
     </div>
   `;
   renderFooterPhotoSlots();
+  document.getElementById('footerPhotosStyleFields').appendChild(
+    buildPhotoStyleFields(content.contact.footerPhotos, 'shape', 'fit', 'rounded', 'cover'));
   renderFactListEditor('contactDetailsEditor', content.contact.details, renderContactEditor);
   const fieldsWrap = el.querySelector('.style-fields');
   const uploadGrid = document.getElementById('footerPhotosUploadGrid');
+  const styleFieldsWrap = document.getElementById('footerPhotosStyleFields');
   document.getElementById('contact-footerPhotosEnabled').addEventListener('change', e => {
     content.contact.footerPhotos.enabled = e.target.checked;
-    fieldsWrap.hidden = uploadGrid.hidden = !e.target.checked;
+    fieldsWrap.hidden = uploadGrid.hidden = styleFieldsWrap.hidden = !e.target.checked;
   });
   document.getElementById('contact-footerPhotosCount').addEventListener('change', e => {
     content.contact.footerPhotos.count = Number(e.target.value);
@@ -1379,6 +1424,8 @@ function collectContact() {
       enabled: document.getElementById('contact-footerPhotosEnabled').checked,
       size: Number(getFieldValue('contact-footerPhotosSize', 'Kontakt')) || 64,
       count: Number(document.getElementById('contact-footerPhotosCount').value) || 3,
+      shape: content.contact.footerPhotos.shape,
+      fit: content.contact.footerPhotos.fit,
     },
     details: content.contact.details,
   };

@@ -229,7 +229,7 @@ function renderFactList(containerId, items, lang) {
 // carousel with prev/next + dots) that links to the full-size image in a
 // new tab. `baseId` names the files: images/<baseId>.jpg for photo 1,
 // images/<baseId>-2.jpg, -3.jpg, ... for the rest.
-function buildPhotoCarousel(baseId, count, sizePx) {
+function buildPhotoCarousel(baseId, count, sizePx, shape, fit) {
   count = Math.max(1, count || 1);
   const wrap = document.createElement('div');
   wrap.className = 'photo-carousel';
@@ -237,12 +237,14 @@ function buildPhotoCarousel(baseId, count, sizePx) {
 
   const frame = document.createElement('a');
   frame.className = 'photo-carousel-frame';
+  frame.style.borderRadius = borderRadiusFor(shape);
   frame.target = '_blank';
   frame.rel = 'noopener noreferrer';
   frame.setAttribute('aria-label', 'Powiększ zdjęcie (otwiera się w nowej karcie)');
   const img = document.createElement('img');
   img.alt = '';
   img.loading = 'lazy';
+  img.style.objectFit = fit || 'cover';
   frame.appendChild(img);
   wrap.appendChild(frame);
 
@@ -292,12 +294,13 @@ function renderDogs(lang) {
   const grid = document.getElementById('dogsGrid');
   if (!grid) return;
   grid.innerHTML = '';
-  const sizePx = (activeContent.dogsSection && activeContent.dogsSection.photoSize) || 200;
+  const dogsSection = activeContent.dogsSection || {};
+  const sizePx = dogsSection.photoSize || 200;
   (activeContent.dogs || []).forEach(dog => {
     if (dog.hidden) return;
     const card = document.createElement('div');
     card.className = 'dog-card';
-    card.appendChild(buildPhotoCarousel(dog.id, dog.photoCount, sizePx));
+    card.appendChild(buildPhotoCarousel(dog.id, dog.photoCount, sizePx, dogsSection.shape, dogsSection.fit));
     const h4 = document.createElement('h4'); h4.textContent = (dog.name && dog.name[lang]) || ''; card.appendChild(h4);
     const role = document.createElement('p'); role.className = 'dog-role'; role.textContent = (dog.role && dog.role[lang]) || ''; card.appendChild(role);
     const bio = document.createElement('p'); bio.className = 'dog-bio'; bio.textContent = (dog.bio && dog.bio[lang]) || ''; card.appendChild(bio);
@@ -310,7 +313,8 @@ function renderLitters(lang) {
   const list = document.getElementById('litterList');
   if (!list) return;
   list.innerHTML = '';
-  const sizePx = (activeContent.littersSection && activeContent.littersSection.photoSize) || 160;
+  const littersSection = activeContent.littersSection || {};
+  const sizePx = littersSection.photoSize || 160;
   (activeContent.litters || []).forEach(litter => {
     if (litter.hidden) return;
     const li = document.createElement('li');
@@ -318,7 +322,7 @@ function renderLitters(lang) {
     const statusKey = 'status_' + (litter.status || 'available');
     const statusLabel = (activeContent.translations[statusKey] && activeContent.translations[statusKey][lang]) || '';
     const ctaText = litter.cta && litter.cta[lang];
-    if (litter.photoCount > 0) li.appendChild(buildPhotoCarousel(litter.id, litter.photoCount, sizePx));
+    if (litter.photoCount > 0) li.appendChild(buildPhotoCarousel(litter.id, litter.photoCount, sizePx, littersSection.shape, littersSection.fit));
     const restWrap = document.createElement('div');
     restWrap.className = 'litter-rest';
     restWrap.innerHTML = '<span class="status"></span><div class="litter-body"><h3></h3><p></p></div>';
@@ -584,6 +588,8 @@ function applyFooterPhotos() {
   for (let i = 1; i <= (cfg.count || 3); i++) {
     const img = document.createElement('img');
     img.style.width = img.style.height = `${size}px`;
+    img.style.borderRadius = borderRadiusFor(cfg.shape);
+    img.style.objectFit = cfg.fit || 'cover';
     img.alt = '';
     img.onerror = () => img.remove();
     img.src = `images/footer-${i}.jpg?t=${Date.now()}`;
@@ -599,6 +605,10 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
 // Photos are uploaded via admin.html (Settings panel), which commits them to
 // this exact path in the repo. Until a slot's file exists, the placeholder
 // icon markup stays as-is. Re-run after renderDogs since it rebuilds nodes.
+// border-radius: '' (browser default) | 'circle' | 'rounded' | 'square'
+function borderRadiusFor(shape) {
+  return shape === 'circle' ? '50%' : shape === 'square' ? '0' : shape === 'rounded' ? 'var(--radius)' : '';
+}
 function applyPhotoSlots() {
   document.querySelectorAll('[data-photo-slot]:not([data-photo-checked])').forEach(container => {
     container.setAttribute('data-photo-checked', '1');
@@ -610,6 +620,8 @@ function applyPhotoSlots() {
       img.loading = 'lazy';
       container.appendChild(img);
       container.classList.add('has-photo');
+      if (slot === 'hero' && activeContent.hero) img.style.objectFit = activeContent.hero.photoFit || '';
+      if (slot === 'about' && activeContent.about) img.style.objectFit = activeContent.about.photoFit || '';
     };
     img.onerror = () => { /* no photo uploaded yet — keep placeholder */ };
     img.src = `images/${slot}.jpg`;
@@ -622,11 +634,13 @@ function applyPhotoVisibility() {
   if (heroSlot) {
     heroSlot.hidden = !!(activeContent.hero && activeContent.hero.photoHidden);
     heroSlot.style.maxWidth = `${(activeContent.hero && activeContent.hero.photoSize) || 420}px`;
+    heroSlot.style.borderRadius = borderRadiusFor(activeContent.hero && activeContent.hero.photoShape);
   }
   const aboutSlot = document.querySelector('[data-photo-slot="about"]');
   if (aboutSlot) {
     aboutSlot.hidden = !!(activeContent.about && activeContent.about.photoHidden);
     aboutSlot.style.maxWidth = `${(activeContent.about && activeContent.about.photoSize) || 480}px`;
+    aboutSlot.style.borderRadius = borderRadiusFor(activeContent.about && activeContent.about.photoShape);
   }
 }
 
@@ -703,13 +717,17 @@ function applyBrandName() {
 function applyLogo() {
   const slot = document.querySelector('[data-logo-slot="logo"]');
   if (!slot) return;
-  const size = (activeContent.site && activeContent.site.logoSize) || 42;
+  const site = activeContent.site || {};
+  const size = site.logoSize || 42;
   slot.style.width = slot.style.height = `${size}px`;
+  slot.style.borderRadius = borderRadiusFor(site.logoShape);
   const img = new Image();
   img.onload = () => {
     slot.innerHTML = '';
     img.alt = '';
     img.style.width = img.style.height = `${size}px`;
+    img.style.objectFit = site.logoFit || 'contain';
+    img.style.borderRadius = borderRadiusFor(site.logoShape);
     slot.appendChild(img);
     slot.classList.add('has-logo');
   };
