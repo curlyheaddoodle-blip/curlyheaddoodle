@@ -7,16 +7,60 @@
       {
         "id": "block-mtz0w1byihxn",
         "heading": {
-          "pl": "test",
-          "en": "test"
+          "pl": "",
+          "en": ""
         },
         "headingFont": "default",
         "textFont": "default",
         "text": {
-          "pl": "rdjtdtd",
-          "en": "jd6dj6"
+          "pl": "Nasza hodowla w Mielcu to przede wszystkim nasz wspólny dom, w którym psy są pełnoprawnymi członkami rodziny: towarzyszą nam w codziennym życiu, odpoczywają na kanapie i asystują przy porannej kawie. Szczenięta dorastają w samym centrum domowego ogniska, od pierwszego oddechu otoczone czułością, codziennym gwarem i najlepszą możliwą opieką.",
+          "en": "Our breeding in Mielec is primarily our common home, where dogs are full members of the family: they accompany us in everyday life, relax on the couch and assist with morning coffee. Puppies grow up in the very center of the home campfire, surrounded by tenderness, everyday gusto and the best possible care from the first breath."
         },
         "bullets": [],
+        "card": {
+          "enabled": false,
+          "background": "#FFFDF9",
+          "borderColor": "#E0D3B8",
+          "borderWidth": 1
+        },
+        "photo": {
+          "enabled": true,
+          "mode": "single",
+          "position": "left",
+          "textAlign": "left",
+          "count": 3
+        }
+      },
+      {
+        "id": "block-mu5oylc6pg4v",
+        "heading": {
+          "pl": "**Dlaczego nasza hodowla Mini Goldendoodle to mądry wybór?**",
+          "en": "**Why is our Mini Goldendoodle a wise choice?**"
+        },
+        "headingFont": "default",
+        "textFont": "default",
+        "text": {
+          "pl": "",
+          "en": ""
+        },
+        "bullets": [
+          {
+            "pl": "**Dorastanie w sercu domu: **Maluchy od początku oswajają się z dźwiękiem odkurzacza, telewizora czy blendera. Zapoznajemy je również z odgłosami zgiełku miejskiego – samochodami, syrenami i ruchem ulicznym. Dzięki temu opuszczają nas odważne i gotowe na nowe wyzwania.",
+            "en": "**Growing up in the heart of the house: **Toddlers get used to the sound of a vacuum cleaner, TV or blender from the very beginning. We also familiarize them with the sounds of city noise – cars, sirens and traffic. Thanks to this, they leave us bold and ready for new challenges."
+          },
+          {
+            "pl": "**Świadome podejście do zdrowia: **Kwestie genetyczne traktujemy priorytetowo. Rodzice naszych szczeniąt posiadają niezwykle szczegółowe wyniki badań (m.in. obszerne pakiety Laboklin Labogenetics XXL), aby zminimalizować ryzyko chorób dziedzicznych i zapewnić maluchom bezpieczny start.",
+            "en": "**Conscious approach to health: ** Genetic issues are a priority for us. The parents of our puppies have extremely detailed test results (including extensive Laboklin Labogenetics XXL packages) to minimize the risk of hereditary diseases and ensure a safe start for the toddlers."
+          },
+          {
+            "pl": "**Nowoczesna socjalizacja: **Opieramy się na sprawdzonych, empatycznych programach (Badass Breeder, Puppy Culture). Wdrażamy wczesną stymulację neurologiczną i węchową (ENS/ESI), uczymy czystości i łagodnie oswajamy z zabiegami pielęgnacyjnymi.",
+            "en": "**Modern socialization: **We rely on proven, empathetic programs (Badass Breeder, Puppy Culture). We implement early neurological and olfactory stimulation (ENS/ESI), teach purity and gently familiarize with care treatments."
+          },
+          {
+            "pl": "**Wielopokoleniowe linie (Multigen): **Koncentrujemy się na zaawansowanych generacjach (np. F2B), uzyskując piękne psy w pożądanych odcieniach (apricot, red brown), z włosem wysoce przyjaznym dla alergików.",
+            "en": "**Multigenerational lines (Multigen): **We focus on advanced generations (e.g. F2B), obtaining beautiful dogs in the desired shades (apricot, red brown), with hair highly allergy friendly."
+          }
+        ],
         "card": {
           "enabled": false,
           "background": "#FFFDF9",
@@ -67,11 +111,11 @@
       "goldSoft": "#e3c68a",
       "line": "#e0d3b8"
     },
-    "fontPair": "fraunces-karla"
+    "fontPair": "cormorant-nunito"
   },
   "translations": {
     "hero_headline": {
-      "pl": "Curly Head Doodle – Przyjaźń, która ma cztery łapy i kręcony włos.",
+      "pl": "Curly Head Doodle – Przyjaciel, który ma cztery łapy i kręcony włos.",
       "en": "Curly Head Doodle – Friends with four paws and curly hair"
     },
     "hero_subhead": {
@@ -79,7 +123,7 @@
       "en": "An in-home Mini Goldendoodle breeder in the heart of the Podkarpacie region."
     },
     "hero_cta_primary": {
-      "pl": "Wypełnij ankietę",
+      "pl": "Formularz zgłoszeniowy",
       "en": "Apply now"
     },
     "hero_cta_secondary": {
@@ -143,12 +187,12 @@
       "en": "Our dogs"
     },
     "dogs_lede": {
-      "pl": "Poznaj rodziców naszych miotów — każdy z pełnymi badaniami zdrowotnymi i genetycznymi.",
-      "en": "Meet the parents behind our litters — each fully health- and genetically tested."
+      "pl": "",
+      "en": ""
     },
     "dogs_note": {
-      "pl": "Zdjęcia i pełne dane naszych psów dodamy tutaj.",
-      "en": "Photos and full profiles of our dogs will go here."
+      "pl": "🧬 Nasze psy posiadają czyste profile genetyczne, co oznacza, że są wolne od nosicielstwa mutacji powodujących najgroźniejsze choroby dziedziczne:  ✅ DM (Mielopatia degeneracyjna) – postępująca choroba rdzenia kręgowego prowadząca do niedowładów.  ✅ EF (Zespół epizodycznego upadania) – schorzenie neurologiczne objawiające się nagłym sztywnieniem mięśni i upadkami.  ✅ GM2 (Gangliozydoza) – ciężka choroba metaboliczna układu nerwowego.  ✅ MTCP (Makrotrombocytopenia) – anomalia płytek krwi (wykluczenie tej wady to kluczowe bezpieczeństwo przy ewentualnych zabiegach weterynaryjnych).  ✅ OCD (Osteochondrodysplazja) – dziedziczna choroba układu kostno-stawowego, powodująca karłowatość i deformacje kości.  ✅ PRA-prcd (Postępujący zanik siatkówki) – genetyczna utrata wzroku (czysty wynik to gwarancja zdrowych oczu do późnej starości).  ✅ vWD1 (Choroba von Willebranda) – zaburzenia krzepnięcia krwi (gwarantuje bezpieczeństwo np. w przypadku operacji czy kastracji).",
+      "en": "🧬 Our dogs have clear genetic profiles, meaning they are completely free from carrying mutations that cause the most severe hereditary diseases:  ✅ DM (Degenerative Myelopathy) – a progressive disease of the spinal cord that leads to weakness and paralysis.  ✅ EF (Episodic Falling Syndrome) – a neurological condition manifesting as sudden muscle stiffness and collapsing.  ✅ GM2 (Gangliosidosis) – a severe metabolic disorder affecting the nervous system.  ✅ MTCP (Macrothrombocytopenia) – a blood platelet abnormality (ruling this out is crucial for your dog's safety during any potential veterinary procedures or surgeries).  ✅ OCD (Osteochondrodysplasia) – a hereditary bone and joint disorder causing dwarfism and bone deformities.  ✅ PRA-prcd (Progressive Retinal Atrophy) – a genetic condition leading to vision loss (a clear result ensures healthy eyes well into their senior years).  ✅ vWD1 (von Willebrand Disease Type 1) – a blood clotting disorder (a clear result guarantees safety during surgeries, such as spaying or neutering)."
     },
     "litters_heading": {
       "pl": "Szczenięta",
@@ -159,8 +203,8 @@
       "en": "Current, expecting, and former litters."
     },
     "litters_note": {
-      "pl": "Podmień na prawdziwe mioty, daty i zdjęcia.",
-      "en": "Swap in your real litters, dates, and photos here."
+      "pl": "",
+      "en": ""
     },
     "status_available": {
       "pl": "Dostępne teraz",
@@ -171,8 +215,8 @@
       "en": "Expecting"
     },
     "status_reserved": {
-      "pl": "xdasfsa",
-      "en": "xdasfsa"
+      "pl": "",
+      "en": ""
     },
     "status_previous": {
       "pl": "Poprzedni miot",
@@ -231,7 +275,7 @@
       "en": "Contact"
     },
     "nav_cta": {
-      "pl": "Wypełnij ankietę",
+      "pl": "Formularz zgłoszeniowy",
       "en": "Apply now"
     },
     "field_section1_heading": {
@@ -360,14 +404,14 @@
       {
         "id": "about-1",
         "heading": {
-          "pl": "**Domowa hodowla psów rasy Mini Goldendoodle w sercu Podkarpacia.**",
-          "en": ""
+          "pl": "Nasza historia i filozofia",
+          "en": "Our Story and Philosophy "
         },
         "headingFont": "default",
         "textFont": "default",
         "text": {
-          "pl": "Jesteśmy Karolina i Paweł. Nasza hodowla w Mielcu to przede wszystkim nasz wspólny dom, w którym psy są pełnoprawnymi członkami rodziny: towarzyszą nam w codziennym życiu, odpoczywają na kanapie i asystują przy porannej kawie. Szczenięta dorastają w samym centrum domowego ogniska, od pierwszego oddechu otoczone czułością, codziennym gwarem i najlepszą możliwą opieką.",
-          "en": "Hi! We are Karolina and Paweł. We run a small, in-home Goldendoodle breeding program. Our love for animals has always been there, but it was the Mini Goldendoodle breed that completely stole our hearts. It combines the incredible intelligence of a Poodle with the absolute gentleness, joy, and patience of a Golden Retriever.\nOur goal from the beginning was not simply \"breeding dogs\". We wanted to create an ethical place full of empathy. The welfare of our dog mothers is our priority – we maintain appropriate regenerative breaks, and our dogs are, above all, our beloved friends.\n"
+          "pl": "Cześć! Tu Karolina i Paweł. Prowadzimy kameralną, domową hodowlę psów rasy Goldendoodle. Nasza miłość do zwierząt trwała od zawsze, ale to właśnie rasa Mini Goldendoodle skradła nasze serca całkowicie. Łączy ona bowiem niesamowitą inteligencję pudla z absolutną łagodnością, radością i cierpliwością golden retrievera.\nNaszym celem od początku nie było po prostu \"rozmnażanie psów\". Zależało nam na stworzeniu etycznego miejsca pełnego empatii. Dobrostan naszych psich matek jest dla nas priorytetem – zachowujemy odpowiednie przerwy regeneracyjne, a nasze psy to przede wszystkim nasi ukochani przyjaciele.",
+          "en": "Hi! We are Karolina and Paweł. We run a small, in-home Goldendoodle breeding program. Our love for animals has always been there, but it was the Mini Goldendoodle breed that completely stole our hearts. It combines the incredible intelligence of a Poodle with the absolute gentleness, joy, and patience of a Golden Retriever.\nOur goal from the beginning was not simply \"breeding dogs\". We wanted to create an ethical place full of empathy. The welfare of our dog mothers is our priority – we maintain appropriate regenerative breaks, and our dogs are, above all, our beloved friends."
         },
         "card": {
           "enabled": false,
@@ -377,9 +421,9 @@
         },
         "photo": {
           "enabled": true,
-          "position": "left",
+          "position": "right",
           "textAlign": "left",
-          "mode": "collage",
+          "mode": "single",
           "count": 3
         },
         "bullets": []
@@ -387,14 +431,14 @@
       {
         "id": "about-2",
         "heading": {
-          "pl": "",
-          "en": ""
+          "pl": "**Nasze metody pracy i socjalizacji**",
+          "en": "**Our working and socialization methods **"
         },
         "headingFont": "default",
         "textFont": "default",
         "text": {
-          "pl": "Wychowujemy szczenięta w domu, bez kojców zewnętrznych, zapewniając im najlepszy możliwy start w życiu.",
-          "en": "We raise our puppies at home, with no outdoor kennels, to give them the best possible start in life."
+          "pl": "Wierzymy, że wspaniały charakter psa to efekt dobrych genów i mądrej pracy od pierwszych dni życia. Wychowując maluchy wdrażamy założenia cenionych programów edukacyjnych (Badass Breeder, Puppy Culture). Co to oznacza dla przyszłego właściciela?",
+          "en": "We believe that a great dog character is the result of good genes and wise work from the first days of life. When raising children, we implement the assumptions of valued educational programs (Badass Breeder, Puppy Culture). What does this mean for the future owner?"
         },
         "card": {
           "enabled": false,
@@ -404,12 +448,33 @@
         },
         "photo": {
           "enabled": true,
-          "position": "left",
+          "position": "right",
           "textAlign": "left",
           "mode": "collage",
-          "count": 3
+          "count": 4
         },
-        "bullets": []
+        "bullets": [
+          {
+            "pl": "**Wczesna Stymulacja Neurologiczna (ENS): **Od 3. do 16. dnia życia wprowadzamy serię pięciu mikrostymulacji dotykowych i temperaturowych. Badania dowodzą, że ten program (pierwotnie stworzony dla psów wojskowych) przyspiesza rozwój układu nerwowego. Szczenięta poddane ENS w dorosłym życiu znacznie lepiej radzą sobie ze stresem, mają silniejsze serca i wyższą odporność na choroby.",
+            "en": "**Early Neurological Stimulation (ENS): **From day 3 to day 16, we introduce a series of five tactile and temperature microstimulations. Research shows that this program (originally created for military dogs) accelerates the development of the nervous system. Puppies subjected to ENS in adulthood cope much better with stress, have stronger hearts and higher resistance to diseases."
+          },
+          {
+            "pl": "**Wczesna Stymulacja Węchowa (ESI): **W tym samym okresie codziennie wprowadzamy maluchom nowy, naturalny zapach (np. kora drzewa, trawa, przyprawy). Rozwija to obszary mózgu odpowiedzialne za węch, budując w psach pewność siebie i ciekawość świata.",
+            "en": "**Early Olfactory Stimulation (ESI): **During the same period, we introduce toddlers a new, natural smell every day (e.g. tree bark, grass, spices). This develops the areas of the brain responsible for smell, building self-confidence and curiosity in the world in dogs."
+          },
+          {
+            "pl": "**Budowanie pewności siebie, a nie lęku: **Program Badass Breeder uczy zasady \"wzmacniaj, nie wyręczaj\". Oferujemy szczeniętom bezpieczne wyzwania, nowe faktury pod łapkami (\"Złota 12\") oraz kontrolowane bodźce środowiskowe i dźwiękowe. Dzięki temu pies w nowym domu nie reaguje paniką na upuszczony garnek czy szczekającego psa sąsiada, lecz traktuje nowości jako przygodę.",
+            "en": "**Building self-confidence, not fear: ** Badass Breeder teaches the “empower, not replace” principle. We offer puppies safe challenges, new underfoot textures (\"Złota 12\") and controlled environmental and sound stimuli. Thanks to this, the dog in the new house does not react with panic to the dropped pot or the barking dog of the neighbor, but treats novelty as an adventure."
+          },
+          {
+            "pl": "**Wczesny trening czystości: **W kojcu wprowadzamy specjalne strefy na “toaletę”. Szczenięta naturalnie uczą się załatwiania swoich potrzeb poza posłaniem, co jest gigantycznym ułatwieniem w pierwszych tygodniach w nowym domu.",
+            "en": "**Early cleanliness training: **We introduce special zones for the \"toilet\" in the playpen. Puppies naturally learn to take care of their needs outside the bed, which is a gigantic facilitation in the first weeks in a new home."
+          },
+          {
+            "pl": "**Oswajanie z groomingiem: **Goldendoodle wymagają regularnej pielęgnacji. Nasze maluchy poznają suszarkę, kąpiele, czesanie, dotykanie łapek, przestrzeni między palcami i obcinanie pazurków na długo przed wyjazdem.",
+            "en": "**Grooming: **Goldendoodle requires regular grooming. Our little ones will get to know the dryer, baths, combing, touching their paws, the space between their fingers and clipping their claws long before they leave."
+          }
+        ]
       }
     ]
   },
@@ -422,8 +487,8 @@
           "en": "Height"
         },
         "value": {
-          "pl": "ok. 35–45 cm w kłębie",
-          "en": "approx. 35–45 cm at the shoulder"
+          "pl": "ok. 45-48 cm w kłębie",
+          "en": "approx. 45-48 cm at the withers"
         }
       },
       {
@@ -433,8 +498,8 @@
           "en": "Weight"
         },
         "value": {
-          "pl": "ok. 7–14 kg",
-          "en": "approx. 7–14 kg"
+          "pl": "ok. 10–14 kg",
+          "en": "approx. 10–14 kg"
         }
       },
       {
@@ -464,14 +529,14 @@
       {
         "id": "breed-1",
         "heading": {
-          "pl": "",
-          "en": ""
+          "pl": "**Dla kogo to wymarzony towarzysz?**",
+          "en": "**Who is this dream companion for?**"
         },
         "headingFont": "default",
         "textFont": "default",
         "text": {
-          "pl": "Mini Goldendoodle to połączenie inteligencji pudla i ciepłego, rodzinnego usposobienia golden retrievera. To psy czułe, chętne do nauki i świetnie odnajdujące się zarówno w mieszkaniu, jak i w domu z ogrodem.",
-          "en": "The Mini Goldendoodle combines the Poodle's intelligence with the Golden Retriever's warm, family-oriented nature — affectionate, eager to learn, and equally at home in an apartment or a house with a yard."
+          "pl": "Goldendoodle to rasa nastawiona na współpracę, niezwykle wpatrzona w człowieka i obdarzona wielką empatią. Dzięki genom golden retrievera i pudla, są to psy bystre, łatwe w układaniu, uwielbiające zabawę, ale potrafiące wyciszyć się w domu. Idealnie sprawdzają się jako psy rodzinne oraz psy do wsparcia emocjonalnego. Bardzo przywiązują się do ludzi – nie odnajdą się jako psy podwórkowe czy zostawiane same na wiele godzin.",
+          "en": "Goldendoodle is a cooperative breed, extremely focused on humans and endowed with great empathy. Thanks to the genes of the golden retriever and the poodle, they are smart, easy to stack, love to play, but can calm down at home. They are ideal as family dogs and dogs for emotional support. They are very attached to people – they will not find themselves as yard dogs or left alone for many hours."
         },
         "card": {
           "enabled": false,
@@ -491,14 +556,14 @@
       {
         "id": "breed-2",
         "heading": {
-          "pl": "",
-          "en": ""
+          "pl": "**Generacje i rodzaj włosa – jak to wygląda w praktyce?**",
+          "en": "**Generations and hair type – what does it look like in practice?**"
         },
         "headingFont": "default",
         "textFont": "default",
         "text": {
-          "pl": "Dzięki kręconej lub falowanej sierści typu pudla, wiele osób z alergią na sierść psów dobrze toleruje Goldendoodle — choć żadna rasa nie jest w 100% hipoalergiczna.",
-          "en": "Thanks to their curly or wavy Poodle-type coat, many people with dog allergies tolerate Goldendoodles well — though no breed is ever 100% hypoallergenic."
+          "pl": "W naszej hodowli stawiamy przede wszystkim na **wielopokoleniowe Mini Goldendoodle (Multigen)**, łącząc starannie dobrane geny, np. poprzez generację F2B (połączenie Mini Goldendoodle z pudlem miniaturowym) i pokrewne linie. Dzięki temu dążymy do uzyskania psów o przewidywalnych cechach, z piękną, falistą lub kręconą szatą w odcieniach apricot czy red brown.\n\n",
+          "en": "In our breeding program, we focus primarily on **multigenerational Mini Goldendoodles (Multigen)**, combining carefully selected genes, e.g., through the F2B generation (a cross between a Mini Goldendoodle and a Miniature Poodle) and related lines. Thanks to this, we strive to obtain dogs with predictable characteristics, with a beautiful, wavy or curly coat in apricot or red brown shades.\n\n\n**Are Goldendoodles 100% hypoallergenic?** \nThis myth needs to be debunked – no dog is 100% allergen-free. However, multigenerational generations (Multigen / F2B), due to the high pool of Poodle genes, have a non-shedding (or minimally shedding) coat, which **drastically minimizes the risk of symptoms in allergy sufferers. **Their beautiful hair requires commitment: regular brushing with a suitable brush and visits to a professional groomer (about every 8 weeks)."
         },
         "card": {
           "enabled": false,
@@ -514,6 +579,33 @@
           "count": 3
         },
         "bullets": []
+      },
+      {
+        "id": "block-mu5qec7mks54",
+        "heading": {
+          "pl": "",
+          "en": ""
+        },
+        "headingFont": "default",
+        "textFont": "default",
+        "text": {
+          "pl": "**Czy Goldendoodle są w 100% hipoalergiczne? **\n\nNależy obalić ten mit – żaden pies nie jest w 100% wolny od alergenów. Jednak generacje wielopokoleniowe (Multigen / F2B), ze względu na wysoką pulę genów pudla, posiadają szatę nieliniejącą (lub znikomo liniejącą), co drastycznie minimalizuje ryzyko wystąpienia objawów u alergików. Ich przepiękny włos wymaga zaangażowania: regularnego czesania odpowiednią szczotką oraz wizyt u profesjonalnego groomera lub samodzielnego strzyżenia (co około 8 tygodni).\n",
+          "en": "**Are Goldendoodles 100% hypoallergenic?** \n\nThis myth needs to be debunked – no dog is 100% allergen-free. However, multigenerational generations (Multigen / F2B), due to the high pool of Poodle genes, have a non-shedding (or minimally shedding) coat, which drastically minimizes the risk of symptoms in allergy sufferers. Their beautiful hair requires commitment: regular brushing with a suitable brush and visits to a professional groomer (about every 8 weeks)."
+        },
+        "bullets": [],
+        "card": {
+          "enabled": false,
+          "background": "#FFFDF9",
+          "borderColor": "#E0D3B8",
+          "borderWidth": 1
+        },
+        "photo": {
+          "enabled": false,
+          "mode": "single",
+          "position": "left",
+          "textAlign": "left",
+          "count": 3
+        }
       }
     ]
   },
@@ -521,34 +613,156 @@
     {
       "id": "dog1",
       "name": {
-        "pl": "[Imię suczki]",
-        "en": "[Dam's name]"
+        "pl": "Figa",
+        "en": "Figa"
       },
       "role": {
         "pl": "Suczka hodowlana",
         "en": "Breeding female"
       },
       "bio": {
-        "pl": "Miejsce na krótki opis charakteru, umaszczenia i wyników badań zdrowotnych.",
-        "en": "Space for a short note on temperament, coloring, and health clearances."
+        "pl": "Figa to chodząca elegancja. Z natury niezwykle spokojna, cierpliwa i zrównoważona. Jest absolutnym championem w nauce nowych sztuczek – jej inteligencja potrafi nas zaskoczyć każdego dnia. W domu to oaza spokoju, wspaniale wyczuwająca nastroje, co czyni ją perfekcyjną matką, która przekazuje szczeniętom swoją łagodność.",
+        "en": "Figa is a walking elegance. Extremely calm, patient and balanced by nature. She is an absolute champion in learning new tricks – her intelligence can surprise us every day. At home, it is an oasis of peace, wonderfully sensing moods, which makes her a perfect mother who conveys her gentleness to the puppies."
       },
-      "extra": []
+      "extra": [
+        {
+          "label": {
+            "pl": "Rasa i Generacja:",
+            "en": "Race and Generation:"
+          },
+          "value": {
+            "pl": "mini goldendoodle (F2)",
+            "en": "Mini Goldendoodle (F2)"
+          }
+        },
+        {
+          "label": {
+            "pl": "Data urodzenia:",
+            "en": "Date of birth:"
+          },
+          "value": {
+            "pl": "23.09.2023",
+            "en": "23.09.2023"
+          }
+        },
+        {
+          "label": {
+            "pl": "Waga: / Wzrost:",
+            "en": "Weight: / Height:"
+          },
+          "value": {
+            "pl": " 16 kg / 48 cm w kłębie",
+            "en": "16 kg / 48 cm at the withers"
+          }
+        },
+        {
+          "label": {
+            "pl": "Kolor:",
+            "en": "Colour"
+          },
+          "value": {
+            "pl": "Biszkoptowy",
+            "en": "Apricot"
+          }
+        },
+        {
+          "label": {
+            "pl": "Włos:",
+            "en": "Hair"
+          },
+          "value": {
+            "pl": "Kręcony",
+            "en": "Curly"
+          }
+        },
+        {
+          "label": {
+            "pl": "Badania Genetyczne:",
+            "en": "Genetic Examinations:"
+          },
+          "value": {
+            "pl": " Pełny panel Laboklin Labogenetics XXL (profil wolny od ponad 250 chorób dziedzicznych)",
+            "en": "Full Laboklin Labogenetics XXL panel (profile free from more than 250 hereditary diseases)"
+          }
+        }
+      ]
     },
     {
       "id": "dog2",
       "name": {
-        "pl": "[Imię reproduktora]",
-        "en": "[Sire's name]"
+        "pl": "Eddie",
+        "en": "Eddie"
       },
       "role": {
         "pl": "Reproduktor",
-        "en": "Stud"
+        "en": "Sire"
       },
       "bio": {
-        "pl": "Miejsce na krótki opis charakteru, umaszczenia i wyników badań zdrowotnych.",
-        "en": "Space for a short note on temperament, coloring, and health clearances."
+        "pl": "Nasz uroczy chłopak to chodząca radość. Eddie to dusza towarzystwa, mistrz długiego przytulania i niekwestionowany pogromca smoków (choć na ten moment walczy wyłącznie z tymi pluszowymi). Wnosi do domu niesamowitą energię, humor i ten błysk w oku.",
+        "en": "Our cute boy is a walking joy. Eddie is the soul of the company, the master of long hugs and the undisputed slayer of dragons (although at the moment he fights only with plush ones). He brings incredible energy, humor and that twinkle in his eye to the house."
       },
-      "extra": []
+      "extra": [
+        {
+          "label": {
+            "pl": "Rasa:",
+            "en": "Race:"
+          },
+          "value": {
+            "pl": "pudel miniaturowy",
+            "en": "Miniature Poodle"
+          }
+        },
+        {
+          "label": {
+            "pl": "Data urodzenia:",
+            "en": "Date of birth:"
+          },
+          "value": {
+            "pl": "26.08.2024",
+            "en": "26.08.2024"
+          }
+        },
+        {
+          "label": {
+            "pl": "Waga: / Wzrost:",
+            "en": "Weight: / Height:"
+          },
+          "value": {
+            "pl": "8 kg / 45cm w kłębie",
+            "en": "8 kg / 45cm at the withers"
+          }
+        },
+        {
+          "label": {
+            "pl": "Kolor:",
+            "en": "Colour:"
+          },
+          "value": {
+            "pl": "Red",
+            "en": "Red"
+          }
+        },
+        {
+          "label": {
+            "pl": "Włos:",
+            "en": "Hair:"
+          },
+          "value": {
+            "pl": "Kręcony",
+            "en": "Curly"
+          }
+        },
+        {
+          "label": {
+            "pl": "Badania genetyczne: ",
+            "en": "Genetic Examination:"
+          },
+          "value": {
+            "pl": "Panel Laboklin Combination Poodle 2. Profil w 100% czysty.",
+            "en": "Laboklin Combination Poodle panel 2. Profile 100% clean."
+          }
+        }
+      ]
     }
   ],
   "littersIntro": {
@@ -590,12 +804,30 @@
       },
       "link": "",
       "extra": []
+    },
+    {
+      "id": "litter-1789679795546",
+      "status": "available",
+      "title": {
+        "pl": "",
+        "en": ""
+      },
+      "desc": {
+        "pl": "",
+        "en": ""
+      },
+      "cta": {
+        "pl": "",
+        "en": ""
+      },
+      "link": "",
+      "extra": []
     }
   ],
   "contact": {
     "email": "curlyheaddoodle@gmail.com",
     "social": "@curlyheaddoodle",
-    "facebook": "curlyheaddoodle",
+    "facebook": "61584361806271",
     "formAction": "https://formspree.io/f/mrpgddwk",
     "ctaLabel": {
       "pl": "Skontaktuj się",
