@@ -609,6 +609,7 @@
       }
     ]
   },
+  "dogsSection": { "photoSize": 200 },
   "dogs": [
     {
       "id": "dog1",
@@ -768,6 +769,7 @@
   "littersIntro": {
     "body": []
   },
+  "littersSection": { "photoSize": 160 },
   "litters": [
     {
       "id": "litter1",

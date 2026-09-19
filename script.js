@@ -130,10 +130,12 @@ const FALLBACK_CONTENT = {
   littersIntro: {
     body: [],
   },
+  dogsSection: { photoSize: 200 },
   dogs: [
     { id: 'dog1', name: { pl: '[Imię suczki]', en: "[Dam's name]" }, role: { pl: 'Suczka hodowlana', en: 'Breeding female' }, bio: { pl: 'Miejsce na krótki opis charakteru.', en: 'Space for a short note on temperament.' } },
     { id: 'dog2', name: { pl: '[Imię reproduktora]', en: '[Sire\'s name]' }, role: { pl: 'Reproduktor', en: 'Stud' }, bio: { pl: 'Miejsce na krótki opis charakteru.', en: 'Space for a short note on temperament.' } },
   ],
+  littersSection: { photoSize: 160 },
   litters: [
     { id: 'litter1', status: 'available', title: { pl: '[Suczka] × [Reproduktor]', en: '[Dam] × [Sire]' }, desc: { pl: 'Uzupełnij tutaj.', en: 'Fill in here.' }, cta: { pl: 'Zapytaj o ten miot', en: 'Ask about this litter' } },
     { id: 'litter2', status: 'expecting', title: { pl: '[Suczka] × [Reproduktor]', en: '[Dam] × [Sire]' }, desc: { pl: 'Uzupełnij tutaj.', en: 'Fill in here.' }, cta: { pl: 'Dołącz do listy oczekujących', en: 'Join this waitlist' } },
@@ -223,29 +225,92 @@ function renderFactList(containerId, items, lang) {
   appendFactRows(el, items, lang);
 }
 
+// Shared by dog and litter cards — a photo (or, when count > 1, a small
+// carousel with prev/next + dots) that links to the full-size image in a
+// new tab. `baseId` names the files: images/<baseId>.jpg for photo 1,
+// images/<baseId>-2.jpg, -3.jpg, ... for the rest.
+function buildPhotoCarousel(baseId, count, sizePx) {
+  count = Math.max(1, count || 1);
+  const wrap = document.createElement('div');
+  wrap.className = 'photo-carousel';
+  wrap.style.setProperty('--photo-size', `${sizePx || 200}px`);
+
+  const frame = document.createElement('a');
+  frame.className = 'photo-carousel-frame';
+  frame.target = '_blank';
+  frame.rel = 'noopener noreferrer';
+  frame.setAttribute('aria-label', 'Powiększ zdjęcie (otwiera się w nowej karcie)');
+  const img = document.createElement('img');
+  img.alt = '';
+  img.loading = 'lazy';
+  frame.appendChild(img);
+  wrap.appendChild(frame);
+
+  const paths = [];
+  for (let i = 1; i <= count; i++) paths.push(i === 1 ? `images/${baseId}.jpg` : `images/${baseId}-${i}.jpg`);
+
+  let idx = 0;
+  let dots = [];
+  function show(i) {
+    idx = (i + paths.length) % paths.length;
+    img.src = `${paths[idx]}?t=${Date.now()}`;
+    frame.href = paths[idx];
+    dots.forEach((d, di) => d.classList.toggle('active', di === idx));
+  }
+  img.onerror = () => { wrap.classList.add('no-photo'); };
+  img.onload = () => { wrap.classList.remove('no-photo'); };
+
+  if (count > 1) {
+    const prevBtn = document.createElement('button');
+    prevBtn.type = 'button'; prevBtn.className = 'carousel-btn prev'; prevBtn.textContent = '‹';
+    prevBtn.setAttribute('aria-label', 'Poprzednie zdjęcie');
+    prevBtn.addEventListener('click', e => { e.preventDefault(); show(idx - 1); });
+    const nextBtn = document.createElement('button');
+    nextBtn.type = 'button'; nextBtn.className = 'carousel-btn next'; nextBtn.textContent = '›';
+    nextBtn.setAttribute('aria-label', 'Następne zdjęcie');
+    nextBtn.addEventListener('click', e => { e.preventDefault(); show(idx + 1); });
+    wrap.appendChild(prevBtn);
+    wrap.appendChild(nextBtn);
+
+    const dotsWrap = document.createElement('div');
+    dotsWrap.className = 'carousel-dots';
+    dots = paths.map((_, di) => {
+      const dot = document.createElement('button');
+      dot.type = 'button'; dot.className = 'carousel-dot';
+      dot.setAttribute('aria-label', `Zdjęcie ${di + 1}`);
+      dot.addEventListener('click', e => { e.preventDefault(); show(di); });
+      dotsWrap.appendChild(dot);
+      return dot;
+    });
+    wrap.appendChild(dotsWrap);
+  }
+  show(0);
+  return wrap;
+}
+
 function renderDogs(lang) {
   const grid = document.getElementById('dogsGrid');
   if (!grid) return;
   grid.innerHTML = '';
+  const sizePx = (activeContent.dogsSection && activeContent.dogsSection.photoSize) || 200;
   (activeContent.dogs || []).forEach(dog => {
     if (dog.hidden) return;
     const card = document.createElement('div');
     card.className = 'dog-card';
-    card.innerHTML = '<div class="dog-photo" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-paw"/></svg></div><h4></h4><p class="dog-role"></p><p class="dog-bio"></p>';
-    card.querySelector('.dog-photo').setAttribute('data-photo-slot', dog.id);
-    card.querySelector('h4').textContent = (dog.name && dog.name[lang]) || '';
-    card.querySelector('.dog-role').textContent = (dog.role && dog.role[lang]) || '';
-    card.querySelector('.dog-bio').textContent = (dog.bio && dog.bio[lang]) || '';
+    card.appendChild(buildPhotoCarousel(dog.id, dog.photoCount, sizePx));
+    const h4 = document.createElement('h4'); h4.textContent = (dog.name && dog.name[lang]) || ''; card.appendChild(h4);
+    const role = document.createElement('p'); role.className = 'dog-role'; role.textContent = (dog.role && dog.role[lang]) || ''; card.appendChild(role);
+    const bio = document.createElement('p'); bio.className = 'dog-bio'; bio.textContent = (dog.bio && dog.bio[lang]) || ''; card.appendChild(bio);
     if (dog.extra && dog.extra.length) card.appendChild(buildFactListEl(dog.extra, lang, 'extra-facts dog-extra'));
     grid.appendChild(card);
   });
-  applyPhotoSlots();
 }
 
 function renderLitters(lang) {
   const list = document.getElementById('litterList');
   if (!list) return;
   list.innerHTML = '';
+  const sizePx = (activeContent.littersSection && activeContent.littersSection.photoSize) || 160;
   (activeContent.litters || []).forEach(litter => {
     if (litter.hidden) return;
     const li = document.createElement('li');
@@ -253,7 +318,11 @@ function renderLitters(lang) {
     const statusKey = 'status_' + (litter.status || 'available');
     const statusLabel = (activeContent.translations[statusKey] && activeContent.translations[statusKey][lang]) || '';
     const ctaText = litter.cta && litter.cta[lang];
-    li.innerHTML = '<span class="status"></span><div class="litter-body"><h3></h3><p></p></div>';
+    if (litter.photoCount > 0) li.appendChild(buildPhotoCarousel(litter.id, litter.photoCount, sizePx));
+    const restWrap = document.createElement('div');
+    restWrap.className = 'litter-rest';
+    restWrap.innerHTML = '<span class="status"></span><div class="litter-body"><h3></h3><p></p></div>';
+    li.appendChild(restWrap);
     const statusEl = li.querySelector('.status');
     statusEl.textContent = statusLabel;
     statusEl.classList.add(STATUS_CLASS[litter.status] || 'status-available');

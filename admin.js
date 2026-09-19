@@ -976,6 +976,8 @@ function buildCustomPageRow(page, index) {
 // ---- Dogs editor ----
 function renderDogsEditor() {
   renderKeyFields('dogsFieldsEditor', SECTION_KEY_GROUPS.dogs);
+  if (!content.dogsSection) content.dogsSection = { photoSize: 200 };
+  document.getElementById('dogsPhotoSize').value = content.dogsSection.photoSize;
   const el = document.getElementById('dogsEditor');
   el.innerHTML = '';
   content.dogs.forEach((dog, index) => {
@@ -998,12 +1000,12 @@ function buildDogRow(dog, index) {
         <button type="button" class="btn-small danger" data-act="remove">Usuń</button>
       </div>
     </div>
-    <div class="dog-photo-row">
-      <div class="dog-photo-preview">Brak</div>
-      <input type="file" accept="image/*" style="flex:1">
-      <button type="button" class="btn-small" data-act="upload-photo">Wgraj</button>
+    <div class="repeat-row single">
+      <div><label>Liczba zdjęć (karuzela, jeśli więcej niż 1)</label>
+        <select data-act="photoCount">${[1, 2, 3, 4, 5].map(n => `<option value="${n}"${(dog.photoCount || 1) === n ? ' selected' : ''}>${n}</option>`).join('')}</select>
+      </div>
     </div>
-    <p class="slot-status"></p>
+    <div class="photo-upload-grid is-collage" id="dogPhotos-${dog.id}"></div>
     <div class="repeat-row">
       <div><label>Imię (PL)</label><input data-f="name.pl" value="${escapeAttr(dog.name.pl)}"></div>
       <div><label>Name (EN)</label><input data-f="name.en" value="${escapeAttr(dog.name.en)}"></div>
@@ -1022,11 +1024,19 @@ function buildDogRow(dog, index) {
       <button type="button" class="btn-small" data-act="add-extra">+ Dodaj pole</button>
     </div>
   `;
-  const preview = row.querySelector('.dog-photo-preview');
-  const status = row.querySelector('.slot-status');
-  const fileInput = row.querySelector('input[type="file"]');
-  const dogPhotoPath = `images/${dog.id}.jpg`;
-  loadPreviewInto(preview, dogPhotoPath);
+  const photoGrid = row.querySelector(`#dogPhotos-${dog.id}`);
+  function renderDogPhotoSlots() {
+    photoGrid.innerHTML = '';
+    for (let i = 1; i <= (dog.photoCount || 1); i++) {
+      const key = i === 1 ? dog.id : `${dog.id}-${i}`;
+      photoGrid.appendChild(buildFixedSlotCard({ key, label: `Zdjęcie ${i}`, hint: '' }));
+    }
+  }
+  renderDogPhotoSlots();
+  row.querySelector('[data-act="photoCount"]').addEventListener('change', e => {
+    dog.photoCount = Number(e.target.value);
+    renderDogPhotoSlots();
+  });
 
   row.querySelectorAll('[data-f]').forEach(input => {
     input.addEventListener('input', () => {
@@ -1041,10 +1051,6 @@ function buildDogRow(dog, index) {
     if (!confirm('Usunąć tego psa ze strony?')) return;
     content.dogs.splice(index, 1);
     renderDogsEditor();
-  });
-  row.querySelector('[data-act="upload-photo"]').addEventListener('click', () => {
-    if (!fileInput.files[0]) { status.textContent = 'Najpierw wybierz plik.'; status.className = 'slot-status err'; return; }
-    uploadPhoto(dogPhotoPath, fileInput.files[0], status, preview, () => { fileInput.value = ''; });
   });
   row.querySelector('[data-act="add-extra"]').addEventListener('click', () => {
     dog.extra.push({ label: { pl: '', en: '' }, value: { pl: '', en: '' } });
@@ -1092,6 +1098,9 @@ document.getElementById('addDogBtn').addEventListener('click', () => {
   content.dogs.push({ id: `dog-${Date.now()}`, name: { pl: '', en: '' }, role: { pl: '', en: '' }, bio: { pl: '', en: '' } });
   renderDogsEditor();
 });
+document.getElementById('dogsPhotoSize').addEventListener('input', e => {
+  content.dogsSection.photoSize = Number(e.target.value) || 200;
+});
 
 // ---- Litters editor ----
 const STATUS_OPTIONS = [
@@ -1101,6 +1110,8 @@ const STATUS_OPTIONS = [
   { value: 'previous', label: 'Poprzedni miot' },
 ];
 function renderLittersEditor() {
+  if (!content.littersSection) content.littersSection = { photoSize: 160 };
+  document.getElementById('littersPhotoSize').value = content.littersSection.photoSize;
   const el = document.getElementById('littersEditor');
   el.innerHTML = '';
   content.litters.forEach((litter, index) => {
@@ -1124,11 +1135,15 @@ function buildLitterRow(litter, index) {
         <button type="button" class="btn-small danger" data-act="remove">Usuń</button>
       </div>
     </div>
-    <div class="repeat-row single">
+    <div class="repeat-row">
       <div><label>Status</label>
         <select data-f="status">${STATUS_OPTIONS.map(s => `<option value="${s.value}"${litter.status === s.value ? ' selected' : ''}>${s.label}</option>`).join('')}</select>
       </div>
+      <div><label>Liczba zdjęć (0 = brak)</label>
+        <select data-act="photoCount">${[0, 1, 2, 3, 4, 5].map(n => `<option value="${n}"${(litter.photoCount || 0) === n ? ' selected' : ''}>${n}</option>`).join('')}</select>
+      </div>
     </div>
+    <div class="photo-upload-grid is-collage" id="litterPhotos-${litter.id}"></div>
     <div class="repeat-row">
       <div><label>Tytuł (PL)</label><input data-f="title.pl" value="${escapeAttr(litter.title.pl)}"></div>
       <div><label>Title (EN)</label><input data-f="title.en" value="${escapeAttr(litter.title.en)}"></div>
@@ -1157,6 +1172,19 @@ function buildLitterRow(litter, index) {
       else litter[path[0]][path[1]] = input.value;
     });
   });
+  const litterPhotoGrid = row.querySelector(`#litterPhotos-${litter.id}`);
+  function renderLitterPhotoSlots() {
+    litterPhotoGrid.innerHTML = '';
+    for (let i = 1; i <= (litter.photoCount || 0); i++) {
+      const key = i === 1 ? litter.id : `${litter.id}-${i}`;
+      litterPhotoGrid.appendChild(buildFixedSlotCard({ key, label: `Zdjęcie ${i}`, hint: '' }));
+    }
+  }
+  renderLitterPhotoSlots();
+  row.querySelector('[data-act="photoCount"]').addEventListener('change', e => {
+    litter.photoCount = Number(e.target.value);
+    renderLitterPhotoSlots();
+  });
   row.querySelector('[data-act="hidden"]').addEventListener('change', e => { litter.hidden = e.target.checked; });
   row.querySelector('[data-act="up"]').addEventListener('click', () => moveItem(content.litters, index, -1, renderLittersEditor));
   row.querySelector('[data-act="down"]').addEventListener('click', () => moveItem(content.litters, index, 1, renderLittersEditor));
@@ -1174,6 +1202,9 @@ function buildLitterRow(litter, index) {
 document.getElementById('addLitterBtn').addEventListener('click', () => {
   content.litters.push({ id: `litter-${Date.now()}`, status: 'available', title: { pl: '', en: '' }, desc: { pl: '', en: '' }, cta: { pl: '', en: '' }, link: '' });
   renderLittersEditor();
+});
+document.getElementById('littersPhotoSize').addEventListener('input', e => {
+  content.littersSection.photoSize = Number(e.target.value) || 160;
 });
 
 function moveItem(arr, index, delta, rerender) {
