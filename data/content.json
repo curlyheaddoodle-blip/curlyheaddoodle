@@ -413,6 +413,14 @@
       "pl": "Wyślij wiadomość",
       "en": "Send message"
     },
+    "contact_form_success_message": {
+      "pl": "Dziękujemy! Wiadomość została wysłana.",
+      "en": "Thank you! Your message has been sent."
+    },
+    "contact_form_error_message": {
+      "pl": "Wystąpił błąd. Spróbuj ponownie.",
+      "en": "Something went wrong. Please try again."
+    },
     "form_fineprint": {
       "pl": "Wykorzystujemy te dane wyłącznie do kontaktu i prowadzenia listy oczekujących. Nie udostępniamy ich nikomu innemu.",
       "en": "We only use this information to respond to your inquiry and manage the waitlist. We don't share it with anyone else."
@@ -858,6 +866,7 @@
     "social": "@curlyheaddoodle",
     "facebook": "61584361806271",
     "formAction": "https://formspree.io/f/mrpgddwk",
+    "web3formsKey": "",
     "ctaLabel": {
       "pl": "Kontakt",
       "en": "Contact"

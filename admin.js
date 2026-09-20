@@ -62,6 +62,7 @@ const LABELS = {
   contact_form_name_placeholder: 'Formularz kontaktowy — placeholder: imię', contact_form_phone_placeholder: 'Formularz kontaktowy — placeholder: telefon',
   contact_form_email_placeholder: 'Formularz kontaktowy — placeholder: e-mail', contact_form_message_placeholder: 'Formularz kontaktowy — placeholder: wiadomość',
   contact_form_submit: 'Formularz kontaktowy — przycisk wysyłania',
+  contact_form_success_message: 'Formularz kontaktowy — komunikat sukcesu', contact_form_error_message: 'Formularz kontaktowy — komunikat błędu',
 };
 
 const TRANSLATION_GROUPS = [
@@ -71,7 +72,7 @@ const TRANSLATION_GROUPS = [
   { title: 'Formularz — Warunki mieszkaniowe i styl życia', keys: ['field_section2_heading', 'field_housing', 'field_alone_hours', 'field_daily_time'] },
   { title: 'Formularz — Doświadczenie i oczekiwania', keys: ['field_section3_heading', 'field_experience', 'field_grooming_ready', 'field_temperament', 'field_training', 'field_vacation'] },
   { title: 'Formularz — pozostałe', keys: ['field_select_placeholder', 'field_yes', 'field_no', 'field_litter', 'field_litter_opt3', 'field_message', 'field_message_placeholder', 'submit_btn', 'form_fineprint'] },
-  { title: 'Krótki formularz kontaktowy (strona Kontakt)', keys: ['contact_form_name_placeholder', 'contact_form_phone_placeholder', 'contact_form_email_placeholder', 'contact_form_message_placeholder', 'contact_form_submit'] },
+  { title: 'Krótki formularz kontaktowy (strona Kontakt)', keys: ['contact_form_name_placeholder', 'contact_form_phone_placeholder', 'contact_form_email_placeholder', 'contact_form_message_placeholder', 'contact_form_submit', 'contact_form_success_message', 'contact_form_error_message'] },
   { title: 'Stopka', keys: ['footer_disclaimer', 'footer_copyright'] },
 ];
 // Keys grouped by real-world site section so admin.html can show them
@@ -1359,7 +1360,14 @@ function renderContactEditor() {
       <div><label>Facebook (nazwa strony, bez @)</label><input id="contact-facebook" value="${escapeAttr(content.contact.facebook)}"></div>
     </div>
     <div class="repeat-row single">
-      <div><label>Formspree — adres formularza (action URL)</label><input id="contact-formAction" value="${escapeAttr(content.contact.formAction)}"></div>
+      <div><label>Formspree — adres formularza (action URL) — formularz zgłoszeniowy „Wypełnij ankietę”</label><input id="contact-formAction" value="${escapeAttr(content.contact.formAction)}"></div>
+    </div>
+    <div class="repeat-row single">
+      <div>
+        <label>Web3Forms — klucz dostępu — krótki formularz kontaktowy na stronach niestandardowych</label>
+        <input id="contact-web3formsKey" value="${escapeAttr(content.contact.web3formsKey)}" placeholder="wklej klucz z web3forms.com">
+        <p class="slot-hint">Osobny formularz, żeby nie zużywać limitu Formspree. Darmowy klucz: wejdź na web3forms.com, podaj e-mail, skopiuj klucz.</p>
+      </div>
     </div>
     <div class="style-wrap">
       <p class="t-key-label">Przycisk w stopce (prowadzi do formularza Google)</p>
@@ -1436,6 +1444,7 @@ function collectContact() {
     social: getFieldValue('contact-social', 'Kontakt'),
     facebook: getFieldValue('contact-facebook', 'Kontakt'),
     formAction: getFieldValue('contact-formAction', 'Kontakt'),
+    web3formsKey: getFieldValue('contact-web3formsKey', 'Kontakt'),
     ctaLabel: { pl: getFieldValue('contact-ctaLabelPl', 'Kontakt'), en: getFieldValue('contact-ctaLabelEn', 'Kontakt') },
     ctaColor: getFieldValue('contact-ctaColor', 'Kontakt'),
     ctaSize: getFieldValue('contact-ctaSize', 'Kontakt'),

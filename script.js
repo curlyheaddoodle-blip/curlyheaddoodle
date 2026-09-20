@@ -115,6 +115,8 @@ const FALLBACK_CONTENT = {
     contact_form_email_placeholder: { pl: 'Adres e-mail do kontaktu', en: 'Contact email address' },
     contact_form_message_placeholder: { pl: 'Napisz, w czym możemy pomóc', en: 'Tell us how we can help' },
     contact_form_submit: { pl: 'Wyślij wiadomość', en: 'Send message' },
+    contact_form_success_message: { pl: 'Dziękujemy! Wiadomość została wysłana.', en: "Thank you! Your message has been sent." },
+    contact_form_error_message: { pl: 'Wystąpił błąd. Spróbuj ponownie.', en: 'Something went wrong. Please try again.' },
     form_fineprint: { pl: 'Wykorzystujemy te dane wyłącznie do kontaktu.', en: 'We only use this information to respond to your inquiry.' },
     footer_disclaimer: { pl: 'Nie prowadzimy sprzedaży za pośrednictwem portali ogłoszeniowych typu OLX.', en: 'We do not sell puppies through classifieds sites such as OLX.' },
     footer_copyright: { pl: '© 2026 Curly Head Doodle. Wszelkie prawa zastrzeżone.', en: '© 2026 Curly Head Doodle. All rights reserved.' },
@@ -151,6 +153,7 @@ const FALLBACK_CONTENT = {
     social: '@curlyheaddoodle',
     facebook: 'curlyheaddoodle',
     formAction: 'https://formspree.io/f/YOUR_FORM_ID',
+    web3formsKey: '',
     ctaLabel: { pl: 'Skontaktuj się', en: 'Contact us' },
     ctaColor: '#2b211a',
     ctaSize: 'medium',
@@ -790,6 +793,49 @@ function initFormspreeAjax(formEl, formActionUrl) {
   formspree('initForm', { formElement: formEl, formId });
 }
 
+// Web3Forms — used for the short Contact-page form so it doesn't share
+// Formspree's 50/month free quota with the full puppy application form.
+// No third-party JS needed: a plain fetch to their submit endpoint with the
+// site owner's own access key (set in admin.html's Kontakt card), same
+// stay-on-page success/error pattern as the Formspree form.
+function initWeb3FormAjax(formEl, accessKey) {
+  if (!accessKey) return; // admin hasn't set a real key yet
+  const keyInput = formEl.querySelector('input[name="access_key"]');
+  if (keyInput) keyInput.value = accessKey;
+  if (formEl.dataset.web3Bound) return; // don't rebind on every language switch
+  formEl.dataset.web3Bound = '1';
+  const successEl = formEl.querySelector('[data-fs-success]');
+  const errorEl = formEl.querySelector('[data-fs-error]');
+  const submitBtn = formEl.querySelector('[data-fs-submit-btn]');
+  formEl.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (successEl) successEl.textContent = '';
+    if (errorEl) errorEl.textContent = '';
+    if (submitBtn) submitBtn.disabled = true;
+    const t = activeContent.translations || {};
+    const lang = document.documentElement.lang || 'pl';
+    try {
+      const data = Object.fromEntries(new FormData(formEl).entries());
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      if (result.success) {
+        if (successEl) successEl.textContent = (t.contact_form_success_message && t.contact_form_success_message[lang]) || 'Dziękujemy! Wiadomość została wysłana.';
+        formEl.reset();
+      } else {
+        if (errorEl) errorEl.textContent = result.message || (t.contact_form_error_message && t.contact_form_error_message[lang]) || 'Wystąpił błąd. Spróbuj ponownie.';
+      }
+    } catch (err) {
+      if (errorEl) errorEl.textContent = (t.contact_form_error_message && t.contact_form_error_message[lang]) || 'Wystąpił błąd. Spróbuj ponownie.';
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
+  });
+}
+
 // ---- Load content.json, then render everything ----
 async function loadContent() {
   try {
@@ -827,13 +873,17 @@ async function loadContent() {
     if (c.formAction) {
       // action/method stay as a no-JS fallback; initFormspreeAjax below takes
       // over the real submission (stays on-page, shows inline success/error).
-      // Every Formspree-wired form on the page (the apply form, and any
-      // custom page's short contact form) shares this class.
       document.querySelectorAll('.js-formspree-form').forEach(formEl => {
         formEl.setAttribute('action', c.formAction);
         initFormspreeAjax(formEl, c.formAction);
       });
     }
+    // Custom pages' short contact form uses Web3Forms instead — keeps it off
+    // Formspree's 50/month free quota, which the full application form above
+    // already uses on its own.
+    document.querySelectorAll('.js-web3form').forEach(formEl => {
+      initWeb3FormAjax(formEl, c.web3formsKey);
+    });
   }
 
   let savedLang = 'pl';

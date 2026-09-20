@@ -105,7 +105,8 @@
            on (admin.html, Strony niestandardowe) — a short, separate contact
            form (not the full puppy application on kontakt.html), wired to
            the same Formspree endpoint via script.js's initFormspreeAjax. -->
-      <form class="waitlist-form js-formspree-form" id="customPageContactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" hidden>
+      <form class="waitlist-form js-web3form" id="customPageContactForm" action="https://api.web3forms.com/submit" method="POST" hidden>
+        <input type="hidden" name="access_key" id="web3formsAccessKey">
         <div class="form-message form-message-success" data-fs-success></div>
         <div class="form-message form-message-error" data-fs-error></div>
         <div class="field field-required">
