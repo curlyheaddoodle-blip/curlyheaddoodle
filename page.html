@@ -63,8 +63,16 @@
 </header>
 
 <main id="main">
-  <section class="section">
+  <!-- Optional photo banner (heading + subtitle over a background photo) —
+       "Pokaż baner z tłem" per custom page in admin.html. When off, the
+       h1 below lives in the plain wrap instead (see applyCustomPage()). -->
+  <section class="page-banner" id="customPageBanner" hidden>
     <div class="wrap">
+      <p class="page-banner-subtitle" id="customPageBannerSubtitle" hidden></p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap" id="customPageMainWrap">
       <!-- Filled in by script.js's applyCustomPage() from the customPages
            entry matching ?slug=... in the URL. -->
       <h1 id="customPageHeading"></h1>
@@ -100,19 +108,23 @@
       <form class="waitlist-form js-formspree-form" id="customPageContactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" hidden>
         <div class="form-message form-message-success" data-fs-success></div>
         <div class="form-message form-message-error" data-fs-error></div>
-        <div class="field">
+        <div class="field field-required">
           <label for="contactFormName" data-i18n="field_name">Imię i nazwisko</label>
-          <input type="text" id="contactFormName" name="name" required data-fs-field>
+          <input type="text" id="contactFormName" name="name" required data-fs-field data-i18n-placeholder="contact_form_name_placeholder" placeholder="Twoje imię">
         </div>
-        <div class="field">
+        <div class="field field-required">
+          <label for="contactFormPhone" data-i18n="field_phone">Telefon</label>
+          <input type="tel" id="contactFormPhone" name="phone" required data-fs-field data-i18n-placeholder="contact_form_phone_placeholder" placeholder="Numer do kontaktu">
+        </div>
+        <div class="field field-required">
           <label for="contactFormEmail" data-i18n="field_email">E-mail</label>
-          <input type="email" id="contactFormEmail" name="email" required data-fs-field>
+          <input type="email" id="contactFormEmail" name="email" required data-fs-field data-i18n-placeholder="contact_form_email_placeholder" placeholder="Adres e-mail do kontaktu">
         </div>
         <div class="field field-wide">
           <label for="contactFormMessage" data-i18n="field_message">Wiadomość</label>
-          <textarea id="contactFormMessage" name="message" rows="4" required data-fs-field></textarea>
+          <textarea id="contactFormMessage" name="message" rows="4" data-fs-field data-i18n-placeholder="contact_form_message_placeholder" placeholder="Napisz, w czym możemy pomóc"></textarea>
         </div>
-        <button class="btn btn-primary" type="submit" data-i18n="submit_btn" data-fs-submit-btn>Wyślij</button>
+        <button class="btn contact-submit-btn" type="submit" data-i18n="contact_form_submit" data-fs-submit-btn>Wyślij wiadomość</button>
       </form>
     </div>
   </section>

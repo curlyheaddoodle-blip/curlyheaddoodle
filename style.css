@@ -378,6 +378,24 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .contact-info-block { margin-top: 32px; display: flex; gap: 56px; align-items: flex-start; }
 .contact-social-col { display: flex; flex-direction: column; gap: 14px; }
 .contact-info-label { font-size: 0.82rem; font-weight: 700; color: var(--color-gold); text-transform: uppercase; letter-spacing: 0.03em; margin: 0; }
+
+/* -- Custom page banner (photo + heading + subtitle) — "Pokaż baner z tłem"
+   per page in admin.html's Strony niestandardowe card -- */
+.page-banner {
+  position: relative; padding: 90px 0; background: var(--color-ink); color: var(--color-bg);
+  background-size: cover; background-position: center; text-align: center;
+}
+.page-banner.has-photo::before { content: ''; position: absolute; inset: 0; background: rgba(20, 15, 10, 0.55); }
+.page-banner .wrap { position: relative; z-index: 1; }
+.page-banner h1 { color: var(--color-bg); margin: 0; }
+.page-banner-subtitle { color: var(--color-bg); opacity: 0.92; max-width: 640px; margin: 14px auto 0; }
+.field-required label::after { content: ' *'; color: #B23A3A; }
+.contact-submit-btn {
+  grid-column: 1 / -1; justify-self: stretch; width: 100%; margin-top: 4px;
+  background: var(--color-ink); color: var(--color-bg);
+  text-transform: uppercase; letter-spacing: 0.04em; padding: 16px; font-weight: 700;
+}
+.contact-submit-btn:hover { background: #3C2E22; }
 .admin-link { color: #8A7C64; font-size: 0.8rem; text-decoration: underline; }
 .admin-link:hover { color: var(--color-bg); }
 

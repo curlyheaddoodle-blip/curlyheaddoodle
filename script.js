@@ -110,6 +110,11 @@ const FALLBACK_CONTENT = {
     field_message: { pl: 'Opowiedz nam o swoim domu', en: 'Tell us about your home' },
     field_message_placeholder: { pl: 'Domownicy, inne zwierzęta, ogród...', en: 'Household, other pets, yard...' },
     submit_btn: { pl: 'Wyślij zgłoszenie', en: 'Send application' },
+    contact_form_name_placeholder: { pl: 'Twoje imię', en: 'Your name' },
+    contact_form_phone_placeholder: { pl: 'Numer do kontaktu', en: 'Phone number' },
+    contact_form_email_placeholder: { pl: 'Adres e-mail do kontaktu', en: 'Contact email address' },
+    contact_form_message_placeholder: { pl: 'Napisz, w czym możemy pomóc', en: 'Tell us how we can help' },
+    contact_form_submit: { pl: 'Wyślij wiadomość', en: 'Send message' },
     form_fineprint: { pl: 'Wykorzystujemy te dane wyłącznie do kontaktu.', en: 'We only use this information to respond to your inquiry.' },
     footer_disclaimer: { pl: 'Nie prowadzimy sprzedaży za pośrednictwem portali ogłoszeniowych typu OLX.', en: 'We do not sell puppies through classifieds sites such as OLX.' },
     footer_copyright: { pl: '© 2026 Curly Head Doodle. Wszelkie prawa zastrzeżone.', en: '© 2026 Curly Head Doodle. All rights reserved.' },
@@ -490,6 +495,34 @@ function applyCustomPage(lang) {
   if (heading) heading.textContent = headingText;
   document.title = `${headingText} — Curly Head Doodle`;
   renderContentBlocks('customPageBody', page.body, lang);
+
+  // Optional photo banner: the same h1 gets moved into (or back out of) the
+  // banner section, so heading text only needs setting once above.
+  const bannerWrap = document.getElementById('customPageBanner');
+  const bannerSubtitle = document.getElementById('customPageBannerSubtitle');
+  const mainWrap = document.getElementById('customPageMainWrap');
+  if (bannerWrap && heading) {
+    if (page.showBanner) {
+      bannerWrap.hidden = false;
+      bannerWrap.querySelector('.wrap').insertBefore(heading, bannerSubtitle);
+      const subText = (page.bannerSubtitle && page.bannerSubtitle[lang]) || '';
+      bannerSubtitle.textContent = subText;
+      bannerSubtitle.hidden = !subText;
+      const bannerImg = new Image();
+      bannerImg.onload = () => {
+        bannerWrap.style.backgroundImage = `url(${bannerImg.src})`;
+        bannerWrap.classList.add('has-photo');
+      };
+      bannerImg.onerror = () => {
+        bannerWrap.classList.remove('has-photo');
+        bannerWrap.style.backgroundImage = '';
+      };
+      bannerImg.src = `images/${page.id}-banner.jpg?t=${Date.now()}`;
+    } else {
+      bannerWrap.hidden = true;
+      if (mainWrap) mainWrap.insertBefore(heading, mainWrap.firstChild);
+    }
+  }
 
   const contactBlock = document.getElementById('customPageContact');
   if (contactBlock) contactBlock.hidden = !page.showContactBlock;

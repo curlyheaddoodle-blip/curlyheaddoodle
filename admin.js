@@ -59,6 +59,9 @@ const LABELS = {
   field_litter_opt3: 'Opcja: „jeszcze nie wiem”', field_message: 'Pole: dodatkowa wiadomość', field_message_placeholder: 'Placeholder wiadomości',
   submit_btn: 'Przycisk wysyłania', form_fineprint: 'Drobny druk pod formularzem',
   footer_disclaimer: 'Zastrzeżenie', footer_copyright: 'Prawa autorskie',
+  contact_form_name_placeholder: 'Formularz kontaktowy — placeholder: imię', contact_form_phone_placeholder: 'Formularz kontaktowy — placeholder: telefon',
+  contact_form_email_placeholder: 'Formularz kontaktowy — placeholder: e-mail', contact_form_message_placeholder: 'Formularz kontaktowy — placeholder: wiadomość',
+  contact_form_submit: 'Formularz kontaktowy — przycisk wysyłania',
 };
 
 const TRANSLATION_GROUPS = [
@@ -68,6 +71,7 @@ const TRANSLATION_GROUPS = [
   { title: 'Formularz — Warunki mieszkaniowe i styl życia', keys: ['field_section2_heading', 'field_housing', 'field_alone_hours', 'field_daily_time'] },
   { title: 'Formularz — Doświadczenie i oczekiwania', keys: ['field_section3_heading', 'field_experience', 'field_grooming_ready', 'field_temperament', 'field_training', 'field_vacation'] },
   { title: 'Formularz — pozostałe', keys: ['field_select_placeholder', 'field_yes', 'field_no', 'field_litter', 'field_litter_opt3', 'field_message', 'field_message_placeholder', 'submit_btn', 'form_fineprint'] },
+  { title: 'Krótki formularz kontaktowy (strona Kontakt)', keys: ['contact_form_name_placeholder', 'contact_form_phone_placeholder', 'contact_form_email_placeholder', 'contact_form_message_placeholder', 'contact_form_submit'] },
   { title: 'Stopka', keys: ['footer_disclaimer', 'footer_copyright'] },
 ];
 // Keys grouped by real-world site section so admin.html can show them
@@ -934,6 +938,7 @@ function renderCustomPages() {
 function buildCustomPageRow(page, index) {
   if (!page.body) page.body = [];
   if (!page.slug) page.slug = slugify(page.navLabel.pl || page.heading.pl);
+  if (!page.bannerSubtitle) page.bannerSubtitle = { pl: '', en: '' };
   const row = document.createElement('div');
   row.className = 'repeat-item';
   row.innerHTML = `
@@ -961,6 +966,15 @@ function buildCustomPageRow(page, index) {
       </div>
     </div>
     <label class="checkbox-label" style="margin-top:14px">
+      <input type="checkbox" data-act="showBanner"${page.showBanner ? ' checked' : ''}>
+      Pokaż baner z tłem (nagłówek i podtytuł na zdjęciu)
+    </label>
+    <div class="repeat-row"${page.showBanner ? '' : ' hidden'} id="bannerSubtitleRow-${page.id}">
+      <div><label>Podtytuł banera (PL)</label><input data-f="bannerSubtitle.pl" value="${escapeAttr((page.bannerSubtitle && page.bannerSubtitle.pl) || '')}"></div>
+      <div><label>Banner subtitle (EN)</label><input data-f="bannerSubtitle.en" value="${escapeAttr((page.bannerSubtitle && page.bannerSubtitle.en) || '')}"></div>
+    </div>
+    <div id="bannerPhotoSlot-${page.id}"${page.showBanner ? '' : ' hidden'}></div>
+    <label class="checkbox-label" style="margin-top:14px">
       <input type="checkbox" data-act="showContactBlock"${page.showContactBlock ? ' checked' : ''}>
       Pokaż na tej stronie dane kontaktowe (lokalizacja, e-mail, social media, przycisk formularza)
     </label>
@@ -977,6 +991,13 @@ function buildCustomPageRow(page, index) {
       if (path.length === 1) page[path[0]] = input.value;
       else page[path[0]][path[1]] = input.value;
     });
+  });
+  row.querySelector(`#bannerPhotoSlot-${page.id}`).appendChild(
+    buildFixedSlotCard({ key: `${page.id}-banner`, label: 'Zdjęcie tła banera', hint: 'Szerokie zdjęcie, np. 1600×600 px.' }));
+  row.querySelector('[data-act="showBanner"]').addEventListener('change', e => {
+    page.showBanner = e.target.checked;
+    row.querySelector(`#bannerSubtitleRow-${page.id}`).hidden = !e.target.checked;
+    row.querySelector(`#bannerPhotoSlot-${page.id}`).hidden = !e.target.checked;
   });
   row.querySelector('[data-act="showContactBlock"]').addEventListener('change', e => {
     page.showContactBlock = e.target.checked;

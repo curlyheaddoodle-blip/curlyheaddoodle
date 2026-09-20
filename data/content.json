@@ -94,12 +94,17 @@
         "en": "Contact"
       },
       "heading": {
-        "pl": "Kontakt",
-        "en": "Contact"
+        "pl": "Skontaktuj się z nami",
+        "en": "Get in touch with us"
       },
       "body": [],
       "showContactBlock": true,
-      "showContactForm": true
+      "showContactForm": true,
+      "showBanner": true,
+      "bannerSubtitle": {
+        "pl": "Chcesz dowiedzieć się więcej lub zapytać o dostępność szczeniąt? Jesteśmy tu, aby pomóc Ci podjąć świadomą decyzję.",
+        "en": "Want to learn more or ask about puppy availability? We're here to help you make an informed decision."
+      }
     }
   ],
   "theme": {
@@ -387,6 +392,26 @@
     "submit_btn": {
       "pl": "Wyślij zgłoszenie",
       "en": "Send application"
+    },
+    "contact_form_name_placeholder": {
+      "pl": "Twoje imię",
+      "en": "Your name"
+    },
+    "contact_form_phone_placeholder": {
+      "pl": "Numer do kontaktu",
+      "en": "Phone number"
+    },
+    "contact_form_email_placeholder": {
+      "pl": "Adres e-mail do kontaktu",
+      "en": "Contact email address"
+    },
+    "contact_form_message_placeholder": {
+      "pl": "Napisz, w czym możemy pomóc",
+      "en": "Tell us how we can help"
+    },
+    "contact_form_submit": {
+      "pl": "Wyślij wiadomość",
+      "en": "Send message"
     },
     "form_fineprint": {
       "pl": "Wykorzystujemy te dane wyłącznie do kontaktu i prowadzenia listy oczekujących. Nie udostępniamy ich nikomu innemu.",
