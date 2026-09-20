@@ -31,6 +31,11 @@
 
 /* ---------- 2. RESET ---------- */
 * { box-sizing: border-box; }
+/* Without !important, class rules like .btn { display: inline-block } beat
+   the browser's low-specificity default [hidden] rule, so el.hidden = true
+   silently does nothing for any element that also has a display-setting
+   class — bit us on the Contact page's inline CTA button. */
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

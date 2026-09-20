@@ -495,6 +495,13 @@ function applyCustomPage(lang) {
   if (contactBlock) contactBlock.hidden = !page.showContactBlock;
   const contactForm = document.getElementById('customPageContactForm');
   if (contactForm) contactForm.hidden = !page.showContactForm;
+  // The info block's own "Kontakt" button exists to bring people here from
+  // elsewhere (footer, About page) — pointless and visually floating when
+  // this very page already has the real form right below it.
+  if (contactBlock) {
+    const inlineCtaBtn = contactBlock.querySelector('.js-contact-form-btn');
+    if (inlineCtaBtn) inlineCtaBtn.hidden = !!page.showContactForm;
+  }
 }
 
 // ---- 6. Language switch ----
