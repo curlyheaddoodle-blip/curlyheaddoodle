@@ -1,7 +1,9 @@
 {
   "site": {
     "brandName": "Curly Head Doodle",
-    "logoSize": 42
+    "logoSize": 42,
+    "logoShape": "square",
+    "logoFit": "contain"
   },
   "hero": {
     "body": [
@@ -76,7 +78,9 @@
           "count": 3
         }
       }
-    ]
+    ],
+    "photoShape": "circle",
+    "photoFit": "cover"
   },
   "navOrder": [
     "about",
@@ -102,8 +106,8 @@
       "showContactForm": true,
       "showBanner": true,
       "bannerSubtitle": {
-        "pl": "Chcesz dowiedzieć się więcej lub zapytać o dostępność szczeniąt? Jesteśmy tu, aby pomóc Ci podjąć świadomą decyzję.",
-        "en": "Want to learn more or ask about puppy availability? We're here to help you make an informed decision."
+        "pl": "Chcesz dowiedzieć się więcej o naszej hodowli lub zapytać o dostępność szczeniąt? Pomożemy Ci podjąć świadomą decyzję!",
+        "en": "Do you want to know more about our kennel or ask about the availability of puppies? We'll help you make an informed decision!"
       }
     }
   ],
@@ -136,18 +140,6 @@
     "hero_cta_secondary": {
       "pl": "Poznaj nasze szczenięta",
       "en": "See our puppies"
-    },
-    "about_kicker": {
-      "pl": "",
-      "en": ""
-    },
-    "about_heading": {
-      "pl": "Witaj w naszym świecie!",
-      "en": "Welcome to our world!"
-    },
-    "about_cta": {
-      "pl": "",
-      "en": ""
     },
     "why_heading": {
       "pl": "Dlaczego my?",
@@ -184,6 +176,18 @@
     "why4_body": {
       "pl": "Hodujemy szczenięta (np. pokolenia F2B) w pięknych odcieniach, z sierścią wyjątkowo przyjazną dla alergików.",
       "en": "We breed puppies (including F2B generations) in beautiful colors, with coats especially friendly to allergy sufferers."
+    },
+    "about_kicker": {
+      "pl": "",
+      "en": ""
+    },
+    "about_heading": {
+      "pl": "Witaj w naszym świecie!",
+      "en": "Welcome to our world!"
+    },
+    "about_cta": {
+      "pl": "",
+      "en": ""
     },
     "breed_heading": {
       "pl": "Poznaj rasę Mini Goldendoodle",
@@ -393,6 +397,10 @@
       "pl": "Wyślij zgłoszenie",
       "en": "Send application"
     },
+    "form_fineprint": {
+      "pl": "Wykorzystujemy te dane wyłącznie do kontaktu i prowadzenia listy oczekujących. Nie udostępniamy ich nikomu innemu.",
+      "en": "We only use this information to respond to your inquiry and manage the waitlist. We don't share it with anyone else."
+    },
     "contact_form_name_placeholder": {
       "pl": "Twoje imię",
       "en": "Your name"
@@ -420,10 +428,6 @@
     "contact_form_error_message": {
       "pl": "Wystąpił błąd. Spróbuj ponownie.",
       "en": "Something went wrong. Please try again."
-    },
-    "form_fineprint": {
-      "pl": "Wykorzystujemy te dane wyłącznie do kontaktu i prowadzenia listy oczekujących. Nie udostępniamy ich nikomu innemu.",
-      "en": "We only use this information to respond to your inquiry and manage the waitlist. We don't share it with anyone else."
     },
     "footer_disclaimer": {
       "pl": "",
@@ -511,7 +515,9 @@
           }
         ]
       }
-    ]
+    ],
+    "photoShape": "rounded",
+    "photoFit": "cover"
   },
   "breed": {
     "facts": [
@@ -644,7 +650,11 @@
       }
     ]
   },
-  "dogsSection": { "photoSize": 200 },
+  "dogsSection": {
+    "photoSize": 200,
+    "shape": "rounded",
+    "fit": "cover"
+  },
   "dogs": [
     {
       "id": "dog1",
@@ -804,7 +814,11 @@
   "littersIntro": {
     "body": []
   },
-  "littersSection": { "photoSize": 160 },
+  "littersSection": {
+    "photoSize": 160,
+    "shape": "rounded",
+    "fit": "cover"
+  },
   "litters": [
     {
       "id": "litter1",
@@ -878,7 +892,9 @@
     "footerPhotos": {
       "enabled": false,
       "size": 64,
-      "count": 3
+      "count": 3,
+      "shape": "rounded",
+      "fit": "cover"
     },
     "details": []
   }
