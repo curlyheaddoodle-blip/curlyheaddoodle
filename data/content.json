@@ -126,7 +126,8 @@
             "mode": "single",
             "position": "right",
             "textAlign": "left",
-            "count": 3
+            "count": 3,
+            "size": 1000
           }
         }
       ],
@@ -135,7 +136,7 @@
       "showBanner": true,
       "bannerSubtitle": {
         "pl": "Jeśli chcesz dowiedzieć się więcej o naszej hodowli lub zapytać o dostępne szczenięta skontaktuj się z nami pod adresem curlyheaddoodle@gmail.com lub skorzystaj z formularza.",
-        "en": ""
+        "en": "If you want to know more about our kennel or inquire about available puppies, please contact us at curlyheaddoodle@gmail.com or use the form."
       }
     }
   ],
