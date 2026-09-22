@@ -122,9 +122,9 @@
             "borderWidth": 1
           },
           "photo": {
-            "enabled": false,
+            "enabled": true,
             "mode": "single",
-            "position": "left",
+            "position": "right",
             "textAlign": "left",
             "count": 3
           }
