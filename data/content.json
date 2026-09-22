@@ -101,7 +101,35 @@
         "pl": "Skontaktuj się z nami",
         "en": "Get in touch with us"
       },
-      "body": [],
+      "body": [
+        {
+          "id": "block-muct7ncwiyce",
+          "heading": {
+            "pl": "",
+            "en": ""
+          },
+          "headingFont": "default",
+          "textFont": "default",
+          "text": {
+            "pl": "",
+            "en": ""
+          },
+          "bullets": [],
+          "card": {
+            "enabled": false,
+            "background": "#FFFDF9",
+            "borderColor": "#E0D3B8",
+            "borderWidth": 1
+          },
+          "photo": {
+            "enabled": false,
+            "mode": "single",
+            "position": "left",
+            "textAlign": "left",
+            "count": 3
+          }
+        }
+      ],
       "showContactBlock": true,
       "showContactForm": true,
       "showBanner": true,
