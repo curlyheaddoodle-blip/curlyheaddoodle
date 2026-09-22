@@ -98,8 +98,8 @@
         "en": "Contact"
       },
       "heading": {
-        "pl": "Skontaktuj się z nami",
-        "en": "Get in touch with us"
+        "pl": "Chcesz dowiedzieć się więcej o naszej hodowli lub zapytać o dostępność szczeniąt? Skontaktuj się z nami!",
+        "en": "Do you want to know more about our kennel or ask about the availability of puppies? Contact us!"
       },
       "body": [
         {
@@ -134,8 +134,8 @@
       "showContactForm": true,
       "showBanner": true,
       "bannerSubtitle": {
-        "pl": "Chcesz dowiedzieć się więcej o naszej hodowli lub zapytać o dostępność szczeniąt? Pomożemy Ci podjąć świadomą decyzję!",
-        "en": "Do you want to know more about our kennel or ask about the availability of puppies? We'll help you make an informed decision!"
+        "pl": "",
+        "en": ""
       }
     }
   ],
