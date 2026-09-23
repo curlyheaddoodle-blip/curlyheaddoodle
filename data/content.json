@@ -135,8 +135,8 @@
       "showContactForm": true,
       "showBanner": true,
       "bannerSubtitle": {
-        "pl": "",
-        "en": ""
+        "pl": "Jesteśmy tutaj aby pomóc Ci podjąć dobrą decyzję",
+        "en": "We're here to help you make the right decision"
       }
     }
   ],
