@@ -1,7 +1,7 @@
 {
   "site": {
     "brandName": "Curly Head Doodle",
-    "logoSize": 50,
+    "logoSize": 42,
     "logoShape": "square",
     "logoFit": "contain"
   },
@@ -127,7 +127,7 @@
             "position": "right",
             "textAlign": "left",
             "count": 3,
-            "size": 400
+            "size": 1000
           }
         }
       ],
@@ -135,8 +135,8 @@
       "showContactForm": true,
       "showBanner": true,
       "bannerSubtitle": {
-        "pl": "Jesteśmy tutaj aby pomóc Ci podjąć dobrą decyzję",
-        "en": "We're here to help you make the right decision"
+        "pl": "",
+        "en": "We're here to help you make the right decisionIf you want to know more about our kennel or inquire about available puppies, please contact us at curlyheaddoodle@gmail.com or use the form."
       }
     }
   ],
@@ -681,8 +681,8 @@
     ]
   },
   "dogsSection": {
-    "photoSize": 200,
-    "shape": "rounded",
+    "photoSize": 300,
+    "shape": "circle",
     "fit": "cover"
   },
   "dogs": [
@@ -865,7 +865,7 @@
         "pl": "Zapytaj o ten miot",
         "en": "Ask about this litter"
       },
-      "link": "",
+      "link": "https://docs.google.com/forms/d/e/1FAIpQLSdA5B4u62-V5OMnPk-UbO-xaf03BnpaTi4w9R4OcOFtaiMx8g/viewform?usp=publish-editor",
       "extra": []
     },
     {
