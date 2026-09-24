@@ -891,10 +891,10 @@
     },
     {
       "id": "litter-1789679795546",
-      "status": "available",
+      "status": "previous",
       "title": {
-        "pl": "",
-        "en": ""
+        "pl": "Figa x Eddie 2025",
+        "en": "Figa x Eddie 2025"
       },
       "desc": {
         "pl": "",
@@ -905,7 +905,19 @@
         "en": ""
       },
       "link": "",
-      "extra": []
+      "extra": [
+        {
+          "label": {
+            "pl": "Data urodzenia",
+            "en": "Date of birth"
+          },
+          "value": {
+            "pl": "28.11.2026",
+            "en": "28.11.2026"
+          }
+        }
+      ],
+      "photoCount": 5
     }
   ],
   "contact": {
