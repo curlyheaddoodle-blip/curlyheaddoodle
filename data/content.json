@@ -492,7 +492,8 @@
           "position": "right",
           "textAlign": "left",
           "mode": "single",
-          "count": 3
+          "count": 3,
+          "size": 240
         },
         "bullets": []
       },
