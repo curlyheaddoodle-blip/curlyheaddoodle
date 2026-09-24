@@ -72,8 +72,8 @@
           "borderWidth": 1
         },
         "photo": {
-          "enabled": false,
-          "mode": "single",
+          "enabled": true,
+          "mode": "collage",
           "position": "left",
           "textAlign": "left",
           "count": 3
