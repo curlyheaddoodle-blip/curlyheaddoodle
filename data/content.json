@@ -870,7 +870,8 @@
         "en": "Ask about this litter"
       },
       "link": "https://curlyheaddoodle.pl/page.html?slug=kontakt",
-      "extra": []
+      "extra": [],
+      "hidden": true
     },
     {
       "id": "litter2",
