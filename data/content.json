@@ -29,7 +29,7 @@
         "photo": {
           "enabled": true,
           "mode": "single",
-          "position": "left",
+          "position": "right",
           "textAlign": "left",
           "count": 3,
           "size": 240
@@ -74,7 +74,7 @@
         "photo": {
           "enabled": true,
           "mode": "collage",
-          "position": "left",
+          "position": "right",
           "textAlign": "left",
           "count": 4,
           "size": 300
