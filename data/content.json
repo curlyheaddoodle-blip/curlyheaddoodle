@@ -29,7 +29,7 @@
         "photo": {
           "enabled": true,
           "mode": "single",
-          "position": "right",
+          "position": "left",
           "textAlign": "left",
           "count": 3,
           "size": 240
