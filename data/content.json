@@ -878,12 +878,12 @@
       "id": "litter2",
       "status": "expecting",
       "title": {
-        "pl": "[Suczka] × [Reproduktor]",
-        "en": "[Dam] × [Sire]"
+        "pl": "Figa × Eddie",
+        "en": "Figa × Eddie"
       },
       "desc": {
-        "pl": "Planowany termin miotu — uzupełnij tutaj.",
-        "en": "Planned litter date — fill in here."
+        "pl": "Planowany termin miotu — wiosna 2027",
+        "en": "Planned litter date — spring 2027"
       },
       "cta": {
         "pl": "Dołącz do listy oczekujących",
