@@ -76,7 +76,8 @@
           "mode": "collage",
           "position": "left",
           "textAlign": "left",
-          "count": 3
+          "count": 3,
+          "size": 500
         }
       }
     ],
