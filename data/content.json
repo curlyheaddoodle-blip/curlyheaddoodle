@@ -74,7 +74,7 @@
         "photo": {
           "enabled": true,
           "mode": "collage",
-          "position": "right",
+          "position": "bottom",
           "textAlign": "left",
           "count": 5,
           "size": 300
