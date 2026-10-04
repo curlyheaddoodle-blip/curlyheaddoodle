@@ -81,7 +81,7 @@
         }
       }
     ],
-    "photoShape": "circle",
+    "photoShape": "rounded",
     "photoFit": "cover"
   },
   "navOrder": [
