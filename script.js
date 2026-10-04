@@ -424,13 +424,7 @@ function renderContentBlocks(containerId, blocks, lang) {
         const collage = document.createElement('div');
         collage.className = 'content-block-collage';
         applySize(collage);
-        for (let i = 1; i <= count; i++) {
-          const cell = document.createElement('div');
-          cell.className = 'collage-photo';
-          cell.setAttribute('data-photo-slot', `${block.id}-${i}`);
-          cell.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-paw"/></svg>';
-          collage.appendChild(cell);
-        }
+        fillRatioGallery(collage, block.id, count);
         outer.appendChild(collage);
       } else {
         const photoEl = document.createElement('div');
@@ -664,6 +658,49 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
 function borderRadiusFor(shape) {
   return shape === 'circle' ? '50%' : shape === 'square' ? '0' : shape === 'rounded' ? 'var(--radius)' : '';
 }
+// Gallery layout: every photo that loads is bucketed by aspect ratio (5%
+// tolerance). Photos sharing a ratio sit side by side in rows of identical
+// tiles; a photo with a different ratio starts its own row. All rows use
+// the same tile width, so nothing is stretched or cropped to "match".
+function fillRatioGallery(container, baseId, count) {
+  const loads = [];
+  for (let i = 1; i <= count; i++) {
+    loads.push(new Promise(resolve => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => resolve(null);
+      img.src = `images/${baseId}-${i}.jpg`;
+    }));
+  }
+  Promise.all(loads).then(imgs => {
+    const buckets = [];
+    imgs.filter(Boolean).forEach(img => {
+      const r = img.naturalWidth / img.naturalHeight;
+      let b = buckets.find(x => Math.abs(x.r - r) / x.r < 0.05);
+      if (!b) { b = { r, imgs: [] }; buckets.push(b); }
+      b.imgs.push(img);
+    });
+    if (!buckets.length) { container.remove(); return; }
+    const k = Math.min(5, Math.max(...buckets.map(b => b.imgs.length)));
+    container.style.setProperty('--k', k);
+    buckets.forEach(b => {
+      for (let i = 0; i < b.imgs.length; i += k) {
+        const row = document.createElement('div');
+        row.className = 'gallery-row';
+        b.imgs.slice(i, i + k).forEach(img => {
+          const cell = document.createElement('div');
+          cell.className = 'collage-photo has-photo';
+          cell.style.aspectRatio = String(b.r);
+          img.alt = '';
+          cell.appendChild(img);
+          row.appendChild(cell);
+        });
+        container.appendChild(row);
+      }
+    });
+  });
+}
+
 function applyPhotoSlots() {
   document.querySelectorAll('[data-photo-slot]:not([data-photo-checked])').forEach(container => {
     container.setAttribute('data-photo-checked', '1');
