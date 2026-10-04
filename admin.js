@@ -207,6 +207,9 @@ async function verifyToken(candidate) {
 }
 
 function friendlyGithubError(message) {
+  if (message && /does not match/.test(message)) {
+    return 'Treść strony zmieniła się na GitHubie, odkąd otwarto ten panel (np. ktoś zapisał inną wersję). Skopiuj swoje niezapisane zmiany, odśwież stronę (Ctrl+Shift+R) i wprowadź je ponownie.';
+  }
   if (message && message.includes('Resource not accessible by personal access token')) {
     return 'Token nie ma uprawnienia do zapisu. Na GitHubie edytuj token → Repository permissions → Contents → ustaw "Read and write" (nie "Read-only"), zapisz i spróbuj ponownie.';
   }
