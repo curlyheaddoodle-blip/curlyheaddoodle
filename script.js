@@ -268,7 +268,7 @@ function buildPhotoCarousel(baseId, count, sizePx, shape, fit) {
     frame.href = paths[idx];
     dots.forEach((d, di) => d.classList.toggle('active', di === idx));
   }
-  img.onerror = () => { wrap.classList.add('no-photo'); };
+  img.onerror = () => { if (paths.length === 1) wrap.remove(); else wrap.classList.add('no-photo'); };
   img.onload = () => { wrap.classList.remove('no-photo'); };
 
   if (count > 1) {
@@ -416,12 +416,14 @@ function renderContentBlocks(containerId, blocks, lang) {
       // A custom size only applies for the left/right layout — top/bottom
       // are intentionally full-width (CSS handles that), so an inline width
       // there would just fight the layout instead of resizing anything.
-      const sizePx = position !== 'top' && position !== 'bottom' ? block.photo.size : null;
+      const sizePx = block.photo.size || null;
+      const stacked = position === 'top' || position === 'bottom';
+      const applySize = el => { if (!sizePx) return; if (stacked) { el.style.maxWidth = `${sizePx}px`; } else { el.style.width = el.style.flexBasis = `${sizePx}px`; } };
       if (block.photo.mode === 'collage') {
-        const count = Math.min(5, Math.max(2, block.photo.count || 3));
+        const count = Math.min(10, Math.max(2, block.photo.count || 3));
         const collage = document.createElement('div');
         collage.className = 'content-block-collage';
-        if (sizePx) { collage.style.width = collage.style.flexBasis = `${sizePx}px`; }
+        applySize(collage);
         for (let i = 1; i <= count; i++) {
           const cell = document.createElement('div');
           cell.className = 'collage-photo';
@@ -433,7 +435,7 @@ function renderContentBlocks(containerId, blocks, lang) {
       } else {
         const photoEl = document.createElement('div');
         photoEl.className = 'content-block-photo';
-        if (sizePx) { photoEl.style.width = photoEl.style.flexBasis = `${sizePx}px`; }
+        applySize(photoEl);
         photoEl.setAttribute('data-photo-slot', block.id);
         photoEl.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-paw"/></svg>';
         outer.appendChild(photoEl);
@@ -676,7 +678,16 @@ function applyPhotoSlots() {
       if (slot === 'hero' && activeContent.hero) img.style.objectFit = activeContent.hero.photoFit || '';
       if (slot === 'about' && activeContent.about) img.style.objectFit = activeContent.about.photoFit || '';
     };
-    img.onerror = () => { /* no photo uploaded yet — keep placeholder */ };
+    img.onerror = () => {
+      // No photo uploaded: drop the placeholder instead of showing an empty frame
+      // (hero's medallion illustration is intentional artwork, so it stays).
+      if (slot === 'hero') return;
+      const outer = container.closest('.content-block');
+      const collage = container.closest('.content-block-collage');
+      container.remove();
+      if (collage && !collage.querySelector('.collage-photo')) collage.remove();
+      if (outer && !outer.querySelector('.content-block-photo, .content-block-collage')) outer.classList.remove('has-photo', 'photo-left', 'photo-right', 'photo-top', 'photo-bottom');
+    };
     img.src = `images/${slot}.jpg`;
   });
 }

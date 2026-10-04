@@ -109,12 +109,12 @@ p { margin: 0 0 1em; max-width: 62ch; }
 
 .content-block-collage {
   flex: 0 0 340px; width: 340px; max-width: 100%;
-  display: flex; gap: 8px; align-items: stretch;
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch;
 }
 .content-block.has-photo.photo-top .content-block-collage,
 .content-block.has-photo.photo-bottom .content-block-collage { flex: none; width: 100%; }
 .collage-photo {
-  flex: 1 1 0; min-width: 0; aspect-ratio: 3/4;
+  flex: 1 1 90px; min-width: 0; aspect-ratio: 3/4;
   border-radius: 6px; overflow: hidden;
   background: var(--color-bg-alt); border: 2px dashed var(--color-gold-soft);
   display: flex; align-items: center; justify-content: center;

@@ -747,7 +747,7 @@ function buildPhotoEditor(block, rerenderBlock) {
         </div>
         <div${isCollage ? '' : ' hidden'}>
           <label>Liczba zdjęć</label>
-          <select data-pf-rerender="count">${[2, 3, 4, 5].map(n => `<option value="${n}"${block.photo.count === n ? ' selected' : ''}>${n}</option>`).join('')}</select>
+          <select data-pf-rerender="count">${[2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => `<option value="${n}"${block.photo.count === n ? ' selected' : ''}>${n}</option>`).join('')}</select>
         </div>
       </div>
       <div class="repeat-row">
@@ -767,8 +767,8 @@ function buildPhotoEditor(block, rerenderBlock) {
           </select>
         </div>
       </div>
-      <div class="repeat-row single"${block.photo.position === 'top' || block.photo.position === 'bottom' ? ' hidden' : ''}>
-        <div><label>Rozmiar (px) — tylko dla pozycji Lewo/Prawo</label><input type="number" min="60" max="500" data-pf="size" value="${block.photo.size || (isCollage ? 340 : 120)}"></div>
+      <div class="repeat-row single">
+        <div><label>Rozmiar (px) — zdjęcie lub cała galeria</label><input type="number" min="60" max="1600" data-pf="size" value="${block.photo.size || (isCollage ? 340 : 120)}"></div>
       </div>
       <div class="photo-upload-grid"></div>
     </div>
@@ -1064,7 +1064,7 @@ function buildDogRow(dog, index) {
     </div>
     <div class="repeat-row single">
       <div><label>Liczba zdjęć (karuzela, jeśli więcej niż 1)</label>
-        <select data-act="photoCount">${[1, 2, 3, 4, 5].map(n => `<option value="${n}"${(dog.photoCount || 1) === n ? ' selected' : ''}>${n}</option>`).join('')}</select>
+        <select data-act="photoCount">${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => `<option value="${n}"${(dog.photoCount || 1) === n ? ' selected' : ''}>${n}</option>`).join('')}</select>
       </div>
     </div>
     <div class="photo-upload-grid is-collage" id="dogPhotos-${dog.id}"></div>
@@ -1205,7 +1205,7 @@ function buildLitterRow(litter, index) {
         <select data-f="status">${STATUS_OPTIONS.map(s => `<option value="${s.value}"${litter.status === s.value ? ' selected' : ''}>${s.label}</option>`).join('')}</select>
       </div>
       <div><label>Liczba zdjęć (0 = brak)</label>
-        <select data-act="photoCount">${[0, 1, 2, 3, 4, 5].map(n => `<option value="${n}"${(litter.photoCount || 0) === n ? ' selected' : ''}>${n}</option>`).join('')}</select>
+        <select data-act="photoCount">${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => `<option value="${n}"${(litter.photoCount || 0) === n ? ' selected' : ''}>${n}</option>`).join('')}</select>
       </div>
     </div>
     <div class="photo-upload-grid is-collage" id="litterPhotos-${litter.id}"></div>
@@ -1407,7 +1407,7 @@ function renderContactEditor() {
       <div class="repeat-row style-fields"${content.contact.footerPhotos.enabled ? '' : ' hidden'}>
         <div><label>Rozmiar ramki (px)</label><input type="number" min="32" max="160" id="contact-footerPhotosSize" value="${content.contact.footerPhotos.size}"></div>
         <div><label>Liczba zdjęć</label>
-          <select id="contact-footerPhotosCount">${[2, 3, 4, 5].map(n => `<option value="${n}"${content.contact.footerPhotos.count === n ? ' selected' : ''}>${n}</option>`).join('')}</select>
+          <select id="contact-footerPhotosCount">${[2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => `<option value="${n}"${content.contact.footerPhotos.count === n ? ' selected' : ''}>${n}</option>`).join('')}</select>
         </div>
       </div>
       <div class="photo-upload-grid is-collage" id="footerPhotosUploadGrid" style="margin-top:10px"${content.contact.footerPhotos.enabled ? '' : ' hidden'}></div>
