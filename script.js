@@ -536,8 +536,10 @@ function applyCustomPage(lang) {
   const split = document.getElementById('customPageSplit');
   if (split && contactForm && page.showContactForm && page.sideBySide) {
     split.hidden = false;
+    const left = document.getElementById('customPageSplitLeft');
+    if (contactBlock) left.appendChild(contactBlock);
+    left.appendChild(contactForm);
     split.appendChild(bodyEl);
-    split.appendChild(contactForm);
   }
   // The info block's own "Kontakt" button exists to bring people here from
   // elsewhere (footer, About page) — pointless and visually floating when
