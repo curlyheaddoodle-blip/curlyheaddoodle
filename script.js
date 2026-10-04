@@ -313,7 +313,8 @@ function renderDogs(lang) {
     const h4 = document.createElement('h4'); h4.textContent = (dog.name && dog.name[lang]) || ''; card.appendChild(h4);
     const role = document.createElement('p'); role.className = 'dog-role'; role.textContent = (dog.role && dog.role[lang]) || ''; card.appendChild(role);
     const bio = document.createElement('p'); bio.className = 'dog-bio'; bio.textContent = (dog.bio && dog.bio[lang]) || ''; card.appendChild(bio);
-    if (dog.extra && dog.extra.length) card.appendChild(buildFactListEl(dog.extra, lang, 'extra-facts dog-extra'));
+    // Always 5 children (photo, name, role, bio, extra) so the grid's subgrid rows line up across cards.
+    card.appendChild(dog.extra && dog.extra.length ? buildFactListEl(dog.extra, lang, 'extra-facts dog-extra') : document.createElement('div'));
     grid.appendChild(card);
   });
 }

@@ -463,3 +463,12 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .gallery-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
 .gallery-row .collage-photo { flex: 0 0 var(--tile, 200px); max-width: 100%; border: none; }
 .gallery-row .collage-photo img { height: 100%; object-fit: cover; }
+
+/* Dogs: round photos (square frame, cover-cropped — aspect ratio ignored on
+   purpose) and name/role/bio/extra lined up across cards via subgrid rows. */
+.dogs-grid { align-items: start; }
+.dog-card { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; }
+.dog-card .photo-carousel-frame { aspect-ratio: 1/1; }
+.dog-card .photo-carousel-frame img { height: 100%; object-fit: cover; }
+.dog-card .photo-carousel { align-self: start; }
+@media (max-width: 600px) { .dog-card { display: block; } }
