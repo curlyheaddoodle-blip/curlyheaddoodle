@@ -555,7 +555,8 @@
     ],
     "photoShape": "rounded",
     "photoFit": "cover",
-    "photoHidden": false
+    "photoHidden": false,
+    "photoSize": 400
   },
   "breed": {
     "facts": [
