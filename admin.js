@@ -93,7 +93,7 @@ const LONG_QUESTION_KEYS = new Set([
   'field_temperament', 'field_training', 'field_vacation',
 ]);
 function isLongKey(key) {
-  return /body|lede|bio|desc|fineprint|description|placeholder/.test(key) || LONG_QUESTION_KEYS.has(key);
+  return /body|lede|bio|desc|fineprint|description|placeholder|note/.test(key) || LONG_QUESTION_KEYS.has(key);
 }
 
 // Renders a list of translation keys as PL/EN field pairs directly inside a

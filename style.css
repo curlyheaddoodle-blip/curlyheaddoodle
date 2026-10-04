@@ -295,7 +295,7 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .status-reserved { background: var(--color-line); color: var(--color-ink-soft); }
 .status-previous { background: transparent; color: var(--color-ink-soft); border: 1px solid var(--color-line); }
 
-.replace-note { margin-top: 22px; font-size: 0.85rem; color: var(--color-ink-soft); font-style: italic; }
+.replace-note { max-width: none; white-space: pre-line; margin-top: 22px; font-size: 0.85rem; color: var(--color-ink-soft); font-style: italic; }
 
 /* -- Kontakt -- */
 .contact-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 56px; align-items: start; }
