@@ -446,3 +446,4 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .page-split .waitlist-form { max-width: none; }
 .page-split .content-block-photo, .page-split .content-block-collage { width: 100% !important; flex-basis: 100% !important; max-width: 100%; }
 @media (max-width: 860px) { .page-split { grid-template-columns: 1fr; } }
+@media (min-width: 861px) { .page-split .waitlist-form { order: -1; } }
