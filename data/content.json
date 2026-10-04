@@ -858,7 +858,12 @@
   "littersSection": {
     "photoSize": 400,
     "shape": "rounded",
-    "fit": "cover"
+    "fit": "cover",
+    "statusColors": {
+      "previous": {
+        "bg": "#ff9ec5"
+      }
+    }
   },
   "litters": [
     {
