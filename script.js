@@ -114,6 +114,7 @@ const FALLBACK_CONTENT = {
     contact_form_phone_placeholder: { pl: 'Numer do kontaktu', en: 'Phone number' },
     contact_form_email_placeholder: { pl: 'Adres e-mail do kontaktu', en: 'Contact email address' },
     contact_form_message_placeholder: { pl: 'Napisz, w czym możemy pomóc', en: 'Tell us how we can help' },
+    contact_form_message_label: { pl: 'Wiadomość', en: 'Message' },
     contact_form_submit: { pl: 'Wyślij wiadomość', en: 'Send message' },
     contact_form_success_message: { pl: 'Dziękujemy! Wiadomość została wysłana.', en: "Thank you! Your message has been sent." },
     contact_form_error_message: { pl: 'Wystąpił błąd. Spróbuj ponownie.', en: 'Something went wrong. Please try again.' },
@@ -531,6 +532,13 @@ function applyCustomPage(lang) {
   if (contactBlock) contactBlock.hidden = !page.showContactBlock;
   const contactForm = document.getElementById('customPageContactForm');
   if (contactForm) contactForm.hidden = !page.showContactForm;
+  // Optional side-by-side layout: body (e.g. a photo) left, form right.
+  const split = document.getElementById('customPageSplit');
+  if (split && contactForm && page.showContactForm && page.sideBySide) {
+    split.hidden = false;
+    split.appendChild(bodyEl);
+    split.appendChild(contactForm);
+  }
   // The info block's own "Kontakt" button exists to bring people here from
   // elsewhere (footer, About page) — pointless and visually floating when
   // this very page already has the real form right below it.

@@ -135,6 +135,7 @@
       ],
       "showContactBlock": true,
       "showContactForm": true,
+      "sideBySide": true,
       "showBanner": true,
       "bannerSubtitle": {
         "pl": "Jesteśmy tutaj aby pomóc Ci podjąć właściwą decyzję",
@@ -447,6 +448,10 @@
     "contact_form_message_placeholder": {
       "pl": "Napisz, w czym możemy pomóc",
       "en": "Tell us how we can help"
+    },
+    "contact_form_message_label": {
+      "pl": "Wiadomość",
+      "en": "Message"
     },
     "contact_form_submit": {
       "pl": "Wyślij wiadomość",

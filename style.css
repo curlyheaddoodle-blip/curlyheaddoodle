@@ -439,3 +439,10 @@ p { margin: 0 0 1em; max-width: 62ch; }
   .content-block.has-photo .content-block-collage { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 80px; }
   .content-block.has-card { padding: 20px; }
 }
+
+/* Side-by-side custom page: body (photo) | form. Inline photo sizes are
+   overridden so the photo fills its column. */
+.page-split { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; margin-top: 32px; }
+.page-split .waitlist-form { max-width: none; }
+.page-split .content-block-photo, .page-split .content-block-collage { width: 100% !important; flex-basis: 100% !important; max-width: 100%; }
+@media (max-width: 860px) { .page-split { grid-template-columns: 1fr; } }

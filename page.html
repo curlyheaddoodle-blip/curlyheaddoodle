@@ -105,6 +105,10 @@
            on (admin.html, Strony niestandardowe) — a short, separate contact
            form (not the full puppy application on kontakt.html), wired to
            the same Formspree endpoint via script.js's initFormspreeAjax. -->
+      <!-- With "Zdjęcie obok formularza" on, script.js moves the body (photo)
+           and the form in here so they sit side by side. -->
+      <div class="page-split" id="customPageSplit" hidden></div>
+
       <form class="waitlist-form js-web3form" id="customPageContactForm" action="https://api.web3forms.com/submit" method="POST" hidden>
         <input type="hidden" name="access_key" id="web3formsAccessKey">
         <div class="form-message form-message-success" data-fs-success></div>
@@ -121,9 +125,9 @@
           <label for="contactFormEmail" data-i18n="field_email">E-mail</label>
           <input type="email" id="contactFormEmail" name="email" required data-fs-field data-i18n-placeholder="contact_form_email_placeholder" placeholder="Adres e-mail do kontaktu">
         </div>
-        <div class="field field-wide">
-          <label for="contactFormMessage" data-i18n="field_message">Wiadomość</label>
-          <textarea id="contactFormMessage" name="message" rows="4" data-fs-field data-i18n-placeholder="contact_form_message_placeholder" placeholder="Napisz, w czym możemy pomóc"></textarea>
+        <div class="field field-wide field-required">
+          <label for="contactFormMessage" data-i18n="contact_form_message_label">Wiadomość</label>
+          <textarea id="contactFormMessage" name="message" rows="4" required data-fs-field data-i18n-placeholder="contact_form_message_placeholder" placeholder="Napisz, w czym możemy pomóc"></textarea>
         </div>
         <button class="btn contact-submit-btn" type="submit" data-i18n="contact_form_submit" data-fs-submit-btn>Wyślij wiadomość</button>
       </form>

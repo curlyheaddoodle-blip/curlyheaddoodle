@@ -61,7 +61,7 @@ const LABELS = {
   footer_disclaimer: 'Zastrzeżenie', footer_copyright: 'Prawa autorskie',
   contact_form_name_placeholder: 'Formularz kontaktowy — placeholder: imię', contact_form_phone_placeholder: 'Formularz kontaktowy — placeholder: telefon',
   contact_form_email_placeholder: 'Formularz kontaktowy — placeholder: e-mail', contact_form_message_placeholder: 'Formularz kontaktowy — placeholder: wiadomość',
-  contact_form_submit: 'Formularz kontaktowy — przycisk wysyłania',
+  contact_form_submit: 'Formularz kontaktowy — przycisk wysyłania', contact_form_message_label: 'Formularz kontaktowy — etykieta wiadomości',
   contact_form_success_message: 'Formularz kontaktowy — komunikat sukcesu', contact_form_error_message: 'Formularz kontaktowy — komunikat błędu',
 };
 
@@ -72,7 +72,7 @@ const TRANSLATION_GROUPS = [
   { title: 'Formularz — Warunki mieszkaniowe i styl życia', keys: ['field_section2_heading', 'field_housing', 'field_alone_hours', 'field_daily_time'] },
   { title: 'Formularz — Doświadczenie i oczekiwania', keys: ['field_section3_heading', 'field_experience', 'field_grooming_ready', 'field_temperament', 'field_training', 'field_vacation'] },
   { title: 'Formularz — pozostałe', keys: ['field_select_placeholder', 'field_yes', 'field_no', 'field_litter', 'field_litter_opt3', 'field_message', 'field_message_placeholder', 'submit_btn', 'form_fineprint'] },
-  { title: 'Krótki formularz kontaktowy (strona Kontakt)', keys: ['contact_form_name_placeholder', 'contact_form_phone_placeholder', 'contact_form_email_placeholder', 'contact_form_message_placeholder', 'contact_form_submit', 'contact_form_success_message', 'contact_form_error_message'] },
+  { title: 'Krótki formularz kontaktowy (strona Kontakt)', keys: ['contact_form_name_placeholder', 'contact_form_phone_placeholder', 'contact_form_email_placeholder', 'contact_form_message_label', 'contact_form_message_placeholder', 'contact_form_submit', 'contact_form_success_message', 'contact_form_error_message'] },
   { title: 'Stopka', keys: ['footer_disclaimer', 'footer_copyright'] },
 ];
 // Keys grouped by real-world site section so admin.html can show them
@@ -983,6 +983,10 @@ function buildCustomPageRow(page, index) {
       <input type="checkbox" data-act="showContactForm"${page.showContactForm ? ' checked' : ''}>
       Pokaż na tej stronie krótki formularz kontaktowy (imię, e-mail, wiadomość)
     </label>
+    <label class="checkbox-label" style="margin-top:8px">
+      <input type="checkbox" data-act="sideBySide"${page.sideBySide ? ' checked' : ''}>
+      Zdjęcie/treść obok formularza (układ dwukolumnowy; wymaga formularza)
+    </label>
     <div id="customPageBodyEditor-${page.id}"></div>
     <button type="button" class="btn-small" data-act="add-para">+ Dodaj akapit</button>
   `;
@@ -1002,6 +1006,9 @@ function buildCustomPageRow(page, index) {
   });
   row.querySelector('[data-act="showContactBlock"]').addEventListener('change', e => {
     page.showContactBlock = e.target.checked;
+  });
+  row.querySelector('[data-act="sideBySide"]').addEventListener('change', e => {
+    page.sideBySide = e.target.checked;
   });
   row.querySelector('[data-act="showContactForm"]').addEventListener('change', e => {
     page.showContactForm = e.target.checked;
