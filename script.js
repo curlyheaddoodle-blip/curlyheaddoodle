@@ -340,6 +340,9 @@ function renderLitters(lang) {
     const statusEl = li.querySelector('.status');
     statusEl.textContent = statusLabel;
     statusEl.classList.add(STATUS_CLASS[litter.status] || 'status-available');
+    const sc = (littersSection.statusColors || {})[litter.status || 'available'];
+    if (sc && sc.bg) { statusEl.style.background = sc.bg; if (!sc.fg) statusEl.style.border = 'none'; }
+    if (sc && sc.fg) statusEl.style.color = sc.fg;
     li.querySelector('h3').textContent = (litter.title && litter.title[lang]) || '';
     li.querySelector('p').textContent = (litter.desc && litter.desc[lang]) || '';
     if (litter.extra && litter.extra.length) li.querySelector('.litter-body').appendChild(buildFactListEl(litter.extra, lang, 'extra-facts litter-extra'));

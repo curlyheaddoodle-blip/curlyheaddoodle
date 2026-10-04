@@ -1214,6 +1214,25 @@ function renderLittersEditor() {
   const littersStyleWrap = document.getElementById('littersPhotoStyleFields');
   littersStyleWrap.innerHTML = '';
   littersStyleWrap.appendChild(buildPhotoStyleFields(content.littersSection, 'shape', 'fit', 'rounded', 'cover'));
+  // Status badge colors (e.g. "Poprzedni miot"); empty = site default.
+  const sc = content.littersSection.statusColors = content.littersSection.statusColors || {};
+  const colorWrap = document.createElement('div');
+  colorWrap.className = 'style-wrap';
+  colorWrap.innerHTML = '<label class="checkbox-label">Kolory etykiet statusu</label>';
+  STATUS_OPTIONS.forEach(opt => {
+    const cur = sc[opt.value] || {};
+    const line = document.createElement('div');
+    line.className = 'color-field';
+    line.style.marginTop = '8px';
+    line.innerHTML = `<input type="color" data-k="bg" value="${cur.bg || '#e8e0d0'}"><input type="color" data-k="fg" value="${cur.fg || '#333333'}"><label>${opt.label} (tło / tekst)</label><button type="button" class="btn-small">Domyślne</button>`;
+    line.querySelectorAll('input').forEach(inp => inp.addEventListener('input', () => {
+      sc[opt.value] = sc[opt.value] || {};
+      sc[opt.value][inp.dataset.k] = inp.value;
+    }));
+    line.querySelector('button').addEventListener('click', () => { delete sc[opt.value]; renderLittersEditor(); });
+    colorWrap.appendChild(line);
+  });
+  littersStyleWrap.appendChild(colorWrap);
   const el = document.getElementById('littersEditor');
   el.innerHTML = '';
   content.litters.forEach((litter, index) => {
