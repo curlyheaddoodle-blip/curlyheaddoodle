@@ -742,7 +742,7 @@ function buildPhotoEditor(block, rerenderBlock) {
         <div><label>Tryb</label>
           <select data-pf-rerender="mode">
             <option value="single"${!isCollage ? ' selected' : ''}>Pojedyncze zdjęcie</option>
-            <option value="collage"${isCollage ? ' selected' : ''}>Kolaż (kilka zdjęć)</option>
+            <option value="collage"${isCollage ? ' selected' : ''}>Galeria obok siebie (kilka zdjęć)</option>
           </select>
         </div>
         <div${isCollage ? '' : ' hidden'}>
@@ -768,7 +768,7 @@ function buildPhotoEditor(block, rerenderBlock) {
         </div>
       </div>
       <div class="repeat-row single"${block.photo.position === 'top' || block.photo.position === 'bottom' ? ' hidden' : ''}>
-        <div><label>Rozmiar (px) — tylko dla pozycji Lewo/Prawo</label><input type="number" min="60" max="500" data-pf="size" value="${block.photo.size || (isCollage ? 200 : 120)}"></div>
+        <div><label>Rozmiar (px) — tylko dla pozycji Lewo/Prawo</label><input type="number" min="60" max="500" data-pf="size" value="${block.photo.size || (isCollage ? 340 : 120)}"></div>
       </div>
       <div class="photo-upload-grid"></div>
     </div>
@@ -789,7 +789,7 @@ function buildPhotoEditor(block, rerenderBlock) {
     select.addEventListener('input', () => { block.photo[select.dataset.pf] = select.value; });
   });
   const sizeInput = wrap.querySelector('input[data-pf="size"]');
-  if (sizeInput) sizeInput.addEventListener('input', () => { block.photo.size = Number(sizeInput.value) || (isCollage ? 200 : 120); });
+  if (sizeInput) sizeInput.addEventListener('input', () => { block.photo.size = Number(sizeInput.value) || (isCollage ? 340 : 120); });
 
   const uploadGrid = wrap.querySelector('.photo-upload-grid');
   uploadGrid.className = 'photo-upload-grid' + (isCollage ? ' is-collage' : '');

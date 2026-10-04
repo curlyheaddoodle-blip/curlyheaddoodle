@@ -902,3 +902,33 @@ async function loadContent() {
 }
 
 loadContent();
+
+
+// ---- Lightbox: click any photo in a multi-photo gallery (collage row,
+// footer strip, dog/litter carousel) for a zoomed-in view. Esc / click to close.
+function openLightbox(src) {
+  const box = document.createElement('div');
+  box.className = 'lightbox';
+  box.innerHTML = '<button type="button" class="lightbox-close" aria-label="Zamknij">×</button>';
+  const img = document.createElement('img');
+  img.alt = '';
+  img.src = src;
+  box.appendChild(img);
+  const close = () => { box.remove(); document.removeEventListener('keydown', onKey); };
+  const onKey = e => { if (e.key === 'Escape') close(); };
+  box.addEventListener('click', close);
+  document.addEventListener('keydown', onKey);
+  document.body.appendChild(box);
+}
+document.addEventListener('click', e => {
+  if (e.ctrlKey || e.metaKey || e.shiftKey) return;
+  const frame = e.target.closest('.photo-carousel-frame');
+  if (frame) {
+    if (frame.closest('.photo-carousel.no-photo')) return;
+    e.preventDefault();
+    openLightbox(frame.getAttribute('href'));
+    return;
+  }
+  const img = e.target.closest('.collage-photo.has-photo img, .footer-photos img');
+  if (img) openLightbox(img.src);
+});
