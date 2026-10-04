@@ -27,7 +27,7 @@
           "borderWidth": 1
         },
         "photo": {
-          "enabled": true,
+          "enabled": false,
           "mode": "single",
           "position": "left",
           "textAlign": "left",
@@ -82,7 +82,14 @@
       }
     ],
     "photoShape": "rounded",
-    "photoFit": "cover"
+    "photoFit": "cover",
+    "gallery": {
+      "enabled": true,
+      "count": 2,
+      "size": 260,
+      "shape": "rounded"
+    },
+    "photoHidden": true
   },
   "navOrder": [
     "about",
