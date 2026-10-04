@@ -445,7 +445,7 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .page-split { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; margin-top: 32px; }
 .page-split .waitlist-form { max-width: none; }
 .page-split .content-block-photo, .page-split .content-block-collage { width: 100% !important; flex-basis: 100% !important; max-width: 100%; }
-@media (max-width: 860px) { .page-split { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .page-split { grid-template-columns: 1fr; } }
 /* Left column: contact info + form; right column: the photo, stretched to match. */
 .page-split { align-items: stretch; }
 .page-split-left .contact-info-block { margin-top: 0; margin-bottom: 24px; }
