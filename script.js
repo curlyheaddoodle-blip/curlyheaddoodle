@@ -587,7 +587,6 @@ function applyLanguage(lang) {
   applyCustomPage(lang);
   applyContactCta(lang);
   applyContactDetails(lang);
-  applyHeroGallery();
   applyFooterPhotos();
 }
 
@@ -634,25 +633,6 @@ function applyContactDetails(lang) {
 // Optional footer photo strip — count/frame size set in admin.html; files are
 // expected at images/footer-1.jpg, footer-2.jpg, etc. Missing files just
 // don't render (no broken-image icon).
-// Homepage gallery: up to 10 photos side by side (images/hero-gallery-N.jpg),
-// each keeps its own aspect ratio; size = photo height. Click to zoom.
-function applyHeroGallery() {
-  const wrap = document.getElementById('heroGallery');
-  if (!wrap) return;
-  wrap.innerHTML = '';
-  const g = activeContent.hero && activeContent.hero.gallery;
-  if (!g || !g.enabled) return;
-  for (let i = 1; i <= Math.min(10, g.count || 1); i++) {
-    const img = document.createElement('img');
-    img.alt = '';
-    img.style.height = `${g.size || 260}px`;
-    img.style.borderRadius = borderRadiusFor(g.shape || 'rounded');
-    img.onerror = () => img.remove();
-    img.src = `images/hero-gallery-${i}.jpg?t=${Date.now()}`;
-    wrap.appendChild(img);
-  }
-}
-
 function applyFooterPhotos() {
   const wrap = document.getElementById('footerPhotos');
   if (!wrap) return;
@@ -960,6 +940,6 @@ document.addEventListener('click', e => {
     openLightbox(frame.getAttribute('href'));
     return;
   }
-  const img = e.target.closest('.collage-photo.has-photo img, .footer-photos img, .hero-gallery img');
+  const img = e.target.closest('.collage-photo.has-photo img, .footer-photos img');
   if (img) openLightbox(img.src);
 });

@@ -457,8 +457,3 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(15,10,6,0.88); display: flex; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out; }
 .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; box-shadow: 0 8px 40px rgba(0,0,0,0.5); }
 .lightbox-close { position: absolute; top: 14px; right: 18px; background: none; border: none; color: #fff; font-size: 2.2rem; line-height: 1; cursor: pointer; }
-
-.hero-gallery { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
-.hero-gallery:empty { display: none; }
-.hero-gallery img { width: auto; max-width: 100%; display: block; cursor: zoom-in; }
-.hero-row:has(.hero-art[hidden]) { grid-template-columns: 1fr; }

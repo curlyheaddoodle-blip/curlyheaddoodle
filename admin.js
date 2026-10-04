@@ -167,29 +167,7 @@ function renderHero() {
   grid.innerHTML = '';
   grid.appendChild(buildFixedSlotCard({ key: 'hero', label: 'Zdjęcie główne (Hero)', hint: 'Widoczne na górze strony głównej.' }, content.hero, 'photoHidden', content.hero, 'photoSize', 420));
   grid.appendChild(buildPhotoStyleFields(content.hero, 'photoShape', 'photoFit', 'circle', 'cover'));
-  renderHeroGalleryEditor();
   renderParagraphEditor('heroBodyEditor', content.hero.body, renderHero);
-}
-
-// Homepage gallery editor: enable, count (1-10), height (px), shape, and
-// one upload slot per photo (images/hero-gallery-N.jpg).
-function renderHeroGalleryEditor() {
-  if (!content.hero.gallery) content.hero.gallery = { enabled: false, count: 3, size: 260, shape: 'rounded' };
-  const g = content.hero.gallery;
-  const el = document.getElementById('heroGalleryEditor');
-  el.innerHTML = `
-    <label class="checkbox-label"><input type="checkbox" data-g="enabled"${g.enabled ? ' checked' : ''}> Pokaż galerię na stronie głównej</label>
-    <div class="repeat-row" style="margin-top:8px">
-      <div><label>Liczba zdjęć</label><select data-g="count">${[1,2,3,4,5,6,7,8,9,10].map(n => `<option value="${n}"${g.count === n ? ' selected' : ''}>${n}</option>`).join('')}</select></div>
-      <div><label>Wysokość zdjęć (px) — szerokość dopasuje się do zdjęcia</label><input type="number" min="60" max="800" data-g="size" value="${g.size || 260}"></div>
-    </div>
-    <div class="photo-upload-grid is-collage" id="heroGallerySlots" style="margin-top:10px"></div>`;
-  el.appendChild(buildPhotoStyleFields(g, 'shape', 'fit', 'rounded', 'cover'));
-  const slots = el.querySelector('#heroGallerySlots');
-  for (let i = 1; i <= g.count; i++) slots.appendChild(buildFixedSlotCard({ key: `hero-gallery-${i}`, label: `Zdjęcie ${i}`, hint: '' }));
-  el.querySelector('[data-g="enabled"]').addEventListener('change', e => { g.enabled = e.target.checked; });
-  el.querySelector('[data-g="size"]').addEventListener('input', e => { g.size = Number(e.target.value) || 260; });
-  el.querySelector('[data-g="count"]').addEventListener('change', e => { g.count = Number(e.target.value); renderHeroGalleryEditor(); });
 }
 
 // ---- Auth ----
