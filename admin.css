@@ -173,3 +173,12 @@
   box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
 }
 .save-bar .admin-status { margin: 0; }
+
+/* ---- Accordion sections ---- */
+.admin-card > .accordion-head { cursor: pointer; margin: 0; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+.admin-card > .accordion-head::after { content: '▾'; color: var(--color-gold); font-size: 1rem; transition: transform 0.15s; }
+.admin-card.is-open > .accordion-head::after { transform: rotate(180deg); }
+.admin-card:not(.is-open) { padding-top: 18px; padding-bottom: 18px; background: var(--color-bg); }
+.admin-card:not(.is-open):hover { border-color: var(--color-gold-soft); }
+.admin-card.is-open { border-color: var(--color-gold); box-shadow: 0 2px 14px rgba(184,134,59,0.18); }
+.admin-card.is-open > .accordion-head { margin-bottom: 0.6em; }

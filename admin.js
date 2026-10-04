@@ -294,7 +294,42 @@ async function enterEditor() {
     setAuthStatus('Połączono, ale nie wczytały się: ' + failures.join(', ') + '. Odśwież stronę (Ctrl+Shift+R) — jeśli to nie pomoże, daj znać.', 'err');
   }
 
+  setupAccordion();
   editorRoot.hidden = false;
+}
+
+// ---- Accordion: one section open at a time, the rest collapsed to a
+// header (click to switch). Open section is highlighted; choice is
+// remembered for the tab session.
+function setupAccordion() {
+  const cards = Array.from(editorRoot.querySelectorAll(':scope > section.admin-card'));
+  let saved = 0;
+  try { saved = Number(sessionStorage.getItem('chd_open_section')) || 0; } catch (e) { /* ignore */ }
+  const open = (idx, scroll) => {
+    cards.forEach((card, i) => {
+      const isOpen = i === idx;
+      card.classList.toggle('is-open', isOpen);
+      card.querySelector(':scope > .card-body').hidden = !isOpen;
+      card.querySelector(':scope > h2').setAttribute('aria-expanded', String(isOpen));
+    });
+    try { sessionStorage.setItem('chd_open_section', String(idx)); } catch (e) { /* ignore */ }
+    if (scroll) cards[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  cards.forEach((card, i) => {
+    if (card.querySelector(':scope > .card-body')) return;
+    const h2 = card.querySelector(':scope > h2');
+    const body = document.createElement('div');
+    body.className = 'card-body';
+    while (h2.nextSibling) body.appendChild(h2.nextSibling);
+    card.appendChild(body);
+    h2.classList.add('accordion-head');
+    h2.setAttribute('role', 'button');
+    h2.tabIndex = 0;
+    const toggle = () => { card.classList.contains('is-open') ? open(-1) : open(i, true); };
+    h2.addEventListener('click', toggle);
+    h2.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  });
+  open(Math.min(saved, cards.length - 1), false);
 }
 
 async function loadContentFile() {
