@@ -803,7 +803,7 @@ function buildPhotoEditor(block, rerenderBlock) {
         </div>
       </div>
       <div class="repeat-row single">
-        <div><label>Rozmiar (px) — zdjęcie lub cała galeria</label><input type="number" min="60" max="1600" data-pf="size" value="${block.photo.size || (isCollage ? 340 : 120)}"></div>
+        <div><label>${isCollage ? 'Rozmiar jednego zdjęcia w galerii (px, szerokość)' : 'Rozmiar zdjęcia (px)'}</label><input type="number" min="60" max="${isCollage ? 1200 : 1600}" data-pf="${isCollage ? 'tileSize' : 'size'}" value="${isCollage ? (block.photo.tileSize || 200) : (block.photo.size || 120)}"></div>
       </div>
       <div class="photo-upload-grid"></div>
     </div>
@@ -824,7 +824,9 @@ function buildPhotoEditor(block, rerenderBlock) {
     select.addEventListener('input', () => { block.photo[select.dataset.pf] = select.value; });
   });
   const sizeInput = wrap.querySelector('input[data-pf="size"]');
-  if (sizeInput) sizeInput.addEventListener('input', () => { block.photo.size = Number(sizeInput.value) || (isCollage ? 340 : 120); });
+  if (sizeInput) sizeInput.addEventListener('input', () => { block.photo.size = Number(sizeInput.value) || 120; });
+  const tileInput = wrap.querySelector('input[data-pf="tileSize"]');
+  if (tileInput) tileInput.addEventListener('input', () => { block.photo.tileSize = Number(tileInput.value) || 200; });
 
   const uploadGrid = wrap.querySelector('.photo-upload-grid');
   uploadGrid.className = 'photo-upload-grid' + (isCollage ? ' is-collage' : '');

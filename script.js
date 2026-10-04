@@ -423,8 +423,13 @@ function renderContentBlocks(containerId, blocks, lang) {
         const count = Math.min(10, Math.max(2, block.photo.count || 3));
         const collage = document.createElement('div');
         collage.className = 'content-block-collage';
-        applySize(collage);
-        fillRatioGallery(collage, block.id, count);
+        // Gallery size = width of ONE photo (rows wrap by available width).
+        const tileW = Math.max(60, Math.min(1200, block.photo.tileSize || 200));
+        if (!stacked) {
+          const perRow = Math.min(count, 3);
+          collage.style.width = collage.style.flexBasis = `${perRow * tileW + (perRow - 1) * 8}px`;
+        }
+        fillRatioGallery(collage, block.id, count, tileW);
         outer.appendChild(collage);
       } else {
         const photoEl = document.createElement('div');
@@ -662,14 +667,14 @@ function borderRadiusFor(shape) {
 // tolerance). Photos sharing a ratio sit side by side in rows of identical
 // tiles; a photo with a different ratio starts its own row. All rows use
 // the same tile width, so nothing is stretched or cropped to "match".
-function fillRatioGallery(container, baseId, count) {
+function fillRatioGallery(container, baseId, count, tileW) {
   const loads = [];
   for (let i = 1; i <= count; i++) {
     loads.push(new Promise(resolve => {
       const img = new Image();
       img.onload = () => resolve(img);
       img.onerror = () => resolve(null);
-      img.src = `images/${baseId}-${i}.jpg`;
+      img.src = `images/${baseId}-${i}.jpg?t=${Date.now()}`;
     }));
   }
   Promise.all(loads).then(imgs => {
@@ -681,13 +686,12 @@ function fillRatioGallery(container, baseId, count) {
       b.imgs.push(img);
     });
     if (!buckets.length) { container.remove(); return; }
-    const k = Math.min(5, Math.max(...buckets.map(b => b.imgs.length)));
-    container.style.setProperty('--k', k);
+    container.style.setProperty('--tile', `${tileW}px`);
     buckets.forEach(b => {
-      for (let i = 0; i < b.imgs.length; i += k) {
+      {
         const row = document.createElement('div');
         row.className = 'gallery-row';
-        b.imgs.slice(i, i + k).forEach(img => {
+        b.imgs.forEach(img => {
           const cell = document.createElement('div');
           cell.className = 'collage-photo has-photo';
           cell.style.aspectRatio = String(b.r);

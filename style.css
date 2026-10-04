@@ -460,6 +460,6 @@ p { margin: 0 0 1em; max-width: 62ch; }
 
 /* Ratio-bucketed gallery: rows of identical tiles, same tile width in every row */
 .content-block-collage { display: block; }
-.gallery-row { display: grid; grid-template-columns: repeat(var(--k, 3), 1fr); gap: 8px; margin-bottom: 8px; }
-.gallery-row .collage-photo { flex: none; border: none; }
+.gallery-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.gallery-row .collage-photo { flex: 0 0 var(--tile, 200px); max-width: 100%; border: none; }
 .gallery-row .collage-photo img { height: 100%; object-fit: cover; }
