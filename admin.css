@@ -60,7 +60,7 @@
   background: var(--color-paper); border: 2px dashed var(--color-gold-soft);
   display: flex; align-items: center; justify-content: center; color: var(--color-gold-soft); font-size: 0.8rem;
 }
-.slot-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.slot-preview img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .slot-card input[type="file"] { font-size: 0.85rem; }
 .slot-card .slot-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 .slot-card .slot-status { font-size: 0.82rem; min-height: 1.2em; }
@@ -143,7 +143,7 @@
   background: var(--color-paper); border: 2px dashed var(--color-gold-soft);
   display: flex; align-items: center; justify-content: center; font-size: 0.65rem; color: var(--color-gold-soft); text-align: center;
 }
-.dog-photo-preview img { width: 100%; height: 100%; object-fit: cover; }
+.dog-photo-preview img { width: 100%; height: 100%; object-fit: contain; }
 .dog-photo-row input[type="file"] { flex: 1 1 140px; min-width: 0; }
 .dog-photo-row .btn-small { flex: 0 0 auto; }
 /* Narrow collage upload cards (min 220px) need the row to stack cleanly. */

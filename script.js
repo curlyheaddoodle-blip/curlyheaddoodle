@@ -642,9 +642,9 @@ function applyFooterPhotos() {
   const size = cfg.size || 64;
   for (let i = 1; i <= (cfg.count || 3); i++) {
     const img = document.createElement('img');
-    img.style.width = img.style.height = `${size}px`;
+    img.style.height = `${size}px`; // size = height; width follows the photo's own ratio
+    img.style.width = 'auto';
     img.style.borderRadius = borderRadiusFor(cfg.shape);
-    img.style.objectFit = cfg.fit || 'cover';
     img.alt = '';
     img.onerror = () => img.remove();
     img.src = `images/footer-${i}.jpg?t=${Date.now()}`;
