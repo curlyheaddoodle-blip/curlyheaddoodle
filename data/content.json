@@ -78,7 +78,7 @@
           "textAlign": "left",
           "count": 6,
           "size": 3000,
-          "tileSize": 400,
+          "tileSize": 150,
           "pos": {
             "1": {
               "x": 73.75256612544747,
