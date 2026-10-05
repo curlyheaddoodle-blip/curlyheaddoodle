@@ -781,6 +781,10 @@ function buildPhotoEditor(block, rerenderBlock) {
           </select>
         </div>
         <div${isCollage ? '' : ' hidden'}>
+          <label>Kadr zdjęć (przeciągnij, aby ustawić)</label>
+          <select data-pf-rerender="frame">${[['natural','Naturalny (bez kadrowania)'],['1/1','Kwadrat 1:1'],['4/3','Poziomy 4:3'],['3/4','Pionowy 3:4'],['16/9','Panorama 16:9']].map(([v, l]) => `<option value="${v}"${(block.photo.frame || 'natural') === v ? ' selected' : ''}>${l}</option>`).join('')}</select>
+        </div>
+        <div${isCollage ? '' : ' hidden'}>
           <label>Liczba zdjęć</label>
           <select data-pf-rerender="count">${[2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => `<option value="${n}"${block.photo.count === n ? ' selected' : ''}>${n}</option>`).join('')}</select>
         </div>
@@ -848,6 +852,30 @@ function buildPhotoEditor(block, rerenderBlock) {
     const fileInput = slotEl.querySelector('input[type="file"]');
     const status = slotEl.querySelector('.slot-status');
     loadPreviewInto(preview, path);
+    if (isCollage && block.photo.frame && block.photo.frame !== 'natural') {
+      // Facebook-style reposition: drag the photo inside the frame to choose what stays visible.
+      const box = document.createElement('div');
+      box.style.cssText = `aspect-ratio:${block.photo.frame};width:100%;max-width:240px;margin-top:8px;overflow:hidden;border-radius:6px;cursor:grab;touch-action:none;background:#eee`;
+      const im = new Image();
+      im.draggable = false;
+      im.src = `${path}?t=${Date.now()}`;
+      const p = ((block.photo.pos = block.photo.pos || {})[i] = block.photo.pos[i] || { x: 50, y: 50 });
+      im.style.cssText = `width:100%;height:100%;object-fit:cover;object-position:${p.x}% ${p.y}%`;
+      box.appendChild(im);
+      box.addEventListener('pointerdown', ev => {
+        box.setPointerCapture(ev.pointerId);
+        const sx = ev.clientX, sy = ev.clientY, ox = p.x, oy = p.y;
+        const move = e2 => {
+          const r = box.getBoundingClientRect();
+          p.x = Math.max(0, Math.min(100, ox - (e2.clientX - sx) / r.width * 100));
+          p.y = Math.max(0, Math.min(100, oy - (e2.clientY - sy) / r.height * 100));
+          im.style.objectPosition = `${p.x}% ${p.y}%`;
+        };
+        box.addEventListener('pointermove', move);
+        box.addEventListener('pointerup', () => box.removeEventListener('pointermove', move), { once: true });
+      });
+      slotEl.insertBefore(box, slotEl.querySelector('.slot-status'));
+    }
     slotEl.querySelector('[data-act="upload"]').addEventListener('click', () => {
       if (!fileInput.files[0]) { status.textContent = 'Najpierw wybierz plik.'; status.className = 'slot-status err'; return; }
       uploadPhoto(path, fileInput.files[0], status, preview, () => { fileInput.value = ''; });

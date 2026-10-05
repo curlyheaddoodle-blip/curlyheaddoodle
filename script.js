@@ -434,7 +434,7 @@ function renderContentBlocks(containerId, blocks, lang) {
           const perRow = Math.min(count, 3);
           collage.style.width = collage.style.flexBasis = `${perRow * tileW + (perRow - 1) * 8}px`;
         }
-        fillRatioGallery(collage, block.id, count, tileW);
+        fillRatioGallery(collage, block.id, count, tileW, block.photo.frame, block.photo.pos);
         outer.appendChild(collage);
       } else {
         const photoEl = document.createElement('div');
@@ -672,11 +672,13 @@ function borderRadiusFor(shape) {
 // tolerance). Photos sharing a ratio sit side by side in rows of identical
 // tiles; a photo with a different ratio starts its own row. All rows use
 // the same tile width, so nothing is stretched or cropped to "match".
-function fillRatioGallery(container, baseId, count, tileW) {
+function fillRatioGallery(container, baseId, count, tileW, frame, pos) {
+  const frameR = frame && frame !== 'natural' ? frame.split('/').reduce((a, b) => a / b) : 0;
   const loads = [];
   for (let i = 1; i <= count; i++) {
     loads.push(new Promise(resolve => {
       const img = new Image();
+      img.dataset.idx = i;
       img.onload = () => resolve(img);
       img.onerror = () => resolve(null);
       img.src = `images/${baseId}-${i}.jpg?t=${Date.now()}`;
@@ -685,7 +687,7 @@ function fillRatioGallery(container, baseId, count, tileW) {
   Promise.all(loads).then(imgs => {
     const buckets = [];
     imgs.filter(Boolean).forEach(img => {
-      const r = img.naturalWidth / img.naturalHeight;
+      const r = frameR || img.naturalWidth / img.naturalHeight;
       let b = buckets.find(x => Math.abs(x.r - r) / x.r < 0.05);
       if (!b) { b = { r, imgs: [] }; buckets.push(b); }
       b.imgs.push(img);
@@ -701,6 +703,10 @@ function fillRatioGallery(container, baseId, count, tileW) {
           cell.className = 'collage-photo has-photo';
           cell.style.aspectRatio = String(b.r);
           img.alt = '';
+          if (frameR) {
+            const p = (pos && pos[img.dataset.idx]) || { x: 50, y: 50 };
+            img.style.cssText = `width:100%;height:100%;object-fit:cover;object-position:${p.x}% ${p.y}%`;
+          }
           cell.appendChild(img);
           row.appendChild(cell);
         });
