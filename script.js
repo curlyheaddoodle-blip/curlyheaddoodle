@@ -238,6 +238,13 @@ function renderFactList(containerId, items, lang) {
 // carousel with prev/next + dots) that links to the full-size image in a
 // new tab. `baseId` names the files: images/<baseId>.jpg for photo 1,
 // images/<baseId>-2.jpg, -3.jpg, ... for the rest.
+// Apply the owner's drag/zoom framing (content.photoPos[key]) to an <img>.
+function applyPhotoPos(img, key) {
+  const p = (activeContent.photoPos || {})[key];
+  if (!p) return;
+  img.style.objectPosition = `${p.x}% ${p.y}%`;
+  if (p.z && p.z !== 1) { img.style.transformOrigin = `${p.x}% ${p.y}%`; img.style.transform = `scale(${p.z})`; if (img.parentElement) img.parentElement.style.overflow = 'hidden'; }
+}
 function buildPhotoCarousel(baseId, count, sizePx, shape, fit) {
   count = Math.max(1, count || 1);
   const wrap = document.createElement('div');
@@ -266,6 +273,7 @@ function buildPhotoCarousel(baseId, count, sizePx, shape, fit) {
     idx = (i + paths.length) % paths.length;
     img.src = `${paths[idx]}?t=${Date.now()}`;
     frame.href = paths[idx];
+    applyPhotoPos(img, paths[idx].replace(/^images\//, '').replace(/\.jpg$/, ''));
     dots.forEach((d, di) => d.classList.toggle('active', di === idx));
   }
   img.onerror = () => { if (paths.length === 1) wrap.remove(); else wrap.classList.add('no-photo'); };
@@ -728,6 +736,7 @@ function applyPhotoSlots() {
       img.loading = 'lazy';
       container.appendChild(img);
       container.classList.add('has-photo');
+      applyPhotoPos(img, slot);
       if (slot === 'hero' && activeContent.hero) img.style.objectFit = activeContent.hero.photoFit || '';
       if (slot === 'about' && activeContent.about) img.style.objectFit = activeContent.about.photoFit || '';
     };

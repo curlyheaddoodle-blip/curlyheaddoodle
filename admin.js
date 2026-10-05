@@ -118,6 +118,42 @@ function renderKeyFields(containerId, keys) {
     el.querySelectorAll(`input[data-key="${key}"]`).forEach(input => { input.value = entry[input.dataset.lang] || ''; });
   });
 }
+// Drag-to-reposition + zoom widget (Facebook profile-photo style). `p` is the
+// {x,y,z} object stored in content.photoPos[<image key>]; the live site applies it.
+function buildRepositionBox(path, p, ratio) {
+  const wrap = document.createElement('div');
+  const box = document.createElement('div');
+  box.style.cssText = `aspect-ratio:${ratio || '1/1'};width:100%;overflow:hidden;border-radius:6px;cursor:grab;touch-action:none;background:#eee;margin-top:6px`;
+  const im = new Image();
+  im.draggable = false;
+  im.src = `${path}?t=${Date.now()}`;
+  im.style.cssText = 'width:100%;height:100%;object-fit:cover;pointer-events:none';
+  const paint = () => { im.style.objectPosition = `${p.x}% ${p.y}%`; im.style.transformOrigin = `${p.x}% ${p.y}%`; im.style.transform = `scale(${p.z || 1})`; };
+  paint();
+  box.appendChild(im);
+  box.addEventListener('pointerdown', ev => {
+    box.setPointerCapture(ev.pointerId);
+    const sx = ev.clientX, sy = ev.clientY, ox = p.x, oy = p.y;
+    const move = e2 => {
+      const r = box.getBoundingClientRect();
+      p.x = Math.max(0, Math.min(100, ox - (e2.clientX - sx) / r.width * 100));
+      p.y = Math.max(0, Math.min(100, oy - (e2.clientY - sy) / r.height * 100));
+      paint();
+    };
+    box.addEventListener('pointermove', move);
+    box.addEventListener('pointerup', () => box.removeEventListener('pointermove', move), { once: true });
+  });
+  const zoom = document.createElement('input');
+  zoom.type = 'range'; zoom.min = 1; zoom.max = 3; zoom.step = 0.05; zoom.value = p.z || 1;
+  zoom.style.cssText = 'width:100%;display:block;margin-top:4px';
+  zoom.title = 'Powiększenie';
+  zoom.addEventListener('input', () => { p.z = Number(zoom.value); paint(); });
+  const hint = document.createElement('p');
+  hint.className = 'slot-hint';
+  hint.textContent = 'Przeciągnij zdjęcie, aby ustawić kadr; suwak = powiększenie.';
+  wrap.append(box, zoom, hint);
+  return wrap;
+}
 // Builds one fixed photo slot card (hero / about) — factored out of the old
 // standalone "Zdjęcia" card so each slot can live inside its own section card.
 // `visTarget`/`visKey` (optional) point at a boolean field to toggle this
@@ -146,6 +182,9 @@ function buildFixedSlotCard(slot, visTarget, visKey, sizeTarget, sizeKey, sizeDe
   const fileInput = card.querySelector('input[type="file"]');
   const status = card.querySelector('.slot-status');
   loadPreviewInto(preview, path);
+  if (!content.photoPos) content.photoPos = {};
+  const posP = content.photoPos[slot.key] = content.photoPos[slot.key] || { x: 50, y: 50, z: 1 };
+  preview.after(buildRepositionBox(path, posP, '1/1'));
   card.querySelector('.btn-small:not(.danger)').addEventListener('click', () => {
     if (!fileInput.files[0]) { status.textContent = 'Najpierw wybierz plik.'; status.className = 'slot-status err'; return; }
     uploadPhoto(path, fileInput.files[0], status, preview, () => { fileInput.value = ''; });
