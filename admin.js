@@ -860,7 +860,9 @@ function buildPhotoEditor(block, rerenderBlock) {
       im.draggable = false;
       im.src = `${path}?t=${Date.now()}`;
       const p = ((block.photo.pos = block.photo.pos || {})[i] = block.photo.pos[i] || { x: 50, y: 50 });
-      im.style.cssText = `width:100%;height:100%;object-fit:cover;object-position:${p.x}% ${p.y}%`;
+      const paint = () => { im.style.objectPosition = `${p.x}% ${p.y}%`; im.style.transformOrigin = `${p.x}% ${p.y}%`; im.style.transform = `scale(${p.z || 1})`; };
+      im.style.cssText = 'width:100%;height:100%;object-fit:cover';
+      paint();
       box.appendChild(im);
       box.addEventListener('pointerdown', ev => {
         box.setPointerCapture(ev.pointerId);
@@ -869,12 +871,18 @@ function buildPhotoEditor(block, rerenderBlock) {
           const r = box.getBoundingClientRect();
           p.x = Math.max(0, Math.min(100, ox - (e2.clientX - sx) / r.width * 100));
           p.y = Math.max(0, Math.min(100, oy - (e2.clientY - sy) / r.height * 100));
-          im.style.objectPosition = `${p.x}% ${p.y}%`;
+          paint();
         };
         box.addEventListener('pointermove', move);
         box.addEventListener('pointerup', () => box.removeEventListener('pointermove', move), { once: true });
       });
+      const zoom = document.createElement('input');
+      zoom.type = 'range'; zoom.min = 1; zoom.max = 3; zoom.step = 0.05; zoom.value = p.z || 1;
+      zoom.style.cssText = 'width:100%;max-width:240px;display:block;margin-top:4px';
+      zoom.title = 'Powiększenie';
+      zoom.addEventListener('input', () => { p.z = Number(zoom.value); paint(); });
       slotEl.insertBefore(box, slotEl.querySelector('.slot-status'));
+      slotEl.insertBefore(zoom, slotEl.querySelector('.slot-status'));
     }
     slotEl.querySelector('[data-act="upload"]').addEventListener('click', () => {
       if (!fileInput.files[0]) { status.textContent = 'Najpierw wybierz plik.'; status.className = 'slot-status err'; return; }
