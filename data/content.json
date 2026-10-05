@@ -858,7 +858,16 @@
   "littersSection": {
     "photoSize": 400,
     "shape": "rounded",
-    "fit": "cover"
+    "fit": "cover",
+    "statusColors": {
+      "previous": {
+        "bg": "#800020",
+        "fg": "#e8e0d0"
+      },
+      "expecting": {
+        "bg": "#e2c792"
+      }
+    }
   },
   "litters": [
     {
@@ -888,8 +897,8 @@
         "en": "Figa × Eddie"
       },
       "desc": {
-        "pl": "Planowany termin miotu — wiosna 2027",
-        "en": "Planned litter date — spring 2027"
+        "pl": "Planowany termin miotu — wczesna wiosna 2027",
+        "en": "Planned litter date — early spring 2027"
       },
       "cta": {
         "pl": "Dołącz do listy oczekujących",
