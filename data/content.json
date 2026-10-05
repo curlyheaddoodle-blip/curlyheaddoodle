@@ -77,7 +77,8 @@
           "position": "bottom",
           "textAlign": "left",
           "count": 5,
-          "size": 3000
+          "size": 3000,
+          "tileSize": 400
         }
       }
     ],
