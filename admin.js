@@ -123,11 +123,12 @@ function renderKeyFields(containerId, keys) {
 function buildRepositionBox(path, p, ratio) {
   const wrap = document.createElement('div');
   const box = document.createElement('div');
-  box.style.cssText = `aspect-ratio:${ratio || '1/1'};width:100%;overflow:hidden;border-radius:6px;cursor:grab;touch-action:none;background:#eee;margin-top:6px`;
+  box.style.cssText = `aspect-ratio:${ratio || '1/1'};max-height:260px;width:100%;overflow:hidden;border-radius:6px;cursor:grab;touch-action:none;background:#eee;margin-top:6px`;
   const im = new Image();
   im.draggable = false;
   im.src = `${path}?t=${Date.now()}`;
   im.style.cssText = 'width:100%;height:100%;object-fit:cover;pointer-events:none';
+  if (!ratio) im.addEventListener('load', () => { box.style.aspectRatio = `${im.naturalWidth} / ${im.naturalHeight}`; });
   const paint = () => { im.style.objectPosition = `${p.x}% ${p.y}%`; im.style.transformOrigin = `${p.x}% ${p.y}%`; im.style.transform = `scale(${p.z || 1})`; };
   paint();
   box.appendChild(im);
@@ -896,10 +897,10 @@ function buildPhotoEditor(block, rerenderBlock) {
     const fileInput = slotEl.querySelector('input[type="file"]');
     const status = slotEl.querySelector('.slot-status');
     loadPreviewInto(preview, path);
-    if (isCollage && block.photo.frame && block.photo.frame !== 'natural') {
+    if (isCollage) {
       if (!block.photo.pos) block.photo.pos = {};
       const gp = block.photo.pos[i] = block.photo.pos[i] || { x: 50, y: 50, z: 1 };
-      const rb = buildRepositionBox(path, gp, block.photo.frame);
+      const rb = buildRepositionBox(path, gp, block.photo.frame && block.photo.frame !== 'natural' ? block.photo.frame : null);
       rb.style.maxWidth = '240px';
       slotEl.insertBefore(rb, slotEl.querySelector('.slot-status'));
     }

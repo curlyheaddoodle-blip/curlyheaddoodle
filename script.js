@@ -711,8 +711,8 @@ function fillRatioGallery(container, baseId, count, tileW, frame, pos) {
           cell.className = 'collage-photo has-photo';
           cell.style.aspectRatio = String(b.r);
           img.alt = '';
-          if (frameR) {
-            const p = (pos && pos[img.dataset.idx]) || { x: 50, y: 50 };
+          const p = (pos && pos[img.dataset.idx]) || { x: 50, y: 50 };
+          if (frameR || (p.z && p.z > 1)) {
             img.style.cssText = `width:100%;height:100%;object-fit:cover;object-position:${p.x}% ${p.y}%;transform:scale(${p.z || 1});transform-origin:${p.x}% ${p.y}%`;
             cell.style.overflow = 'hidden';
           }
