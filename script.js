@@ -529,6 +529,8 @@ function applyCustomPage(lang) {
       const bannerImg = new Image();
       bannerImg.onload = () => {
         bannerWrap.style.backgroundImage = `url(${bannerImg.src})`;
+        const bp = (activeContent.photoPos || {})[`${page.id}-banner`];
+        if (bp) { bannerWrap.style.backgroundPosition = `${bp.x}% ${bp.y}%`; if (bp.z > 1) bannerWrap.style.backgroundSize = `${bp.z * 100}% auto`; }
         bannerWrap.classList.add('has-photo');
       };
       bannerImg.onerror = () => {
@@ -658,9 +660,14 @@ function applyFooterPhotos() {
     img.style.width = 'auto';
     img.style.borderRadius = borderRadiusFor(cfg.shape);
     img.alt = '';
-    img.onerror = () => img.remove();
+    const frame = document.createElement('span');
+    frame.style.cssText = `display:inline-block;overflow:hidden;line-height:0;border-radius:${borderRadiusFor(cfg.shape)}`;
+    img.style.borderRadius = '';
+    img.onerror = () => frame.remove();
+    img.onload = () => applyPhotoPos(img, `footer-${i}`);
     img.src = `images/footer-${i}.jpg?t=${Date.now()}`;
-    wrap.appendChild(img);
+    frame.appendChild(img);
+    wrap.appendChild(frame);
   }
 }
 
@@ -854,6 +861,8 @@ function applyLogo() {
     img.style.width = img.style.height = `${size}px`;
     img.style.objectFit = site.logoFit || 'contain';
     img.style.borderRadius = borderRadiusFor(site.logoShape);
+    slot.style.overflow = 'hidden';
+    applyPhotoPos(img, 'logo');
     slot.appendChild(img);
     slot.classList.add('has-logo');
   };

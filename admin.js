@@ -576,6 +576,11 @@ function renderBrand() {
   const fileInput = document.getElementById('logoFile');
   const status = document.getElementById('logoStatus');
   loadPreviewInto(preview, 'images/logo.png');
+  if (!content.photoPos) content.photoPos = {};
+  const logoP = content.photoPos.logo = content.photoPos.logo || { x: 50, y: 50, z: 1 };
+  const logoBox = buildRepositionBox('images/logo.png', logoP, '1/1');
+  logoBox.style.maxWidth = '200px';
+  preview.closest('.dog-photo-row').after(logoBox);
   document.getElementById('logoUploadBtn').addEventListener('click', () => {
     if (!fileInput.files[0]) { status.textContent = 'Najpierw wybierz plik.'; status.className = 'slot-status err'; return; }
     uploadPhoto('images/logo.png', fileInput.files[0], status, preview, () => { fileInput.value = ''; }, 'image/png');
@@ -897,6 +902,13 @@ function buildPhotoEditor(block, rerenderBlock) {
     const fileInput = slotEl.querySelector('input[type="file"]');
     const status = slotEl.querySelector('.slot-status');
     loadPreviewInto(preview, path);
+    if (!isCollage) {
+      if (!content.photoPos) content.photoPos = {};
+      const sp = content.photoPos[block.id] = content.photoPos[block.id] || { x: 50, y: 50, z: 1 };
+      const sb = buildRepositionBox(path, sp, null);
+      sb.style.maxWidth = '240px';
+      slotEl.insertBefore(sb, slotEl.querySelector('.slot-status'));
+    }
     if (isCollage) {
       if (!block.photo.pos) block.photo.pos = {};
       const gp = block.photo.pos[i] = block.photo.pos[i] || { x: 50, y: 50, z: 1 };
