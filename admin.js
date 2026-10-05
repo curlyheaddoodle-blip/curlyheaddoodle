@@ -1219,6 +1219,13 @@ function renderLittersEditor() {
   const colorWrap = document.createElement('div');
   colorWrap.className = 'style-wrap';
   colorWrap.innerHTML = '<label class="checkbox-label">Kolory etykiet statusu</label>';
+  const sizeLine = document.createElement('div');
+  sizeLine.className = 'repeat-row single';
+  sizeLine.innerHTML = '<div><label>Rozmiar etykiet statusu (% — 100 = domyślny)</label><input type="number" min="50" max="400" step="10"></div>';
+  const sizeInp = sizeLine.querySelector('input');
+  sizeInp.value = content.littersSection.statusSize || 100;
+  sizeInp.addEventListener('input', () => { content.littersSection.statusSize = Math.max(50, Math.min(400, parseInt(sizeInp.value, 10) || 100)); });
+  colorWrap.appendChild(sizeLine);
   STATUS_OPTIONS.forEach(opt => {
     const cur = sc[opt.value] || {};
     const line = document.createElement('div');

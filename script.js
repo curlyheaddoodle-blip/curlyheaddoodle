@@ -340,6 +340,7 @@ function renderLitters(lang) {
     const statusEl = li.querySelector('.status');
     statusEl.textContent = statusLabel;
     statusEl.classList.add(STATUS_CLASS[litter.status] || 'status-available');
+    if (littersSection.statusSize) { const k = littersSection.statusSize / 100; statusEl.style.fontSize = (0.8 * k) + 'rem'; statusEl.style.padding = (6 * k) + 'px ' + (12 * k) + 'px'; }
     const sc = (littersSection.statusColors || {})[litter.status || 'available'];
     if (sc && sc.bg) { statusEl.style.background = sc.bg; if (!sc.fg) statusEl.style.border = 'none'; }
     if (sc && sc.fg) statusEl.style.color = sc.fg;
