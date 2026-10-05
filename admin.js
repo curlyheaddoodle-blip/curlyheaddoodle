@@ -136,8 +136,13 @@ function buildRepositionBox(path, p, ratio) {
     const sx = ev.clientX, sy = ev.clientY, ox = p.x, oy = p.y;
     const move = e2 => {
       const r = box.getBoundingClientRect();
-      p.x = Math.max(0, Math.min(100, ox - (e2.clientX - sx) / r.width * 100));
-      p.y = Math.max(0, Math.min(100, oy - (e2.clientY - sy) / r.height * 100));
+      // How far (in box widths/heights) the image can actually slide: the part
+      // cropped by "cover" plus the zoom. Makes the image follow the pointer 1:1.
+      const z = p.z || 1, br = r.width / r.height, ir = (im.naturalWidth / im.naturalHeight) || br;
+      const kx = Math.max(0.05, Math.max(0, ir / br - 1) * z + (z - 1));
+      const ky = Math.max(0.05, Math.max(0, br / ir - 1) * z + (z - 1));
+      p.x = Math.max(0, Math.min(100, ox - (e2.clientX - sx) / (r.width * kx) * 100));
+      p.y = Math.max(0, Math.min(100, oy - (e2.clientY - sy) / (r.height * ky) * 100));
       paint();
     };
     box.addEventListener('pointermove', move);
@@ -150,7 +155,7 @@ function buildRepositionBox(path, p, ratio) {
   zoom.addEventListener('input', () => { p.z = Number(zoom.value); paint(); });
   const hint = document.createElement('p');
   hint.className = 'slot-hint';
-  hint.textContent = 'Przeciągnij zdjęcie, aby ustawić kadr; suwak = powiększenie.';
+  hint.textContent = 'Najpierw powiększ suwakiem, potem przeciągnij zdjęcie w ramce, aby ustawić kadr.';
   wrap.append(box, zoom, hint);
   return wrap;
 }
@@ -892,36 +897,11 @@ function buildPhotoEditor(block, rerenderBlock) {
     const status = slotEl.querySelector('.slot-status');
     loadPreviewInto(preview, path);
     if (isCollage && block.photo.frame && block.photo.frame !== 'natural') {
-      // Facebook-style reposition: drag the photo inside the frame to choose what stays visible.
-      const box = document.createElement('div');
-      box.style.cssText = `aspect-ratio:${block.photo.frame};width:100%;max-width:240px;margin-top:8px;overflow:hidden;border-radius:6px;cursor:grab;touch-action:none;background:#eee`;
-      const im = new Image();
-      im.draggable = false;
-      im.src = `${path}?t=${Date.now()}`;
-      const p = ((block.photo.pos = block.photo.pos || {})[i] = block.photo.pos[i] || { x: 50, y: 50 });
-      const paint = () => { im.style.objectPosition = `${p.x}% ${p.y}%`; im.style.transformOrigin = `${p.x}% ${p.y}%`; im.style.transform = `scale(${p.z || 1})`; };
-      im.style.cssText = 'width:100%;height:100%;object-fit:cover';
-      paint();
-      box.appendChild(im);
-      box.addEventListener('pointerdown', ev => {
-        box.setPointerCapture(ev.pointerId);
-        const sx = ev.clientX, sy = ev.clientY, ox = p.x, oy = p.y;
-        const move = e2 => {
-          const r = box.getBoundingClientRect();
-          p.x = Math.max(0, Math.min(100, ox - (e2.clientX - sx) / r.width * 100));
-          p.y = Math.max(0, Math.min(100, oy - (e2.clientY - sy) / r.height * 100));
-          paint();
-        };
-        box.addEventListener('pointermove', move);
-        box.addEventListener('pointerup', () => box.removeEventListener('pointermove', move), { once: true });
-      });
-      const zoom = document.createElement('input');
-      zoom.type = 'range'; zoom.min = 1; zoom.max = 3; zoom.step = 0.05; zoom.value = p.z || 1;
-      zoom.style.cssText = 'width:100%;max-width:240px;display:block;margin-top:4px';
-      zoom.title = 'Powiększenie';
-      zoom.addEventListener('input', () => { p.z = Number(zoom.value); paint(); });
-      slotEl.insertBefore(box, slotEl.querySelector('.slot-status'));
-      slotEl.insertBefore(zoom, slotEl.querySelector('.slot-status'));
+      if (!block.photo.pos) block.photo.pos = {};
+      const gp = block.photo.pos[i] = block.photo.pos[i] || { x: 50, y: 50, z: 1 };
+      const rb = buildRepositionBox(path, gp, block.photo.frame);
+      rb.style.maxWidth = '240px';
+      slotEl.insertBefore(rb, slotEl.querySelector('.slot-status'));
     }
     slotEl.querySelector('[data-act="upload"]').addEventListener('click', () => {
       if (!fileInput.files[0]) { status.textContent = 'Najpierw wybierz plik.'; status.className = 'slot-status err'; return; }
