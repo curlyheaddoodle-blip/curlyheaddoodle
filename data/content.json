@@ -697,11 +697,11 @@
         },
         "photo": {
           "enabled": true,
-          "position": "left",
+          "position": "right",
           "textAlign": "left",
           "mode": "single",
           "count": 3,
-          "size": 350
+          "size": 200
         },
         "bullets": []
       },
