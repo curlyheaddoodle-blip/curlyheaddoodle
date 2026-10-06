@@ -116,7 +116,7 @@
     ],
     "photoShape": "square",
     "photoFit": "contain",
-    "photoSize": 600
+    "photoSize": 750
   },
   "navOrder": [
     "about",
