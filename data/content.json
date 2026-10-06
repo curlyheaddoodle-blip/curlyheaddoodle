@@ -700,7 +700,8 @@
           "position": "left",
           "textAlign": "left",
           "mode": "single",
-          "count": 3
+          "count": 3,
+          "size": 350
         },
         "bullets": []
       },
