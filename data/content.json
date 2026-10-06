@@ -696,7 +696,7 @@
           "borderWidth": 1
         },
         "photo": {
-          "enabled": false,
+          "enabled": true,
           "position": "left",
           "textAlign": "left",
           "mode": "single",
@@ -723,7 +723,7 @@
           "borderWidth": 1
         },
         "photo": {
-          "enabled": false,
+          "enabled": true,
           "position": "left",
           "textAlign": "left",
           "mode": "single",
@@ -751,7 +751,7 @@
           "borderWidth": 1
         },
         "photo": {
-          "enabled": false,
+          "enabled": true,
           "mode": "single",
           "position": "left",
           "textAlign": "left",
