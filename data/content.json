@@ -946,7 +946,7 @@
       },
       "link": "https://curlyheaddoodle.pl/page.html?slug=kontakt",
       "extra": [],
-      "hidden": false
+      "hidden": true
     },
     {
       "id": "litter2",
@@ -1027,8 +1027,8 @@
       "z": 1
     },
     "hero": {
-      "x": 50,
-      "y": 50,
+      "x": 0,
+      "y": 58.887929840600506,
       "z": 1
     },
     "about": {
