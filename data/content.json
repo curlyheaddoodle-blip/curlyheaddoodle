@@ -916,11 +916,15 @@
     "fit": "cover",
     "statusColors": {
       "previous": {
-        "bg": "#800020",
-        "fg": "#e8e0d0"
+        "bg": "#28241f",
+        "fg": "#ffffff"
       },
       "expecting": {
         "bg": "#e2c792"
+      },
+      "available": {
+        "bg": "#800020",
+        "fg": "#e8e0d0"
       }
     }
   },
