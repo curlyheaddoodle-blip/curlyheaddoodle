@@ -115,7 +115,8 @@
       }
     ],
     "photoShape": "square",
-    "photoFit": "contain"
+    "photoFit": "contain",
+    "photoSize": 600
   },
   "navOrder": [
     "about",
