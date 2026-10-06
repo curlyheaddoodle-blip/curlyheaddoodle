@@ -114,8 +114,8 @@
         }
       }
     ],
-    "photoShape": "rounded",
-    "photoFit": "cover"
+    "photoShape": "square",
+    "photoFit": "contain"
   },
   "navOrder": [
     "about",
