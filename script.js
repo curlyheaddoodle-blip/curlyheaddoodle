@@ -442,7 +442,7 @@ function renderContentBlocks(containerId, blocks, lang) {
       const stacked = position === 'top' || position === 'bottom';
       const applySize = el => { if (!sizePx) return; if (stacked) { el.style.maxWidth = `${sizePx}px`; } else { el.style.width = el.style.flexBasis = `${sizePx}px`; } };
       if (block.photo.mode === 'collage') {
-        const count = Math.min(10, Math.max(2, block.photo.count || 3));
+        const count = Math.min(27, Math.max(2, block.photo.count || 3));
         const collage = document.createElement('div');
         collage.className = 'content-block-collage';
         // Gallery size = width of ONE photo (rows wrap by available width).
