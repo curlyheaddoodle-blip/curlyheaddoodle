@@ -875,6 +875,14 @@ function buildPhotoEditor(block, rerenderBlock) {
           <select data-pf-rerender="perRow">${[1, 2, 3, 4, 5, 6].map(n => `<option value="${n}"${(block.photo.perRow || 3) === n ? ' selected' : ''}>${n}</option>`).join('')}</select>
         </div>
         <div${isCollage ? '' : ' hidden'}>
+          <label>Orientacja zdjęć</label>
+          <select data-pf-rerender="orientation">
+            <option value="auto"${(block.photo.orientation || 'auto') === 'auto' ? ' selected' : ''}>Automatyczna (jak większość zdjęć)</option>
+            <option value="landscape"${block.photo.orientation === 'landscape' ? ' selected' : ''}>Poziome (4:3)</option>
+            <option value="portrait"${block.photo.orientation === 'portrait' ? ' selected' : ''}>Pionowe (3:4)</option>
+          </select>
+        </div>
+        <div${isCollage ? '' : ' hidden'}>
           <label>Kadr zdjęć (przeciągnij, aby ustawić)</label>
           <select data-pf-rerender="frame">${[['natural','Naturalny (bez kadrowania)'],['1/1','Kwadrat 1:1'],['4/3','Poziomy 4:3'],['3/4','Pionowy 3:4'],['16/9','Panorama 16:9']].map(([v, l]) => `<option value="${v}"${(block.photo.frame || 'natural') === v ? ' selected' : ''}>${l}</option>`).join('')}</select>
         </div>
@@ -957,7 +965,7 @@ function buildPhotoEditor(block, rerenderBlock) {
     if (isCollage) {
       if (!block.photo.pos) block.photo.pos = {};
       const gp = block.photo.pos[i] = block.photo.pos[i] || { x: 50, y: 50, z: 1 };
-      const rb = buildRepositionBox(path, gp, block.photo.frame && block.photo.frame !== 'natural' ? block.photo.frame : null);
+      const rb = buildRepositionBox(path, gp, (block.photo.frame && block.photo.frame !== 'natural') ? block.photo.frame : (block.photo.orientation === 'landscape' ? '4/3' : block.photo.orientation === 'portrait' ? '3/4' : null));
       rb.style.maxWidth = '240px';
       slotEl.insertBefore(rb, slotEl.querySelector('.slot-status'));
     }

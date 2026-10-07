@@ -451,7 +451,7 @@ function renderContentBlocks(containerId, blocks, lang) {
           const perRow = Math.min(count, block.photo.perRow || 3);
           collage.style.width = collage.style.flexBasis = `${perRow * tileW + (perRow - 1) * 8}px`;
         }
-        fillRatioGallery(collage, block.id, count, tileW, block.photo.frame, block.photo.pos, block.photo.perRow);
+        fillRatioGallery(collage, block.id, count, tileW, (block.photo.frame && block.photo.frame !== 'natural') ? block.photo.frame : (block.photo.orientation === 'landscape' ? '4/3' : block.photo.orientation === 'portrait' ? '3/4' : 'natural'), block.photo.pos, block.photo.perRow);
         outer.appendChild(collage);
       } else {
         const photoEl = document.createElement('div');
