@@ -76,14 +76,14 @@
           "mode": "collage",
           "position": "bottom",
           "textAlign": "left",
-          "count": 6,
+          "count": 9,
           "size": 3000,
-          "tileSize": 150,
+          "tileSize": 350,
           "pos": {
             "1": {
-              "x": 73.75256612544747,
-              "y": 21.516458497285747,
-              "z": 3
+              "x": 21.542678013822325,
+              "y": 41.164654516367285,
+              "z": 1
             },
             "2": {
               "x": 50,
@@ -109,13 +109,29 @@
               "x": 50,
               "y": 50,
               "z": 1
+            },
+            "7": {
+              "x": 50,
+              "y": 50,
+              "z": 1
+            },
+            "8": {
+              "x": 50,
+              "y": 50,
+              "z": 1.05
+            },
+            "9": {
+              "x": 50,
+              "y": 50,
+              "z": 1.05
             }
           }
         }
       }
     ],
-    "photoShape": "rounded",
-    "photoFit": "cover"
+    "photoShape": "square",
+    "photoFit": "contain",
+    "photoSize": 750
   },
   "navOrder": [
     "about",
@@ -680,11 +696,12 @@
           "borderWidth": 1
         },
         "photo": {
-          "enabled": false,
-          "position": "left",
+          "enabled": true,
+          "position": "right",
           "textAlign": "left",
           "mode": "single",
-          "count": 3
+          "count": 3,
+          "size": 200
         },
         "bullets": []
       },
@@ -707,7 +724,7 @@
           "borderWidth": 1
         },
         "photo": {
-          "enabled": false,
+          "enabled": true,
           "position": "left",
           "textAlign": "left",
           "mode": "single",
@@ -735,7 +752,7 @@
           "borderWidth": 1
         },
         "photo": {
-          "enabled": false,
+          "enabled": true,
           "mode": "single",
           "position": "left",
           "textAlign": "left",
@@ -916,11 +933,15 @@
     "fit": "cover",
     "statusColors": {
       "previous": {
-        "bg": "#800020",
-        "fg": "#e8e0d0"
+        "bg": "#28241f",
+        "fg": "#ffffff"
       },
       "expecting": {
         "bg": "#e2c792"
+      },
+      "available": {
+        "bg": "#800020",
+        "fg": "#e8e0d0"
       }
     }
   },
@@ -942,7 +963,7 @@
       },
       "link": "https://curlyheaddoodle.pl/page.html?slug=kontakt",
       "extra": [],
-      "hidden": false
+      "hidden": true
     },
     {
       "id": "litter2",
@@ -990,7 +1011,7 @@
           }
         }
       ],
-      "photoCount": 5
+      "photoCount": 10
     }
   ],
   "contact": {
@@ -1023,8 +1044,8 @@
       "z": 1
     },
     "hero": {
-      "x": 50,
-      "y": 50,
+      "x": 64.4906743185079,
+      "y": 53.07654761481597,
       "z": 1
     },
     "about": {
@@ -1098,6 +1119,66 @@
       "z": 1
     },
     "footer-3": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "block-muct7ncwiyce": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "logo": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "block-mtz0w1byihxn": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "about-1": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "breed-1": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "breed-2": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "block-mu5qec7mks54": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "litter-1789679795546-6": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "litter-1789679795546-7": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "litter-1789679795546-8": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "litter-1789679795546-9": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "litter-1789679795546-10": {
       "x": 50,
       "y": 50,
       "z": 1
