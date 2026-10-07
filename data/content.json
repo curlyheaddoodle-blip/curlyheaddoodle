@@ -626,7 +626,7 @@
     ],
     "photoShape": "rounded",
     "photoFit": "cover",
-    "photoHidden": true,
+    "photoHidden": false,
     "photoSize": 400
   },
   "breed": {
@@ -697,7 +697,7 @@
         },
         "photo": {
           "enabled": true,
-          "position": "right",
+          "position": "left",
           "textAlign": "left",
           "mode": "single",
           "count": 3,
@@ -728,7 +728,8 @@
           "position": "left",
           "textAlign": "left",
           "mode": "single",
-          "count": 3
+          "count": 3,
+          "size": 200
         },
         "bullets": []
       },
@@ -756,7 +757,8 @@
           "mode": "single",
           "position": "left",
           "textAlign": "left",
-          "count": 3
+          "count": 3,
+          "size": 200
         }
       }
     ]
@@ -981,7 +983,8 @@
         "en": "Join this waitlist"
       },
       "link": "",
-      "extra": []
+      "extra": [],
+      "photoCount": 0
     },
     {
       "id": "litter-1789679795546",
@@ -1217,6 +1220,21 @@
       "x": 50,
       "y": 50,
       "z": 1
+    },
+    "litter2": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "litter2-2": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "litter2-3": {
+      "x": 50,
+      "y": 50,
+      "z": 1
     }
   },
   "photoOrder": {
@@ -1260,6 +1278,11 @@
       10
     ],
     "footer": [
+      1,
+      2,
+      3
+    ],
+    "litter2": [
       1,
       2,
       3
