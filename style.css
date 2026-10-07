@@ -482,3 +482,6 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .hero-row:has(> .hero-art[hidden]) { grid-template-columns: 1fr; }
 .hero-row:has(> .hero-art[hidden]) .hero-copy { max-width: none; }
 @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; } }
+
+/* Dogs: photo centered over its own text column */
+.dog-card .photo-carousel { justify-self: center; margin-left: auto; margin-right: auto; }
