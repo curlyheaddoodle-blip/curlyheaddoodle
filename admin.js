@@ -1291,6 +1291,10 @@ document.getElementById('addBreedFactBtn').addEventListener('click', () => {
   content.breed.facts.push({ label: { pl: '', en: '' }, value: { pl: '', en: '' } });
   renderBreedBody();
 });
+document.getElementById('addContactExtraParaBtn').addEventListener('click', () => {
+  content.contact.extraBody.push(newContentBlock());
+  renderContactEditor();
+});
 document.getElementById('addHeroParaBtn').addEventListener('click', () => {
   content.hero.body.push(newContentBlock());
   renderHero();
@@ -1534,6 +1538,12 @@ function renderFactListEditor(containerId, list, rerender) {
 // ---- Contact editor ----
 function renderContactEditor() {
   renderKeyFields('contactFieldsEditor', SECTION_KEY_GROUPS.contact);
+  if (!content.contact.extraBody) content.contact.extraBody = [];
+  if (content.contact.extraShow === undefined) content.contact.extraShow = true;
+  const extraShow = document.getElementById('contactExtraShow');
+  extraShow.checked = content.contact.extraShow !== false;
+  extraShow.onchange = () => { content.contact.extraShow = extraShow.checked; };
+  renderParagraphEditor('contactExtraBodyEditor', content.contact.extraBody, renderContactEditor);
   if (!content.contact.ctaLabel) content.contact.ctaLabel = { pl: '', en: '' };
   if (!content.contact.ctaColor) content.contact.ctaColor = '#2b211a';
   if (!content.contact.ctaSize) content.contact.ctaSize = 'medium';
@@ -1640,6 +1650,8 @@ function collectContact() {
       fit: content.contact.footerPhotos.fit,
     },
     details: content.contact.details,
+    extraBody: content.contact.extraBody || [],
+    extraShow: content.contact.extraShow !== false,
   };
 }
 

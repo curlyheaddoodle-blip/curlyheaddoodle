@@ -603,6 +603,7 @@ function applyLanguage(lang) {
   renderContentBlocks('heroBody', activeContent.hero && activeContent.hero.body, lang);
   renderContentBlocks('aboutBody', activeContent.about && activeContent.about.body, lang);
   renderContentBlocks('breedBody', activeContent.breed && activeContent.breed.body, lang);
+  renderContentBlocks('contactExtraBody', activeContent.contact && activeContent.contact.extraShow !== false ? activeContent.contact.extraBody : [], lang);
   renderContentBlocks('littersIntroBody', activeContent.littersIntro && activeContent.littersIntro.body, lang);
   renderFactList('breedFacts', activeContent.breed && activeContent.breed.facts, lang);
   applyNavOrder(activeContent.navOrder, activeContent.customPages, lang);
