@@ -1293,7 +1293,7 @@ document.getElementById('addBreedFactBtn').addEventListener('click', () => {
 });
 document.getElementById('addContactExtraParaBtn').addEventListener('click', () => {
   content.contact.extraBody.push(newContentBlock());
-  renderContactEditor();
+  renderFormsExtra();
 });
 document.getElementById('addHeroParaBtn').addEventListener('click', () => {
   content.hero.body.push(newContentBlock());
@@ -1538,12 +1538,6 @@ function renderFactListEditor(containerId, list, rerender) {
 // ---- Contact editor ----
 function renderContactEditor() {
   renderKeyFields('contactFieldsEditor', SECTION_KEY_GROUPS.contact);
-  if (!content.contact.extraBody) content.contact.extraBody = [];
-  if (content.contact.extraShow === undefined) content.contact.extraShow = true;
-  const extraShow = document.getElementById('contactExtraShow');
-  extraShow.checked = content.contact.extraShow !== false;
-  extraShow.onchange = () => { content.contact.extraShow = extraShow.checked; };
-  renderParagraphEditor('contactExtraBodyEditor', content.contact.extraBody, renderContactEditor);
   if (!content.contact.ctaLabel) content.contact.ctaLabel = { pl: '', en: '' };
   if (!content.contact.ctaColor) content.contact.ctaColor = '#2b211a';
   if (!content.contact.ctaSize) content.contact.ctaSize = 'medium';
@@ -1658,7 +1652,16 @@ function collectContact() {
 // ---- Translations editor ----
 const isFormGroup = g => /formularz/i.test(g.title);
 function renderTranslationsEditor() { renderTranslationGroups('translationsEditor', TRANSLATION_GROUPS.filter(g => !isFormGroup(g))); }
+function renderFormsExtra() {
+  if (!content.contact.extraBody) content.contact.extraBody = [];
+  if (content.contact.extraShow === undefined) content.contact.extraShow = true;
+  const extraShow = document.getElementById('contactExtraShow');
+  extraShow.checked = content.contact.extraShow !== false;
+  extraShow.onchange = () => { content.contact.extraShow = extraShow.checked; };
+  renderParagraphEditor('contactExtraBodyEditor', content.contact.extraBody, renderFormsExtra);
+}
 function renderFormsEditor() {
+  renderFormsExtra();
   const keys = document.getElementById('formsKeysEditor');
   keys.innerHTML = `    <div class="repeat-row single">
       <div><label>Formspree — adres formularza (action URL) — formularz zgłoszeniowy „Wypełnij ankietę”</label><input id="contact-formAction" value="${escapeAttr(content.contact.formAction)}"></div>
