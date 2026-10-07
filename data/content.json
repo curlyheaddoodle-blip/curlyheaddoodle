@@ -338,38 +338,6 @@
       "pl": "Media społecznościowe",
       "en": "Social media"
     },
-    "page_title": {
-      "pl": "Curly Head Doodle — Hodowla Mini Goldendoodle | Szczeniaki | Mielec PL",
-      "en": "Curly Head Doodle — Mini Goldendoodle Breeder | Puppies | Mielec"
-    },
-    "page_description": {
-      "pl": "Szukasz wymarzonego Mini Goldendoodle? Poznaj domową hodowlę Curly Head Doodle z Mielca. Szczenięta po przebadanych genetycznie rodzicach, z doskonałą socjalizacją i domowym wychowaniem.",
-      "en": "Looking for your dream Mini Goldendoodle? Meet Curly Head Doodle, an in-home breeder from Mielec. Puppies from genetically tested parents, with excellent socialization and home raising."
-    },
-    "nav_about": {
-      "pl": "O nas",
-      "en": "About us"
-    },
-    "nav_breed": {
-      "pl": "O rasie",
-      "en": "The breed"
-    },
-    "nav_dogs": {
-      "pl": "Nasze psy",
-      "en": "Our dogs"
-    },
-    "nav_puppies": {
-      "pl": "Szczenięta",
-      "en": "Puppies"
-    },
-    "nav_contact": {
-      "pl": "Kontakt",
-      "en": "Contact"
-    },
-    "nav_cta": {
-      "pl": "Formularz zgłoszeniowy",
-      "en": "Apply now"
-    },
     "field_section1_heading": {
       "pl": "Dane podstawowe i rodzina",
       "en": "Basic info and family"
@@ -513,6 +481,38 @@
     "contact_form_error_message": {
       "pl": "Wystąpił błąd. Spróbuj ponownie.",
       "en": "Something went wrong. Please try again."
+    },
+    "page_title": {
+      "pl": "Curly Head Doodle — Hodowla Mini Goldendoodle | Szczeniaki | Mielec PL",
+      "en": "Curly Head Doodle — Mini Goldendoodle Breeder | Puppies | Mielec"
+    },
+    "page_description": {
+      "pl": "Szukasz wymarzonego Mini Goldendoodle? Poznaj domową hodowlę Curly Head Doodle z Mielca. Szczenięta po przebadanych genetycznie rodzicach, z doskonałą socjalizacją i domowym wychowaniem.",
+      "en": "Looking for your dream Mini Goldendoodle? Meet Curly Head Doodle, an in-home breeder from Mielec. Puppies from genetically tested parents, with excellent socialization and home raising."
+    },
+    "nav_about": {
+      "pl": "O nas",
+      "en": "About us"
+    },
+    "nav_breed": {
+      "pl": "O rasie",
+      "en": "The breed"
+    },
+    "nav_dogs": {
+      "pl": "Nasze psy",
+      "en": "Our dogs"
+    },
+    "nav_puppies": {
+      "pl": "Szczenięta",
+      "en": "Puppies"
+    },
+    "nav_contact": {
+      "pl": "Kontakt",
+      "en": "Contact"
+    },
+    "nav_cta": {
+      "pl": "Formularz zgłoszeniowy",
+      "en": "Apply now"
     },
     "footer_disclaimer": {
       "pl": "",
@@ -1035,7 +1035,37 @@
       "shape": "rounded",
       "fit": "cover"
     },
-    "details": []
+    "details": [],
+    "extraBody": [
+      {
+        "id": "block-muy6ppkw6x7a",
+        "heading": {
+          "pl": "test",
+          "en": ""
+        },
+        "headingFont": "default",
+        "textFont": "default",
+        "text": {
+          "pl": "test",
+          "en": ""
+        },
+        "bullets": [],
+        "card": {
+          "enabled": false,
+          "background": "#FFFDF9",
+          "borderColor": "#E0D3B8",
+          "borderWidth": 1
+        },
+        "photo": {
+          "enabled": false,
+          "mode": "single",
+          "position": "left",
+          "textAlign": "left",
+          "count": 3
+        }
+      }
+    ],
+    "extraShow": true
   },
   "photoPos": {
     "custom-mtysmct2vm0s-banner": {
@@ -1179,6 +1209,11 @@
       "z": 1
     },
     "litter-1789679795546-10": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "block-muy6ppkw6x7a": {
       "x": 50,
       "y": 50,
       "z": 1
