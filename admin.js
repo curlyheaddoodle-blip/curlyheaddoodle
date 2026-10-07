@@ -365,6 +365,7 @@ async function enterEditor() {
     ['Szczenięta — akapity', renderLittersIntroBody],
     ['Szczenięta / mioty', renderLittersEditor],
     ['Kontakt', renderContactEditor],
+    ['Formularze', renderFormsEditor],
     ['Wszystkie teksty', renderTranslationsEditor],
   ];
   const failures = [];
@@ -1549,16 +1550,6 @@ function renderContactEditor() {
     <div class="repeat-row">
       <div><label>Facebook (nazwa strony, bez @)</label><input id="contact-facebook" value="${escapeAttr(content.contact.facebook)}"></div>
     </div>
-    <div class="repeat-row single">
-      <div><label>Formspree — adres formularza (action URL) — formularz zgłoszeniowy „Wypełnij ankietę”</label><input id="contact-formAction" value="${escapeAttr(content.contact.formAction)}"></div>
-    </div>
-    <div class="repeat-row single">
-      <div>
-        <label>Web3Forms — klucz dostępu — krótki formularz kontaktowy na stronach niestandardowych</label>
-        <input id="contact-web3formsKey" value="${escapeAttr(content.contact.web3formsKey)}" placeholder="wklej klucz z web3forms.com">
-        <p class="slot-hint">Osobny formularz, żeby nie zużywać limitu Formspree. Darmowy klucz: wejdź na web3forms.com, podaj e-mail, skopiuj klucz.</p>
-      </div>
-    </div>
     <div class="style-wrap">
       <p class="t-key-label">Przycisk w stopce (prowadzi do formularza Google)</p>
       <div class="repeat-row">
@@ -1653,10 +1644,27 @@ function collectContact() {
 }
 
 // ---- Translations editor ----
-function renderTranslationsEditor() {
-  const el = document.getElementById('translationsEditor');
+const isFormGroup = g => /formularz/i.test(g.title);
+function renderTranslationsEditor() { renderTranslationGroups('translationsEditor', TRANSLATION_GROUPS.filter(g => !isFormGroup(g))); }
+function renderFormsEditor() {
+  const keys = document.getElementById('formsKeysEditor');
+  keys.innerHTML = `    <div class="repeat-row single">
+      <div><label>Formspree — adres formularza (action URL) — formularz zgłoszeniowy „Wypełnij ankietę”</label><input id="contact-formAction" value="${escapeAttr(content.contact.formAction)}"></div>
+    </div>
+    <div class="repeat-row single">
+      <div>
+        <label>Web3Forms — klucz dostępu — krótki formularz kontaktowy na stronach niestandardowych</label>
+        <input id="contact-web3formsKey" value="${escapeAttr(content.contact.web3formsKey)}" placeholder="wklej klucz z web3forms.com">
+        <p class="slot-hint">Osobny formularz, żeby nie zużywać limitu Formspree. Darmowy klucz: wejdź na web3forms.com, podaj e-mail, skopiuj klucz.</p>
+      </div>
+    </div>
+`;
+  renderTranslationGroups('formsEditor', TRANSLATION_GROUPS.filter(isFormGroup));
+}
+function renderTranslationGroups(elId, groups) {
+  const el = document.getElementById(elId);
   el.innerHTML = '';
-  TRANSLATION_GROUPS.forEach(group => {
+  groups.forEach(group => {
     const details = document.createElement('details');
     details.className = 't-group';
     const body = group.keys.map(key => {
