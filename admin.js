@@ -118,6 +118,45 @@ function renderKeyFields(containerId, keys) {
     el.querySelectorAll(`input[data-key="${key}"]`).forEach(input => { input.value = entry[input.dataset.lang] || ''; });
   });
 }
+// Drag-and-drop order strip for a multi-photo set. Stores the display order in
+// content.photoOrder[orderKey] (file numbers); the live site reads it.
+function buildOrderStrip(orderKey, count, pathFn) {
+  if (!content.photoOrder) content.photoOrder = {};
+  const saved = (content.photoOrder[orderKey] || []).filter((n, i, a) => n >= 1 && n <= count && a.indexOf(n) === i);
+  const order = saved.slice();
+  for (let i = 1; i <= count; i++) if (!order.includes(i)) order.push(i);
+  content.photoOrder[orderKey] = order;
+  const wrap = document.createElement('div');
+  wrap.className = 'style-wrap';
+  wrap.innerHTML = '<label class="checkbox-label">Kolejność zdjęć — przeciągnij, aby zmienić</label>';
+  const strip = document.createElement('div');
+  strip.style.cssText = 'display:flex;flex-wrap:wrap;gap:8px;margin-top:8px';
+  wrap.appendChild(strip);
+  let dragFrom = null;
+  function draw() {
+    strip.innerHTML = '';
+    order.forEach((file, pos) => {
+      const t = document.createElement('div');
+      t.draggable = true;
+      t.style.cssText = 'position:relative;width:72px;height:72px;border:2px solid var(--color-gold-soft);border-radius:8px;overflow:hidden;cursor:grab;background:#eee;user-select:none';
+      t.innerHTML = `<img src="${pathFn(file)}?t=${Date.now()}" draggable="false" style="width:100%;height:100%;object-fit:cover;pointer-events:none"><span style="position:absolute;left:3px;top:3px;background:rgba(0,0,0,.65);color:#fff;font-size:.7rem;font-weight:700;padding:1px 6px;border-radius:10px">${pos + 1}</span>`;
+      t.addEventListener('dragstart', e => { dragFrom = pos; e.dataTransfer.effectAllowed = 'move'; t.style.opacity = '.4'; });
+      t.addEventListener('dragend', () => { t.style.opacity = ''; });
+      t.addEventListener('dragover', e => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; });
+      t.addEventListener('drop', e => {
+        e.preventDefault();
+        if (dragFrom === null || dragFrom === pos) return;
+        const [moved] = order.splice(dragFrom, 1);
+        order.splice(pos, 0, moved);
+        dragFrom = null;
+        draw();
+      });
+      strip.appendChild(t);
+    });
+  }
+  draw();
+  return wrap;
+}
 // Drag-to-reposition + zoom widget (Facebook profile-photo style). `p` is the
 // {x,y,z} object stored in content.photoPos[<image key>]; the live site applies it.
 function buildRepositionBox(path, p, ratio) {
@@ -883,6 +922,7 @@ function buildPhotoEditor(block, rerenderBlock) {
   if (tileInput) tileInput.addEventListener('input', () => { block.photo.tileSize = Number(tileInput.value) || 200; });
 
   const uploadGrid = wrap.querySelector('.photo-upload-grid');
+  if (isCollage) uploadGrid.before(buildOrderStrip(block.id, slotCount, n => `images/${block.id}-${n}.jpg`));
   uploadGrid.className = 'photo-upload-grid' + (isCollage ? ' is-collage' : '');
   for (let i = 1; i <= slotCount; i++) {
     const path = isCollage ? `images/${block.id}-${i}.jpg` : `images/${block.id}.jpg`;
@@ -1200,9 +1240,14 @@ function buildDogRow(dog, index) {
     }
   }
   renderDogPhotoSlots();
+  const dogOrderHolder = document.createElement('div');
+  photoGrid.before(dogOrderHolder);
+  const drawDogOrder = () => { dogOrderHolder.innerHTML = ''; if ((dog.photoCount || 1) > 1) dogOrderHolder.appendChild(buildOrderStrip(dog.id, dog.photoCount, n => n === 1 ? `images/${dog.id}.jpg` : `images/${dog.id}-${n}.jpg`)); };
+  drawDogOrder();
   row.querySelector('[data-act="photoCount"]').addEventListener('change', e => {
     dog.photoCount = Number(e.target.value);
     renderDogPhotoSlots();
+    drawDogOrder();
   });
 
   row.querySelectorAll('[data-f]').forEach(input => {
@@ -1377,9 +1422,13 @@ function buildLitterRow(litter, index) {
     }
   }
   renderLitterPhotoSlots();
+  const litterOrderHolder = litterPhotoGrid.parentNode.insertBefore(document.createElement('div'), litterPhotoGrid);
+  const drawLitterOrder = () => { litterOrderHolder.innerHTML = ''; if ((litter.photoCount || 0) > 1) litterOrderHolder.appendChild(buildOrderStrip(litter.id, litter.photoCount, n => n === 1 ? `images/${litter.id}.jpg` : `images/${litter.id}-${n}.jpg`)); };
+  drawLitterOrder();
   row.querySelector('[data-act="photoCount"]').addEventListener('change', e => {
     litter.photoCount = Number(e.target.value);
     renderLitterPhotoSlots();
+    drawLitterOrder();
   });
   row.querySelector('[data-act="hidden"]').addEventListener('change', e => { litter.hidden = e.target.checked; });
   row.querySelector('[data-act="up"]').addEventListener('click', () => moveItem(content.litters, index, -1, renderLittersEditor));
@@ -1577,7 +1626,8 @@ function renderFooterPhotoSlots() {
   grid.innerHTML = '';
   for (let i = 1; i <= content.contact.footerPhotos.count; i++) {
     grid.appendChild(buildFixedSlotCard({ key: `footer-${i}`, label: `Zdjęcie ${i}`, hint: '' }));
-  }
+  }  if (grid.previousElementSibling && grid.previousElementSibling.dataset.orderStrip) grid.previousElementSibling.remove();
+  if (content.contact.footerPhotos.count > 1) { const st = buildOrderStrip('footer', content.contact.footerPhotos.count, n => `images/footer-${n}.jpg`); st.dataset.orderStrip = '1'; grid.before(st); }
 }
 function collectContact() {
   return {

@@ -245,6 +245,15 @@ function applyPhotoPos(img, key) {
   img.style.objectPosition = `${p.x}% ${p.y}%`;
   if (p.z && p.z !== 1) { img.style.transformOrigin = `${p.x}% ${p.y}%`; img.style.transform = `scale(${p.z})`; if (img.parentElement) img.parentElement.style.overflow = 'hidden'; }
 }
+// Display order of a multi-photo set: content.photoOrder[key] = [file numbers],
+// set by dragging in admin. Missing/stale entries fall back to file order.
+function photoOrder(key, count) {
+  const saved = ((activeContent.photoOrder || {})[key] || []).filter(n => n >= 1 && n <= count);
+  const seen = new Set(saved);
+  const out = saved.filter((n, i) => saved.indexOf(n) === i);
+  for (let i = 1; i <= count; i++) if (!seen.has(i)) out.push(i);
+  return out;
+}
 function buildPhotoCarousel(baseId, count, sizePx, shape, fit) {
   count = Math.max(1, count || 1);
   const wrap = document.createElement('div');
@@ -265,7 +274,7 @@ function buildPhotoCarousel(baseId, count, sizePx, shape, fit) {
   wrap.appendChild(frame);
 
   const paths = [];
-  for (let i = 1; i <= count; i++) paths.push(i === 1 ? `images/${baseId}.jpg` : `images/${baseId}-${i}.jpg`);
+  photoOrder(baseId, count).forEach(i => paths.push(i === 1 ? `images/${baseId}.jpg` : `images/${baseId}-${i}.jpg`));
 
   let idx = 0;
   let dots = [];
@@ -654,7 +663,7 @@ function applyFooterPhotos() {
   const cfg = activeContent.contact && activeContent.contact.footerPhotos;
   if (!cfg || !cfg.enabled) return;
   const size = cfg.size || 64;
-  for (let i = 1; i <= (cfg.count || 3); i++) {
+  for (const i of photoOrder('footer', cfg.count || 3)) {
     const img = document.createElement('img');
     img.style.height = `${size}px`; // size = height; width follows the photo's own ratio
     img.style.width = 'auto';
@@ -690,7 +699,7 @@ function borderRadiusFor(shape) {
 function fillRatioGallery(container, baseId, count, tileW, frame, pos) {
   const frameR = frame && frame !== 'natural' ? frame.split('/').reduce((a, b) => a / b) : 0;
   const loads = [];
-  for (let i = 1; i <= count; i++) {
+  for (const i of photoOrder(baseId, count)) {
     loads.push(new Promise(resolve => {
       const img = new Image();
       img.dataset.idx = i;
