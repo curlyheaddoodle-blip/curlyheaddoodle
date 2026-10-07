@@ -472,3 +472,13 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .dog-card .photo-carousel-frame img { height: 100%; object-fit: cover; }
 .dog-card .photo-carousel { align-self: start; }
 @media (max-width: 600px) { .dog-card { display: block; } }
+
+/* Use the whole width: the text column takes all the room the photo doesn't,
+   and when the O nas / hero photo is hidden or missing it spans the full page. */
+.about-grid { grid-template-columns: 1fr auto; }
+.about-grid > .photo-frame { max-width: 100%; }
+.about-grid:has(> .photo-frame[hidden]),
+.about-grid:not(:has(> .photo-frame)) { grid-template-columns: 1fr; }
+.hero-row:has(> .hero-art[hidden]) { grid-template-columns: 1fr; }
+.hero-row:has(> .hero-art[hidden]) .hero-copy { max-width: none; }
+@media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; } }

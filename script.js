@@ -783,6 +783,7 @@ function applyPhotoVisibility() {
   if (aboutSlot) {
     aboutSlot.hidden = !!(activeContent.about && activeContent.about.photoHidden);
     aboutSlot.style.maxWidth = `${(activeContent.about && activeContent.about.photoSize) || 480}px`;
+    aboutSlot.style.width = `${(activeContent.about && activeContent.about.photoSize) || 480}px`;
     aboutSlot.style.borderRadius = borderRadiusFor(activeContent.about && activeContent.about.photoShape);
   }
 }
