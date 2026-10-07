@@ -448,10 +448,10 @@ function renderContentBlocks(containerId, blocks, lang) {
         // Gallery size = width of ONE photo (rows wrap by available width).
         const tileW = Math.max(60, Math.min(1200, block.photo.tileSize || 200));
         if (!stacked) {
-          const perRow = Math.min(count, 3);
+          const perRow = Math.min(count, block.photo.perRow || 3);
           collage.style.width = collage.style.flexBasis = `${perRow * tileW + (perRow - 1) * 8}px`;
         }
-        fillRatioGallery(collage, block.id, count, tileW, block.photo.frame, block.photo.pos);
+        fillRatioGallery(collage, block.id, count, tileW, block.photo.frame, block.photo.pos, block.photo.perRow);
         outer.appendChild(collage);
       } else {
         const photoEl = document.createElement('div');
@@ -697,7 +697,7 @@ function borderRadiusFor(shape) {
 // tolerance). Photos sharing a ratio sit side by side in rows of identical
 // tiles; a photo with a different ratio starts its own row. All rows use
 // the same tile width, so nothing is stretched or cropped to "match".
-function fillRatioGallery(container, baseId, count, tileW, frame, pos) {
+function fillRatioGallery(container, baseId, count, tileW, frame, pos, perRow) {
   const frameR = frame && frame !== 'natural' ? frame.split('/').reduce((a, b) => a / b) : 0;
   const loads = [];
   for (const i of photoOrder(baseId, count)) {
@@ -710,35 +710,40 @@ function fillRatioGallery(container, baseId, count, tileW, frame, pos) {
     }));
   }
   Promise.all(loads).then(imgs => {
-    const buckets = [];
-    imgs.filter(Boolean).forEach(img => {
-      const r = frameR || img.naturalWidth / img.naturalHeight;
-      let b = buckets.find(x => Math.abs(x.r - r) / x.r < 0.05);
-      if (!b) { b = { r, imgs: [] }; buckets.push(b); }
-      b.imgs.push(img);
-    });
-    if (!buckets.length) { container.remove(); return; }
+    const ok = imgs.filter(Boolean);
+    if (!ok.length) { container.remove(); return; }
+    // Every tile shares one box: the chosen frame, or else the most common
+    // photo ratio. Odd-shaped photos are cropped to fit (adjust with drag/zoom
+    // in admin) so rows always hold exactly `perRow` photos.
+    let tileR = frameR;
+    if (!tileR) {
+      const buckets = [];
+      ok.forEach(img => {
+        const r = img.naturalWidth / img.naturalHeight;
+        let b = buckets.find(x => Math.abs(x.r - r) / x.r < 0.05);
+        if (!b) { b = { r, n: 0 }; buckets.push(b); }
+        b.n++;
+      });
+      tileR = buckets.reduce((m, b) => (b.n > m.n ? b : m), buckets[0]).r;
+    }
+    const per = Math.max(1, Math.min(10, perRow || 3));
     container.style.setProperty('--tile', `${tileW}px`);
-    buckets.forEach(b => {
-      {
-        const row = document.createElement('div');
-        row.className = 'gallery-row';
-        b.imgs.forEach(img => {
-          const cell = document.createElement('div');
-          cell.className = 'collage-photo has-photo';
-          cell.style.aspectRatio = String(b.r);
-          img.alt = '';
-          const p = (pos && pos[img.dataset.idx]) || { x: 50, y: 50 };
-          if (frameR || (p.z && p.z > 1)) {
-            img.style.cssText = `width:100%;height:100%;object-fit:cover;object-position:${p.x}% ${p.y}%;transform:scale(${p.z || 1});transform-origin:${p.x}% ${p.y}%`;
-            cell.style.overflow = 'hidden';
-          }
-          cell.appendChild(img);
-          row.appendChild(cell);
-        });
-        container.appendChild(row);
-      }
-    });
+    for (let k = 0; k < ok.length; k += per) {
+      const row = document.createElement('div');
+      row.className = 'gallery-row';
+      ok.slice(k, k + per).forEach(img => {
+        const cell = document.createElement('div');
+        cell.className = 'collage-photo has-photo';
+        cell.style.aspectRatio = String(tileR);
+        cell.style.overflow = 'hidden';
+        img.alt = '';
+        const p = (pos && pos[img.dataset.idx]) || { x: 50, y: 50 };
+        img.style.cssText = `width:100%;height:100%;object-fit:cover;object-position:${p.x}% ${p.y}%;transform:scale(${p.z || 1});transform-origin:${p.x}% ${p.y}%`;
+        cell.appendChild(img);
+        row.appendChild(cell);
+      });
+      container.appendChild(row);
+    }
   });
 }
 

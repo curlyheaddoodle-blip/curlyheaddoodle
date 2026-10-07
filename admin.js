@@ -871,6 +871,10 @@ function buildPhotoEditor(block, rerenderBlock) {
           </select>
         </div>
         <div${isCollage ? '' : ' hidden'}>
+          <label>Zdjęć w rzędzie</label>
+          <select data-pf-rerender="perRow">${[1, 2, 3, 4, 5, 6].map(n => `<option value="${n}"${(block.photo.perRow || 3) === n ? ' selected' : ''}>${n}</option>`).join('')}</select>
+        </div>
+        <div${isCollage ? '' : ' hidden'}>
           <label>Kadr zdjęć (przeciągnij, aby ustawić)</label>
           <select data-pf-rerender="frame">${[['natural','Naturalny (bez kadrowania)'],['1/1','Kwadrat 1:1'],['4/3','Poziomy 4:3'],['3/4','Pionowy 3:4'],['16/9','Panorama 16:9']].map(([v, l]) => `<option value="${v}"${(block.photo.frame || 'natural') === v ? ' selected' : ''}>${l}</option>`).join('')}</select>
         </div>
@@ -910,7 +914,7 @@ function buildPhotoEditor(block, rerenderBlock) {
   wrap.querySelectorAll('[data-pf-rerender]').forEach(select => {
     select.addEventListener('change', () => {
       const key = select.dataset.pfRerender;
-      block.photo[key] = key === 'count' ? Number(select.value) : select.value;
+      block.photo[key] = (key === 'count' || key === 'perRow') ? Number(select.value) : select.value;
       rerenderBlock();
     });
   });
