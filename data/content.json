@@ -626,7 +626,7 @@
     ],
     "photoShape": "rounded",
     "photoFit": "cover",
-    "photoHidden": false,
+    "photoHidden": true,
     "photoSize": 400
   },
   "breed": {
@@ -1244,8 +1244,8 @@
       4,
       3,
       5,
-      7,
       6,
+      7,
       8,
       9
     ],
