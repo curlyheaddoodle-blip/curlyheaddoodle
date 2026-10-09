@@ -1045,8 +1045,8 @@
       {
         "id": "block-muy6ppkw6x7a",
         "heading": {
-          "pl": "Zanim dołączysz do rodziny Curly Head Doodle... Poznajmy się!",
-          "en": "Before you join the Curly Head Doodle family... let's get to know each other!"
+          "pl": "**Zanim dołączysz do rodziny Curly Head Doodle... Poznajmy się!**",
+          "en": "**Before you join the Curly Head Doodle family... let's get to know each other!**"
         },
         "headingFont": "default",
         "textFont": "default",
@@ -1070,7 +1070,7 @@
         }
       }
     ],
-    "extraShow": true
+    "extraShow": false
   },
   "photoPos": {
     "custom-mtysmct2vm0s-banner": {
