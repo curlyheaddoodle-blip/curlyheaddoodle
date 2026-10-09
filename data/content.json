@@ -429,12 +429,12 @@
       "en": "No"
     },
     "field_litter": {
-      "pl": "Który miot Cię interesuje?",
-      "en": "Which litter are you interested in?"
+      "pl": "",
+      "en": ""
     },
     "field_litter_opt3": {
-      "pl": "Jeszcze nie wiem / przyszły miot",
-      "en": "Not sure yet / future litter"
+      "pl": "",
+      "en": ""
     },
     "field_message": {
       "pl": "Coś jeszcze, o czym chcesz nam powiedzieć? (opcjonalnie)",
