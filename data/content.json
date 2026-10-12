@@ -1062,7 +1062,7 @@
           "borderWidth": 1
         },
         "photo": {
-          "enabled": false,
+          "enabled": true,
           "mode": "single",
           "position": "left",
           "textAlign": "left",
@@ -1234,6 +1234,11 @@
       "z": 1
     },
     "litter2-3": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "custom-mv5kxpuj49wq-banner": {
       "x": 50,
       "y": 50,
       "z": 1
