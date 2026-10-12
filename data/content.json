@@ -1068,6 +1068,33 @@
           "textAlign": "left",
           "count": 3
         }
+      },
+      {
+        "id": "block-mv5lqedlwru4",
+        "heading": {
+          "pl": "**Jak pomagamy dobrać odpowiedniego psa?**",
+          "en": ""
+        },
+        "headingFont": "default",
+        "textFont": "default",
+        "text": {
+          "pl": "Każde szczenię rozwija się nieco inaczej – jedne maluchy od małego wykazują wysoki poziom energii i ciekawość świata, inne są z natury bardziej wyciszone i łaknące przytulania. Dzięki wiedzy z ankiety oraz obserwacjom zachowań szczeniąt możemy wspólnie z Tobą wybrać malucha, którego charakter i potrzeby będą w harmonii z dynamiką Twojego domu.",
+          "en": ""
+        },
+        "bullets": [],
+        "card": {
+          "enabled": false,
+          "background": "#FFFDF9",
+          "borderColor": "#E0D3B8",
+          "borderWidth": 1
+        },
+        "photo": {
+          "enabled": false,
+          "mode": "single",
+          "position": "left",
+          "textAlign": "left",
+          "count": 3
+        }
       }
     ],
     "extraShow": true
@@ -1239,6 +1266,11 @@
       "z": 1
     },
     "custom-mv5kxpuj49wq-banner": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "block-mv5lqedlwru4": {
       "x": 50,
       "y": 50,
       "z": 1
