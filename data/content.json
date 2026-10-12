@@ -1062,7 +1062,7 @@
           "borderWidth": 1
         },
         "photo": {
-          "enabled": true,
+          "enabled": false,
           "mode": "single",
           "position": "left",
           "textAlign": "left",
@@ -1070,7 +1070,7 @@
         }
       }
     ],
-    "extraShow": false
+    "extraShow": true
   },
   "photoPos": {
     "custom-mtysmct2vm0s-banner": {
