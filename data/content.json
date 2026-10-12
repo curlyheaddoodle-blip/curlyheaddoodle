@@ -449,8 +449,8 @@
       "en": "Send application"
     },
     "form_fineprint": {
-      "pl": "Wykorzystujemy te dane wyłącznie do kontaktu i prowadzenia listy oczekujących. Nie udostępniamy ich nikomu innemu. Administratorem Twoich danych osobowych jest Curly Head Doodle. Przesyłając formularz, akceptujesz naszą Politykę Prywatności.",
-      "en": "We only use this information to contact you and keep a waiting list. We don't share them with anyone else. The administrator of your personal data is Curly Head Doodle. By submitting the form, you agree to our Privacy Policy."
+      "pl": "Administratorem Twoich danych osobowych jest Curly Head Doodle. Przesyłając formularz, akceptujesz naszą Politykę Prywatności.\nWykorzystujemy te dane wyłącznie do kontaktu i prowadzenia listy oczekujących. Nie udostępniamy ich nikomu innemu. ",
+      "en": "The administrator of your personal data is Curly Head Doodle. By submitting the form, you agree to our Privacy Policy.\nWe only use this information to contact you and keep a waiting list. We don't share them with anyone else."
     },
     "contact_form_name_placeholder": {
       "pl": "Twoje imię",
