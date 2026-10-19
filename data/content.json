@@ -576,7 +576,7 @@
         "photo": {
           "enabled": true,
           "position": "bottom",
-          "textAlign": "center",
+          "textAlign": "left",
           "mode": "collage",
           "count": 3,
           "pos": {
