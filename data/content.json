@@ -704,7 +704,7 @@
           "textAlign": "left",
           "mode": "single",
           "count": 3,
-          "size": 200
+          "size": 350
         },
         "bullets": []
       },
@@ -732,7 +732,7 @@
           "textAlign": "left",
           "mode": "single",
           "count": 3,
-          "size": 200
+          "size": 350
         },
         "bullets": []
       },
@@ -761,7 +761,7 @@
           "position": "left",
           "textAlign": "left",
           "count": 3,
-          "size": 200
+          "size": 350
         }
       }
     ]
