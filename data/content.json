@@ -140,7 +140,8 @@
     "breed",
     "dogs",
     "litters",
-    "custom-mtysmct2vm0s"
+    "custom-mtysmct2vm0s",
+    "custom-mvfsgy3cgw2w"
   ],
   "customPages": [
     {
@@ -191,6 +192,23 @@
       "bannerSubtitle": {
         "pl": "Jesteśmy tutaj aby pomóc Ci podjąć właściwą decyzję",
         "en": "We're here to help you make the right decision"
+      }
+    },
+    {
+      "id": "custom-mvfsgy3cgw2w",
+      "slug": "https://curlyheaddoodle.pl/index.html",
+      "navLabel": {
+        "pl": "Strona Główna",
+        "en": "Home"
+      },
+      "heading": {
+        "pl": "",
+        "en": ""
+      },
+      "body": [],
+      "bannerSubtitle": {
+        "pl": "",
+        "en": ""
       }
     }
   ],
@@ -1304,6 +1322,11 @@
       "z": 1
     },
     "block-mv5lsrjfq2oi": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "custom-mvfsgy3cgw2w-banner": {
       "x": 50,
       "y": 50,
       "z": 1
