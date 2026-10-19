@@ -136,7 +136,6 @@
     "photoSize": 750
   },
   "navOrder": [
-    "custom-mvfsgy3cgw2w",
     "about",
     "breed",
     "dogs",
@@ -192,23 +191,6 @@
       "bannerSubtitle": {
         "pl": "Jesteśmy tutaj aby pomóc Ci podjąć właściwą decyzję",
         "en": "We're here to help you make the right decision"
-      }
-    },
-    {
-      "id": "custom-mvfsgy3cgw2w",
-      "slug": "home",
-      "navLabel": {
-        "pl": "Strona Główna",
-        "en": "Home"
-      },
-      "heading": {
-        "pl": "",
-        "en": ""
-      },
-      "body": [],
-      "bannerSubtitle": {
-        "pl": "",
-        "en": ""
       }
     }
   ],
