@@ -785,7 +785,7 @@
     ]
   },
   "dogsSection": {
-    "photoSize": 300,
+    "photoSize": 350,
     "shape": "circle",
     "fit": "cover"
   },
