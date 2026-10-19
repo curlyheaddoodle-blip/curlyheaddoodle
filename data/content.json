@@ -578,7 +578,7 @@
           "position": "bottom",
           "textAlign": "left",
           "mode": "collage",
-          "count": 4,
+          "count": 3,
           "pos": {
             "1": {
               "x": 50,
@@ -1324,8 +1324,7 @@
     "about-2": [
       1,
       2,
-      3,
-      4
+      3
     ],
     "dog1": [
       1,
