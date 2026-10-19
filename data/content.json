@@ -401,8 +401,8 @@
       "en": "Do you have previous experience caring for a dog?"
     },
     "field_grooming_ready": {
-      "pl": "Goldendoodle to rasa wymagająca dbania o włos. Czy jesteś gotowy/a na codzienne czesanie oraz regularne wizyty u groomera?",
-      "en": "Goldendoodles need regular coat care. Are you ready for daily brushing and regular groomer visits?"
+      "pl": "Goldendoodle to rasa wymagająca dbania o włos. Czy jesteś gotowy/a na regularne czesanie oraz okresowe wizyty u groomera?",
+      "en": "Goldendoodle is a breed that requires hair care. Are you ready for regular combing and periodic visits to the groomer?"
     },
     "field_temperament": {
       "pl": "Opisz, jakiego charakteru psa szukasz (np. „spokojny kanapowiec”, „aktywny kompan do długich wędrówek”, „bardzo wpatrzony w człowieka”)",
@@ -1052,8 +1052,8 @@
         "headingFont": "default",
         "textFont": "default",
         "text": {
-          "pl": "Wybór psa to decyzja, która zmieni Twoją codzienność na kilkanaście najbliższych lat. Zależy nam, aby każdy maluch z naszej hodowli trafił do miejsca, w którym będzie czuł się bezpiecznie, a jego obecność przyniesie rodzinie mnóstwo radości i spokoju.\n\nWypełnienie poniższego formularza to nasz pierwszy krok do nawiązania kontaktu. Pomaga nam ono lepiej zrozumieć Twój rytm dnia, domowe zwyczaje i to, jak wyobrażasz sobie życie z nowym czworonogiem.\n",
-          "en": "Choosing a dog is a decision that will change your everyday life for the next several years. We want every child from our kennel to go to a place where they will feel safe and their presence will bring a lot of joy and peace to the family. Filling out the form below is our first step to getting in touch. It helps us to better understand your rhythm of the day, home habits and how you imagine life with a new pet."
+          "pl": "Wybór psa to decyzja, która zmieni Twoją codzienność na kilkanaście najbliższych lat. Zależy nam, aby każdy maluch z naszej hodowli trafił do miejsca, w którym będzie czuł się bezpiecznie, a jego obecność przyniesie rodzinie mnóstwo radości i spokoju.\n\nWypełnienie poniższego formularza to nasz pierwszy krok do nawiązania kontaktu. Pomaga nam on lepiej zrozumieć Twój rytm dnia, domowe zwyczaje i to, jak wyobrażasz sobie życie z nowym czworonogiem.\n",
+          "en": "Choosing a dog is a decision that will change your everyday life for the next several years. We want every child from our kennel to go to a place where they will feel safe and their presence will bring a lot of joy and peace to the family.\n\nFilling out the form below is our first step to getting in touch. It helps us to better understand your rhythm of the day, home habits and how you imagine life with a new pet."
         },
         "bullets": [],
         "card": {
