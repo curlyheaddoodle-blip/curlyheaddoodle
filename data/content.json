@@ -769,7 +769,7 @@
   "dogsSection": {
     "photoSize": 300,
     "shape": "circle",
-    "fit": "contain"
+    "fit": "cover"
   },
   "dogs": [
     {
