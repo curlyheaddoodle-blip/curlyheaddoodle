@@ -86,13 +86,13 @@
               "z": 1
             },
             "2": {
-              "x": 50,
-              "y": 50,
+              "x": 100,
+              "y": 22.50346044252077,
               "z": 1
             },
             "3": {
-              "x": 50,
-              "y": 50,
+              "x": 19.2229675679191,
+              "y": 0,
               "z": 1
             },
             "4": {
@@ -111,21 +111,23 @@
               "z": 1
             },
             "7": {
-              "x": 100,
-              "y": 0,
+              "x": 37.006101901684076,
+              "y": 100,
               "z": 1
             },
             "8": {
               "x": 50,
               "y": 50,
-              "z": 1.05
+              "z": 1
             },
             "9": {
-              "x": 50,
-              "y": 50,
-              "z": 1.05
+              "x": 20.952749664830552,
+              "y": 55.44162217708055,
+              "z": 2.35
             }
-          }
+          },
+          "orientation": "portrait",
+          "frame": "natural"
         }
       }
     ],
@@ -283,8 +285,8 @@
       "en": ""
     },
     "dogs_note": {
-      "pl": "🧬 Nasze psy posiadają czyste profile genetyczne, co oznacza, że są wolne od nosicielstwa mutacji powodujących najgroźniejsze choroby dziedziczne:  \n✅ DM (Mielopatia degeneracyjna) – postępująca choroba rdzenia kręgowego prowadząca do niedowładów.  \n✅ EF (Zespół epizodycznego upadania) – schorzenie neurologiczne objawiające się nagłym sztywnieniem mięśni i upadkami.  \n✅ GM2 (Gangliozydoza) – ciężka choroba metaboliczna układu nerwowego.  \n✅ MTCP (Makrotrombocytopenia) – anomalia płytek krwi (wykluczenie tej wady to kluczowe bezpieczeństwo przy ewentualnych zabiegach weterynaryjnych).  \n✅ OCD (Osteochondrodysplazja) – dziedziczna choroba układu kostno-stawowego, powodująca karłowatość i deformacje kości.  \n✅ PRA-prcd (Postępujący zanik siatkówki) – genetyczna utrata wzroku (czysty wynik to gwarancja zdrowych oczu do późnej starości).  \n✅ vWD1 (Choroba von Willebranda) – zaburzenia krzepnięcia krwi (gwarantuje bezpieczeństwo np. w przypadku operacji czy kastracji).",
-      "en": "🧬 Our dogs have pure genetic profiles, which means that they are free from carrying mutations that cause the most dangerous hereditary diseases:  \n✅ DM (Degenerative Myelopathy) – a progressive disease of the spinal cord leading to paresis. \n✅ EF (Episodic Fall Syndrome) – a neurological condition manifested by sudden muscle stiffness and falls. \n✅ GM2 (Gangliosidosis) – a severe metabolic disease of the nervous system. \n✅ MTCP (Macrotrombocytopenia) – platelet anomaly (excluding this defect is a key safety in possible veterinary procedures). \n✅ OCD (Osteochondrodysplasia) – an inherited disease of the osteoarticular system, causing dwarfism and bone deformities. \n✅ PRA-prcd (Progressive retinal atrophy) – genetic loss of vision (a clear result is a guarantee of healthy eyes until old age). \n✅ vWD1 (von Willebrand disease) – blood clotting disorders (guarantees safety, e.g. in the case of surgery or castration)."
+      "pl": "",
+      "en": ""
     },
     "litters_heading": {
       "pl": "Szczenięta",
@@ -399,8 +401,8 @@
       "en": "Do you have previous experience caring for a dog?"
     },
     "field_grooming_ready": {
-      "pl": "Goldendoodle to rasa wymagająca dbania o włos. Czy jesteś gotowy/a na codzienne czesanie oraz regularne wizyty u groomera?",
-      "en": "Goldendoodles need regular coat care. Are you ready for daily brushing and regular groomer visits?"
+      "pl": "Goldendoodle to rasa wymagająca dbania o włos. Czy jesteś gotowy/a na regularne czesanie oraz okresowe wizyty u groomera?",
+      "en": "Goldendoodle is a breed that requires hair care. Are you ready for regular combing and periodic visits to the groomer?"
     },
     "field_temperament": {
       "pl": "Opisz, jakiego charakteru psa szukasz (np. „spokojny kanapowiec”, „aktywny kompan do długich wędrówek”, „bardzo wpatrzony w człowieka”)",
@@ -447,8 +449,8 @@
       "en": "Send application"
     },
     "form_fineprint": {
-      "pl": "Wykorzystujemy te dane wyłącznie do kontaktu i prowadzenia listy oczekujących. Nie udostępniamy ich nikomu innemu.",
-      "en": "We only use this information to respond to your inquiry and manage the waitlist. We don't share it with anyone else."
+      "pl": "Administratorem Twoich danych osobowych jest Curly Head Doodle. Przesyłając formularz, akceptujesz naszą Politykę Prywatności.\nWykorzystujemy te dane wyłącznie do kontaktu i prowadzenia listy oczekujących. Nie udostępniamy ich nikomu innemu. ",
+      "en": "The administrator of your personal data is Curly Head Doodle. By submitting the form, you agree to our Privacy Policy.\nWe only use this information to contact you and keep a waiting list. We don't share them with anyone else."
     },
     "contact_form_name_placeholder": {
       "pl": "Twoje imię",
@@ -553,7 +555,7 @@
           "textAlign": "left",
           "mode": "single",
           "count": 3,
-          "size": 240
+          "size": 400
         },
         "bullets": []
       },
@@ -577,10 +579,10 @@
         },
         "photo": {
           "enabled": true,
-          "position": "right",
+          "position": "bottom",
           "textAlign": "left",
           "mode": "collage",
-          "count": 4,
+          "count": 3,
           "pos": {
             "1": {
               "x": 50,
@@ -602,7 +604,8 @@
               "y": 50,
               "z": 1
             }
-          }
+          },
+          "tileSize": 350
         },
         "bullets": [
           {
@@ -705,7 +708,7 @@
           "textAlign": "left",
           "mode": "single",
           "count": 3,
-          "size": 200
+          "size": 250
         },
         "bullets": []
       },
@@ -733,7 +736,7 @@
           "textAlign": "left",
           "mode": "single",
           "count": 3,
-          "size": 200
+          "size": 250
         },
         "bullets": []
       },
@@ -762,7 +765,7 @@
           "position": "left",
           "textAlign": "left",
           "count": 3,
-          "size": 200
+          "size": 250
         }
       }
     ]
@@ -934,7 +937,7 @@
     "body": []
   },
   "littersSection": {
-    "photoSize": 400,
+    "photoSize": 500,
     "shape": "rounded",
     "fit": "cover",
     "statusColors": {
@@ -979,8 +982,8 @@
         "en": "Figa × Eddie"
       },
       "desc": {
-        "pl": "Planowany termin miotu — wczesna wiosna 2027",
-        "en": "Planned litter date — early spring 2027"
+        "pl": "Planowany termin narodzin miotu — początek 2027r",
+        "en": "Planned date of birth of the litter — beginning of 2027"
       },
       "cta": {
         "pl": "Dołącz do listy oczekujących",
@@ -1013,8 +1016,8 @@
             "en": "Date of birth"
           },
           "value": {
-            "pl": "28.11.2026",
-            "en": "28.11.2026"
+            "pl": "28.11.2025",
+            "en": "28.11.2025"
           }
         }
       ],
@@ -1047,14 +1050,68 @@
       {
         "id": "block-muy6ppkw6x7a",
         "heading": {
-          "pl": "",
-          "en": ""
+          "pl": "**Zanim dołączysz do rodziny Curly Head Doodle... Poznajmy się!**",
+          "en": "**Before you join the Curly Head Doodle family... let's get to know each other!**"
         },
         "headingFont": "default",
         "textFont": "default",
         "text": {
-          "pl": "",
-          "en": ""
+          "pl": "Wybór psa to decyzja, która zmieni Twoją codzienność na kilkanaście najbliższych lat. Zależy nam, aby każdy maluch z naszej hodowli trafił do miejsca, w którym będzie czuł się bezpiecznie, a jego obecność przyniesie rodzinie mnóstwo radości i spokoju.\n\nWypełnienie poniższego formularza to nasz pierwszy krok do nawiązania kontaktu. Pomaga nam on lepiej zrozumieć Twój rytm dnia, domowe zwyczaje i to, jak wyobrażasz sobie życie z nowym czworonogiem.\n",
+          "en": "Choosing a dog is a decision that will change your everyday life for the next several years. We want every child from our kennel to go to a place where they will feel safe and their presence will bring a lot of joy and peace to the family.\n\nFilling out the form below is our first step to getting in touch. It helps us to better understand your rhythm of the day, home habits and how you imagine life with a new pet."
+        },
+        "bullets": [],
+        "card": {
+          "enabled": false,
+          "background": "#FFFDF9",
+          "borderColor": "#E0D3B8",
+          "borderWidth": 1
+        },
+        "photo": {
+          "enabled": false,
+          "mode": "single",
+          "position": "left",
+          "textAlign": "left",
+          "count": 3
+        }
+      },
+      {
+        "id": "block-mv5lqedlwru4",
+        "heading": {
+          "pl": "**Jak pomagamy dobrać odpowiedniego psa?**",
+          "en": "**How do we help you choose the right dog?**"
+        },
+        "headingFont": "default",
+        "textFont": "default",
+        "text": {
+          "pl": "Każde szczenię rozwija się nieco inaczej – jedne maluchy od małego wykazują wysoki poziom energii i ciekawość świata, inne są z natury bardziej wyciszone i łaknące przytulania. Dzięki wiedzy z ankiety oraz obserwacjom zachowań szczeniąt możemy wspólnie z Tobą wybrać malucha, którego charakter i potrzeby będą w harmonii z dynamiką Twojego domu.",
+          "en": "Each puppy develops a little differently – some puppies show a high level of energy and curiosity about the world from a young age, others are more calming and craving hugs by nature. Thanks to the knowledge from the survey and observations of puppies' behavior, we can choose a toddler with you whose character and needs will be in harmony with the dynamics of your home."
+        },
+        "bullets": [],
+        "card": {
+          "enabled": false,
+          "background": "#FFFDF9",
+          "borderColor": "#E0D3B8",
+          "borderWidth": 1
+        },
+        "photo": {
+          "enabled": false,
+          "mode": "single",
+          "position": "left",
+          "textAlign": "left",
+          "count": 3
+        }
+      },
+      {
+        "id": "block-mv5lsrjfq2oi",
+        "heading": {
+          "pl": "**Co dzieje się po przesłaniu ankiety?**",
+          "en": "**What happens after you submit a survey?**"
+        },
+        "headingFont": "default",
+        "textFont": "default",
+        "text": {
+          "pl": "1. Rozmowa zapoznawcza: Skontaktujemy się z Tobą, aby umówić się na spokojną rozmowę telefoniczną lub wideo. Chętnie odpowiemy na wszystkie Twoje pytania i opowiemy więcej o naszych planach oraz opiece nad miotem.\n2. Rezerwacja: Po obustronnej decyzji o chęci współpracy formalizujemy rezerwację, co gwarantuje miejsce na liście oczekujących na malucha.\n3. Wspólne dorastanie: Będziesz na bieżąco obserwować rozwój szczeniąt dzięki regularnym zdjęciom i relacjom wideo z domowej socjalizacji.\n\nOddając szczenię do nowego domu, przekazujemy malucha po badaniach weterynaryjnych, z bogatą wyprawką oraz z deklaracją naszego pełnego wsparcia na każdym etapie jego dorosłego życia.\n\nWypełnij formularz swobodnie i po swojemu. Nie ma tu złych odpowiedzi – jest tylko prawda o Twojej codzienności, do której my postaramy się dopasować idealnego Mini Goldendoodle.",
+          "en": "1. Introductory call: We will contact you to arrange a quiet phone or video call. We will be happy to answer all your questions and tell you more about our plans and care for the litter. 2. Reservation: After a mutual decision to cooperate, we formalize the reservation, which guarantees a place on the waiting list for the toddler. 3. Growing up together: You'll keep an eye on your puppy's development with regular photos and videos from home socialization. Giving the puppy to a new home, we pass the toddler after veterinary examinations, with a rich kit and with a declaration of our full support at every stage of his adult life. Fill out the form freely and in your own way. There are no wrong answers here – there is only the truth about your everyday life, to which we will try to match the perfect Mini Goldendoodle."
         },
         "bullets": [],
         "card": {
@@ -1091,13 +1148,13 @@
       "z": 1
     },
     "dog1": {
-      "x": 50,
-      "y": 50,
+      "x": 74.82890936969775,
+      "y": 40.0795239975799,
       "z": 1
     },
     "dog1-2": {
-      "x": 50,
-      "y": 50,
+      "x": 74.82667113476452,
+      "y": 73.58566905490497,
       "z": 1
     },
     "dog1-3": {
@@ -1106,18 +1163,18 @@
       "z": 1
     },
     "dog2": {
-      "x": 50,
-      "y": 50,
+      "x": 23.92992930324496,
+      "y": 8.618905334100205,
       "z": 1
     },
     "dog2-2": {
-      "x": 50,
-      "y": 50,
+      "x": 100,
+      "y": 100,
       "z": 1
     },
     "dog2-3": {
-      "x": 50,
-      "y": 50,
+      "x": 0,
+      "y": 22.688515406029804,
       "z": 1
     },
     "litter-1789679795546": {
@@ -1211,8 +1268,8 @@
       "z": 1
     },
     "litter-1789679795546-9": {
-      "x": 50,
-      "y": 50,
+      "x": 74.82843580065175,
+      "y": 21.30940217052072,
       "z": 1
     },
     "litter-1789679795546-10": {
@@ -1239,30 +1296,49 @@
       "x": 50,
       "y": 50,
       "z": 1
+    },
+    "custom-mv5kxpuj49wq-banner": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "block-mv5lqedlwru4": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "block-mv5lsrjfq2oi": {
+      "x": 50,
+      "y": 50,
+      "z": 1
+    },
+    "custom-mvfsgy3cgw2w-banner": {
+      "x": 50,
+      "y": 50,
+      "z": 1
     }
   },
   "photoOrder": {
     "block-mu5oylc6pg4v": [
-      2,
       1,
-      4,
-      3,
-      5,
+      9,
       6,
-      7,
+      2,
+      4,
       8,
-      9
+      5,
+      7,
+      3
     ],
     "about-2": [
       1,
-      2,
       3,
-      4
+      2
     ],
     "dog1": [
+      1,
       3,
-      2,
-      1
+      2
     ],
     "dog2": [
       1,
@@ -1275,10 +1351,10 @@
       3,
       4,
       5,
-      6,
-      7,
       8,
+      6,
       9,
+      7,
       10
     ],
     "footer": [
