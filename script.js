@@ -120,7 +120,7 @@ const FALLBACK_CONTENT = {
     contact_form_error_message: { pl: 'Wystąpił błąd. Spróbuj ponownie.', en: 'Something went wrong. Please try again.' },
     form_fineprint: { pl: 'Wykorzystujemy te dane wyłącznie do kontaktu.', en: 'We only use this information to respond to your inquiry.' },
     footer_disclaimer: { pl: 'Nie prowadzimy sprzedaży za pośrednictwem portali ogłoszeniowych typu OLX.', en: 'We do not sell puppies through classifieds sites such as OLX.' },
-    footer_home: { pl: 'Strona główna', en: 'Home' },
+    nav_home: { pl: 'Strona główna', en: 'Home' },
     footer_copyright: { pl: '© 2026 Curly Head Doodle. Wszelkie prawa zastrzeżone.', en: '© 2026 Curly Head Doodle. All rights reserved.' },
   },
   about: {
@@ -847,6 +847,8 @@ function applyNavOrder(order, customPages, lang) {
 function applyActiveNavLink() {
   const current = location.pathname.split('/').pop() || 'index.html';
   const currentWithQuery = current + location.search;
+  const homeLink = document.querySelector('.primary-nav a[data-home-link]');
+  if (homeLink) { if (current === 'index.html' || current === '') homeLink.setAttribute('aria-current', 'page'); else homeLink.removeAttribute('aria-current'); }
   document.querySelectorAll('.primary-nav a[data-section]').forEach(a => {
     const href = a.getAttribute('href');
     if (href === current || href === currentWithQuery) a.setAttribute('aria-current', 'page');

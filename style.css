@@ -486,6 +486,3 @@ p { margin: 0 0 1em; max-width: 62ch; }
 /* Dogs: photo centered over its own text column */
 .dog-card .photo-carousel { justify-self: center; margin-left: auto; margin-right: auto; }
 
-/* Footer "Strona główna" button */
-.footer-home-wrap { margin: 0 0 10px; max-width: none; }
-.footer-home { padding: 8px 16px; font-size: 0.9rem; }

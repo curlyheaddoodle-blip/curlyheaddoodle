@@ -45,7 +45,7 @@ const LABELS = {
   dogs_heading: 'Nagłówek', dogs_lede: 'Zapowiedź', dogs_note: 'Notatka na dole',
   litters_heading: 'Nagłówek', litters_lede: 'Zapowiedź', litters_note: 'Notatka na dole',
   status_available: 'Etykieta statusu: dostępny', status_expecting: 'Etykieta statusu: oczekiwany', status_reserved: 'Etykieta statusu: zarezerwowany', status_previous: 'Etykieta statusu: poprzedni miot',
-  footer_home: 'Przycisk „Strona główna” w stopce',
+  nav_home: 'Menu: Strona główna',
   contact_heading: 'Nagłówek', contact_lede: 'Zapowiedź', contact_location_label: 'Etykieta: lokalizacja', contact_location_value: 'Wartość: lokalizacja',
   contact_email_label: 'Etykieta: e-mail', contact_social_label: 'Etykieta: media społecznościowe',
   field_section1_heading: 'Nagłówek sekcji 1', field_name: 'Pole: imię i nazwisko', field_email: 'Pole: e-mail', field_phone: 'Pole: telefon',
@@ -68,13 +68,13 @@ const LABELS = {
 
 const TRANSLATION_GROUPS = [
   { title: 'Strona / SEO', keys: ['page_title', 'page_description'] },
-  { title: 'Menu', keys: ['nav_about', 'nav_breed', 'nav_dogs', 'nav_puppies', 'nav_contact', 'nav_cta'] },
+  { title: 'Menu', keys: ['nav_home', 'nav_about', 'nav_breed', 'nav_dogs', 'nav_puppies', 'nav_contact', 'nav_cta'] },
   { title: 'Formularz — Dane podstawowe i rodzina', keys: ['field_section1_heading', 'field_name', 'field_email', 'field_phone', 'field_city', 'field_household', 'field_household_agree', 'field_allergies', 'field_other_pets'] },
   { title: 'Formularz — Warunki mieszkaniowe i styl życia', keys: ['field_section2_heading', 'field_housing', 'field_alone_hours', 'field_daily_time'] },
   { title: 'Formularz — Doświadczenie i oczekiwania', keys: ['field_section3_heading', 'field_experience', 'field_grooming_ready', 'field_temperament', 'field_training', 'field_vacation'] },
   { title: 'Formularz — pozostałe', keys: ['field_select_placeholder', 'field_yes', 'field_no', 'field_litter', 'field_litter_opt3', 'field_message', 'field_message_placeholder', 'submit_btn', 'form_fineprint'] },
   { title: 'Krótki formularz kontaktowy (strona Kontakt)', keys: ['contact_form_name_placeholder', 'contact_form_phone_placeholder', 'contact_form_email_placeholder', 'contact_form_message_label', 'contact_form_message_placeholder', 'contact_form_submit', 'contact_form_success_message', 'contact_form_error_message'] },
-  { title: 'Stopka', keys: ['footer_home', 'footer_disclaimer', 'footer_copyright'] },
+  { title: 'Stopka', keys: ['footer_disclaimer', 'footer_copyright'] },
 ];
 // Keys grouped by real-world site section so admin.html can show them
 // together with that section's photo/body/list editor, instead of buried
