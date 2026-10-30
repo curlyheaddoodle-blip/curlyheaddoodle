@@ -239,6 +239,7 @@ function renderFactList(containerId, items, lang) {
 // carousel with prev/next + dots) that links to the full-size image in a
 // new tab. `baseId` names the files: images/<baseId>.jpg for photo 1,
 // images/<baseId>-2.jpg, -3.jpg, ... for the rest.
+const PAGE_STAMP = Date.now();
 // Apply the owner's drag/zoom framing (content.photoPos[key]) to an <img>.
 function applyPhotoPos(img, key) {
   const p = (activeContent.photoPos || {})[key];
@@ -277,17 +278,28 @@ function buildPhotoCarousel(baseId, count, sizePx, shape, fit) {
   const paths = [];
   photoOrder(baseId, count).forEach(i => paths.push(i === 1 ? `images/${baseId}.jpg` : `images/${baseId}-${i}.jpg`));
 
+  // One cache-busting stamp per page view (not per slide change), so a slide
+  // that was already loaded is served from cache instantly instead of being
+  // re-downloaded on every click. Slides are preloaded once the first is shown.
+  const urlFor = i => `${paths[i]}?v=${PAGE_STAMP}`;
+  let preloaded = false;
+  function preloadAll() {
+    if (preloaded) return;
+    preloaded = true;
+    paths.forEach((_, i) => { const im = new Image(); im.decoding = 'async'; im.src = urlFor(i); });
+  }
   let idx = 0;
   let dots = [];
   function show(i) {
     idx = (i + paths.length) % paths.length;
-    img.src = `${paths[idx]}?t=${Date.now()}`;
+    img.loading = 'eager'; // lazy would delay every slide change until the browser re-checks visibility
+    img.src = urlFor(idx);
     frame.href = paths[idx];
     applyPhotoPos(img, paths[idx].replace(/^images\//, '').replace(/\.jpg$/, ''));
     dots.forEach((d, di) => d.classList.toggle('active', di === idx));
   }
   img.onerror = () => { if (paths.length === 1) wrap.remove(); else wrap.classList.add('no-photo'); };
-  img.onload = () => { wrap.classList.remove('no-photo'); };
+  img.onload = () => { wrap.classList.remove('no-photo'); preloadAll(); };
 
   if (count > 1) {
     const prevBtn = document.createElement('button');
