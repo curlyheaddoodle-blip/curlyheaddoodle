@@ -521,6 +521,10 @@
     "footer_copyright": {
       "pl": "© 2026 Curly Head Doodle. Wszelkie prawa zastrzeżone.",
       "en": "© 2026 Curly Head Doodle. All rights reserved."
+    },
+    "footer_home": {
+      "pl": "Strona główna",
+      "en": "Home"
     }
   },
   "about": {

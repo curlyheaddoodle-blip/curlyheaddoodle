@@ -23,6 +23,11 @@
   .legal-main h2 { font-size: 1.25rem; margin-top: 2em; }
   .legal-main ul { padding-left: 1.3em; color: var(--color-ink-soft); }
   .legal-main li { margin-bottom: 0.4em; }
+  .legal-main ol { padding-left: 1.4em; }
+  .legal-main li { margin-bottom: 0.6em; }
+  .legal-main ul { margin-top: 0.5em; }
+  .lang-switch { display: flex; gap: 6px; justify-content: flex-end; margin-bottom: 8px; }
+  .footer-home-wrap { margin: 0 0 10px; }
   .draft-notice {
     background: var(--color-bg-alt); border: 1px solid var(--color-line); border-radius: var(--radius);
     padding: 16px 20px; font-size: 0.92rem; color: var(--color-ink-soft); margin-bottom: 2.5em;
@@ -53,73 +58,154 @@
 </header>
 
 <main class="legal-main">
-  <h1>Polityka prywatności</h1>
-  <p class="updated">Ostatnia aktualizacja: 11 września 2026</p>
-
-  <div class="draft-notice">
-    <strong>Uwaga:</strong> to jest szkic wygenerowany jako punkt wyjścia, a nie gotowy dokument prawny.
-    Przed opublikowaniem strony zalecamy konsultację z prawnikiem specjalizującym się w RODO, aby upewnić się,
-    że treść dokładnie odpowiada temu, jak faktycznie przetwarzane są dane (np. jeśli zmieni się dostawca
-    formularza, sposób przechowywania danych, lub dojdą narzędzia analityczne/reklamowe).
+  <div class="lang-switch" role="group" aria-label="Language">
+    <button type="button" class="lang-btn" data-lang="pl">PL</button>
+    <button type="button" class="lang-btn" data-lang="en">EN</button>
   </div>
 
-  <p>Niniejsza polityka prywatności opisuje, jakie dane osobowe są zbierane za pośrednictwem strony
-  curlyheaddoodle.pl, w jakim celu są przetwarzane oraz jakie prawa przysługują osobom, których dane dotyczą.</p>
+  <div data-lang-block="pl">
+  <h1>Polityka prywatności</h1>
+  <p>Niniejsza Polityka Prywatności określa zasady przetwarzania i ochrony danych osobowych przekazanych przez Użytkowników w związku z korzystaniem ze strony internetowej <a href="https://curlyheaddoodle.pl/">https://curlyheaddoodle.pl/</a>.</p>
 
-  <h2>1. Administrator danych</h2>
-  <p>Administratorem danych osobowych zbieranych za pośrednictwem tej strony są Karolina i Paweł,
-  prowadzący hodowlę Curly Head Doodle w Mielcu. Kontakt w sprawach ochrony danych:
-  <strong>curlyheaddoodle@gmail.com</strong>.</p>
+  <h2>§ 1. Administrator Danych Osobowych</h2>
+  <ol>
+    <li>Administratorem Twoich danych osobowych jest Karolina Gastoł-Dziura prowadząca zarejestrowaną hodowlę psów rasowych pod przydomkiem „Curly Head Doodle”, z siedzibą w: 39-300 Mielec.</li>
+    <li>Z Administratorem można się kontaktować mailowo pod adresem: <strong>curlyheaddoodle@gmail.com</strong>.</li>
+  </ol>
 
-  <h2>2. Jakie dane zbieramy</h2>
-  <p>Dane osobowe zbierane są wyłącznie wtedy, gdy samodzielnie przekażesz je nam poprzez formularz
-  zgłoszeniowy („Wypełnij ankietę”):</p>
-  <ul>
-    <li>imię i nazwisko,</li>
-    <li>adres e-mail,</li>
-    <li>numer telefonu (opcjonalnie),</li>
-    <li>treść wiadomości oraz wybrany miot, którym jesteś zainteresowany/-a.</li>
-  </ul>
-  <p>Strona nie używa plików cookie do celów analitycznych ani reklamowych. Wybór języka (PL/EN) jest
-  zapamiętywany lokalnie w Twojej przeglądarce (localStorage) i nie jest przesyłany nigdzie indziej.</p>
+  <h2>§ 2. Cele i podstawy prawne przetwarzania danych</h2>
+  <p>Twoje dane osobowe przetwarzamy w następujących celach:</p>
+  <ol>
+    <li><strong>Rozpatrzenie ankiety przedadopcyjnej i proces rezerwacji:</strong> Analiza przesłanej ankiety w celu weryfikacji warunków dla szczenięcia oraz ewentualnego zawarcia umowy rezerwacji/sprzedaży psa. Podstawą prawną jest podjęcie działań na żądanie osoby, której dane dotyczą, przed zawarciem umowy (art. 6 ust. 1 lit. b RODO).</li>
+    <li><strong>Obsługa zapytań i komunikacja:</strong> Odpowiadanie na wiadomości e-mail lub zapytania z formularza kontaktowego. Podstawą prawną jest nasz prawnie uzasadniony interes (art. 6 ust. 1 lit. f RODO), polegający na budowaniu relacji i udzielaniu odpowiedzi.</li>
+    <li><strong>Prowadzenie statystyk i działanie strony:</strong> (poprzez pliki cookies). Podstawą prawną jest Twoja zgoda (art. 6 ust. 1 lit. a RODO) oraz nasz prawnie uzasadniony interes (art. 6 ust. 1 lit. f RODO) polegający na zapewnieniu prawidłowego funkcjonowania serwisu.</li>
+  </ol>
 
-  <h2>3. Cel i podstawa prawna przetwarzania</h2>
-  <p>Dane podane w formularzu przetwarzane są w celu odpowiedzi na zapytanie oraz — jeśli wyrazisz taką wolę —
-  prowadzenia listy oczekujących na szczenięta. Podstawą prawną jest art. 6 ust. 1 lit. b) RODO (działania
-  podejmowane przed zawarciem umowy, na żądanie osoby, której dane dotyczą) oraz art. 6 ust. 1 lit. a) RODO
-  (zgoda wyrażona poprzez wysłanie formularza).</p>
+  <h2>§ 3. Jakie dane zbieramy?</h2>
+  <p>Podawanie danych osobowych na naszej stronie jest dobrowolne, jednak w przypadku chęci zaadoptowania szczenięcia, podanie niektórych z nich jest niezbędne.</p>
+  <ol>
+    <li><strong>DANE NIEZBĘDNE</strong> (Musisz je podać, abyśmy mogli rozpatrzyć Twoje zgłoszenie):
+      <ul>
+        <li><strong>Dane kontaktowe:</strong> Imię i nazwisko, adres e-mail, numer telefonu, miejscowość. Bez nich nie będziemy w stanie skontaktować się z Tobą w sprawie miotu.</li>
+        <li><strong>Warunki domowe i styl życia:</strong> Odpowiedzi w ankiecie dotyczące warunków mieszkaniowych, trybu pracy, ilości domowników oraz obecności innych zwierząt. Ze względu na etykę naszej hodowli, są to informacje niezbędne do oceny, czy charakter rasy będzie dopasowany do Twojej codzienności.</li>
+      </ul>
+    </li>
+    <li><strong>DANE OPCJONALNE</strong> (Podajesz je dobrowolnie):
+      <ul>
+        <li><strong>Informacje o alergiach:</strong> Pytamy o ewentualne alergie domowników wyłącznie po to, aby doradzić Ci w kwestii wyboru rasy (Goldendoodle nie są w 100% hipoalergiczne). Informacja ta służy wyłącznie Twojemu dobru i bezpieczeństwu psa; nie przetwarzamy jej w celach medycznych.</li>
+        <li><strong>Dane statystyczne i analityczne (Cookies):</strong> Informacje o tym, jak poruszasz się po naszej stronie. Masz prawo nie wyrazić zgody na ich zbieranie w ustawieniach plików cookies.</li>
+      </ul>
+    </li>
+  </ol>
 
-  <h2>4. Komu przekazujemy dane</h2>
-  <p>Formularz zgłoszeniowy jest obsługiwany przez zewnętrznego dostawcę usług — <strong>Formspree</strong>
-  (Formspree, Inc., USA), który przekazuje nam treść zgłoszeń drogą mailową. Strona jest hostowana na
-  <strong>GitHub Pages</strong> (GitHub, Inc. / Microsoft), który — jak każdy hosting — przetwarza standardowe
-  logi serwera (np. adres IP) w ramach utrzymania infrastruktury. Nie sprzedajemy ani nie udostępniamy danych
-  osobowych w celach marketingowych podmiotom trzecim.</p>
+  <h2>§ 4. Komu przekazujemy Twoje dane? (Odbiorcy danych)</h2>
+  <p>Twoje dane są u nas w pełni bezpieczne. Nie sprzedajemy ich i nie udostępniamy w celach marketingowych podmiotom trzecim. Odbiorcami Twoich danych mogą być wyłącznie zaufane podmioty wspierające nas technicznie:</p>
+  <ol>
+    <li>Firma hostingowa, na której serwerach utrzymywana jest nasza strona: GitHub Pages (GitHub, Inc. / Microsoft).</li>
+    <li>Dostawca narzędzi do formularzy: Formspree (Formspree, Inc., USA), Web3Forms (Web3Creative, USA).</li>
+  </ol>
+  <p>Z uwagi na korzystanie z usług podmiotów z siedzibą w USA (GitHub, Formspree), Twoje dane mogą być przekazywane poza Europejski Obszar Gospodarczy na podstawie odpowiednich zabezpieczeń prawnych wymaganych przez RODO.</p>
 
-  <h2>5. Okres przechowywania danych</h2>
-  <p>Dane przechowujemy przez czas niezbędny do udzielenia odpowiedzi na zapytanie oraz — w przypadku wyrażenia
-  chęci pozostania na liście oczekujących — do czasu zakończenia procesu rezerwacji szczenięcia lub wycofania
-  zgody.</p>
+  <h2>§ 5. Czas przechowywania danych</h2>
+  <ol>
+    <li>Dane z ankiet adopcyjnych osób, z którymi nie nawiążemy współpracy, usuwamy niezwłocznie po zakończeniu procesu rezerwacji danego miotu (maksymalnie do 6 miesięcy od otrzymania formularza).</li>
+    <li>Dane osób, z którymi zawrzemy umowę rezerwacji i sprzedaży szczenięcia, będą przechowywane przez okres wymagany przepisami prawa cywilnego i podatkowego.</li>
+    <li>Dane z luźnych zapytań e-mail przechowujemy przez czas niezbędny do udzielenia odpowiedzi i zachowania ciągłości korespondencji (do 1 roku).</li>
+  </ol>
 
-  <h2>6. Twoje prawa</h2>
-  <p>Zgodnie z RODO przysługuje Ci prawo do:</p>
-  <ul>
-    <li>dostępu do swoich danych oraz otrzymania ich kopii,</li>
-    <li>sprostowania (poprawienia) danych,</li>
-    <li>usunięcia danych,</li>
-    <li>ograniczenia przetwarzania,</li>
-    <li>przenoszenia danych,</li>
-    <li>wniesienia sprzeciwu wobec przetwarzania,</li>
-    <li>wycofania zgody w dowolnym momencie, bez wpływu na zgodność z prawem przetwarzania dokonanego przed jej wycofaniem,</li>
-    <li>wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych (UODO), jeśli uznasz, że przetwarzanie narusza przepisy o ochronie danych.</li>
-  </ul>
-  <p>Aby skorzystać z powyższych praw, napisz na adres <strong>curlyheaddoodle@gmail.com</strong>.</p>
+  <h2>§ 6. Twoje prawa (RODO)</h2>
+  <p>W związku z przetwarzaniem Twoich danych, przysługują Ci następujące prawa:</p>
+  <ol>
+    <li>Prawo dostępu do swoich danych oraz otrzymania ich kopii.</li>
+    <li>Prawo do sprostowania (poprawiania) swoich danych.</li>
+    <li>Prawo do usunięcia danych (tzw. „prawo do bycia zapomnianym”), z wyjątkiem sytuacji, gdy przepisy prawa nakazują nam ich dalsze przechowywanie (np. zawarta umowa).</li>
+    <li>Prawo do ograniczenia przetwarzania danych.</li>
+    <li>Prawo do wniesienia sprzeciwu wobec przetwarzania.</li>
+    <li>Prawo do cofnięcia zgody w dowolnym momencie (jeśli dane przetwarzane są na podstawie zgody).</li>
+  </ol>
+  <p>Aby skorzystać ze swoich praw, napisz do nas na adres: <strong>curlyheaddoodle@gmail.com</strong>. Masz również prawo wnieść skargę do Prezesa Urzędu Ochrony Danych Osobowych (PUODO), jeśli uznasz, że naruszamy przepisy o ochronie danych.</p>
 
-  <h2>7. Dobrowolność podania danych</h2>
-  <p>Podanie danych w formularzu jest całkowicie dobrowolne, ale niezbędne, aby móc odpowiedzieć na Twoje
-  zgłoszenie.</p>
+  <h2>§ 7. Pliki Cookies (Ciasteczka)</h2>
+  <ol>
+    <li>Nasza strona wykorzystuje pliki cookies (niewielkie pliki tekstowe zapisywane na Twoim urządzeniu), aby zapewnić jej poprawne działanie.</li>
+    <li>Wykorzystujemy cookies w celach: niezbędnych do prawidłowego funkcjonowania serwisu i formularzy (nie można ich wyłączyć).</li>
+  </ol>
 
-  <p style="margin-top:2.5em"><a class="btn-link" href="index.html">← Wróć do strony głównej</a></p>
+  <h2>§ 8. Postanowienia końcowe</h2>
+  <p>Zastrzegamy sobie prawo do zmiany niniejszej Polityki Prywatności w przypadku zmian technologii, przepisów prawa lub zmian w sposobie funkcjonowania naszej hodowli. O wszelkich zmianach poinformujemy na tej podstronie.</p>
+  </div>
+
+  <div data-lang-block="en" hidden>
+  <h1>Privacy Policy</h1>
+  <p>This Privacy Policy sets out the rules for the processing and protection of personal data provided by Users in connection with their use of the website <a href="https://curlyheaddoodle.pl/">https://curlyheaddoodle.pl/</a>.</p>
+
+  <h2>§ 1. Data Controller</h2>
+  <ol>
+    <li>The controller of your personal data is Karolina Gastol-Dziura running a registered purebred dog breeding program under the kennel name “Curly Head Doodle”, located at: 39-300 Mielec, Poland.</li>
+    <li>You can contact the Controller via email at: <strong>curlyheaddoodle@gmail.com</strong>.</li>
+  </ol>
+
+  <h2>§ 2. Purposes and legal bases for data processing</h2>
+  <p>We process your personal data for the following purposes:</p>
+  <ol>
+    <li><strong>Reviewing the pre-adoption application and reservation process:</strong> Analyzing the submitted application to verify the conditions for the puppy and potentially concluding a dog reservation/sale agreement. The legal basis is taking action at the request of the data subject prior to entering into a contract (Art. 6(1)(b) GDPR).</li>
+    <li><strong>Handling inquiries and communication:</strong> Responding to emails or inquiries from the contact form. The legal basis is our legitimate interest (Art. 6(1)(f) GDPR), which consists of building relationships and providing answers.</li>
+    <li><strong>Maintaining statistics and website operation:</strong> (via cookies). The legal basis is your consent (Art. 6(1)(a) GDPR) and our legitimate interest (Art. 6(1)(f) GDPR) in ensuring the proper functioning of the website.</li>
+  </ol>
+
+  <h2>§ 3. What data do we collect?</h2>
+  <p>Providing personal data on our website is voluntary; however, if you wish to adopt a puppy, providing certain data is necessary.</p>
+  <ol>
+    <li><strong>MANDATORY DATA</strong> (You must provide it so we can process your application):
+      <ul>
+        <li><strong>Contact details:</strong> First and last name, email address, phone number, city/location. Without these, we will not be able to contact you regarding the litter.</li>
+        <li><strong>Home conditions and lifestyle:</strong> Answers in the application regarding housing conditions, work schedule, number of household members, and the presence of other animals. Due to the ethics of our breeding program, this information is necessary to assess whether the breed's character will suit your daily life.</li>
+      </ul>
+    </li>
+    <li><strong>OPTIONAL DATA</strong> (Provided voluntarily):
+      <ul>
+        <li><strong>Allergy information:</strong> We ask about potential household allergies solely to advise you on breed selection (Goldendoodles are not 100% hypoallergenic). This information is used exclusively for your well-being and the safety of the dog; we do not process it for medical purposes.</li>
+        <li><strong>Statistical and analytical data (Cookies):</strong> Information on how you navigate our website. You have the right to withhold consent for their collection in your cookie settings.</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h2>§ 4. Who do we share your data with? (Data recipients)</h2>
+  <p>Your data is completely safe with us. We do not sell it, nor do we share it with third parties for marketing purposes. The recipients of your data may only be trusted entities that support us technically:</p>
+  <ol>
+    <li>Hosting company maintaining our website servers: GitHub Pages (GitHub, Inc. / Microsoft).</li>
+    <li>Form tool providers: Formspree (Formspree, Inc., USA), Web3Forms (Web3Creative, USA).</li>
+  </ol>
+  <p><strong>Transfer of data outside the EEA:</strong> Due to the use of services provided by entities based in the USA (GitHub, Formspree, Web3Forms), your personal data may be transferred outside the European Economic Area (EEA). This is always done based on appropriate legal safeguards required by GDPR, ensuring an adequate level of data protection.</p>
+
+  <h2>§ 5. Data retention period</h2>
+  <ol>
+    <li>Data from adoption applications of individuals with whom we do not establish a collaboration is deleted immediately after the reservation process for a given litter is concluded (up to a maximum of 6 months from receiving the form).</li>
+    <li>Data of individuals with whom we conclude a reservation and sale agreement for a puppy will be kept for the period required by civil and tax law regulations.</li>
+    <li>Data from general email inquiries is kept for the time necessary to provide an answer and maintain the continuity of correspondence (up to 1 year).</li>
+  </ol>
+
+  <h2>§ 6. Your rights (GDPR)</h2>
+  <p>In connection with the processing of your data, you have the following rights:</p>
+  <ol>
+    <li>The right to access your data and receive a copy of it.</li>
+    <li>The right to rectify (correct) your data.</li>
+    <li>The right to erasure (the “right to be forgotten”), except when legal provisions require us to continue storing it (e.g., an active contract).</li>
+    <li>The right to restrict data processing.</li>
+    <li>The right to object to processing.</li>
+    <li>The right to withdraw consent at any time (if data is processed based on consent).</li>
+  </ol>
+  <p>To exercise your rights, please email us at: <strong>curlyheaddoodle@gmail.com</strong>. You also have the right to lodge a complaint with the appropriate Data Protection Authority (in Poland: PUODO) if you believe we are violating data protection regulations.</p>
+
+  <h2>§ 7. Cookies</h2>
+  <ol>
+    <li>Our website uses cookies (small text files saved on your device) to ensure its proper operation.</li>
+    <li>We use cookies for: strictly necessary purposes for the proper functioning of the website and forms (these cannot be disabled).</li>
+  </ol>
+
+  <h2>§ 8. Final provisions</h2>
+  <p>We reserve the right to change this Privacy Policy in the event of changes in technology, legal regulations, or changes in how our breeding program operates. We will inform you of any changes on this subpage.</p>
+  </div>
 </main>
 
 <footer class="site-footer">
@@ -129,12 +215,25 @@
       <p class="muted">Mielec</p>
     </div>
     <div class="footer-right">
+      <p class="footer-home-wrap"><a class="btn btn-primary footer-home" href="index.html" id="footerHome">Strona główna</a></p>
       <p class="muted">&copy; 2026 Curly Head Doodle. Wszelkie prawa zastrzeżone.</p>
     </div>
   </div>
 </footer>
 
 <script>
+  function setPolicyLang(lang) {
+    document.querySelectorAll('[data-lang-block]').forEach(b => { b.hidden = b.dataset.langBlock !== lang; });
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    document.documentElement.lang = lang;
+    document.title = lang === 'en' ? 'Privacy Policy — Curly Head Doodle' : 'Polityka prywatności — Curly Head Doodle';
+    document.getElementById('footerHome').textContent = lang === 'en' ? 'Home' : 'Strona główna';
+    try { localStorage.setItem('chd_lang', lang); } catch (e) { /* ignore */ }
+  }
+  document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setPolicyLang(b.dataset.lang)));
+  let startLang = 'pl';
+  try { startLang = localStorage.getItem('chd_lang') === 'en' ? 'en' : 'pl'; } catch (e) { /* ignore */ }
+  setPolicyLang(startLang);
   fetch('data/content.json').then(r => r.json()).then(c => {
     const name = (c.site && c.site.brandName) || 'Curly Head Doodle';
     document.querySelectorAll('#brandName, #brandNameFooter').forEach(el => { el.textContent = name; });

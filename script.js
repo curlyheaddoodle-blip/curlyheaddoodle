@@ -120,6 +120,7 @@ const FALLBACK_CONTENT = {
     contact_form_error_message: { pl: 'Wystąpił błąd. Spróbuj ponownie.', en: 'Something went wrong. Please try again.' },
     form_fineprint: { pl: 'Wykorzystujemy te dane wyłącznie do kontaktu.', en: 'We only use this information to respond to your inquiry.' },
     footer_disclaimer: { pl: 'Nie prowadzimy sprzedaży za pośrednictwem portali ogłoszeniowych typu OLX.', en: 'We do not sell puppies through classifieds sites such as OLX.' },
+    footer_home: { pl: 'Strona główna', en: 'Home' },
     footer_copyright: { pl: '© 2026 Curly Head Doodle. Wszelkie prawa zastrzeżone.', en: '© 2026 Curly Head Doodle. All rights reserved.' },
   },
   about: {
