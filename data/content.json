@@ -49,20 +49,20 @@
         },
         "bullets": [
           {
-            "pl": "**Dorastanie w sercu domu: **Maluchy od początku oswajają się z dźwiękiem odkurzacza, telewizora czy blendera. Zapoznajemy je również z odgłosami zgiełku miejskiego – samochodami, syrenami i ruchem ulicznym. Dzięki temu opuszczają nas odważne i gotowe na nowe wyzwania.",
-            "en": "**Growing up in the heart of the house: **Toddlers get used to the sound of a vacuum cleaner, TV or blender from the very beginning. We also familiarize them with the sounds of city noise – cars, sirens and traffic. Thanks to this, they leave us bold and ready for new challenges."
+            "pl": "**Dorastanie w sercu domu: **Maluchy od początku oswajają się z dźwiękiem odkurzacza, telewizora czy blendera. Zapoznajemy je również z odgłosami miasta – samochodami, syrenami i ruchem ulicznym. Dzięki temu opuszczają nas odważne i ciekawe świata.",
+            "en": "**Growing up in the heart of the house: **Toddlers get used to the sound of a vacuum cleaner, TV or blender from the very beginning. We also familiarize them with the sounds of the city – cars, sirens and traffic. Thanks to this, brave and interesting worlds leave us."
           },
           {
-            "pl": "**Świadome podejście do zdrowia: **Kwestie genetyczne traktujemy priorytetowo. Rodzice naszych szczeniąt posiadają niezwykle szczegółowe wyniki badań (m.in. obszerne pakiety Laboklin Labogenetics XXL), aby zminimalizować ryzyko chorób dziedzicznych i zapewnić maluchom bezpieczny start.",
-            "en": "**Conscious approach to health: ** Genetic issues are a priority for us. The parents of our puppies have extremely detailed test results (including extensive Laboklin Labogenetics XXL packages) to minimize the risk of hereditary diseases and ensure a safe start for the toddlers."
+            "pl": "**Świadome podejście do zdrowia: **Kwestie genetyczne traktujemy priorytetowo. Rodzice naszych szczeniąt posiadają szczegółowe wyniki badań (m.in. obszerne pakiety Laboklin Labogenetics XXL), aby zminimalizować ryzyko chorób dziedzicznych u szczeniąt.",
+            "en": "**Conscious approach to health: ** Genetic issues are a priority for us. Parents of our puppies have detailed test results (including extensive Laboklin Labogenetics XXL packages) to minimize the risk of hereditary diseases in puppies."
           },
           {
-            "pl": "**Nowoczesna socjalizacja: **Opieramy się na sprawdzonych, empatycznych programach (Badass Breeder, Puppy Culture). Wdrażamy wczesną stymulację neurologiczną i węchową (ENS/ESI), uczymy czystości i łagodnie oswajamy z zabiegami pielęgnacyjnymi.",
-            "en": "**Modern socialization: **We rely on proven, empathetic programs (Badass Breeder, Puppy Culture). We implement early neurological and olfactory stimulation (ENS/ESI), teach purity and gently familiarize with care treatments."
+            "pl": "**Nowoczesna socjalizacja: **Opieramy się na sprawdzonych programach (Badass Breeder, Puppy Culture, Breeders Bootcamp). Wdrażamy wczesną stymulację neurologiczną i węchową (ENS/ESI), uczymy czystości i łagodnie oswajamy z zabiegami pielęgnacyjnymi.",
+            "en": "**Modern socialization: **We rely on proven programs (Badass Breeder, Puppy Culture, Breeders Bootcamp). We implement early neurological and olfactory stimulation (ENS/ESI), teach purity and gently familiarize with care treatments."
           },
           {
-            "pl": "**Wielopokoleniowe linie (Multigen): **Koncentrujemy się na zaawansowanych generacjach (np. F2B), uzyskując piękne psy w pożądanych odcieniach (apricot, red brown), z włosem wysoce przyjaznym dla alergików.",
-            "en": "**Multigenerational lines (Multigen): **We focus on advanced generations (e.g. F2B), obtaining beautiful dogs in the desired shades (apricot, red brown), with hair highly allergy friendly."
+            "pl": "**Wielopokoleniowe linie (Multigen): **Koncentrujemy się na zaawansowanych generacjach (F2B, Multigen), uzyskując piękne psy w pożądanych odcieniach (apricot, red brown), z włosem wysoce przyjaznym dla alergików.",
+            "en": "**Multigenerational lines (Multigen): **We focus on advanced generations (F2B, Multigen), obtaining beautiful dogs in desired shades (apricot, red brown), with highly allergy-friendly coat."
           }
         ],
         "card": {
@@ -241,16 +241,16 @@
       "en": "Genetics without compromise"
     },
     "why2_body": {
-      "pl": "Posiadamy rozbudowany pakiet badań (m.in. Laboklin, Labogenetics XXL), wykluczających najpoważniejsze choroby genetyczne.",
-      "en": "We run an extensive testing panel (including Laboklin and Labogenetics XXL) that rules out the most serious genetic diseases."
+      "pl": "Posiadamy rozbudowany pakiet badań (Laboklin, Labogenetics XXL), wykluczających najpoważniejsze choroby genetyczne.",
+      "en": "We have an extensive package of studies (Laboklin, Labogenetics XXL), excluding the most serious genetic diseases."
     },
     "why3_title": {
       "pl": "Zaawansowana socjalizacja",
       "en": "Advanced socialization"
     },
     "why3_body": {
-      "pl": "Testujemy temperament szczeniąt, stosujemy ENS/ESI i oswajamy je z zabiegami groomerskimi już od najmłodszych dni.",
-      "en": "We test each puppy's temperament, use ENS/ESI early stimulation, and introduce grooming procedures from their earliest days."
+      "pl": "Testujemy temperament szczeniąt, stosujemy ENS/ESI i oswajamy je z zabiegami groomerskimi.",
+      "en": "We test the temperament of puppies, use ENS/ESI and familiarize them with grooming treatments."
     },
     "why4_title": {
       "pl": "Wielopokoleniowe linie",
@@ -540,8 +540,8 @@
         "headingFont": "default",
         "textFont": "default",
         "text": {
-          "pl": "Cześć! Tu Karolina i Paweł. Prowadzimy kameralną, domową hodowlę psów rasy Goldendoodle. Nasza miłość do zwierząt trwała od zawsze, ale to właśnie rasa Mini Goldendoodle skradła nasze serca całkowicie. Łączy ona bowiem niesamowitą inteligencję pudla z absolutną łagodnością, radością i cierpliwością golden retrievera.\nNaszym celem od początku nie było po prostu \"rozmnażanie psów\". Zależało nam na stworzeniu etycznego miejsca pełnego empatii. Dobrostan naszych psich matek jest dla nas priorytetem – zachowujemy odpowiednie przerwy regeneracyjne, a nasze psy to przede wszystkim nasi ukochani przyjaciele.",
-          "en": "Hi! We are Karolina and Paweł. We run a small, in-home Goldendoodle breeding program. Our love for animals has always been there, but it was the Mini Goldendoodle breed that completely stole our hearts. It combines the incredible intelligence of a Poodle with the absolute gentleness, joy, and patience of a Golden Retriever.\nOur goal from the beginning was not simply \"breeding dogs\". We wanted to create an ethical place full of empathy. The welfare of our dog mothers is our priority – we maintain appropriate regenerative breaks, and our dogs are, above all, our beloved friends."
+          "pl": "Cześć! Tu Karolina i Paweł. Prowadzimy kameralną, domową hodowlę MiniGoldendoodle w Mielcu. Zwierzęta były w naszym życiu od zawsze, ale to właśnie Goldendoodle całkowicie nas w sobie rozkochały. Trudno o lepsze połączenie – te psy mają w sobie bystrość i spryt pudla, a jednocześnie całe to ciepło, cierpliwość i radość, z których słyną golden retrievery.\n\nNaszym celem od początku nie było po prostu \"rozmnażanie psów\". Zależało nam na stworzeniu etycznego miejsca opartego na szacunku do zwierząt. Zdrowie i spokój naszych psów są dla nas najważniejsze, dlatego bardzo pilnujemy długich przerw na odpoczynek między miotami. Nasze psiaki są z nami na co dzień – jako domownicy i przyjaciele, a dopiero potem psy hodowlane.",
+          "en": "Hi! This is Karolina and Paweł. We run an intimate, homemade MiniGoldendoodle bredding in Mielec. Animals have always been in our lives, but it was Goldendoodle that completely made us fall in love. It is hard to find a better connection – these dogs have the sharpness and cleverness of a poodle, and at the same time all the warmth, patience and joy that golden retrievers are famous for. \n\nOur goal from the beginning was not just to \"breed dogs\". We wanted to create an ethical place based on respect for animals. The health and tranquility of our dogs are most important to us, which is why we take great care of long rest periods between litters. Our dogs are with us every day – as household members and friends, and only then breeding dogs."
         },
         "card": {
           "enabled": false,
