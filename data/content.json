@@ -1019,6 +1019,26 @@
             "pl": "28.11.2025",
             "en": "28.11.2025"
           }
+        },
+        {
+          "label": {
+            "pl": "Liczba szczeniąt: ",
+            "en": "Number of puppies:"
+          },
+          "value": {
+            "pl": "8 (6 chłopców i 2 dziewczynki)",
+            "en": "8 (6 boys and 2 girls)"
+          }
+        },
+        {
+          "label": {
+            "pl": "Waga w wieku dorosłym: ",
+            "en": "Adult weight: "
+          },
+          "value": {
+            "pl": "12-14",
+            "en": "12-14"
+          }
         }
       ],
       "photoCount": 10
