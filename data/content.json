@@ -16,8 +16,8 @@
         "headingFont": "default",
         "textFont": "default",
         "text": {
-          "pl": "Nasza hodowla w Mielcu to przede wszystkim nasz wspólny dom, w którym psy są pełnoprawnymi członkami rodziny: towarzyszą nam w codziennym życiu, odpoczywają na kanapie i asystują przy porannej kawie. Szczenięta dorastają w samym centrum domowego ogniska, od pierwszego oddechu otoczone czułością, codziennym gwarem i najlepszą możliwą opieką.",
-          "en": "Our breeding in Mielec is primarily our common home, where dogs are full members of the family: they accompany us in everyday life, relax on the couch and assist with morning coffee. Puppies grow up in the very center of the home campfire, surrounded by tenderness, everyday gusto and the best possible care from the first breath."
+          "pl": "Nasza hodowla to po prostu nasz dom, w którym psy są pełnoprawnymi członkami rodziny: towarzyszą nam w codziennym życiu: w kuchni przy przygotowaniu kawy czy na kanapie przy filmie. Kiedy na świecie pojawiają się szczenięta, od pierwszych dni dorastają dokładnie w tym samym rytmie: wśród normalnych rozmów, gości i domowego ciepła.",
+          "en": "Our kennel is simply our home, where dogs are full members of the family: they accompany us in everyday life: in the kitchen while preparing coffee or on the couch while watching a movie. When puppies appear in the world, they grow up in exactly the same rhythm from the first days: among normal conversations, guests and home warmth."
         },
         "bullets": [],
         "card": {
@@ -213,8 +213,8 @@
       "en": "Curly Head Doodle – Friends with four paws and curly hair"
     },
     "hero_subhead": {
-      "pl": "Domowa hodowla psów rasy Mini Goldendoodle w sercu Podkarpacia.",
-      "en": "An in-home Mini Goldendoodle breeder in the heart of the Podkarpacie region."
+      "pl": "Kameralna, domowa hodowla psów rasy Mini Goldendoodle w Mielcu (Podkarpacie)",
+      "en": "Intimate, home breeding of Mini Goldendoodle dogs in Mielec (Podkarpacie)"
     },
     "hero_cta_primary": {
       "pl": "Formularz zgłoszeniowy",
@@ -492,6 +492,10 @@
       "pl": "Szukasz wymarzonego Mini Goldendoodle? Poznaj domową hodowlę Curly Head Doodle z Mielca. Szczenięta po przebadanych genetycznie rodzicach, z doskonałą socjalizacją i domowym wychowaniem.",
       "en": "Looking for your dream Mini Goldendoodle? Meet Curly Head Doodle, an in-home breeder from Mielec. Puppies from genetically tested parents, with excellent socialization and home raising."
     },
+    "nav_home": {
+      "pl": "Strona główna",
+      "en": "Home"
+    },
     "nav_about": {
       "pl": "O nas",
       "en": "About us"
@@ -523,10 +527,6 @@
     "footer_copyright": {
       "pl": "© 2026 Curly Head Doodle. Wszelkie prawa zastrzeżone.",
       "en": "© 2026 Curly Head Doodle. All rights reserved."
-    },
-    "nav_home": {
-      "pl": "Strona główna",
-      "en": "Home"
     }
   },
   "about": {
